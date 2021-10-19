@@ -71,12 +71,36 @@ class ChooseGroupViewController: UIViewController {
             headerView.rightAnchor.constraint(equalTo: view.rightAnchor),
             
             headerView.heightAnchor.constraint(equalToConstant: 120)
-            
-//            headerView.bottomAnchor.constraint(equal)
         ])
+        headerView.requestListButton.addTarget(self, action: #selector(checkRequestList), for: .touchUpInside)
+    }
+    @objc func checkRequestList(_ sender: UIButton){
+        performSegue(withIdentifier: "toRequestList", sender: nil)
     }
     
+    func setUpButton() {
+        
+        let buildTeamButton = UIButton()
+        
+        let width = view.frame.size.width
+        let height = view.frame.size.height
+        
+        buildTeamButton.frame = CGRect(x: width - 70, y: height - 120, width: 50, height: 50)
+        buildTeamButton.backgroundColor = UIColor(red: 46 / 255 , green: 13 / 255 , blue: 128 / 255 , alpha: 1.00)
+        let plusImage = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .medium))
+        buildTeamButton.setImage(plusImage, for: .normal)
+        buildTeamButton.tintColor = .white
+        buildTeamButton.layer.cornerRadius = 25
+        buildTeamButton.layer.masksToBounds = true
+        
+        buildTeamButton.addTarget(self, action: #selector(buildNewTeam), for: .touchUpInside)
     
+       view.addSubview(buildTeamButton)
+    }
+    
+    @objc func buildNewTeam(_ sender: UIButton){
+        performSegue(withIdentifier: "toBuildTeamVC", sender: nil)
+    }
 }
 
 extension ChooseGroupViewController: UITableViewDelegate {
@@ -96,7 +120,7 @@ extension ChooseGroupViewController: UITableViewDelegate {
 
 extension ChooseGroupViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

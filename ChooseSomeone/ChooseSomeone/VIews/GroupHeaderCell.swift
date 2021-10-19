@@ -13,6 +13,7 @@ class GroupHeaderCell: UITableViewCell {
     
     @IBOutlet weak var groupSearchBar: UISearchBar!
     
+    @IBOutlet weak var requestListButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
