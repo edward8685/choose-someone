@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ChooseGroupViewController: UIViewController {
     
@@ -110,7 +111,7 @@ extension ChooseGroupViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        UITableView.automaticDimension
+       95
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

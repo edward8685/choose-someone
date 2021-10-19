@@ -12,18 +12,15 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="94" id="KGk-i7-Jjw" customClass="GroupHeaderCell" customModule="ChooseSomeone" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="401" height="94"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="401" height="94"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="MRu-37-W6E">
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="MRu-37-W6E">
                         <rect key="frame" x="10" y="10" width="381" height="30"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1pp-lf-pOJ">
                                 <rect key="frame" x="0.0" y="0.0" width="342" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="fk7-Gv-o0Z"/>
-                                </constraints>
                                 <segments>
                                     <segment title="揪團中"/>
                                     <segment title="我的團"/>
@@ -39,6 +36,9 @@
                                 <buttonConfiguration key="configuration" style="plain" image="person.fill.badge.plus" catalog="system" title=""/>
                             </button>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="uSo-3B-UaH"/>
+                        </constraints>
                     </stackView>
                     <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="CCw-Rb-ECG">
                         <rect key="frame" x="10" y="50" width="381" height="30"/>

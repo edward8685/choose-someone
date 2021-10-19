@@ -8,6 +8,9 @@ target 'ChooseSomeone' do
   # Pods for ChooseSomeone
 
   pod 'SwiftLint'
-  pod 'IQKeyboardManagerSwift'
+  #pod 'IQKeyboardManagerSwift'
+  pod 'FirebaseFirestoreSwift'
+  pod 'FirebaseFirestore'
+  #pod 'MJRefresh'
 
 end
