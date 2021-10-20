@@ -13,11 +13,29 @@ class GroupInfoCell: UITableViewCell {
     
     @IBOutlet weak var travelDate: UILabel!
     
-    @IBOutlet weak var travelRoute: UILabel!
+    @IBOutlet weak var trailName: UILabel!
     
     @IBOutlet weak var numOfPeople: UILabel!
     
     @IBOutlet weak var participationLabel: UILabel!
+    
+    func setUpCell(groups: [Group], indexPath: IndexPath){
+        
+        groupName.text = groups[indexPath.row].groupName
+        
+        let timeInterval = groups[indexPath.row].date
+        let date = timeInterval.dateValue()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd HH:mm"
+        let time = dateFormatter.string(from: date as Date)
+        travelDate.text = time
+        
+        trailName.text = groups[indexPath.row].trailName
+        let upperLimit = groups[indexPath.row].upperLimit.description
+        let counts = groups[indexPath.row].userIds.count
+        numOfPeople.text = "\(counts) \\ \(upperLimit)"
+        
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

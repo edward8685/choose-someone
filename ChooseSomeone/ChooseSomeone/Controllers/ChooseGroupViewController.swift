@@ -17,6 +17,13 @@ class ChooseGroupViewController: UIViewController {
         }
     }
     
+    private var groups = [Group]() {
+        didSet{
+            tableView.reloadData()
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,6 +38,8 @@ class ChooseGroupViewController: UIViewController {
         setUpTableView()
         
         setUpButton()
+        
+        fetchGroupData()
         
         navigationController?.isNavigationBarHidden = true
         
@@ -102,6 +111,24 @@ class ChooseGroupViewController: UIViewController {
     @objc func buildNewTeam(_ sender: UIButton){
         performSegue(withIdentifier: "toBuildTeamVC", sender: nil)
     }
+    
+    func fetchGroupData() {
+        
+        GroupRoomManager.shared.fetchGroups { [weak self] result in
+            
+            switch result {
+            
+            case .success(let groups):
+                
+                self?.groups = groups
+                print(groups)
+                
+            case .failure(let error):
+                
+                print("fetchData.failure: \(error)")
+            }
+        }
+    }
 }
 
 extension ChooseGroupViewController: UITableViewDelegate {
@@ -115,13 +142,25 @@ extension ChooseGroupViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "toGroupChatVC", sender: nil)
+        performSegue(withIdentifier: "toGroupChatVC", sender: groups[indexPath.row])
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toGroupChatVC"{
+            if let chatRoomVC = segue.destination as? ChatRoomViewController{
+                
+                if let groupInfo = sender as? Group {
+                    chatRoomVC.groupInfo = groupInfo
+                }
+            }
+        }
     }
 }
 
 extension ChooseGroupViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        groups.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -129,6 +168,8 @@ extension ChooseGroupViewController: UITableViewDataSource {
                 
         else {fatalError("Could not create Cell")}
         
+        cell.setUpCell(groups: groups, indexPath: indexPath)
         return cell
     }
+
 }

@@ -9,15 +9,40 @@ import UIKit
 
 class GroupChatHeaderCell: UITableViewCell {
     
+    @IBOutlet weak var groupName: UILabel!
+    
     @IBOutlet weak var travelDate: UILabel!
     
     @IBOutlet weak var trailName: UILabel!
     
     @IBOutlet weak var numOfPeople: UILabel!
     
-    @IBOutlet weak var noted: UILabel!
+    @IBOutlet weak var note: UILabel!
     
-    @IBOutlet weak var requestButtom: UIButton!
+    @IBOutlet weak var requestButton: UIButton!
+    
+    @IBOutlet weak var backButton: UIButton!
+    
+    @IBOutlet weak var infoButton: UIButton!
+    
+    func setUpCell(groups: Group){
+        
+        groupName.text = groups.groupName
+        
+        let timeInterval = groups.date
+        let date = timeInterval.dateValue()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd HH:mm"
+        let time = dateFormatter.string(from: date as Date)
+        travelDate.text = time
+        
+        trailName.text = groups.trailName
+        let upperLimit = groups.upperLimit.description
+        let counts = groups.userIds.count
+        numOfPeople.text = "\(counts) \\ \(upperLimit)"
+        note.text = groups.note
+        
+    }
     
     
     override func awakeFromNib() {

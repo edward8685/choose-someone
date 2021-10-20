@@ -6,18 +6,17 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
-struct GroupRoom: Codable {
-    
+struct Group: Codable {
     var groupId: String
     var groupName: String
     var hostId: String
-    var date: Int64
+    var date: Timestamp
     var upperLimit: Int
     var trailName: String
     var note: String
     var userIds: [String]
-    var messages: [Message]?
     
     enum CodingKeys: String, CodingKey {
         case groupId = "group_id"
@@ -28,17 +27,17 @@ struct GroupRoom: Codable {
         case trailName = "trail_name"
         case note
         case userIds = "user_ids"
-        case messages
+    }
+    var toDict: [String: Any] {
+        return [
+            "groupId": groupId as Any,
+            "groupName": groupName as Any,
+            "hostId": hostId as Any,
+            "upperLimit": upperLimit as Any,
+            "trailName": trailName as Any,
+            "note": note as Any,
+            "userIds": userIds as Any,
+        ]
     }
 }
 
-struct Message: Codable {
-    var sender: String
-    var body: String
-    var createdTime: Int64
-    enum CodingKeys: String, CodingKey {
-        case sender
-        case body
-        case createdTime = "created_time"
-    }
-}

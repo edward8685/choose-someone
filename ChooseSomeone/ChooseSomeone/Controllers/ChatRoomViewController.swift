@@ -7,12 +7,47 @@
 
 import UIKit
 
-class ChatRoomViewController: UIViewController {
+
+class ChatRoomViewController: UIViewController, UITextFieldDelegate {
     
+    private var messages = [Message]() {
+        didSet{
+            tableView.reloadData()
+        }
+    }
+
     private var tableView: UITableView! {
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
+        }
+    }
+    
+    var groupInfo: Group?
+    
+    var textField = UITextField() {
+        didSet {
+            textField.delegate = self
+        }
+    }
+    
+    var textFieldMessage: String?
+    
+    func fetchMessageData() {
+        
+        GroupRoomManager.shared.fetchMessages { [weak self] result in
+            
+            switch result {
+            
+            case .success(let messages):
+                
+                self?.messages = messages
+                print(messages)
+                
+            case .failure(let error):
+                
+                print("fetchData.failure: \(error)")
+            }
         }
     }
     
@@ -26,6 +61,10 @@ class ChatRoomViewController: UIViewController {
         setUpHeaderView()
         
         setUpTableView()
+        
+        setUpTextField()
+        
+        fetchMessageData()
         
     }
     
@@ -43,7 +82,7 @@ class ChatRoomViewController: UIViewController {
             
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 40)
         ])
     }
     
@@ -66,7 +105,95 @@ class ChatRoomViewController: UIViewController {
             
             headerView.heightAnchor.constraint(equalToConstant: 150)
         ])
+        headerView.requestButton.addTarget(self, action: #selector(sendRequest), for: .touchUpInside)
+
+        headerView.backButton.addTarget(self, action: #selector(backToPreviousVC), for: .touchUpInside)
+        headerView.infoButton.addTarget(self, action: #selector(showMembers), for: .touchUpInside)
+        
+        if let groupInfo = groupInfo {
+        headerView.setUpCell(groups: groupInfo)
+        }
     }
+    
+    @objc func backToPreviousVC(){
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func showMembers(){
+    }
+    
+    func setUpTextField() {
+        
+        let textFieldView = UIView()
+        view.addSubview(textFieldView)
+        
+        textFieldView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            
+            textFieldView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            textFieldView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            
+            textFieldView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            textFieldView.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        textFieldView.backgroundColor = .green
+        
+        textFieldView.addSubview(textField)
+        
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            
+            textField.heightAnchor.constraint(equalToConstant: 40),
+            
+            textField.bottomAnchor.constraint(equalTo: textFieldView.bottomAnchor,constant: -10),
+            
+            textField.leadingAnchor.constraint(equalTo: textFieldView.leadingAnchor,constant: 10),
+            
+            textField.widthAnchor.constraint(equalToConstant: UIScreen.width - 10 * 2 - 5 - 40)
+        ])
+        textField.textAlignment = .left
+        textField.backgroundColor = .white
+        textField.layer.cornerRadius = textField.frame.height / 2
+        textField.layer.masksToBounds = true
+        
+        let sendButton = UIButton()
+        
+        textFieldView.addSubview(sendButton)
+        
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            
+            sendButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            sendButton.widthAnchor.constraint(equalToConstant: 40),
+            
+            sendButton.bottomAnchor.constraint(equalTo: textFieldView.bottomAnchor,constant: -10),
+            
+            sendButton.trailingAnchor.constraint(equalTo: textFieldView.trailingAnchor, constant: -10)
+        ])
+        sendButton.setImage(UIImage(named: "paperplane"), for: .normal)
+        sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
+        sendButton.backgroundColor = .lightGray
+        sendButton.tintColor = .green
+        sendButton.layer.cornerRadius = sendButton.frame.width / 2
+        sendButton.layer.masksToBounds = true
+
+    }
+
+    
+    @objc func sendRequest(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func sendMessage(_ sender: UIButton) {
+        
+    }
+
 }
 
 extension ChatRoomViewController: UITableViewDelegate {
@@ -82,7 +209,8 @@ extension ChatRoomViewController: UITableViewDelegate {
 
 extension ChatRoomViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
+
+        return messages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -90,6 +218,14 @@ extension ChatRoomViewController: UITableViewDataSource {
                 
         else {fatalError("Could not create Cell")}
         
+        cell.setUpCell(messages: messages, indexPath: indexPath)
+        
         return cell
+    }
+}
+
+extension ChatRoomViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        textFieldMessage = textField.text
     }
 }

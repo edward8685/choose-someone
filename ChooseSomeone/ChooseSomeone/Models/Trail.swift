@@ -8,7 +8,6 @@
 import Foundation
 
 struct Trail: Codable {
-    
     let trailId: Int
     let trailCategory: String?
     let trailLocation: String
@@ -20,7 +19,7 @@ struct Trail: Codable {
     let trailImages: [String]?
     let numOfTeam: Int?
     let trailLikedList: [String]?
-
+    
     enum CodingKeys: String, CodingKey {
         case trailId = "trail_id"
         case trailCategory = "trail_category"
