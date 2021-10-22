@@ -25,21 +25,21 @@ class GroupChatHeaderCell: UITableViewCell {
     
     @IBOutlet weak var infoButton: UIButton!
     
-    func setUpCell(groups: Group){
+    func setUpCell(groups: Group) {
         
         groupName.text = groups.groupName
         
         let timeInterval = groups.date
         let date = timeInterval.dateValue()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd HH:mm"
+        dateFormatter.dateFormat = "yyyy/MM/dd  HH:mm"
         let time = dateFormatter.string(from: date as Date)
         travelDate.text = time
         
         trailName.text = groups.trailName
         let upperLimit = groups.upperLimit.description
         let counts = groups.userIds.count
-        numOfPeople.text = "\(counts) \\ \(upperLimit)"
+        numOfPeople.text = "\(counts) / \(upperLimit)"
         note.text = groups.note
         
     }
@@ -47,7 +47,7 @@ class GroupChatHeaderCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

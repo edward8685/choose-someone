@@ -99,7 +99,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XS2-GX-eD3">
                                                 <rect key="frame" x="0.0" y="45" width="394" height="35"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19Y-aH-e9X">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="時間" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19Y-aH-e9X">
                                                         <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -170,7 +170,6 @@
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vfk-S0-7qK">
                                                         <rect key="frame" x="0.0" y="25.5" width="394" height="121.5"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                         <color key="textColor" systemColor="labelColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -183,7 +182,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x0e-eK-WlN">
-                                        <rect key="frame" x="385" y="5" width="24" height="20"/>
+                                        <rect key="frame" x="380" y="10" width="24" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="8Kc-br-1VL"/>
                                             <constraint firstAttribute="height" constant="20" id="iZw-Ji-E2P"/>
@@ -198,11 +197,22 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KKr-2P-Jhv">
                                         <rect key="frame" x="10" y="367" width="394" height="31"/>
+                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                        <color key="tintColor" red="0.90588235859999999" green="0.90588235859999999" blue="0.90588235859999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="揪Someone "/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="5"/>
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                <real key="value" value="0.40000000000000002"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                                <size key="value" width="3" height="3"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
@@ -210,9 +220,9 @@
                                 <color key="backgroundColor" red="1" green="0.76886687078585325" blue="0.48545945059866835" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="SZU-x4-qib" firstAttribute="top" secondItem="jvJ-w7-A9i" secondAttribute="top" constant="35" id="2Au-iJ-KcW"/>
-                                    <constraint firstAttribute="trailing" secondItem="x0e-eK-WlN" secondAttribute="trailing" constant="5" id="Udz-Io-vZO"/>
+                                    <constraint firstAttribute="trailing" secondItem="x0e-eK-WlN" secondAttribute="trailing" constant="10" id="Udz-Io-vZO"/>
                                     <constraint firstAttribute="bottom" secondItem="KKr-2P-Jhv" secondAttribute="bottom" constant="10" id="bE6-8x-YqZ"/>
-                                    <constraint firstItem="x0e-eK-WlN" firstAttribute="top" secondItem="jvJ-w7-A9i" secondAttribute="top" constant="5" id="gkD-NR-T2q"/>
+                                    <constraint firstItem="x0e-eK-WlN" firstAttribute="top" secondItem="jvJ-w7-A9i" secondAttribute="top" constant="10" id="gkD-NR-T2q"/>
                                     <constraint firstAttribute="trailing" secondItem="SZU-x4-qib" secondAttribute="trailing" constant="10" id="jIk-U7-dcn"/>
                                     <constraint firstItem="KKr-2P-Jhv" firstAttribute="leading" secondItem="jvJ-w7-A9i" secondAttribute="leading" constant="10" id="qvd-m5-ACW"/>
                                     <constraint firstItem="x0e-eK-WlN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jvJ-w7-A9i" secondAttribute="leading" constant="20" symbolic="YES" id="r0p-NZ-NYt"/>
@@ -220,6 +230,11 @@
                                     <constraint firstItem="KKr-2P-Jhv" firstAttribute="top" secondItem="vfk-S0-7qK" secondAttribute="bottom" constant="5" id="wyk-SE-AIA"/>
                                     <constraint firstAttribute="trailing" secondItem="KKr-2P-Jhv" secondAttribute="trailing" constant="10" id="xq3-gS-1Vy"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lkCornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bJ9-DT-sKc"/>
@@ -237,6 +252,7 @@
                         <outlet property="numOfPeopleTextfield" destination="z5l-sh-UVX" id="aNn-lb-W2H"/>
                         <outlet property="sendPostButton" destination="KKr-2P-Jhv" id="RpL-iy-kOU"/>
                         <outlet property="trailNameTextField" destination="IAt-3Q-urY" id="oSq-G0-aqY"/>
+                        <outlet property="travelDate" destination="9VF-wg-qX1" id="8gZ-TR-hws"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uet-I1-req" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -266,6 +282,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -10,7 +10,7 @@ import FirebaseFirestore
 
 class GroupChatCell: UITableViewCell {
     
-    let userId = "12345678"
+    private let userId = "1357988"
 
     @IBOutlet weak var createdTime: UILabel!
     
@@ -27,7 +27,7 @@ class GroupChatCell: UITableViewCell {
         let timeInterval = messages[indexPath.row].createdTime
         let date = timeInterval.dateValue()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd HH:mm"
+        dateFormatter.dateFormat = "yyyy/MM/dd  HH:mm"
         let time = dateFormatter.string(from: date as Date)
         createdTime.text = time
         
@@ -57,6 +57,7 @@ class GroupChatCell: UITableViewCell {
         userMessage.layer.masksToBounds = true
         memberMessage.layer.cornerRadius = 5
         memberMessage.layer.masksToBounds = true
+        selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

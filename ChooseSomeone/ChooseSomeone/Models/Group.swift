@@ -28,16 +28,4 @@ struct Group: Codable {
         case note
         case userIds = "user_ids"
     }
-    var toDict: [String: Any] {
-        return [
-            "groupId": groupId as Any,
-            "groupName": groupName as Any,
-            "hostId": hostId as Any,
-            "upperLimit": upperLimit as Any,
-            "trailName": trailName as Any,
-            "note": note as Any,
-            "userIds": userIds as Any,
-        ]
-    }
 }
-

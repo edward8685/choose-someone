@@ -7,8 +7,11 @@
 
 import UIKit
 import Firebase
+import MJRefresh
 
 class ChooseGroupViewController: UIViewController {
+    
+    let header = MJRefreshNormalHeader()
     
     private var tableView: UITableView! {
         didSet {
@@ -43,6 +46,14 @@ class ChooseGroupViewController: UIViewController {
         
         navigationController?.isNavigationBarHidden = true
         
+        header.setRefreshingTarget(self, refreshingAction: #selector(self.headerRefresh))
+        self.tableView.mj_header = header
+        
+    }
+    
+    @objc func headerRefresh(){
+        fetchGroupData()
+        self.tableView.mj_header?.endRefreshing()
     }
     
     func setUpTableView() {
@@ -108,7 +119,7 @@ class ChooseGroupViewController: UIViewController {
        view.addSubview(buildTeamButton)
     }
     
-    @objc func buildNewTeam(_ sender: UIButton){
+    @objc func buildNewTeam() {
         performSegue(withIdentifier: "toBuildTeamVC", sender: nil)
     }
     
@@ -121,7 +132,6 @@ class ChooseGroupViewController: UIViewController {
             case .success(let groups):
                 
                 self?.groups = groups
-                print(groups)
                 
             case .failure(let error):
                 

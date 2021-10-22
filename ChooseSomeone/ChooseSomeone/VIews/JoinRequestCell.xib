@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -83,11 +84,11 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="acceptedButton" destination="bI0-tD-C4g" id="Ual-7a-QsE"/>
-                <outlet property="deniedButton" destination="HHR-rJ-nQt" id="Rqx-o4-FfE"/>
+                <outlet property="acceptButton" destination="bI0-tD-C4g" id="Pwg-BX-T81"/>
+                <outlet property="rejectButton" destination="HHR-rJ-nQt" id="p7t-0i-NlW"/>
                 <outlet property="requestLabel" destination="oyJ-4p-33h" id="0Lq-Ca-rPv"/>
+                <outlet property="requestName" destination="r9v-v8-FLr" id="WfQ-uG-gJ3"/>
                 <outlet property="userImage" destination="2Iz-uD-nKV" id="8J6-Fo-Jcw"/>
-                <outlet property="userName" destination="r9v-v8-FLr" id="cCL-hF-yOi"/>
                 <outlet property="viewOfBackground" destination="4aO-NA-v1e" id="uqr-tM-7Kv"/>
             </connections>
             <point key="canvasLocation" x="189.13043478260872" y="74.330357142857139"/>

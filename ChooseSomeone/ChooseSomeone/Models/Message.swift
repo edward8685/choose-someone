@@ -23,19 +23,3 @@ struct Message: Codable {
         case createdTime = "created_time"
     }
 }
-//public protocol MessageType {
-//
-//    var sender: Sender { get }
-//
-//    var messageId: String { get }
-//
-//    var sentDate: Date { get }
-//
-//    var kind: MessageKind { get }
-//}
-//public protocol SenderType {
-//
-//    var senderId: String { get }
-//    
-//    var displayName: String { get }
-//}
