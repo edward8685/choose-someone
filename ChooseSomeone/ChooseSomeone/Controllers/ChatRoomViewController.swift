@@ -98,6 +98,7 @@ class ChatRoomViewController: UIViewController {
             
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 60)
         ])
+        tableView.separatorStyle = .none
     }
     
     func setUpHeaderView() {
@@ -274,8 +275,11 @@ extension ChatRoomViewController: UITableViewDelegate {
 
 extension ChatRoomViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+        if groupInfo?.userIds.contains(userId) == true {
         return messages.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

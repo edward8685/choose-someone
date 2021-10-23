@@ -17,7 +17,6 @@ struct Trail: Codable {
     let trailTraffic: String?
     let trailMap: String?
     let trailImages: [String]?
-    let numOfTeam: Int?
     let trailLikedList: [String]?
     
     enum CodingKeys: String, CodingKey {
@@ -30,7 +29,6 @@ struct Trail: Codable {
         case trailTraffic = "trail_traffic"
         case trailMap = "trail_map"
         case trailImages = "trail_images"
-        case numOfTeam
         case trailLikedList
     }
 }

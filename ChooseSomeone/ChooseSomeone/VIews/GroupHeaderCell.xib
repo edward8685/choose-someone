@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,35 +18,66 @@
                 <rect key="frame" x="0.0" y="0.0" width="401" height="94"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="MRu-37-W6E">
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="MRu-37-W6E">
                         <rect key="frame" x="10" y="10" width="381" height="30"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1pp-lf-pOJ">
-                                <rect key="frame" x="0.0" y="0.0" width="342" height="31"/>
-                                <segments>
-                                    <segment title="揪團中"/>
-                                    <segment title="我的團"/>
-                                </segments>
-                            </segmentedControl>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Kx-Zn-jtK" customClass="MASegmentedControl" customModule="MASegmentedControl">
+                                <rect key="frame" x="0.0" y="0.0" width="336" height="30"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="6iv-G8-INE"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedSegmentTextColor">
+                                        <color key="value" red="0.01495191827" green="0.58823529409999997" blue="0.090196078430000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="animationDuration">
+                                        <real key="value" value="0.29999999999999999"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" systemColor="systemGrayColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.59999999999999998"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="2" height="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQH-5H-zlB">
                                 <rect key="frame" x="351" y="0.0" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="5lM-pB-Fpd"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="person.fill.badge.plus" catalog="system" title=""/>
+                                <buttonConfiguration key="configuration" style="plain" image="person.fill.checkmark" catalog="system" title=""/>
                             </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="uSo-3B-UaH"/>
                         </constraints>
                     </stackView>
-                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="CCw-Rb-ECG">
-                        <rect key="frame" x="10" y="50" width="381" height="30"/>
+                    <searchBar contentMode="redraw" text="" placeholder="想去的路線..." translatesAutoresizingMaskIntoConstraints="NO" id="CCw-Rb-ECG">
+                        <rect key="frame" x="10" y="50" width="381" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="VQ4-Hq-sK8"/>
+                            <constraint firstAttribute="height" constant="40" id="VQ4-Hq-sK8"/>
                         </constraints>
                         <textInputTraits key="textInputTraits"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="lkCornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </searchBar>
                 </subviews>
                 <constraints>
@@ -61,13 +93,19 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="groupSearchBar" destination="CCw-Rb-ECG" id="QJv-MM-9H7"/>
-                <outlet property="groupSegment" destination="1pp-lf-pOJ" id="Kwu-5D-USg"/>
                 <outlet property="requestListButton" destination="xQH-5H-zlB" id="POU-P3-wXn"/>
+                <outlet property="textSegmentedControl" destination="4Kx-Zn-jtK" id="2lx-bi-WpA"/>
             </connections>
-            <point key="canvasLocation" x="210.86956521739131" y="137.94642857142856"/>
+            <point key="canvasLocation" x="200.72463768115944" y="120.53571428571428"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="person.fill.badge.plus" catalog="system" width="128" height="124"/>
+        <image name="person.fill.checkmark" catalog="system" width="128" height="88"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

@@ -14,5 +14,6 @@ target 'ChooseSomeone' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Core'
   pod 'MJRefresh'
+  pod 'MASegmentedControl'
 
 end

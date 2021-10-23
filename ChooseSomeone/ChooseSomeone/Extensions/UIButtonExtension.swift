@@ -38,8 +38,7 @@ import UIKit
         }
     }
     
-    @IBInspectable
-    var shadowRadius: CGFloat {
+    @IBInspectable override var shadowRadius: CGFloat {
         get {
             return layer.shadowRadius
         }
@@ -49,8 +48,7 @@ import UIKit
         }
     }
     
-    @IBInspectable
-    var shadowOpacity: Float {
+    @IBInspectable override var shadowOpacity: Float {
         get {
             return layer.shadowOpacity
         }
@@ -60,8 +58,7 @@ import UIKit
         }
     }
     
-    @IBInspectable
-    var shadowOffset: CGSize {
+    @IBInspectable override var shadowOffset: CGSize {
         get {
             return layer.shadowOffset
         }
@@ -72,7 +69,7 @@ import UIKit
     }
     
     @IBInspectable
-    var shadowColor: UIColor? {
+    override var shadowColor: UIColor? {
         get {
             if let color = layer.shadowColor {
                 return UIColor(cgColor: color)
@@ -87,5 +84,14 @@ import UIKit
             }
         }
     }
+    
+    func applyGradient(colors: [CGColor])
+    {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = colors
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0)
+        gradientLayer.frame = self.bounds
+        self.layer.insertSublayer(gradientLayer, at: 0)
+    }
 }
-

@@ -38,7 +38,7 @@
                     <navigationItem key="navigationItem" id="uva-Bo-58p"/>
                     <connections>
                         <segue destination="K9k-lg-EXA" kind="show" identifier="toGroupChatVC" id="KS9-o8-ZE6"/>
-                        <segue destination="okd-f5-N7m" kind="presentation" identifier="toBuildTeamVC" id="Jao-OI-4lO"/>
+                        <segue destination="okd-f5-N7m" kind="presentation" identifier="toBuildTeamVC" modalPresentationStyle="overFullScreen" id="Jao-OI-4lO"/>
                         <segue destination="MMi-L5-LgI" kind="presentation" identifier="toRequestList" id="VpQ-O3-Tzv"/>
                     </connections>
                 </viewController>
@@ -67,11 +67,11 @@
             <objects>
                 <viewController id="okd-f5-N7m" customClass="BuildTeamViewController" customModule="ChooseSomeone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rds-Zc-5tG">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jvJ-w7-A9i">
-                                <rect key="frame" x="0.0" y="200" width="414" height="408"/>
+                                <rect key="frame" x="0.0" y="244" width="414" height="418"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SZU-x4-qib">
                                         <rect key="frame" x="10" y="35" width="394" height="327"/>
@@ -196,7 +196,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KKr-2P-Jhv">
-                                        <rect key="frame" x="10" y="367" width="394" height="31"/>
+                                        <rect key="frame" x="10" y="367" width="394" height="41"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                                         <color key="tintColor" red="0.90588235859999999" green="0.90588235859999999" blue="0.90588235859999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>

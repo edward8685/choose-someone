@@ -11,18 +11,18 @@ import FirebaseFirestore
 class GroupChatCell: UITableViewCell {
     
     private let userId = "1357988"
-
+    
     @IBOutlet weak var createdTime: UILabel!
     
     @IBOutlet weak var memberName: UILabel!
     
     @IBOutlet weak var memberMessage: UILabel!
-        
+    
     @IBOutlet weak var memberImage: UIImageView!
     
     @IBOutlet weak var userMessage: UILabel!
     
-    func setUpCell(messages: [Message], indexPath: IndexPath){
+    func setUpCell(messages: [Message], indexPath: IndexPath) {
         
         let timeInterval = messages[indexPath.row].createdTime
         let date = timeInterval.dateValue()
@@ -34,8 +34,7 @@ class GroupChatCell: UITableViewCell {
         if messages[indexPath.row].userId == userId {
             userMessage.text = messages[indexPath.row].body
             isSentFromUser = true
-        }
-        else {
+        } else {
             isSentFromUser = false
             memberName.text = messages[indexPath.row].userName
             memberMessage.text = messages[indexPath.row].body
@@ -43,7 +42,7 @@ class GroupChatCell: UITableViewCell {
     }
     
     var isSentFromUser: Bool = true {
-        didSet{
+        didSet {
             userMessage.isHidden = isSentFromUser ? false : true
             memberName.isHidden = isSentFromUser ? true : false
             memberMessage.isHidden = isSentFromUser ? true : false
@@ -58,12 +57,6 @@ class GroupChatCell: UITableViewCell {
         memberMessage.layer.cornerRadius = 5
         memberMessage.layer.masksToBounds = true
         selectionStyle = .none
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
 }

@@ -37,8 +37,7 @@ class BuildTeamViewController: UIViewController {
     
     @IBOutlet weak var travelDate: UIDatePicker! {
         didSet {
-//            travelDate.datePickerMode = UIDatePicker.Mode.date
-            
+  
         }
     }
     

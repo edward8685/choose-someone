@@ -9,6 +9,8 @@ import UIKit
 
 class GroupChatHeaderCell: UITableViewCell {
     
+    private let userId = "1357988"
+    
     @IBOutlet weak var groupName: UILabel!
     
     @IBOutlet weak var travelDate: UILabel!
@@ -41,6 +43,14 @@ class GroupChatHeaderCell: UITableViewCell {
         let counts = groups.userIds.count
         numOfPeople.text = "\(counts) / \(upperLimit)"
         note.text = groups.note
+        
+        for userInGroup in groups.userIds {
+            if userInGroup != userId {
+                requestButton.setTitle("送出申請", for: .normal)
+            } else {
+                requestButton.setTitle("退出隊伍", for: .normal)
+            }
+        }
         
     }
     

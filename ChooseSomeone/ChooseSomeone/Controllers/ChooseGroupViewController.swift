@@ -8,8 +8,11 @@
 import UIKit
 import Firebase
 import MJRefresh
+import MASegmentedControl
 
 class ChooseGroupViewController: UIViewController {
+    
+    private var userId = "1357988"
     
     let header = MJRefreshNormalHeader()
     
@@ -21,10 +24,22 @@ class ChooseGroupViewController: UIViewController {
     }
     
     private var groups = [Group]() {
-        didSet{
+        didSet {
+            tableView.reloadData()
+            myGroups = groups.filter { $0.userIds.contains(userId) }
+        }
+    }
+    
+    lazy var groupsToDisplay = groups {
+        didSet {
             tableView.reloadData()
         }
     }
+    
+    private var myGroups = [Group]()
+    
+    private var searching = false
+    private var searchGroups = [Group]()
     
     
     override func viewDidLoad() {
@@ -51,8 +66,9 @@ class ChooseGroupViewController: UIViewController {
         
     }
     
-    @objc func headerRefresh(){
+    @objc func headerRefresh() {
         fetchGroupData()
+        tableView.reloadData()
         self.tableView.mj_header?.endRefreshing()
     }
     
@@ -72,6 +88,9 @@ class ChooseGroupViewController: UIViewController {
             
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        
+        tableView.separatorStyle = .none
+        
     }
     
     func setUpHeaderView() {
@@ -93,9 +112,27 @@ class ChooseGroupViewController: UIViewController {
             
             headerView.heightAnchor.constraint(equalToConstant: 120)
         ])
+        
         headerView.requestListButton.addTarget(self, action: #selector(checkRequestList), for: .touchUpInside)
+        
+        headerView.textSegmentedControl.addTarget(self, action: #selector(segmentValueChanged(_:)), for: .valueChanged)
+        
+        headerView.groupSearchBar.delegate = self
+        
     }
-    @objc func checkRequestList(_ sender: UIButton){
+    
+    @objc func segmentValueChanged(_ sender: MASegmentedControl) {
+
+        switch sender.tag {
+        case 0:
+            groupsToDisplay = groups
+
+        default:
+            groupsToDisplay = myGroups
+        }
+    }
+    
+    @objc func checkRequestList(_ sender: UIButton) {
         performSegue(withIdentifier: "toRequestList", sender: nil)
     }
     
@@ -107,7 +144,7 @@ class ChooseGroupViewController: UIViewController {
         let height = view.frame.size.height
         
         buildTeamButton.frame = CGRect(x: width - 70, y: height - 120, width: 50, height: 50)
-        buildTeamButton.backgroundColor = UIColor(red: 46 / 255 , green: 13 / 255 , blue: 128 / 255 , alpha: 1.00)
+        buildTeamButton.backgroundColor = UIColor.hexStringToUIColor(hex: "72E717")
         let plusImage = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .medium))
         buildTeamButton.setImage(plusImage, for: .normal)
         buildTeamButton.tintColor = .white
@@ -115,8 +152,8 @@ class ChooseGroupViewController: UIViewController {
         buildTeamButton.layer.masksToBounds = true
         
         buildTeamButton.addTarget(self, action: #selector(buildNewTeam), for: .touchUpInside)
-    
-       view.addSubview(buildTeamButton)
+        
+        view.addSubview(buildTeamButton)
     }
     
     @objc func buildNewTeam() {
@@ -128,7 +165,7 @@ class ChooseGroupViewController: UIViewController {
         GroupRoomManager.shared.fetchGroups { [weak self] result in
             
             switch result {
-            
+                
             case .success(let groups):
                 
                 self?.groups = groups
@@ -148,17 +185,18 @@ extension ChooseGroupViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-       95
+        95
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         performSegue(withIdentifier: "toGroupChatVC", sender: groups[indexPath.row])
         
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toGroupChatVC"{
-            if let chatRoomVC = segue.destination as? ChatRoomViewController{
+        if segue.identifier == "toGroupChatVC" {
+            if let chatRoomVC = segue.destination as? ChatRoomViewController {
                 
                 if let groupInfo = sender as? Group {
                     chatRoomVC.groupInfo = groupInfo
@@ -170,7 +208,16 @@ extension ChooseGroupViewController: UITableViewDelegate {
 
 extension ChooseGroupViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        groups.count
+        
+        if searching {
+            
+            return searchGroups.count
+            
+        } else {
+            
+            return groupsToDisplay.count
+            
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -178,8 +225,39 @@ extension ChooseGroupViewController: UITableViewDataSource {
                 
         else {fatalError("Could not create Cell")}
         
-        cell.setUpCell(groups: groups, indexPath: indexPath)
+        if searching {
+            
+            cell.setUpCell(group: searchGroups[indexPath.row], indexPath: indexPath)
+            
+        } else {
+            
+            cell.setUpCell(group: groupsToDisplay[indexPath.row], indexPath: indexPath)
+            
+        }
+        
         return cell
+        
     }
+}
 
+extension ChooseGroupViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        searchGroups = groupsToDisplay.filter { $0.trailName.lowercased().prefix(searchText.count) == searchText.lowercased() }
+        
+        searching = true
+        
+        tableView.reloadData()
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        searching = false
+        
+        searchBar.text = ""
+        
+        tableView.reloadData()
+        
+    }
 }
