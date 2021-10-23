@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 
 class GroupRoomManager {
     
-    private var hostId = "12345678"
+    private var hostId = "1357988"
     
     static let shared = GroupRoomManager()
     

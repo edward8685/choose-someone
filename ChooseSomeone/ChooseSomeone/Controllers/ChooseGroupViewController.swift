@@ -30,17 +30,12 @@ class ChooseGroupViewController: UIViewController {
         }
     }
     
-    lazy var groupsToDisplay = groups {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-    
     private var myGroups = [Group]()
+    
+    lazy var groupsToDisplay = groups
     
     private var searching = false
     private var searchGroups = [Group]()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +59,7 @@ class ChooseGroupViewController: UIViewController {
         header.setRefreshingTarget(self, refreshingAction: #selector(self.headerRefresh))
         self.tableView.mj_header = header
         
+        groupsToDisplay = groups
     }
     
     @objc func headerRefresh() {
@@ -80,7 +76,7 @@ class ChooseGroupViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 120),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 120),
             
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             
@@ -122,14 +118,18 @@ class ChooseGroupViewController: UIViewController {
     }
     
     @objc func segmentValueChanged(_ sender: MASegmentedControl) {
-
-        switch sender.tag {
+  
+        switch sender.selectedSegmentIndex{
         case 0:
             groupsToDisplay = groups
+            
+        case 1 :
+            groupsToDisplay = myGroups
 
         default:
-            groupsToDisplay = myGroups
+            groupsToDisplay = groups
         }
+        tableView.reloadData()
     }
     
     @objc func checkRequestList(_ sender: UIButton) {
@@ -143,12 +143,12 @@ class ChooseGroupViewController: UIViewController {
         let width = view.frame.size.width
         let height = view.frame.size.height
         
-        buildTeamButton.frame = CGRect(x: width - 70, y: height - 120, width: 50, height: 50)
+        buildTeamButton.frame = CGRect(x: width * 0.8, y: height * 0.9, width: width * 0.15, height: width * 0.15)
         buildTeamButton.backgroundColor = UIColor.hexStringToUIColor(hex: "72E717")
         let plusImage = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .medium))
         buildTeamButton.setImage(plusImage, for: .normal)
         buildTeamButton.tintColor = .white
-        buildTeamButton.layer.cornerRadius = 25
+        buildTeamButton.layer.cornerRadius = width * 0.075
         buildTeamButton.layer.masksToBounds = true
         
         buildTeamButton.addTarget(self, action: #selector(buildNewTeam), for: .touchUpInside)
