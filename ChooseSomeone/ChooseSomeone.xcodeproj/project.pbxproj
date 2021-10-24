@@ -23,6 +23,9 @@
 		740FC399271D17180071459A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740FC397271D17180071459A /* LaunchScreen.storyboard */; };
 		742516F927218A520011166B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742516F827218A520011166B /* UIColor+Extension.swift */; };
 		742516FB272197A30011166B /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742516FA272197A30011166B /* UILabelExtension.swift */; };
+		7449349C272548BC002D8FE3 /* TrailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7449349B272548BC002D8FE3 /* TrailInfoViewController.swift */; };
+		7449349F27255A0B002D8FE3 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7449349E27255A0B002D8FE3 /* UIStoryboard+Extension.swift */; };
+		744934A1272562C8002D8FE3 /* TrailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744934A0272562C8002D8FE3 /* TrailManager.swift */; };
 		7457A1D0271EECEF00A947AE /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457A1CF271EECEF00A947AE /* Message.swift */; };
 		7457A1D2271EEEDC00A947AE /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457A1D1271EEEDC00A947AE /* Request.swift */; };
 		74608D1D271D1CEC002BD125 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D1B271D1CEC002BD125 /* UIScreen+Extension.swift */; };
@@ -74,6 +77,9 @@
 		740FC39A271D17180071459A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		742516F827218A520011166B /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		742516FA272197A30011166B /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
+		7449349B272548BC002D8FE3 /* TrailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailInfoViewController.swift; sourceTree = "<group>"; };
+		7449349E27255A0B002D8FE3 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
+		744934A0272562C8002D8FE3 /* TrailManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailManager.swift; sourceTree = "<group>"; };
 		7457A1CF271EECEF00A947AE /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		7457A1D1271EEEDC00A947AE /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		74608D1B271D1CEC002BD125 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
@@ -219,6 +225,7 @@
 				74608D39271DDA05002BD125 /* JoinRequestViewController.swift */,
 				740B1B852723FF2500A1CD3B /* HomeViewController.swift */,
 				74F96503272481F800B77DC5 /* TrailListViewController.swift */,
+				7449349B272548BC002D8FE3 /* TrailInfoViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -245,6 +252,7 @@
 				742516FA272197A30011166B /* UILabelExtension.swift */,
 				74FDD9272722C47D0014D2B2 /* UITableView+ColloectionVIewExtension.swift */,
 				74FDD9292722C5670014D2B2 /* UITextFieldExtexsion.swift */,
+				7449349E27255A0B002D8FE3 /* UIStoryboard+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -253,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				74608D46271EC727002BD125 /* GroupRoomManager.swift */,
+				744934A0272562C8002D8FE3 /* TrailManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -435,8 +444,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				740B1B862723FF2500A1CD3B /* HomeViewController.swift in Sources */,
+				7449349F27255A0B002D8FE3 /* UIStoryboard+Extension.swift in Sources */,
 				74608D32271D7253002BD125 /* BuildTeamViewController.swift in Sources */,
 				74608D41271E97DC002BD125 /* Trail.swift in Sources */,
+				744934A1272562C8002D8FE3 /* TrailManager.swift in Sources */,
 				740FC391271D17160071459A /* ChooseGroupViewController.swift in Sources */,
 				742516FB272197A30011166B /* UILabelExtension.swift in Sources */,
 				742516F927218A520011166B /* UIColor+Extension.swift in Sources */,
@@ -458,6 +469,7 @@
 				740FC38D271D17160071459A /* AppDelegate.swift in Sources */,
 				74F965072724830900B77DC5 /* TrailCell.swift in Sources */,
 				74608D3A271DDA05002BD125 /* JoinRequestViewController.swift in Sources */,
+				7449349C272548BC002D8FE3 /* TrailInfoViewController.swift in Sources */,
 				74FDD9282722C47D0014D2B2 /* UITableView+ColloectionVIewExtension.swift in Sources */,
 				740FC38F271D17160071459A /* SceneDelegate.swift in Sources */,
 				74608D21271D1DE1002BD125 /* GroupInfoCell.swift in Sources */,

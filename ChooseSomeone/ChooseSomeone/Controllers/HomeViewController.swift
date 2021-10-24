@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseFirestore
+import grpc
 
 class HomeViewController: UIViewController {
     
@@ -16,11 +17,7 @@ class HomeViewController: UIViewController {
     
     private let images = ["", "", ""]
     
-    private var trails = [Trail]() {
-        didSet{
-            tableView.reloadData()
-        }
-    }
+    private var trails = [Trail]()
     
     var user = User(
         uid: "",
@@ -43,8 +40,9 @@ class HomeViewController: UIViewController {
         
         setUpTableView()
         
-        navigationController?.isNavigationBarHidden = true
+        fetchTrailData()
         
+        navigationController?.isNavigationBarHidden = true
         
     }
     
@@ -60,6 +58,24 @@ class HomeViewController: UIViewController {
         
         tableView.separatorStyle = .none
     
+    }
+    
+    func fetchTrailData() {
+        
+        TrailManager.shared.fetchTrails { [weak self] result in
+            
+            switch result {
+                
+            case .success(let trails):
+                
+                self?.trails = trails
+                print(trails)
+                
+            case .failure(let error):
+                
+                print("fetchData.failure: \(error)")
+            }
+        }
     }
 }
 
@@ -79,6 +95,17 @@ extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         performSegue(withIdentifier: "toTrailList", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toTrailList" {
+            if let trailListVC = segue.destination as? TrailListViewController {
+                
+                if let trails = sender as? [Trail] {
+                    trailListVC.trails = trails
+                }
+            }
+        }
     }
 }
 

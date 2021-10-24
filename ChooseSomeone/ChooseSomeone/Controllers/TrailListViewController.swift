@@ -26,8 +26,14 @@ class TrailListViewController: UIViewController {
         case section
     }
     
-    struct TrailInfo : Hashable {
-        var trailName : String
+    var trails = [Trail]() {
+        didSet{
+            collectionView.reloadData()
+        }
+    }
+    
+    struct TrailInfo: Hashable {
+        var trailName: String
         //        var position : String
         //        var level : String
         //        var length : String
@@ -35,11 +41,11 @@ class TrailListViewController: UIViewController {
     }
     
     let trialsInfo = [
-        TrailInfo(trailName:"Trail 1"),
-        TrailInfo(trailName:"Trail 2"),
-        TrailInfo(trailName:"Trail 3"),
-        TrailInfo(trailName:"Trail 4"),
-        TrailInfo(trailName:"Trail 5")
+        TrailInfo(trailName: "Trail 1"),
+        TrailInfo(trailName: "Trail 2"),
+        TrailInfo(trailName: "Trail 3"),
+        TrailInfo(trailName: "Trail 4"),
+        TrailInfo(trailName: "Trail 5")
     ]
     
     override func viewDidLoad() {
@@ -60,7 +66,6 @@ class TrailListViewController: UIViewController {
         
         collectionView.lk_registerCellWithNib(reuseIdentifier: TrailCell.reuseIdentifier, bundle: nil)
         
-        
         collectionView.backgroundColor = .systemBlue
         collectionView.collectionViewLayout = configureCollectionViewLayout()
         
@@ -75,7 +80,7 @@ class TrailListViewController: UIViewController {
         let radius = UIScreen.width * 13 / 107
         returnButton.frame = CGRect(x: 20, y: 20, width: radius, height: radius)
         returnButton.backgroundColor = UIColor.hexStringToUIColor(hex: "FFFFFF")
-        let image = UIImage(systemName: "chevron.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .heavy))
+        let image = UIImage(systemName: "chevron.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .medium))
         returnButton.setImage(image, for: .normal)
         returnButton.tintColor = UIColor.hexStringToUIColor(hex: "19C3DA")
         returnButton.layer.cornerRadius = radius / 2
@@ -94,32 +99,42 @@ class TrailListViewController: UIViewController {
         
         let view = UIView(frame: CGRect(x: -20, y: 80, width: UIScreen.width / 2 + 10, height: 40))
         
-        let label = UILabel(frame: CGRect(x: 20, y: 0, width: 105, height: 35))
+        let label = UILabel(frame: CGRect(x: 20, y:83 , width: 105, height: 35))
         
         view.backgroundColor = UIColor.hexStringToUIColor(hex: "CFFFDA")
         view.layer.cornerRadius = 20
         view.layer.masksToBounds = true
         
+        label.text = "愜意的走"
         label.textColor = .black
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 24)
-
+        
         collectionView.addSubview(view)
-        view.addSubview(label)
-//        collectionView.addSubview(label)
+        collectionView.addSubview(label)
     }
 }
 
 extension TrailListViewController: UICollectionViewDelegate {
     
-}
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toTrailInfo", sender: nil)
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toTrailInfo" {
+            if let trailInfoVC = segue.destination as? TrailInfoViewController {
+            }
+        }
+    }
+}
+
 // MARK: - Collection View -
 
 func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
     return UICollectionViewCompositionalLayout { (sectionIndex, env) -> NSCollectionLayoutSection? in
         
-        let inset: CGFloat = 10
+//        let inset: CGFloat = 10
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
@@ -138,14 +153,14 @@ func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
                 NSCollectionLayoutGroupCustomItem(frame: CGRect(x: spacing , y: height / 2, width: itemWidth, height: height * 0.9))
             ]
         }
-//        group.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
+        //        group.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
         
         
         let section = NSCollectionLayoutSection(group: group)
         
-//                section.orthogonalScrollingBehavior = .groupPaging
-//                section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-//                section.interGroupSpacing = 20
+        //                section.orthogonalScrollingBehavior = .groupPaging
+        //                section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        //                section.interGroupSpacing = 20
         
         //        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
         //        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
@@ -169,8 +184,23 @@ extension TrailListViewController {
                 fatalError("Cannot create new cell")
             }
             cell.trailName.text = model.trailName
+            cell.checkGroupButton.addTarget(self, action: #selector(self.toGroupPage), for: .touchUpInside)
             return cell
         }
+    }
+    
+    @objc func toGroupPage() {
+        
+        var controller: UIViewController
+
+        UIStoryboard.group.instantiateInitialViewController()!
+        
+
+//        if let controller = storyboard?.instantiateViewController(withIdentifier: "ChooseGroupViewController") as? ChooseGroupViewController
+//        {
+//            controller.modalPresentationStyle = .overFullScreen
+//            present(controller, animated: false, completion: nil)
+//        }
     }
     
     func configureSnapshot() {
