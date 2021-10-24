@@ -44,8 +44,6 @@ class ChooseGroupViewController: UIViewController {
         
         tableView.lk_registerCellWithNib(identifier: GroupInfoCell.identifier, bundle: nil)
         
-        tableView.lk_registerCellWithNib(identifier: GroupHeaderCell.identifier, bundle: nil)
-        
         setUpHeaderView()
         
         setUpTableView()

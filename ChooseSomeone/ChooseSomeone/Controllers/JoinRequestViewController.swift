@@ -76,7 +76,7 @@ class JoinRequestViewController: UIViewController {
         
         let dismissButton = UIButton()
         
-        dismissButton.frame = CGRect(x: UIScreen.width - 40, y: 40 , width: 20, height: 20)
+        dismissButton.frame = CGRect(x: UIScreen.width - 40, y: 40, width: 20, height: 20)
         dismissButton.titleEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         dismissButton.backgroundColor = UIColor.hexStringToUIColor(hex: "64696F")
         let image = UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 10, weight: .light))
