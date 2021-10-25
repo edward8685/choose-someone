@@ -49,6 +49,7 @@
 		74608D43271E9C67002BD125 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D42271E9C67002BD125 /* Group.swift */; };
 		74608D45271EA5E1002BD125 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D44271EA5E1002BD125 /* User.swift */; };
 		74608D47271EC727002BD125 /* GroupRoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D46271EC727002BD125 /* GroupRoomManager.swift */; };
+		74E5735B27268E3E00F490BF /* TrialInfoScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5735A27268E3E00F490BF /* TrialInfoScrollView.swift */; };
 		74F96504272481F800B77DC5 /* TrailListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F96503272481F800B77DC5 /* TrailListViewController.swift */; };
 		74F965072724830900B77DC5 /* TrailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F965052724830900B77DC5 /* TrailCell.swift */; };
 		74F965082724830900B77DC5 /* TrailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74F965062724830900B77DC5 /* TrailCell.xib */; };
@@ -103,6 +104,7 @@
 		74608D42271E9C67002BD125 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		74608D44271EA5E1002BD125 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		74608D46271EC727002BD125 /* GroupRoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRoomManager.swift; sourceTree = "<group>"; };
+		74E5735A27268E3E00F490BF /* TrialInfoScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialInfoScrollView.swift; sourceTree = "<group>"; };
 		74F96503272481F800B77DC5 /* TrailListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailListViewController.swift; sourceTree = "<group>"; };
 		74F965052724830900B77DC5 /* TrailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailCell.swift; sourceTree = "<group>"; };
 		74F965062724830900B77DC5 /* TrailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrailCell.xib; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				740B1B8E2724280D00A1CD3B /* TrailThemeCell.xib */,
 				740B1B892724161600A1CD3B /* HomeHeaderCell.swift */,
 				740B1B8A2724161600A1CD3B /* HomeHeaderCell.xib */,
+				74E5735A27268E3E00F490BF /* TrialInfoScrollView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				74608D29271D4A80002BD125 /* GroupChatCell.swift in Sources */,
 				74608D1D271D1CEC002BD125 /* UIScreen+Extension.swift in Sources */,
 				74608D45271EA5E1002BD125 /* User.swift in Sources */,
+				74E5735B27268E3E00F490BF /* TrialInfoScrollView.swift in Sources */,
 				7457A1D2271EEEDC00A947AE /* Request.swift in Sources */,
 				74608D47271EC727002BD125 /* GroupRoomManager.swift in Sources */,
 				740FC38D271D17160071459A /* AppDelegate.swift in Sources */,
@@ -637,7 +641,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ed.ChooseSomeone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -667,7 +671,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ed.ChooseSomeone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

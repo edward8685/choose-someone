@@ -114,11 +114,11 @@
                         <color key="textColor" systemColor="systemPinkColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flag" translatesAutoresizingMaskIntoConstraints="NO" id="2mf-4B-nnL">
-                        <rect key="frame" x="10" y="4" width="30" height="25"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Artboard 5" translatesAutoresizingMaskIntoConstraints="NO" id="2mf-4B-nnL">
+                        <rect key="frame" x="462" y="5" width="36" height="43"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="YQd-7b-yVq"/>
-                            <constraint firstAttribute="height" constant="25" id="l1I-9B-VsW"/>
+                            <constraint firstAttribute="height" constant="43" id="NRZ-9h-kyA"/>
+                            <constraint firstAttribute="width" constant="36" id="h9h-zy-cqC"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -126,15 +126,15 @@
                     <constraint firstItem="It9-u7-Sme" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="1RJ-t9-2ur"/>
                     <constraint firstAttribute="bottom" secondItem="Cdk-ME-c3N" secondAttribute="bottom" constant="20" id="5DP-g4-Oui"/>
                     <constraint firstItem="IFX-00-YVL" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="B1S-TM-FAj"/>
+                    <constraint firstAttribute="trailing" secondItem="2mf-4B-nnL" secondAttribute="trailing" constant="36" id="DOe-3h-vh6"/>
                     <constraint firstAttribute="bottom" secondItem="It9-u7-Sme" secondAttribute="bottom" constant="30" id="IN5-JR-QGn"/>
                     <constraint firstItem="gDB-sh-p3n" firstAttribute="leading" secondItem="3UB-sO-ofa" secondAttribute="trailing" constant="10" id="M5j-Z1-Beh"/>
                     <constraint firstItem="gDB-sh-p3n" firstAttribute="centerY" secondItem="3UB-sO-ofa" secondAttribute="centerY" id="Uwa-Es-Jzq"/>
-                    <constraint firstItem="2mf-4B-nnL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="W2a-Kh-qfy"/>
+                    <constraint firstItem="2mf-4B-nnL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="V4o-ta-m5M"/>
                     <constraint firstAttribute="trailing" secondItem="Cdk-ME-c3N" secondAttribute="trailing" constant="20" id="aNK-sJ-7CT"/>
                     <constraint firstItem="Cdk-ME-c3N" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="cNl-3z-Sct"/>
                     <constraint firstAttribute="trailing" secondItem="IFX-00-YVL" secondAttribute="trailing" constant="30" id="qZL-fj-JoR"/>
                     <constraint firstItem="It9-u7-Sme" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="s9Y-Vs-2kS"/>
-                    <constraint firstItem="2mf-4B-nnL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="t1u-kD-FaT"/>
                     <constraint firstItem="Cdk-ME-c3N" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="tV4-ET-4Vb"/>
                 </constraints>
             </tableViewCellContentView>
@@ -151,7 +151,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Flag" width="2000" height="2000"/>
+        <image name="Artboard 5" width="41.119998931884766" height="49.119998931884766"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -10,8 +10,8 @@ import UIKit
 class TrailListViewController: UIViewController {
     
     // MARK: - DataSource & DataSourceSnapshot typelias -
-    typealias DataSource = UICollectionViewDiffableDataSource<Section, TrailInfo>
-    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, TrailInfo>
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, Trail>
+    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Trail>
     
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
@@ -19,6 +19,12 @@ class TrailListViewController: UIViewController {
         }
     }
     
+    var themes = ["", "", ""] {
+        didSet{
+            setUpLabel()
+        }
+    }
+    private var themeLabel = ""
     private var dataSource: DataSource!
     private var snapshot = DataSourceSnapshot()
     
@@ -26,27 +32,7 @@ class TrailListViewController: UIViewController {
         case section
     }
     
-    var trails = [Trail]() {
-        didSet{
-            collectionView.reloadData()
-        }
-    }
-    
-    struct TrailInfo: Hashable {
-        var trailName: String
-        //        var position : String
-        //        var level : String
-        //        var length : String
-        //        var picture : UIImage
-    }
-    
-    let trialsInfo = [
-        TrailInfo(trailName: "Trail 1"),
-        TrailInfo(trailName: "Trail 2"),
-        TrailInfo(trailName: "Trail 3"),
-        TrailInfo(trailName: "Trail 4"),
-        TrailInfo(trailName: "Trail 5")
-    ]
+    var trails = [Trail]()
     
     override func viewDidLoad() {
         
@@ -66,7 +52,7 @@ class TrailListViewController: UIViewController {
         
         collectionView.lk_registerCellWithNib(reuseIdentifier: TrailCell.reuseIdentifier, bundle: nil)
         
-        collectionView.backgroundColor = .systemBlue
+        collectionView.backgroundColor = .clear
         collectionView.collectionViewLayout = configureCollectionViewLayout()
         
         configureDataSource()
@@ -91,6 +77,21 @@ class TrailListViewController: UIViewController {
         collectionView.addSubview(returnButton)
     }
     
+    func setUpLabel() {
+        if let label = trails.first?.trailLevel{
+        switch label {
+        case 1:
+            themeLabel = themes[0]
+        case 2...3:
+            themeLabel = themes[1]
+        case 4...5:
+            themeLabel = themes[2]
+        default:
+            return
+        }
+        }
+    }
+    
     @objc func returnToPreviousPage() {
         navigationController?.popViewController(animated: true)
     }
@@ -99,13 +100,13 @@ class TrailListViewController: UIViewController {
         
         let view = UIView(frame: CGRect(x: -20, y: 80, width: UIScreen.width / 2 + 10, height: 40))
         
-        let label = UILabel(frame: CGRect(x: 20, y:83 , width: 105, height: 35))
+        let label = UILabel(frame: CGRect(x: 20, y: 83 , width: 120, height: 35))
         
         view.backgroundColor = UIColor.hexStringToUIColor(hex: "CFFFDA")
         view.layer.cornerRadius = 20
         view.layer.masksToBounds = true
         
-        label.text = "愜意的走"
+        label.text = themeLabel
         label.textColor = .black
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 24)
@@ -113,17 +114,22 @@ class TrailListViewController: UIViewController {
         collectionView.addSubview(view)
         collectionView.addSubview(label)
     }
+    
 }
 
 extension TrailListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "toTrailInfo", sender: nil)
+        performSegue(withIdentifier: "toTrailInfo", sender: trails[indexPath.row])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toTrailInfo" {
             if let trailInfoVC = segue.destination as? TrailInfoViewController {
+                
+                if let trail = sender as? Trail {
+                trailInfoVC.trail = trail
+                }
             }
         }
     }
@@ -183,7 +189,8 @@ extension TrailListViewController {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrailCell.reuseIdentifier, for: indexPath) as? TrailCell else {
                 fatalError("Cannot create new cell")
             }
-            cell.trailName.text = model.trailName
+            cell.setUpCell(model: model, indexPath: indexPath)
+            
             cell.checkGroupButton.addTarget(self, action: #selector(self.toGroupPage), for: .touchUpInside)
             return cell
         }
@@ -206,7 +213,7 @@ extension TrailListViewController {
     func configureSnapshot() {
         
         snapshot.appendSections([.section])
-        snapshot.appendItems(trialsInfo, toSection: .section)
+        snapshot.appendItems(trails, toSection: .section)
         
         dataSource.apply(snapshot, animatingDifferences: false)
     }

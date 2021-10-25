@@ -17,8 +17,19 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="Artboard 3" translatesAutoresizingMaskIntoConstraints="NO" id="yLi-oH-X24">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="yLi-oH-X24" secondAttribute="bottom" id="3Rs-ec-eRW"/>
+                            <constraint firstItem="yLi-oH-X24" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="44Q-f4-aOp"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="yLi-oH-X24" secondAttribute="trailing" id="bvc-Kb-gPM"/>
+                            <constraint firstItem="yLi-oH-X24" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="jf8-ed-1b9"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="38g-T8-P2r"/>
                     <connections>
@@ -37,6 +48,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="Artboard 3" translatesAutoresizingMaskIntoConstraints="NO" id="W3s-s0-FYV">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TmS-Nq-4s3">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -62,9 +76,13 @@
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mX5-jH-pAJ"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="W3s-s0-FYV" secondAttribute="bottom" id="9QP-L3-vSs"/>
+                            <constraint firstItem="W3s-s0-FYV" firstAttribute="leading" secondItem="mX5-jH-pAJ" secondAttribute="leading" id="Hm2-bi-hYh"/>
+                            <constraint firstItem="W3s-s0-FYV" firstAttribute="top" secondItem="wet-Y0-SVo" secondAttribute="top" id="OFf-uj-bl7"/>
                             <constraint firstItem="mX5-jH-pAJ" firstAttribute="trailing" secondItem="TmS-Nq-4s3" secondAttribute="trailing" id="PLz-FX-d8C"/>
+                            <constraint firstItem="W3s-s0-FYV" firstAttribute="trailing" secondItem="mX5-jH-pAJ" secondAttribute="trailing" id="aUK-R6-yld"/>
                             <constraint firstItem="TmS-Nq-4s3" firstAttribute="top" secondItem="mX5-jH-pAJ" secondAttribute="top" id="mI8-ES-Ul7"/>
                             <constraint firstItem="TmS-Nq-4s3" firstAttribute="leading" secondItem="mX5-jH-pAJ" secondAttribute="leading" id="vCX-n8-mwP"/>
                             <constraint firstItem="mX5-jH-pAJ" firstAttribute="bottom" secondItem="TmS-Nq-4s3" secondAttribute="bottom" id="xse-DF-LPa"/>
@@ -84,13 +102,13 @@
             <objects>
                 <viewController id="dTW-ZR-WgG" customClass="TrailInfoViewController" customModule="ChooseSomeone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z0M-mr-L8e">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="946"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="892"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qx0-BZ-cR4">
-                                <rect key="frame" x="20" y="100" width="374" height="712"/>
+                                <rect key="frame" x="20" y="100" width="374" height="658"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XzK-Qj-uxx">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XzK-Qj-uxx" customClass="TrialInfoView" customModule="ChooseSomeone" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="950"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="蘇花古道：大南澳越嶺段" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sg4-yP-lWd">
@@ -127,14 +145,8 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日人19 世紀於蘇花海岸之間先後開鑿了北段的大南澳路、南段的沿岸理番道路及東海徒步道，即今日蘇花公路的前身日人19 世紀於蘇花海岸之間先後開鑿了北段的大南澳路、南段的沿岸理番道路及東海徒步道，即今日蘇花公路的前身。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VuJ-hH-N4s">
-                                                <rect key="frame" x="30" y="160.5" width="314" height="291.5"/>
-                                                <fontDescription key="fontDescription" name="NotoSansKannada-Light" family="Noto Sans Kannada" pointSize="24"/>
-                                                <color key="textColor" red="0.098039215690000001" green="0.76470588240000004" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tYs-ex-PHV">
-                                                <rect key="frame" x="30" y="482" width="314" height="243.5"/>
+                                                <rect key="frame" x="30" y="482" width="314" height="254.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="TC1-iY-8Ai">
                                                         <rect key="frame" x="0.0" y="0.0" width="314" height="81.5"/>
@@ -177,7 +189,7 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="img-hU-TBh">
-                                                        <rect key="frame" x="0.0" y="173" width="314" height="70.5"/>
+                                                        <rect key="frame" x="0.0" y="173" width="314" height="81.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="交通方式：" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oqp-Fu-e2H">
                                                                 <rect key="frame" x="0.0" y="0.0" width="90" height="24.5"/>
@@ -186,8 +198,8 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="北宜高速公路→蘇花公路（台9線）→烏石鼻戰備道路約 3.2 公里處" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHW-gC-c4t">
-                                                                <rect key="frame" x="0.0" y="32.5" width="314" height="38"/>
-                                                                <fontDescription key="fontDescription" name="NotoSansKannada-Light" family="Noto Sans Kannada" pointSize="14"/>
+                                                                <rect key="frame" x="0.0" y="32.5" width="314" height="49"/>
+                                                                <fontDescription key="fontDescription" name="NotoSansKannada-Light" family="Noto Sans Kannada" pointSize="18"/>
                                                                 <color key="textColor" red="0.098039215690000001" green="0.76470588240000004" blue="0.85490196080000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -199,7 +211,7 @@
                                                 </subviews>
                                             </stackView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hxC-sT-hHz">
-                                                <rect key="frame" x="30" y="755.5" width="314" height="164.5"/>
+                                                <rect key="frame" x="30" y="766.5" width="314" height="153.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="RKE-xT-oow"/>
                                                 </constraints>
@@ -209,6 +221,12 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日人19 世紀於蘇花海岸之間先後開鑿了北段的大南澳路、南段的沿岸理番道路及東海徒步道，即今日蘇花公路的前身日人19 世紀於蘇花海岸之間先後開鑿了北段的大南澳路、南段的沿岸理番道路及東海徒步道，即今日蘇花公路的前身。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VuJ-hH-N4s">
+                                                <rect key="frame" x="30" y="160.5" width="314" height="291.5"/>
+                                                <fontDescription key="fontDescription" name="NotoSansKannada-Light" family="Noto Sans Kannada" pointSize="24"/>
+                                                <color key="textColor" red="0.098039215690000001" green="0.76470588240000004" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -230,6 +248,19 @@
                                             <constraint firstAttribute="trailing" secondItem="hxC-sT-hHz" secondAttribute="trailing" constant="30" id="yXt-Ka-1hZ"/>
                                             <constraint firstItem="r0W-SA-2ib" firstAttribute="top" secondItem="sg4-yP-lWd" secondAttribute="bottom" constant="12" id="ztA-dW-MH5"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="lkCornerRadius">
+                                                <real key="value" value="40"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="trafficInfo" destination="KHW-gC-c4t" id="3sk-Jd-tdQ"/>
+                                            <outlet property="trailInfo" destination="VuJ-hH-N4s" id="cqh-sF-Lde"/>
+                                            <outlet property="trailLength" destination="G2p-cd-qDm" id="OqM-kV-H5O"/>
+                                            <outlet property="trailLevel" destination="Gr7-Cd-xPJ" id="vCY-O3-nGF"/>
+                                            <outlet property="trailMap" destination="hxC-sT-hHz" id="6iH-GA-TNT"/>
+                                            <outlet property="trailName" destination="sg4-yP-lWd" id="bdC-al-Klb"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -257,19 +288,14 @@
                             <constraint firstItem="zdb-fp-jKh" firstAttribute="trailing" secondItem="qx0-BZ-cR4" secondAttribute="trailing" constant="20" id="j9Y-7l-WdU"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="414" height="1000"/>
+                    <size key="freeformSize" width="414" height="946"/>
                     <connections>
-                        <outlet property="trafficInfo" destination="KHW-gC-c4t" id="BPZ-iE-ib1"/>
-                        <outlet property="trailInfo" destination="VuJ-hH-N4s" id="X2T-zI-Y0Q"/>
-                        <outlet property="trailLevel" destination="Gr7-Cd-xPJ" id="aut-ZK-2Bd"/>
-                        <outlet property="trailMap" destination="hxC-sT-hHz" id="4IH-3D-czk"/>
-                        <outlet property="trailName" destination="sg4-yP-lWd" id="VTP-X0-5iu"/>
-                        <outlet property="trialLength" destination="G2p-cd-qDm" id="ZQU-ou-BMd"/>
+                        <outlet property="trailInfo" destination="XzK-Qj-uxx" id="tsb-eR-rVS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tak-Yp-6e0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1816" y="766"/>
+            <point key="canvasLocation" x="1815.9420289855075" y="765.40178571428567"/>
         </scene>
         <!--Home-->
         <scene sceneID="M4s-Ji-mv2">
@@ -293,6 +319,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Artboard 3" width="428.5" height="1205"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="house.fill" catalog="system" width="128" height="106"/>
         <systemColor name="systemBackgroundColor">

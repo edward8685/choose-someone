@@ -151,18 +151,19 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Man" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JVX-Fe-1h9">
-                        <rect key="frame" x="0.0" y="100" width="260" height="462"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Man" translatesAutoresizingMaskIntoConstraints="NO" id="JVX-Fe-1h9">
+                        <rect key="frame" x="0.0" y="0.0" width="342" height="592"/>
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                     </imageView>
                 </subviews>
-                <color key="backgroundColor" red="0.79973700495049505" green="0.46296637941422009" blue="0.063985340654398995" alpha="0.80791330645161286" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="VLy-ds-3T0" secondAttribute="trailing" constant="33" id="1sq-dc-3LG"/>
-                    <constraint firstItem="JVX-Fe-1h9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="100" id="IH9-cd-Gsd"/>
+                    <constraint firstItem="JVX-Fe-1h9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="IH9-cd-Gsd"/>
                     <constraint firstAttribute="bottom" secondItem="VLy-ds-3T0" secondAttribute="bottom" constant="20" id="XMO-ED-NfF"/>
-                    <constraint firstItem="3qi-0C-x3b" firstAttribute="leading" secondItem="JVX-Fe-1h9" secondAttribute="trailing" constant="20" id="gxS-Fr-IrC"/>
+                    <constraint firstAttribute="trailing" secondItem="JVX-Fe-1h9" secondAttribute="trailing" constant="100" id="f6S-Ar-cmF"/>
                     <constraint firstAttribute="trailing" secondItem="3qi-0C-x3b" secondAttribute="trailing" constant="33" id="hCM-C0-1yn"/>
-                    <constraint firstAttribute="bottom" secondItem="JVX-Fe-1h9" secondAttribute="bottom" constant="30" id="mmc-DK-yhy"/>
+                    <constraint firstAttribute="bottom" secondItem="JVX-Fe-1h9" secondAttribute="bottom" id="mmc-DK-yhy"/>
                     <constraint firstItem="JVX-Fe-1h9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="tvI-xL-cMO"/>
                     <constraint firstItem="VLy-ds-3T0" firstAttribute="top" secondItem="3qi-0C-x3b" secondAttribute="bottom" constant="35" id="uMc-f7-FMc"/>
                     <constraint firstItem="3qi-0C-x3b" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="uWe-oR-nkV"/>

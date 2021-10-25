@@ -19,7 +19,9 @@ class TrailThemeCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        contentView.backgroundColor = .clear
+        self.backgroundView?.backgroundColor = .clear
+        self.backgroundColor = .clear
         selectionStyle = .none
         
     }

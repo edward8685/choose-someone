@@ -25,14 +25,16 @@ class ChooseGroupViewController: UIViewController {
     
     private var groups = [Group]() {
         didSet {
+            myGroups = groups.filter { $0.userIds.contains(userId)
+            }
+            groupsToDisplay = groups
             tableView.reloadData()
-            myGroups = groups.filter { $0.userIds.contains(userId) }
         }
     }
     
     private var myGroups = [Group]()
     
-    lazy var groupsToDisplay = groups
+    private var groupsToDisplay = [Group]()
     
     private var searching = false
     private var searchGroups = [Group]()
@@ -141,9 +143,10 @@ class ChooseGroupViewController: UIViewController {
         let width = view.frame.size.width
         let height = view.frame.size.height
         
-        buildTeamButton.frame = CGRect(x: width * 0.8, y: height * 0.9, width: width * 0.15, height: width * 0.15)
+        buildTeamButton.frame = CGRect(x: width * 0.8, y: height * 0.8, width: width * 0.15, height: width * 0.15)
         buildTeamButton.backgroundColor = UIColor.hexStringToUIColor(hex: "72E717")
-        let plusImage = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .medium))
+        let plusImage = UIImage(named: "choose-button")
+//        let plusImage = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .medium))
         buildTeamButton.setImage(plusImage, for: .normal)
         buildTeamButton.tintColor = .white
         buildTeamButton.layer.cornerRadius = width * 0.075

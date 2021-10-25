@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,27 +17,35 @@
                 <rect key="frame" x="0.0" y="0.0" width="197" height="234"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z1H-9e-Pap">
+                    <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="z1H-9e-Pap">
                         <rect key="frame" x="0.0" y="0.0" width="197" height="234"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TrailName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQT-4a-8aV">
-                                <rect key="frame" x="12" y="16" width="96.5" height="28.5"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Artboard 4" translatesAutoresizingMaskIntoConstraints="NO" id="eNB-xI-tB3">
+                                <rect key="frame" x="0.0" y="0.0" width="197" height="234"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lkCornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TrailName" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQT-4a-8aV">
+                                <rect key="frame" x="12" y="16" width="173" height="28.5"/>
                                 <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="21"/>
                                 <color key="textColor" red="0.098039215686274508" green="0.76470588235294112" blue="0.85490196078431369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Area" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rqw-9O-eJS">
-                                <rect key="frame" x="161.5" y="56" width="25.5" height="16.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Area" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rqw-9O-eJS">
+                                <rect key="frame" x="10" y="56.5" width="177" height="16.5"/>
                                 <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="12"/>
                                 <color key="textColor" red="0.098039215686274508" green="0.76470588235294112" blue="0.85490196078431369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RzY-si-dN8">
-                                <rect key="frame" x="0.0" y="80" width="197" height="1"/>
+                                <rect key="frame" x="0.0" y="83" width="197" height="1"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bgD-gN-Idt">
                                         <rect key="frame" x="0.0" y="0.0" width="10" height="1"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="10" id="4xL-bZ-8P2"/>
                                             <constraint firstAttribute="height" constant="1" id="gpS-wi-ZYv"/>
@@ -53,7 +60,7 @@
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Huh-M7-bZo">
                                         <rect key="frame" x="187" y="0.0" width="10" height="1"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="10" id="7H7-2a-84Y"/>
                                             <constraint firstAttribute="height" constant="1" id="AiW-oA-Knx"/>
@@ -62,11 +69,11 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="0HO-7W-Lf8">
-                                <rect key="frame" x="14" y="113" width="169" height="94.5"/>
+                                <rect key="frame" x="14" y="116" width="169" height="91.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="5.5" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rG-ql-q3W">
-                                        <rect key="frame" x="0.0" y="0.0" width="121" height="92"/>
-                                        <fontDescription key="fontDescription" name="NotoSansKannada-Light" family="Noto Sans Kannada" pointSize="68"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" placeholderIntrinsicWidth="121" placeholderIntrinsicHeight="92" text="5.50" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rG-ql-q3W">
+                                        <rect key="frame" x="0.0" y="0.0" width="121" height="91.5"/>
+                                        <fontDescription key="fontDescription" name="NotoSansKannada-Light" family="Noto Sans Kannada" pointSize="50"/>
                                         <color key="textColor" red="0.098039215686274508" green="0.76470588235294112" blue="0.85490196078431369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -87,7 +94,7 @@
                                 <fontDescription key="fontDescription" name="NotoSansKannada-Regular" family="Noto Sans Kannada" pointSize="14"/>
                                 <inset key="titleEdgeInsets" minX="0.0" minY="4" maxX="0.0" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="已開團數( 0 )">
+                                <state key="normal" title="查看揪團">
                                     <color key="titleColor" red="0.098039215686274508" green="0.76470588235294112" blue="0.85490196078431369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" red="0.086274509803921567" green="0.4823529411764706" blue="0.53725490196078429" alpha="0.20156250000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -110,19 +117,25 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Rqw-9O-eJS" firstAttribute="top" secondItem="z1H-9e-Pap" secondAttribute="top" constant="56" id="3Gf-wD-gGc"/>
+                            <constraint firstItem="RzY-si-dN8" firstAttribute="top" secondItem="Rqw-9O-eJS" secondAttribute="bottom" constant="10" id="0dg-IJ-PvO"/>
+                            <constraint firstAttribute="bottom" secondItem="eNB-xI-tB3" secondAttribute="bottom" id="3OW-Ox-1jC"/>
+                            <constraint firstAttribute="trailing" secondItem="eNB-xI-tB3" secondAttribute="trailing" id="6LU-5Q-vdM"/>
+                            <constraint firstAttribute="trailing" secondItem="dQT-4a-8aV" secondAttribute="trailing" constant="12" id="HNG-6R-Gpg"/>
+                            <constraint firstItem="eNB-xI-tB3" firstAttribute="leading" secondItem="z1H-9e-Pap" secondAttribute="leading" id="Ibo-Pl-YdY"/>
                             <constraint firstItem="uZY-fj-Q6t" firstAttribute="leading" secondItem="z1H-9e-Pap" secondAttribute="leading" constant="10" id="Ids-Ps-r6H"/>
                             <constraint firstAttribute="bottom" secondItem="uZY-fj-Q6t" secondAttribute="bottom" constant="10" id="J01-la-xiJ"/>
+                            <constraint firstItem="eNB-xI-tB3" firstAttribute="top" secondItem="z1H-9e-Pap" secondAttribute="top" id="MGb-Vu-l6K"/>
+                            <constraint firstItem="Rqw-9O-eJS" firstAttribute="leading" secondItem="z1H-9e-Pap" secondAttribute="leading" constant="10" id="OOY-F7-yGt"/>
                             <constraint firstItem="0HO-7W-Lf8" firstAttribute="top" secondItem="RzY-si-dN8" secondAttribute="bottom" constant="32" id="TUm-Gs-n4o"/>
                             <constraint firstItem="RzY-si-dN8" firstAttribute="leading" secondItem="z1H-9e-Pap" secondAttribute="leading" id="V2E-W5-nVI"/>
+                            <constraint firstItem="Rqw-9O-eJS" firstAttribute="top" secondItem="dQT-4a-8aV" secondAttribute="bottom" constant="12" id="Xjj-EK-CTo"/>
                             <constraint firstAttribute="trailing" secondItem="uZY-fj-Q6t" secondAttribute="trailing" constant="10" id="XuD-Cx-ddW"/>
                             <constraint firstAttribute="trailing" secondItem="Rqw-9O-eJS" secondAttribute="trailing" constant="10" id="Z9J-Bo-klV"/>
                             <constraint firstItem="dQT-4a-8aV" firstAttribute="leading" secondItem="z1H-9e-Pap" secondAttribute="leading" constant="12" id="ZfE-I8-cGP"/>
                             <constraint firstItem="dQT-4a-8aV" firstAttribute="top" secondItem="z1H-9e-Pap" secondAttribute="top" constant="16" id="bvM-1d-Y81"/>
                             <constraint firstAttribute="trailing" secondItem="0HO-7W-Lf8" secondAttribute="trailing" constant="14" id="hN3-Bc-zUI"/>
-                            <constraint firstItem="RzY-si-dN8" firstAttribute="top" secondItem="z1H-9e-Pap" secondAttribute="top" constant="80" id="mr3-8H-wAA"/>
                             <constraint firstAttribute="trailing" secondItem="RzY-si-dN8" secondAttribute="trailing" id="sQZ-sQ-80e"/>
                             <constraint firstItem="0HO-7W-Lf8" firstAttribute="leading" secondItem="z1H-9e-Pap" secondAttribute="leading" constant="14" id="w2q-n9-ois"/>
                             <constraint firstItem="uZY-fj-Q6t" firstAttribute="top" secondItem="0HO-7W-Lf8" secondAttribute="bottom" constant="-17.5" id="ykd-UE-DyQ"/>
@@ -156,8 +169,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="Artboard 4" width="180.5" height="250.5"/>
     </resources>
 </document>

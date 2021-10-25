@@ -7,17 +7,24 @@
 
 import UIKit
 import FirebaseFirestore
-import grpc
 
 class HomeViewController: UIViewController {
     
     private var userId = "1357988"
     
-    private let themes = ["愜意的走", "想流點汗", "百岳行前訓"]
+    private let themes = ["愜意的走", "想流點汗", "百岳挑戰"]
     
     private let images = ["", "", ""]
     
-    private var trails = [Trail]()
+    private var trails = [Trail]() {
+        didSet{
+            manageTrailData()
+        }
+    }
+    
+    private var easyTrails = [Trail]()
+    private var mediumTrails = [Trail]()
+    private var hardTrails = [Trail]()
     
     var user = User(
         uid: "",
@@ -77,6 +84,20 @@ class HomeViewController: UIViewController {
             }
         }
     }
+    //clasfied by Trail_difficult
+    func manageTrailData() {
+        
+        for trail in trails {
+            switch trail.trailLevel {
+            case 1:
+                easyTrails.append(trail)
+            case 2...3:
+                mediumTrails.append(trail)
+            default:
+                hardTrails.append(trail)
+            }
+        }
+    }
 }
 
 
@@ -93,8 +114,17 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            performSegue(withIdentifier: "toTrailList", sender: easyTrails)
+        case 1:
+            performSegue(withIdentifier: "toTrailList", sender: mediumTrails)
+        case 2:
+            performSegue(withIdentifier: "toTrailList", sender: hardTrails)
+        default:
+            return
+        }
         
-        performSegue(withIdentifier: "toTrailList", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -104,6 +134,7 @@ extension HomeViewController: UITableViewDelegate {
                 if let trails = sender as? [Trail] {
                     trailListVC.trails = trails
                 }
+                trailListVC.themes = themes
             }
         }
     }
