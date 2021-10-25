@@ -145,8 +145,8 @@ class ChooseGroupViewController: UIViewController {
         
         buildTeamButton.frame = CGRect(x: width * 0.8, y: height * 0.8, width: width * 0.15, height: width * 0.15)
         buildTeamButton.backgroundColor = UIColor.hexStringToUIColor(hex: "72E717")
-        let plusImage = UIImage(named: "choose-button")
-//        let plusImage = UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .medium))
+        let plusImage = UIImage(named: "choose_button")
+
         buildTeamButton.setImage(plusImage, for: .normal)
         buildTeamButton.tintColor = .white
         buildTeamButton.layer.cornerRadius = width * 0.075

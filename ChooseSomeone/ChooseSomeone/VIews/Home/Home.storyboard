@@ -97,6 +97,16 @@
             </objects>
             <point key="canvasLocation" x="1816" y="48"/>
         </scene>
+        <!--ChooseGroup-->
+        <scene sceneID="mep-M4-tvZ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ChooseGroup" id="zXb-xO-zKt" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="VM6-fa-c6I"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Jx-zA-QNM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2438" y="339"/>
+        </scene>
         <!--Trail Info View Controller-->
         <scene sceneID="5Uz-Sd-TeD">
             <objects>

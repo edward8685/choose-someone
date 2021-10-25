@@ -79,16 +79,16 @@ class TrailListViewController: UIViewController {
     
     func setUpLabel() {
         if let label = trails.first?.trailLevel{
-        switch label {
-        case 1:
-            themeLabel = themes[0]
-        case 2...3:
-            themeLabel = themes[1]
-        case 4...5:
-            themeLabel = themes[2]
-        default:
-            return
-        }
+            switch label {
+            case 1:
+                themeLabel = themes[0]
+            case 2...3:
+                themeLabel = themes[1]
+            case 4...5:
+                themeLabel = themes[2]
+            default:
+                return
+            }
         }
     }
     
@@ -100,7 +100,7 @@ class TrailListViewController: UIViewController {
         
         let view = UIView(frame: CGRect(x: -20, y: 80, width: UIScreen.width / 2 + 10, height: 40))
         
-        let label = UILabel(frame: CGRect(x: 20, y: 83 , width: 120, height: 35))
+        let label = UILabel(frame: CGRect(x: 20, y: 83, width: 120, height: 35))
         
         view.backgroundColor = UIColor.hexStringToUIColor(hex: "CFFFDA")
         view.layer.cornerRadius = 20
@@ -128,7 +128,7 @@ extension TrailListViewController: UICollectionViewDelegate {
             if let trailInfoVC = segue.destination as? TrailInfoViewController {
                 
                 if let trail = sender as? Trail {
-                trailInfoVC.trail = trail
+                    trailInfoVC.trail = trail
                 }
             }
         }
@@ -140,13 +140,8 @@ extension TrailListViewController: UICollectionViewDelegate {
 func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
     return UICollectionViewCompositionalLayout { (sectionIndex, env) -> NSCollectionLayoutSection? in
         
-//        let inset: CGFloat = 10
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        //        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(1.0))
-        //            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        //        group.interItemSpacing = .flexible(8)
         
         let height: CGFloat = 280
         let groupLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(height))
@@ -161,24 +156,12 @@ func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
         }
         //        group.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
         
-        
         let section = NSCollectionLayoutSection(group: group)
-        
-        //                section.orthogonalScrollingBehavior = .groupPaging
-        //                section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        //                section.interGroupSpacing = 20
-        
-        //        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
-        //        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
-        //        section.boundarySupplementaryItems = [sectionHeader]
         
         return section
     }
     
 }
-
-
-
 // MARK: - Diffable Data Source -
 
 extension TrailListViewController {
@@ -198,16 +181,13 @@ extension TrailListViewController {
     
     @objc func toGroupPage() {
         
-        var controller: UIViewController
-
-        UIStoryboard.group.instantiateInitialViewController()!
+        let chooseGroupVC = UIStoryboard.group.instantiateViewController(withIdentifier:
+                                                                            String(describing: ChooseGroupViewController.self)
+        )
         
-
-//        if let controller = storyboard?.instantiateViewController(withIdentifier: "ChooseGroupViewController") as? ChooseGroupViewController
-//        {
-//            controller.modalPresentationStyle = .overFullScreen
-//            present(controller, animated: false, completion: nil)
-//        }
+        guard let groupVC = chooseGroupVC as? ChooseGroupViewController else { return }
+        
+        show(groupVC, sender: nil)
     }
     
     func configureSnapshot() {

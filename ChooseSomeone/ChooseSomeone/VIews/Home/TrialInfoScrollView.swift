@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import FirebaseStorage
+import FirebaseStorageSwift
+
 
 class TrialInfoView: UIView {
     
@@ -33,6 +36,20 @@ class TrialInfoView: UIView {
         
         trafficInfo.text = trail.trailTraffic
         
+        
+        let fileReference = Storage.storage().reference().child("maps/\(trail.trailId)_MAP.jpg")
+        print("maps/\(trail.trailId).jpg")
+        fileReference.getData(maxSize: 10 * 1024 * 1024) { result in
+            switch result {
+            case .success(let data):
+//                trailMap.loadImage(data, placeHolder: nil)
+                let image = UIImage(data: data)
+                self.trailMap.image = image
+                self.trailMap.contentMode = .scaleAspectFill
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
     }
-    
 }

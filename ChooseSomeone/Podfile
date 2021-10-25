@@ -11,9 +11,11 @@ target 'ChooseSomeone' do
   pod 'IQKeyboardManagerSwift'
   pod 'FirebaseFirestoreSwift'
   pod 'FirebaseFirestore'
-  pod 'Firebase/Analytics'
   pod 'Firebase/Core'
+  pod 'FirebaseStorage'
+  pod 'FirebaseStorageSwift'
   pod 'MJRefresh'
   pod 'MASegmentedControl'
+  pod 'Kingfisher'
 
 end

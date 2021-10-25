@@ -29,13 +29,13 @@ class TrailInfoViewController: UIViewController {
         
         let dismissButton = UIButton()
         
-        dismissButton.frame = CGRect(x: UIScreen.width - 40, y: 40, width: 20, height: 20)
+        dismissButton.frame = CGRect(x: UIScreen.width - 50, y: 50, width: 30, height: 30)
         dismissButton.titleEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         dismissButton.backgroundColor = UIColor.hexStringToUIColor(hex: "64696F")
-        let image = UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 10, weight: .light))
+        let image = UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .light))
         dismissButton.setImage(image, for: .normal)
         dismissButton.tintColor = .white
-        dismissButton.layer.cornerRadius = 10
+        dismissButton.layer.cornerRadius = 15
         dismissButton.layer.masksToBounds = true
         
         dismissButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
