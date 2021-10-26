@@ -52,7 +52,7 @@
         <!--Journey-->
         <scene sceneID="v9i-iw-xXB">
             <objects>
-                <viewControllerPlaceholder storyboardName="ChooseGroup" id="Kb8-jp-Obx" userLabel="Journey" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Journey" id="Kb8-jp-Obx" userLabel="Journey" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="qNE-r2-jLr"/>
                     <navigationItem key="navigationItem" id="0vR-7b-xns"/>
                 </viewControllerPlaceholder>
