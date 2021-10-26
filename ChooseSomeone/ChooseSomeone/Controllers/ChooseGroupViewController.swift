@@ -14,6 +14,12 @@ class ChooseGroupViewController: UIViewController {
     
     private var userId = "1357988"
     
+    var searchText: String = "" {
+        didSet {
+            searching = true
+        }
+    }
+    
     let header = MJRefreshNormalHeader()
     
     private var tableView: UITableView! {

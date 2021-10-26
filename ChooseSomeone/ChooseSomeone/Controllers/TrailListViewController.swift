@@ -173,20 +173,20 @@ extension TrailListViewController {
                 fatalError("Cannot create new cell")
             }
             cell.setUpCell(model: model, indexPath: indexPath)
-            
+            cell.checkGroupButton.tag = indexPath.row
             cell.checkGroupButton.addTarget(self, action: #selector(self.toGroupPage), for: .touchUpInside)
             return cell
         }
     }
     
-    @objc func toGroupPage() {
+    @objc func toGroupPage(_ sender: UIButton) {
         
         let chooseGroupVC = UIStoryboard.group.instantiateViewController(withIdentifier:
                                                                             String(describing: ChooseGroupViewController.self)
         )
         
         guard let groupVC = chooseGroupVC as? ChooseGroupViewController else { return }
-        
+        groupVC.searchText = trails[sender.tag].trailName
         show(groupVC, sender: nil)
     }
     
