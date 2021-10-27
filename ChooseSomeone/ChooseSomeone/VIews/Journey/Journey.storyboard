@@ -17,22 +17,130 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="jxk-RE-Bka">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="a5J-tM-E1K">
+                                <rect key="frame" x="284" y="108" width="110" height="41"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3Dd-Na-32W">
+                                        <rect key="frame" x="0.0" y="0.0" width="46" height="41"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="時間" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYb-Xq-2Eg">
+                                                <rect key="frame" x="0.0" y="0.0" width="46" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0OY-9P-er4">
+                                                <rect key="frame" x="0.0" y="20.5" width="46" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wEz-iH-4wD">
+                                        <rect key="frame" x="66" y="0.0" width="44" height="41"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="距離" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ay-hc-9Dl">
+                                                <rect key="frame" x="0.0" y="0.0" width="44" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00km" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kFP-cS-xfj" customClass="DistanceLabel" customModule="ChooseSomeone" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="20.5" width="44" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="07Q-Zy-goN">
+                                <rect key="frame" x="50" y="763" width="314" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZB3-jx-hUu">
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="follow"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RYM-z9-P0F">
+                                        <rect key="frame" x="80" y="0.0" width="74.5" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Save"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wEh-sT-cKh">
+                                        <rect key="frame" x="159.5" y="0.0" width="75" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Start"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHi-R3-32j">
+                                        <rect key="frame" x="239.5" y="0.0" width="74.5" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Cancel"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="e7o-w2-FY4"/>
+                                </constraints>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zP4-Sj-2hp">
+                                <rect key="frame" x="30" y="118.5" width="41.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="jxk-RE-Bka" customClass="GPXMapView" customModule="ChooseSomeone" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                             </mapView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="a5J-tM-E1K" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="0Ht-XH-FtQ"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="jxk-RE-Bka" secondAttribute="bottom" id="7iU-FU-zHt"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="07Q-Zy-goN" secondAttribute="trailing" constant="50" id="DeU-oL-yDr"/>
                             <constraint firstItem="jxk-RE-Bka" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="FER-WI-c6Z"/>
+                            <constraint firstItem="zP4-Sj-2hp" firstAttribute="centerY" secondItem="a5J-tM-E1K" secondAttribute="centerY" id="MBT-vP-rul"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="07Q-Zy-goN" secondAttribute="bottom" constant="20" id="NAQ-iC-Yuo"/>
+                            <constraint firstItem="07Q-Zy-goN" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="50" id="TQy-L0-NCi"/>
+                            <constraint firstItem="07Q-Zy-goN" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="UQg-gg-zi0"/>
+                            <constraint firstItem="zP4-Sj-2hp" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="Z5n-lK-pyu"/>
                             <constraint firstItem="jxk-RE-Bka" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="byJ-eb-eb3"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="jxk-RE-Bka" secondAttribute="trailing" id="gE9-Hw-7xi"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="a5J-tM-E1K" secondAttribute="trailing" constant="20" id="giU-Fb-5Vv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="IcK-oD-0ct"/>
                     <connections>
-                        <outlet property="mapView" destination="jxk-RE-Bka" id="r5d-yf-xhl"/>
+                        <outlet property="coordsLabel" destination="zP4-Sj-2hp" id="YmD-PZ-uJY"/>
+                        <outlet property="followUserButton" destination="ZB3-jx-hUu" id="udi-om-lO9"/>
+                        <outlet property="map" destination="jxk-RE-Bka" id="Dft-Lj-IlZ"/>
+                        <outlet property="resetButton" destination="kHi-R3-32j" id="JKg-MU-HVd"/>
+                        <outlet property="saveButton" destination="RYM-z9-P0F" id="zJZ-t8-sQh"/>
+                        <outlet property="timeLabel" destination="0OY-9P-er4" id="Iur-nW-LRK"/>
+                        <outlet property="totalTrackedDistanceLabel" destination="kFP-cS-xfj" id="G47-0B-TFN"/>
+                        <outlet property="trackerButton" destination="wEh-sT-cKh" id="Svm-8U-d3l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -52,6 +52,19 @@
 		74E5735B27268E3E00F490BF /* TrialInfoScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5735A27268E3E00F490BF /* TrialInfoScrollView.swift */; };
 		74E5735F2726D6A500F490BF /* KingFisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5735E2726D6A500F490BF /* KingFisherWrapper.swift */; };
 		74E5736327279A2800F490BF /* JourneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5736227279A2800F490BF /* JourneyViewController.swift */; };
+		74E5736F2728241F00F490BF /* GPXTrack+length.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E573692728241F00F490BF /* GPXTrack+length.swift */; };
+		74E573702728241F00F490BF /* GPXRoot+length.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5736A2728241F00F490BF /* GPXRoot+length.swift */; };
+		74E573722728241F00F490BF /* GPXExtentCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5736C2728241F00F490BF /* GPXExtentCoordinates.swift */; };
+		74E573782728700C00F490BF /* StopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E573772728700C00F490BF /* StopWatch.swift */; };
+		74E5737A2728725A00F490BF /* StopWatchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E573792728725A00F490BF /* StopWatchDelegate.swift */; };
+		74E5737F2728E92500F490BF /* GPXSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5737E2728E92400F490BF /* GPXSession.swift */; };
+		74E573842728EBEE00F490BF /* GPXTrackSegment+MapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E573822728EBEE00F490BF /* GPXTrackSegment+MapKit.swift */; };
+		74E573852728EBEE00F490BF /* GPXTrackPoint+MapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E573832728EBEE00F490BF /* GPXTrackPoint+MapKit.swift */; };
+		74E573872728F45700F490BF /* GPXWaypoint+MKAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E573862728F45600F490BF /* GPXWaypoint+MKAnnotation.swift */; };
+		74E573892728F4B300F490BF /* MapViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E573882728F4B300F490BF /* MapViewDelegate.swift */; };
+		74E5738B2728F61C00F490BF /* GPXMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5738A2728F61C00F490BF /* GPXMapView.swift */; };
+		74E573D427292CE300F490BF /* DistanceLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E573D327292CE200F490BF /* DistanceLabel.swift */; };
+		74E573D627292EBD00F490BF /* Double+Measures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E573D527292EBD00F490BF /* Double+Measures.swift */; };
 		74F96504272481F800B77DC5 /* TrailListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F96503272481F800B77DC5 /* TrailListViewController.swift */; };
 		74F965072724830900B77DC5 /* TrailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F965052724830900B77DC5 /* TrailCell.swift */; };
 		74F965082724830900B77DC5 /* TrailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74F965062724830900B77DC5 /* TrailCell.xib */; };
@@ -109,6 +122,20 @@
 		74E5735A27268E3E00F490BF /* TrialInfoScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialInfoScrollView.swift; sourceTree = "<group>"; };
 		74E5735E2726D6A500F490BF /* KingFisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingFisherWrapper.swift; sourceTree = "<group>"; };
 		74E5736227279A2800F490BF /* JourneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyViewController.swift; sourceTree = "<group>"; };
+		74E573642727EC1C00F490BF /* CurrentLocation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CurrentLocation.gpx; sourceTree = "<group>"; };
+		74E573692728241F00F490BF /* GPXTrack+length.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GPXTrack+length.swift"; sourceTree = "<group>"; };
+		74E5736A2728241F00F490BF /* GPXRoot+length.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GPXRoot+length.swift"; sourceTree = "<group>"; };
+		74E5736C2728241F00F490BF /* GPXExtentCoordinates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPXExtentCoordinates.swift; sourceTree = "<group>"; };
+		74E573772728700C00F490BF /* StopWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopWatch.swift; sourceTree = "<group>"; };
+		74E573792728725A00F490BF /* StopWatchDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopWatchDelegate.swift; sourceTree = "<group>"; };
+		74E5737E2728E92400F490BF /* GPXSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPXSession.swift; sourceTree = "<group>"; };
+		74E573822728EBEE00F490BF /* GPXTrackSegment+MapKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GPXTrackSegment+MapKit.swift"; sourceTree = "<group>"; };
+		74E573832728EBEE00F490BF /* GPXTrackPoint+MapKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GPXTrackPoint+MapKit.swift"; sourceTree = "<group>"; };
+		74E573862728F45600F490BF /* GPXWaypoint+MKAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GPXWaypoint+MKAnnotation.swift"; sourceTree = "<group>"; };
+		74E573882728F4B300F490BF /* MapViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewDelegate.swift; sourceTree = "<group>"; };
+		74E5738A2728F61C00F490BF /* GPXMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPXMapView.swift; sourceTree = "<group>"; };
+		74E573D327292CE200F490BF /* DistanceLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceLabel.swift; sourceTree = "<group>"; };
+		74E573D527292EBD00F490BF /* Double+Measures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+Measures.swift"; sourceTree = "<group>"; };
 		74F96503272481F800B77DC5 /* TrailListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailListViewController.swift; sourceTree = "<group>"; };
 		74F965052724830900B77DC5 /* TrailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailCell.swift; sourceTree = "<group>"; };
 		74F965062724830900B77DC5 /* TrailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrailCell.xib; sourceTree = "<group>"; };
@@ -136,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				8806AC3D54657A853EA85620 /* Pods-ChooseSomeone.debug.xcconfig */,
+				74E573642727EC1C00F490BF /* CurrentLocation.gpx */,
 				715A0A3D1C233AFC5A6955E0 /* Pods-ChooseSomeone.release.xcconfig */,
 			);
 			path = Pods;
@@ -233,6 +261,7 @@
 				740B1B852723FF2500A1CD3B /* HomeViewController.swift */,
 				74F96503272481F800B77DC5 /* TrailListViewController.swift */,
 				7449349B272548BC002D8FE3 /* TrailInfoViewController.swift */,
+				74E573882728F4B300F490BF /* MapViewDelegate.swift */,
 				74E5736227279A2800F490BF /* JourneyViewController.swift */,
 			);
 			path = Controllers;
@@ -241,11 +270,21 @@
 		74608D19271D1CA4002BD125 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				74E5736C2728241F00F490BF /* GPXExtentCoordinates.swift */,
+				74E5736A2728241F00F490BF /* GPXRoot+length.swift */,
+				74E573832728EBEE00F490BF /* GPXTrackPoint+MapKit.swift */,
+				74E573822728EBEE00F490BF /* GPXTrackSegment+MapKit.swift */,
+				74E573862728F45600F490BF /* GPXWaypoint+MKAnnotation.swift */,
+				74E573692728241F00F490BF /* GPXTrack+length.swift */,
+				74E573D527292EBD00F490BF /* Double+Measures.swift */,
+				74E573792728725A00F490BF /* StopWatchDelegate.swift */,
 				74608D40271E97DC002BD125 /* Trail.swift */,
 				74608D42271E9C67002BD125 /* Group.swift */,
 				7457A1CF271EECEF00A947AE /* Message.swift */,
 				74608D44271EA5E1002BD125 /* User.swift */,
 				7457A1D1271EEEDC00A947AE /* Request.swift */,
+				74E573772728700C00F490BF /* StopWatch.swift */,
+				74E5737E2728E92400F490BF /* GPXSession.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -286,6 +325,8 @@
 			isa = PBXGroup;
 			children = (
 				74F9650B2725393A00B77DC5 /* Journey.storyboard */,
+				74E573D327292CE200F490BF /* DistanceLabel.swift */,
+				74E5738A2728F61C00F490BF /* GPXMapView.swift */,
 			);
 			path = Journey;
 			sourceTree = "<group>";
@@ -453,39 +494,52 @@
 			buildActionMask = 2147483647;
 			files = (
 				740B1B862723FF2500A1CD3B /* HomeViewController.swift in Sources */,
+				74E5738B2728F61C00F490BF /* GPXMapView.swift in Sources */,
 				7449349F27255A0B002D8FE3 /* UIStoryboard+Extension.swift in Sources */,
 				74608D32271D7253002BD125 /* BuildTeamViewController.swift in Sources */,
 				74608D41271E97DC002BD125 /* Trail.swift in Sources */,
 				744934A1272562C8002D8FE3 /* TrailManager.swift in Sources */,
 				740FC391271D17160071459A /* ChooseGroupViewController.swift in Sources */,
+				74E573D427292CE300F490BF /* DistanceLabel.swift in Sources */,
 				742516FB272197A30011166B /* UILabelExtension.swift in Sources */,
+				74E573722728241F00F490BF /* GPXExtentCoordinates.swift in Sources */,
 				742516F927218A520011166B /* UIColor+Extension.swift in Sources */,
+				74E573D627292EBD00F490BF /* Double+Measures.swift in Sources */,
 				74F96504272481F800B77DC5 /* TrailListViewController.swift in Sources */,
 				74608D1E271D1CEC002BD125 /* UIViewExtension.swift in Sources */,
 				74608D2F271D54C7002BD125 /* GroupChatHeaderCell.swift in Sources */,
+				74E5736F2728241F00F490BF /* GPXTrack+length.swift in Sources */,
 				74608D37271DD2F2002BD125 /* JoinRequestCell.swift in Sources */,
 				740B1B8B2724161600A1CD3B /* HomeHeaderCell.swift in Sources */,
 				74FDD92A2722C5670014D2B2 /* UITextFieldExtexsion.swift in Sources */,
+				74E573702728241F00F490BF /* GPXRoot+length.swift in Sources */,
 				74608D43271E9C67002BD125 /* Group.swift in Sources */,
 				74E5736327279A2800F490BF /* JourneyViewController.swift in Sources */,
 				7457A1D0271EECEF00A947AE /* Message.swift in Sources */,
+				74E5737F2728E92500F490BF /* GPXSession.swift in Sources */,
 				74608D25271D20B0002BD125 /* GroupHeaderCell.swift in Sources */,
 				74608D34271D7AE1002BD125 /* UIButtonExtension.swift in Sources */,
 				74608D29271D4A80002BD125 /* GroupChatCell.swift in Sources */,
 				74608D1D271D1CEC002BD125 /* UIScreen+Extension.swift in Sources */,
+				74E573852728EBEE00F490BF /* GPXTrackPoint+MapKit.swift in Sources */,
+				74E573842728EBEE00F490BF /* GPXTrackSegment+MapKit.swift in Sources */,
 				74608D45271EA5E1002BD125 /* User.swift in Sources */,
 				74E5735B27268E3E00F490BF /* TrialInfoScrollView.swift in Sources */,
 				7457A1D2271EEEDC00A947AE /* Request.swift in Sources */,
 				74608D47271EC727002BD125 /* GroupRoomManager.swift in Sources */,
 				740FC38D271D17160071459A /* AppDelegate.swift in Sources */,
 				74F965072724830900B77DC5 /* TrailCell.swift in Sources */,
+				74E573872728F45700F490BF /* GPXWaypoint+MKAnnotation.swift in Sources */,
 				74608D3A271DDA05002BD125 /* JoinRequestViewController.swift in Sources */,
 				7449349C272548BC002D8FE3 /* TrailInfoViewController.swift in Sources */,
+				74E573892728F4B300F490BF /* MapViewDelegate.swift in Sources */,
 				74FDD9282722C47D0014D2B2 /* UITableView+ColloectionVIewExtension.swift in Sources */,
 				74E5735F2726D6A500F490BF /* KingFisherWrapper.swift in Sources */,
 				740FC38F271D17160071459A /* SceneDelegate.swift in Sources */,
 				74608D21271D1DE1002BD125 /* GroupInfoCell.swift in Sources */,
+				74E573782728700C00F490BF /* StopWatch.swift in Sources */,
 				740B1B8F2724280D00A1CD3B /* TrailThemeCell.swift in Sources */,
+				74E5737A2728725A00F490BF /* StopWatchDelegate.swift in Sources */,
 				74608D2C271D51F6002BD125 /* ChatRoomViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
