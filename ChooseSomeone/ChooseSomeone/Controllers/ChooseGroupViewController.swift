@@ -125,7 +125,7 @@ class ChooseGroupViewController: UIViewController {
     
     @objc func segmentValueChanged(_ sender: MASegmentedControl) {
   
-        switch sender.selectedSegmentIndex{
+        switch sender.selectedSegmentIndex {
         case 0:
             groupsToDisplay = groups
             

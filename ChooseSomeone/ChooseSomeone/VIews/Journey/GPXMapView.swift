@@ -12,27 +12,6 @@ import CoreLocation
 import CoreGPX
 import CoreData
 
-
-///
-/// A MapView that Tracks user position
-///
-/// - it is able to convert GPX file into map
-/// - it is able to return a GPX file from map
-///
-///
-/// ### Some definitions
-///
-/// 1. A **track** is a set of segments.
-/// 2. A **segment** is set of points. A segment is linked to a MKPolyline overlay in the map.
-
-/// Each time the user touches "Start Tracking" => a segment is created (currentSegment)
-/// Each time the users touches "Pause Tracking" => the segment is added to trackSegments
-/// When the user saves the file => trackSegments are consolidated in a single track that is
-/// added to the file.
-/// If the user opens the file in a session for the second, then tracks some seg ments and saves
-/// the file again, the resulting gpx file will have two tracks.
-///
-
 class GPXMapView: MKMapView {
     
     /// Current session of GPX location logging. Handles all background tasks and recording.
@@ -44,25 +23,7 @@ class GPXMapView: MKMapView {
     ///
     var extent: GPXExtentCoordinates = GPXExtentCoordinates() //extent of the GPX points and tracks
 
-    ///position of the compass in the map
-    ///Example:
-    /// map.compassRect = CGRect(x: map.frame.width/2 - 18, y: 70, width: 36, height: 36)
     var compassRect: CGRect
-    
-    /// Is the map using local image cache??
-//    var useCache: Bool = true { //use tile overlay cache (
-//        didSet {
-//            if tileServerOverlay is CachedTileOverlay {
-//                print("GPXMapView:: setting useCache \(useCache)")
-//                // swiftlint:disable force_cast
-//                (tileServerOverlay as! CachedTileOverlay).useCache = useCache
-//            }
-//        }
-//    }
-    
-    /// Arrow image to display heading (orientation of the device)
-    /// initialized on MapViewDelegate
-    var headingImageView: UIImageView?
     
     /// Selected tile server.
     /// - SeeAlso: GPXTileServer
@@ -117,77 +78,14 @@ class GPXMapView: MKMapView {
     /// Handles rotation detected from user, for heading arrow to update.
     @objc func rotationGestureHandling(_ gesture: UIRotationGestureRecognizer) {
         headingOffset = gesture.rotation
-        updateHeading()
+
         
         if gesture.state == .ended {
             headingOffset = nil
         }
     }
     
-    ///
-    /// Adds a waypoint annotation in the point passed as arguments
-    ///
-    /// For example, this function can be used to add a waypoint after long press on the map view
-    ///
-    /// - Parameters:
-    ///     - point: The location in which the waypoint has to be added.
-    ///
-//    func addWaypointAtViewPoint(_ point: CGPoint) {
-//        let coords: CLLocationCoordinate2D = convert(point, toCoordinateFrom: self)
-//        let waypoint = GPXWaypoint(coordinate: coords)
-//        addWaypoint(waypoint)
-//        coreDataHelper.add(toCoreData: waypoint)
-//
-//    }
     
-    ///
-    /// Adds a waypoint to the map.
-    ///
-    /// - Parameters: The waypoint to add to the map.
-    ///
-    func addWaypoint(_ waypoint: GPXWaypoint) {
-    	session.addWaypoint(waypoint)
-        addAnnotation(waypoint)
-        extent.extendAreaToIncludeLocation(waypoint.coordinate)
-    }
-    
-    ///
-    /// Removes a Waypoint from the map
-    ///
-    /// - Parameters: The waypoint to remove from the map.
-    ///
-//    func removeWaypoint(_ waypoint: GPXWaypoint) {
-//        let index = session.waypoints.firstIndex(of: waypoint)
-//        if index == nil {
-//            print("Waypoint not found")
-//            return
-//        }
-//        removeAnnotation(waypoint)
-//        session.waypoints.remove(at: index!)
-//        coreDataHelper.deleteWaypoint(fromCoreDataAt: index!)
-//    }
-    
-    ///
-    /// Updates the heading arrow based on the heading information
-    ///
-    func updateHeading() {
-        guard let heading = heading else { return }
-        
-        headingImageView?.isHidden = false
-        let rotation = CGFloat((heading.trueHeading - camera.heading)/180 * Double.pi)
-        
-        var newRotation = rotation
-        
-        if let headingOffset = headingOffset {
-            newRotation = rotation + headingOffset
-        }
- 
-        UIView.animate(withDuration: 0.15) {
-            self.headingImageView?.transform = CGAffineTransform(rotationAngle: newRotation)
-        }
-    }
-    
-    ///
     /// Adds a new point to current segment.
     /// - Parameters:
     ///    - location: Typically a location provided by CLLocation
@@ -248,14 +146,6 @@ class GPXMapView: MKMapView {
         addTrackSegments(for: gpx)
     }
 
-//    private func addWaypoints(for gpx: GPXRoot, fromImport: Bool = true) {
-//        for waypoint in gpx.waypoints {
-//            addWaypoint(waypoint)
-//            if fromImport {
-//                coreDataHelper.add(toCoreData: waypoint)
-//            }
-//        }
-//    }
 
     private func addTrackSegments(for gpx: GPXRoot) {
         session.tracks = gpx.tracks

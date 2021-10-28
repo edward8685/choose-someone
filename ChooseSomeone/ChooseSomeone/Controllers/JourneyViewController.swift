@@ -12,38 +12,22 @@ import CoreLocation
 
 class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     
-    @IBOutlet weak var trackerButton: UIButton!
-    
-    @IBOutlet weak var resetButton: UIButton!
-    
-    @IBOutlet weak var saveButton: UIButton!
-    
-    @IBOutlet weak var followUserButton: UIButton!
-    
-    @IBOutlet weak var timeLabel: UILabel!
-    
-    @IBOutlet weak var totalTrackedDistanceLabel: DistanceLabel!
-    
-    @IBOutlet weak var coordsLabel: UILabel!
-    /// Name of the last file that was saved (without extension)
     var lastGpxFilename: String = ""
-    
-    var useImperial = false
     
     var isDisplayingLocationServicesDenied: Bool = false
     
     var followUser: Bool = true {
         didSet {
             if followUser {
-                print("followUser=true")
-                followUserButton.setTitle("Following", for: UIControl.State())
-//                followUserButton.setImage(UIImage(named: "follow_user_high"), for: UIControl.State())
+                let image = UIImage(systemName: "location.fill",
+                                    withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .medium))
+                followUserButton.setImage(image, for: UIControl.State())
                 map.setCenter((map.userLocation.coordinate), animated: true)
                 
             } else {
-                followUserButton.setTitle("Follow", for: UIControl.State())
-                print("followUser=false")
-                //               followUserButton.setImage(UIImage(named: "follow_user"), for: UIControl.State())
+                let image = UIImage(systemName: "location",
+                                    withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .medium))
+                followUserButton.setImage(image, for: UIControl.State())
             }
         }
     }
@@ -55,36 +39,51 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         manager.distanceFilter = 2 //meters
         manager.headingFilter = 3 //degrees (1 is default)
         manager.pausesLocationUpdatesAutomatically = false
-//        manager.allowsBackgroundLocationUpdates = true
+        //        manager.allowsBackgroundLocationUpdates = true
         return manager
     }()
     
     let mapViewDelegate = MapViewDelegate()
     
-    @IBOutlet weak var map: GPXMapView!{
-        didSet {
-            map.delegate = mapViewDelegate
-        }
-    }
+    @IBOutlet weak var map: GPXMapView!
     
     var stopWatch = StopWatch()
+    
+    var trackerButton = UIButton()
+    
+    var resetButton = UIButton()
+    
+    var saveButton = UIButton()
+    
+    var followUserButton = UIButton()
+    
+    lazy var buttonStackView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [followUserButton, trackerButton, saveButton, resetButton])
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.axis = .horizontal
+        view.spacing = 10
+        view.distribution = .fillEqually
+        
+        return view
+    }()
+    
+    let timeLabel = UILabel()
+    
+    let totalTrackedDistanceLabel = DistanceLabel()
+    
+    let currentSegmentDistanceLabel = DistanceLabel()
+    
+    let coordsLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         stopWatch.delegate = self
         
-        // Map autorotate configuration
-        map.autoresizesSubviews = true
-        map.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        self.view.autoresizesSubviews = true
-        self.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        
-        // Show the current user's location
+        map.delegate = mapViewDelegate
         map.showsUserLocation = true
         
         locationManager.delegate = self
-        map.isZoomEnabled = true
-        map.isRotateEnabled = true
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(stopFollowingUser(_:)))
         panGesture.delegate = self
         map.addGestureRecognizer(panGesture)
@@ -95,12 +94,15 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         locationManager.requestWhenInUseAuthorization()
         let status = CLLocationManager.authorizationStatus()
         
-        if status == CLAuthorizationStatus.authorizedWhenInUse {
-            map.showsUserLocation = true
-        }
+        let center = locationManager.location?.coordinate ?? CLLocationCoordinate2D(latitude: 8.90, longitude: -79.50)
+        let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+        let region = MKCoordinateRegion(center: center, span: span)
+        map.setRegion(region, animated: true)
+        self.view.addSubview(map)
         
+        setUpButtons()
+        setUpLabels()
         
-        setUpTrackerButton()
     }
     /// Will update polyline color when invoked
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -110,12 +112,59 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     /// Updates polyline color
     func updatePolylineColor() {
         for overlay in map.overlays where overlay is MKPolyline {
-                map.removeOverlay(overlay)
-                map.addOverlay(overlay)
+            map.removeOverlay(overlay)
+            map.addOverlay(overlay)
         }
     }
     
-    func setUpTrackerButton() {
+    func setUpButtons() {
+        view.addSubview(buttonStackView)
+        
+        //        trackerButton.translatesAutoresizingMaskIntoConstraints = false
+        //        followUserButton.translatesAutoresizingMaskIntoConstraints = false
+        //        saveButton.translatesAutoresizingMaskIntoConstraints = false
+        //        resetButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            
+            buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            
+            buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
+            buttonStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -UIScreen.height * 0.13),
+            
+            buttonStackView.heightAnchor.constraint(equalToConstant: UIScreen.height * 0.06),
+            //
+            //            followUserButton.widthAnchor.constraint(equalTo: buttonStackView.heightAnchor)
+        ])
+        
+        followUserButton.layer.cornerRadius = 24
+        followUserButton.backgroundColor = .green
+        let image = UIImage(systemName: "location.fill",
+                            withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .medium))
+        followUserButton.setImage(image, for: UIControl.State())
+        
+        trackerButton.layer.cornerRadius = 20
+        trackerButton.setTitle("Tracking", for: UIControl.State())
+        trackerButton.backgroundColor = .green
+        trackerButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        trackerButton.titleLabel?.numberOfLines = 2
+        trackerButton.titleLabel?.textAlignment = .center
+        
+        saveButton.layer.cornerRadius = 20
+        saveButton.setTitle("Save", for: UIControl.State())
+        saveButton.backgroundColor = .gray
+        saveButton.titleLabel?.textAlignment = .center
+        
+        resetButton.layer.cornerRadius = 20
+        resetButton.setTitle("Reset", for: UIControl.State())
+        resetButton.backgroundColor = .gray
+        resetButton.titleLabel?.textAlignment = .center
+        
+        buttonStackView.addArrangedSubview(followUserButton)
+        buttonStackView.addArrangedSubview(trackerButton)
+        buttonStackView.addArrangedSubview(saveButton)
+        buttonStackView.addArrangedSubview(resetButton)
         
         trackerButton.addTarget(self, action: #selector(trackerButtonTapped), for: .touchUpInside)
         
@@ -124,6 +173,39 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         resetButton.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
         
         followUserButton.addTarget(self, action: #selector(followButtonTroggler), for: .touchUpInside)
+    }
+    
+    func setUpLabels() {
+        
+        map.addSubview(coordsLabel)
+        coordsLabel.numberOfLines = 0
+        coordsLabel.frame = CGRect(x: 15, y: 30, width: 200, height: 100)
+        coordsLabel.textAlignment = .left
+        coordsLabel.font = .systemFont(ofSize: 14)
+        coordsLabel.textColor = UIColor.black
+        
+        map.addSubview(timeLabel)
+        timeLabel.frame = CGRect(x: UIScreen.width - 100, y: 40, width: 80, height: 30)
+        timeLabel.textAlignment = .right
+        timeLabel.font = .systemFont(ofSize: 26)
+        timeLabel.textColor = UIColor.black
+        timeLabel.text = "00:00"
+        
+        map.addSubview(totalTrackedDistanceLabel)
+        totalTrackedDistanceLabel.frame = CGRect(x: UIScreen.width - 100, y: 70, width: 80, height: 30)
+        totalTrackedDistanceLabel.textAlignment = .right
+        totalTrackedDistanceLabel.font = .systemFont(ofSize: 26)
+        totalTrackedDistanceLabel.textColor = UIColor.black
+        totalTrackedDistanceLabel.distance = 0.00
+        
+        map.addSubview(currentSegmentDistanceLabel)
+        currentSegmentDistanceLabel.frame = CGRect(x: UIScreen.width - 100, y: 100, width: 80, height: 30)
+        currentSegmentDistanceLabel.textAlignment = .right
+        currentSegmentDistanceLabel.font = .systemFont(ofSize: 18)
+        currentSegmentDistanceLabel.textColor = UIColor.black
+        currentSegmentDistanceLabel.distance = 0.00
+        
+        
     }
     
     /// Defines the different statuses regarding tracking current user location.
@@ -147,46 +229,40 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
             case .notStarted:
                 print("switched to non started")
                 // set Tracker button to allow Start
-                trackerButton.setTitle(NSLocalizedString("START_TRACKING", comment: "no comment"), for: UIControl.State())
+                trackerButton.setTitle("Tracking",
+                                       for: UIControl.State())
                 trackerButton.alpha = 1.0
                 //save & reset button to transparent.
                 saveButton.alpha = 1.0
                 resetButton.alpha = 1.0
                 //reset clock
                 stopWatch.reset()
-                                timeLabel.text = stopWatch.elapsedTimeString
+                timeLabel.text = stopWatch.elapsedTimeString
                 
                 lastGpxFilename = "" //clear last filename, so when saving it appears an empty field
                 
                 //                map.coreDataHelper.clearAll()
                 //                map.coreDataHelper.coreDataDeleteAll(of: CDRoot.self)//deleteCDRootFromCoreData()
                 
-                                totalTrackedDistanceLabel.distance = (map.session.totalTrackedDistance)
-                //                currentSegmentDistanceLabel.distance = (map.session.currentSegmentDistance)
+                totalTrackedDistanceLabel.distance = (map.session.totalTrackedDistance)
+                currentSegmentDistanceLabel.distance = (map.session.currentSegmentDistance)
                 
             case .tracking:
                 print("switched to tracking mode")
                 // set tracerkButton to allow Pause
-                trackerButton.setTitle(NSLocalizedString("PAUSE", comment: "no comment"), for: UIControl.State())
-                trackerButton.alpha = 0.5
-                //activate save & reset buttons
-                saveButton.alpha = 0.5
-                resetButton.alpha = 0.5
+                trackerButton.setTitle("Pause", for: UIControl.State())
                 // start clock
                 self.stopWatch.start()
                 
             case .paused:
                 print("switched to paused mode")
                 // set trackerButton to allow Resume
-                self.trackerButton.setTitle(NSLocalizedString("RESUME", comment: "no comment"), for: UIControl.State())
-                self.trackerButton.alpha = 0.5
-                // activate save & reset (just in case switched from .NotStarted)
-                saveButton.alpha = 0.5
-                resetButton.alpha = 0.5
+                self.trackerButton.setTitle("Resume", for: UIControl.State())
+                
                 //pause clock
                 self.stopWatch.stop()
                 // start new track segment
-                //                self.map.startNewTrackSegment()
+                self.map.startNewTrackSegment()
             }
         }
     }
@@ -210,14 +286,14 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         if (gpxTrackingStatus == .notStarted) {
             return
         }
-
+        
         //
         //        alertController.addTextField(configurationHandler: { (textField) in
         //            textField.clearButtonMode = .always
         
         //    })
         
-        let saveAction = UIAlertAction(title: NSLocalizedString("SAVE", comment: "no comment"), style: .default) { _ in
+        let saveAction = UIAlertAction(title: "SAVE", style: .default) { _ in
             //export to a file
             let gpxString = self.map.exportToGPXString()
             //            self.lastGpxFilename = filename!
@@ -228,28 +304,28 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
                 self.gpxTrackingStatus = .notStarted
             }
         }
-//        let cancelAction = UIAlertAction(title: NSLocalizedString("CANCEL", comment: "no comment"), style: .cancel) { _ in }
-//
-//        alertController.addAction(saveAction)
-//        alertController.addAction(cancelAction)
-//
-//        present(alertController, animated: true)
+        //        let cancelAction = UIAlertAction(title: NSLocalizedString("CANCEL", comment: "no comment"), style: .cancel) { _ in }
+        //
+        //        alertController.addAction(saveAction)
+        //        alertController.addAction(cancelAction)
+        //
+        //        present(alertController, animated: true)
         
     }
     
     @objc func resetButtonTapped() {
         
-        let sheet = UIAlertController(title: nil, message: NSLocalizedString("SELECT_OPTION", comment: "no comment"), preferredStyle: .actionSheet)
+        let sheet = UIAlertController()
         
-        let cancelOption = UIAlertAction(title: NSLocalizedString("CANCEL", comment: "no comment"), style: .cancel) { _ in
+        let cancelOption = UIAlertAction(title: "Cancel", style: .cancel) { _ in
         }
         
-        let saveAndStartOption = UIAlertAction(title: NSLocalizedString("SAVE_START_NEW", comment: "no comment"), style: .default) { _ in
+        let saveAndStartOption = UIAlertAction(title: "SAVE_START_NEW", style: .default) { _ in
             //Save
             self.saveButtonTapped(withReset: true)
         }
         
-        let deleteOption = UIAlertAction(title: NSLocalizedString("RESET", comment: "no comment"), style: .destructive) { _ in
+        let deleteOption = UIAlertAction(title: "Reset", style: .destructive) { _ in
             self.gpxTrackingStatus = .notStarted
         }
         
@@ -277,16 +353,40 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         return true
     }
     
+    override func didReceiveMemoryWarning() {
+        print("didReceiveMemoryWarning")
+        super.didReceiveMemoryWarning()
+    }
+    
     func checkLocationServicesStatus() {
         if !CLLocationManager.locationServicesEnabled() {
-//            displayLocationServicesDisabledAlert()
+            displayLocationServicesDisabledAlert()
             return
         }
-
-        if !([.authorizedAlways, .authorizedWhenInUse].contains(CLLocationManager.authorizationStatus())) {
+        
+        if !([.authorizedAlways, .authorizedWhenInUse]
+                .contains(CLLocationManager.authorizationStatus())) {
             displayLocationServicesDeniedAlert()
             return
         }
+    }
+    
+    func displayLocationServicesDisabledAlert() {
+        
+        let alertController = UIAlertController(title: "Disabled", message: "Enable", preferredStyle: .alert)
+        
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.openURL(url)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+        
+        alertController.addAction(settingsAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
+        
     }
     
     
@@ -294,17 +394,16 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         if isDisplayingLocationServicesDenied {
             return // display it only once.
         }
-        let alertController = UIAlertController(title: NSLocalizedString("ACCESS_TO_LOCATION_DENIED", comment: "no comment"),
-                                                message: NSLocalizedString("ALLOW_LOCATION", comment: "no comment"),
+        let alertController = UIAlertController(title: "ACCESS_TO_LOCATION_DENIED",
+                                                message: "ALLOW_LOCATION",
                                                 preferredStyle: .alert)
-        let settingsAction = UIAlertAction(title: NSLocalizedString("SETTINGS", comment: "no comment"),
+        let settingsAction = UIAlertAction(title: "SETTINGS",
                                            style: .default) { _ in
             if let url = URL(string: UIApplication.openSettingsURLString) {
                 UIApplication.shared.openURL(url)
             }
         }
-        let cancelAction = UIAlertAction(title: NSLocalizedString("CANCEL",
-                                                                  comment: "no comment"),
+        let cancelAction = UIAlertAction(title: "CANCEL",
                                          style: .cancel) { _ in }
         
         alertController.addAction(settingsAction)
@@ -313,7 +412,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         present(alertController, animated: true)
         isDisplayingLocationServicesDenied = false
     }
-
+    
 }
 // MARK: - MKMapViewDelegate methods
 extension JourneyViewController: MKMapViewDelegate {
@@ -328,7 +427,7 @@ extension JourneyViewController: StopWatchDelegate {
 // MARK: CLLocationManagerDelegate
 
 extension JourneyViewController: CLLocationManagerDelegate {
-
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("didFailWithError \(error)")
         let locationError = error as? CLError
@@ -343,16 +442,17 @@ extension JourneyViewController: CLLocationManagerDelegate {
         default:
             print("Default error")
         }
-  
+        
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let newLocation = locations.first!
         //Update coordsLabel
         let latFormat = String(format: "%.6f", newLocation.coordinate.latitude)
         let lonFormat = String(format: "%.6f", newLocation.coordinate.longitude)
-        let altitude = newLocation.altitude.toAltitude(useImperial: useImperial)
-        coordsLabel.text = String(format: NSLocalizedString("COORDS_LABEL", comment: "no comment"), latFormat, lonFormat, altitude)
+        let altitude = newLocation.altitude.toAltitude()
+        var text = "latitude:\(latFormat) \rlongtitude: \(lonFormat) \raltitude:\(altitude)"
+        coordsLabel.text = text
         
         //Update Map center and track overlay if user is being followed
         if followUser {
@@ -362,22 +462,20 @@ extension JourneyViewController: CLLocationManagerDelegate {
             print("didUpdateLocation: adding point to track (\(newLocation.coordinate.latitude),\(newLocation.coordinate.longitude))")
             map.addPointToCurrentTrackSegmentAtLocation(newLocation)
             totalTrackedDistanceLabel.distance = map.session.totalTrackedDistance
+            currentSegmentDistanceLabel.distance = map.session.currentSegmentDistance
         }
     }
-
-
+    
+    
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         print("ViewController::didUpdateHeading true: \(newHeading.trueHeading) magnetic: \(newHeading.magneticHeading)")
         print("mkMapcamera heading=\(map.camera.heading)")
         map.heading = newHeading // updates heading variable
-        map.updateHeading() // updates heading view's rotation
     }
 }
 
 extension Notification.Name {
     static let loadRecoveredFile = Notification.Name("loadRecoveredFile")
     static let updateAppearance = Notification.Name("updateAppearance")
-    // swiftlint:disable file_length
 }
 
-// swiftlint:enable line_length
