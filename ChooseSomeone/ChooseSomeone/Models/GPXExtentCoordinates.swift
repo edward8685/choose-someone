@@ -8,9 +8,6 @@
 import Foundation
 import MapKit
 
-///
-/// Defines an area extension by its top left and bottom right points
-///
 class GPXExtentCoordinates: NSObject {
     
     /// Top left coordinate point.
@@ -36,7 +33,6 @@ class GPXExtentCoordinates: NSObject {
         }
     }
     
-    /// This is the extent coordinates as a MKCoordinateRegion
     var region: MKCoordinateRegion {
         set {
             topLeftCoordinate.latitude = newValue.center.latitude - newValue.span.latitudeDelta/2

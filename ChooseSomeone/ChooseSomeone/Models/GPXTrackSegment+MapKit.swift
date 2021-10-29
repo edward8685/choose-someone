@@ -10,22 +10,17 @@ import UIKit
 import MapKit
 import CoreGPX
 
-
 extension GPXTrackSegment {
     
-    /// Returns a MapKit polyline with the points of the segment.
-    /// This polyline can be directly plotted on the map as an overlay
     public var overlay: MKPolyline {
         var coords: [CLLocationCoordinate2D] = self.trackPointsToCoordinates()
-        let pl = MKPolyline(coordinates: &coords, count: coords.count)
-        return pl
+        let polyLine = MKPolyline(coordinates: &coords, count: coords.count)
+        return polyLine
     }
 }
 
 extension GPXTrackSegment {
   
-    /// Helper method to create the polyline. Returns the array of coordinates of the points
-    /// that belong to this segment
     func trackPointsToCoordinates() -> [CLLocationCoordinate2D] {
         var coords: [CLLocationCoordinate2D] = []
         for point in self.points {
@@ -34,25 +29,22 @@ extension GPXTrackSegment {
         return coords
     }
     
-    /// Calculates length in meters of the segment
     func length() -> CLLocationDistance {
         var length: CLLocationDistance = 0.0
         var distanceTwoPoints: CLLocationDistance
-        //we need at least two points
         if self.points.count < 2 {
             return length
         }
-        var prev: CLLocation? //previous
+        var prev: CLLocation?
         for point in self.points {
-            let pt: CLLocation = CLLocation(latitude: Double(point.latitude!), longitude: Double(point.longitude!) )
+            let point: CLLocation = CLLocation(latitude: Double(point.latitude!), longitude: Double(point.longitude!) )
             if prev == nil { //if first point => set it as previous and go for next
-                prev = pt
+                prev = point
                 continue
             }
-            distanceTwoPoints = pt.distance(from: prev!)
+            distanceTwoPoints = point.distance(from: prev!)
             length += distanceTwoPoints
-            //set current point as previous point
-            prev = pt
+            prev = point
         }
         return length
     }    

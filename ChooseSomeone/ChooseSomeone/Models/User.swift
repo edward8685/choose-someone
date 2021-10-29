@@ -27,5 +27,3 @@ struct User: Codable {
         case totalGroups = "total_groups"
     }
 }
-
-

@@ -9,20 +9,11 @@ import Foundation
 import MapKit
 import CoreGPX
 
-///
-/// Extends GPXWaypoint to support the MKAnnotation protocol. It allows to
-/// add the waypoint as a pin in the map
-///
 extension GPXWaypoint: MKAnnotation {
     
-    ///
-    /// Inits the point with a coordinate
-    ///
     convenience init (coordinate: CLLocationCoordinate2D) { 
         self.init(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        //set default title and subtitle
-        
-        // Default title now
+
         let timeFormat = DateFormatter()
         timeFormat.dateStyle = DateFormatter.Style.none
         timeFormat.timeStyle = DateFormatter.Style.medium

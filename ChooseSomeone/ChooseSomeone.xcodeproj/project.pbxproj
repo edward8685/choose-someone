@@ -28,6 +28,8 @@
 		744934A1272562C8002D8FE3 /* TrailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744934A0272562C8002D8FE3 /* TrailManager.swift */; };
 		7457A1D0271EECEF00A947AE /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457A1CF271EECEF00A947AE /* Message.swift */; };
 		7457A1D2271EEEDC00A947AE /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457A1D1271EEEDC00A947AE /* Request.swift */; };
+		745A6EFC272BA417006064C4 /* GPXFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6EFB272BA417006064C4 /* GPXFileManager.swift */; };
+		745A6EFE272BABC6006064C4 /* GPXFileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6EFD272BABC6006064C4 /* GPXFileInfo.swift */; };
 		74608D1D271D1CEC002BD125 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D1B271D1CEC002BD125 /* UIScreen+Extension.swift */; };
 		74608D1E271D1CEC002BD125 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D1C271D1CEC002BD125 /* UIViewExtension.swift */; };
 		74608D21271D1DE1002BD125 /* GroupInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D1F271D1DE1002BD125 /* GroupInfoCell.swift */; };
@@ -98,6 +100,8 @@
 		744934A0272562C8002D8FE3 /* TrailManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailManager.swift; sourceTree = "<group>"; };
 		7457A1CF271EECEF00A947AE /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		7457A1D1271EEEDC00A947AE /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		745A6EFB272BA417006064C4 /* GPXFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPXFileManager.swift; sourceTree = "<group>"; };
+		745A6EFD272BABC6006064C4 /* GPXFileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPXFileInfo.swift; sourceTree = "<group>"; };
 		74608D1B271D1CEC002BD125 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		74608D1C271D1CEC002BD125 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		74608D1F271D1DE1002BD125 /* GroupInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoCell.swift; sourceTree = "<group>"; };
@@ -285,6 +289,7 @@
 				7457A1D1271EEEDC00A947AE /* Request.swift */,
 				74E573772728700C00F490BF /* StopWatch.swift */,
 				74E5737E2728E92400F490BF /* GPXSession.swift */,
+				745A6EFD272BABC6006064C4 /* GPXFileInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -309,6 +314,7 @@
 			children = (
 				74608D46271EC727002BD125 /* GroupRoomManager.swift */,
 				744934A0272562C8002D8FE3 /* TrailManager.swift */,
+				745A6EFB272BA417006064C4 /* GPXFileManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -504,6 +510,7 @@
 				742516FB272197A30011166B /* UILabelExtension.swift in Sources */,
 				74E573722728241F00F490BF /* GPXExtentCoordinates.swift in Sources */,
 				742516F927218A520011166B /* UIColor+Extension.swift in Sources */,
+				745A6EFE272BABC6006064C4 /* GPXFileInfo.swift in Sources */,
 				74E573D627292EBD00F490BF /* Double+Measures.swift in Sources */,
 				74F96504272481F800B77DC5 /* TrailListViewController.swift in Sources */,
 				74608D1E271D1CEC002BD125 /* UIViewExtension.swift in Sources */,
@@ -519,6 +526,7 @@
 				74E5737F2728E92500F490BF /* GPXSession.swift in Sources */,
 				74608D25271D20B0002BD125 /* GroupHeaderCell.swift in Sources */,
 				74608D34271D7AE1002BD125 /* UIButtonExtension.swift in Sources */,
+				745A6EFC272BA417006064C4 /* GPXFileManager.swift in Sources */,
 				74608D29271D4A80002BD125 /* GroupChatCell.swift in Sources */,
 				74608D1D271D1CEC002BD125 /* UIScreen+Extension.swift in Sources */,
 				74E573852728EBEE00F490BF /* GPXTrackPoint+MapKit.swift in Sources */,
@@ -694,6 +702,10 @@
 				DEVELOPMENT_TEAM = 2THHZQ7GX3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChooseSomeone/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location is only used to display your position in the map. Select always allow to track your position even if the app is in background.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Location is needed to create the GPX track even when the app is in background.";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Location is needed to create GPX and add PDIs";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need to find out your current location in order to compute the route.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -724,6 +736,10 @@
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChooseSomeone/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location is only used to display your position in the map. Select always allow to track your position even if the app is in background.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Location is needed to create the GPX track even when the app is in background.";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Location is needed to create GPX and add PDIs";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need to find out your current location in order to compute the route.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

@@ -22,16 +22,12 @@ class GPXMapView: MKMapView {
     
     ///
     var extent: GPXExtentCoordinates = GPXExtentCoordinates() //extent of the GPX points and tracks
-
-    var compassRect: CGRect
     
-    /// Selected tile server.
-    /// - SeeAlso: GPXTileServer
+    var headingImageView: UIImageView?
     
     /// Overlay that holds map tiles
     var tileServerOverlay: MKTileOverlay = MKTileOverlay()
     
-    ///
 //    let coreDataHelper = CoreDataHelper()
     
     /// Heading of device
@@ -49,9 +45,8 @@ class GPXMapView: MKMapView {
     required init?(coder aDecoder: NSCoder) {
         var tmpCoords: [CLLocationCoordinate2D] = [] //init with empty
         currentSegmentOverlay = MKPolyline(coordinates: &tmpCoords, count: 0)
-        compassRect = CGRect.init(x: 0, y: 0, width: 36, height: 36)
-        super.init(coder: aDecoder)
         
+        super.init(coder: aDecoder)
         // Rotation Gesture handling (for the map rotation's influence towards heading pointing arrow)
         rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(rotationGestureHandling(_:)))
         
@@ -60,20 +55,14 @@ class GPXMapView: MKMapView {
         isMultipleTouchEnabled = true
     }
     
-    ///
-    /// Override default implementation to set the compass that appears in the map in a better position.
-    ///
     override func layoutSubviews() {
         super.layoutSubviews()
-        // set compass position by setting its frame
         if let compassView = subviews.filter({ $0.isKind(of: NSClassFromString("MKCompassView")!) }).first {
-            if compassRect.origin.x != 0 {
-                compassView.frame = compassRect
-            }
+
+            compassView.frame.origin = CGPoint(x: UIScreen.width/2-18, y: 30)
         }
-        
-//        updateMapInformation(tileServer)
     }
+    
     
     /// Handles rotation detected from user, for heading arrow to update.
     @objc func rotationGestureHandling(_ gesture: UIRotationGestureRecognizer) {
@@ -84,6 +73,24 @@ class GPXMapView: MKMapView {
             headingOffset = nil
         }
     }
+    
+    func updateHeading() {
+        guard let heading = heading else { return }
+        
+        headingImageView?.isHidden = false
+        let rotation = CGFloat((heading.trueHeading - camera.heading)/180 * Double.pi)
+        
+        var newRotation = rotation
+        
+        if let headingOffset = headingOffset {
+            newRotation = rotation + headingOffset
+        }
+ 
+        UIView.animate(withDuration: 0.15) {
+            self.headingImageView?.transform = CGAffineTransform(rotationAngle: newRotation)
+        }
+    }
+
     
     
     /// Adds a new point to current segment.
@@ -118,6 +125,13 @@ class GPXMapView: MKMapView {
     ///
     func finishCurrentSegment() {
         startNewTrackSegment() //basically, we need to append the segment to the list of segments
+    }
+    
+    func clearMap() {
+        session.reset()
+        removeOverlays(overlays)
+        removeAnnotations(annotations)
+        extent = GPXExtentCoordinates()
     }
     ///
     ///
