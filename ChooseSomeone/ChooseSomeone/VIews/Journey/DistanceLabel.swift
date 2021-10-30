@@ -9,16 +9,6 @@ import Foundation
 import UIKit
 import MapKit
 
-///
-/// A label to display distances.
-///
-/// The text is displated in meters if is less than 1km (for instance "980m") and in
-/// km with two decimals if it is larger than 1km (for instance "1.20km").
-///
-/// If `useImperial` is true, it displays the distance always in miles ("0.23mi").
-///
-/// To update the text displayed set the `distance` property.
-///
 open class DistanceLabel: UILabel {
     
     /// Internal variable that keeps the actual distance

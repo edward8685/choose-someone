@@ -9,12 +9,11 @@ import UIKit
 import MapKit
 import CoreGPX
 import CoreLocation
+import Firebase
 
 class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     
     private var userId = "1357988"
-    
-    var lastGpxFilename: String = ""
     
     var isDisplayingLocationServicesDenied: Bool = false
     
@@ -34,10 +33,11 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    let recordManager = RecordManager()
+    
     let locationManager: CLLocationManager = {
         let manager = CLLocationManager()
         
-//        manager.requestWhenInUseAuthorization()
         manager.requestAlwaysAuthorization()
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.distanceFilter = 2 //meters
@@ -96,7 +96,8 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         locationManager.startUpdatingLocation()
         locationManager.startUpdatingHeading()
         
-        let center = locationManager.location?.coordinate ?? CLLocationCoordinate2D(latitude: 25.042393, longitude: 121.56496)
+        let center = locationManager.location?.coordinate ??
+        CLLocationCoordinate2D(latitude: 25.042393, longitude: 121.56496)
         let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
         let region = MKCoordinateRegion(center: center, span: span)
         map.setRegion(region, animated: true)
@@ -106,12 +107,11 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         setUpLabels()
         
     }
-    /// Will update polyline color when invoked
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         updatePolylineColor()
     }
     
-    /// Updates polyline color
     func updatePolylineColor() {
         for overlay in map.overlays where overlay is MKPolyline {
             map.removeOverlay(overlay)
@@ -203,65 +203,45 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         
     }
     
-    /// Defines the different statuses regarding tracking current user location.
     enum GpxTrackingStatus {
         
-        /// Tracking has not started or map was reset
         case notStarted
         
-        /// Tracking is ongoing
         case tracking
         
-        /// Tracking is paused (the map has some contents)
         case paused
     }
     
-    /// Tells what is the current status of the Map Instance.
     var gpxTrackingStatus: GpxTrackingStatus = GpxTrackingStatus.notStarted {
         didSet {
-            print("gpxTrackingStatus changed to \(gpxTrackingStatus)")
             switch gpxTrackingStatus {
             case .notStarted:
                 print("switched to non started")
-                // set Tracker button to allow Start
                 trackerButton.setTitle("Tracking",
                                        for: UIControl.State())
                 trackerButton.alpha = 1.0
-                //save & reset button to transparent.
                 saveButton.alpha = 1.0
                 resetButton.alpha = 1.0
-                //reset clock
                 stopWatch.reset()
                 timeLabel.text = stopWatch.elapsedTimeString
                 
-                lastGpxFilename = "" //clear last filename, so when saving it appears an empty field
-                
-                //                map.coreDataHelper.clearAll()
-                //                map.coreDataHelper.coreDataDeleteAll(of: CDRoot.self)//deleteCDRootFromCoreData()
                 map.clearMap()
                 totalTrackedDistanceLabel.distance = (map.session.totalTrackedDistance)
                 currentSegmentDistanceLabel.distance = (map.session.currentSegmentDistance)
                 
             case .tracking:
-                print("switched to tracking mode")
-                // set tracerkButton to allow Pause
+
                 trackerButton.setTitle("Pause", for: UIControl.State())
-                // start clock
                 self.stopWatch.start()
                 
             case .paused:
-                print("switched to paused mode")
-                // set trackerButton to allow Resume
                 self.trackerButton.setTitle("Resume", for: UIControl.State())
                 
-                //pause clock
                 self.stopWatch.stop()
-                // start new track segment
                 self.map.startNewTrackSegment()
             }
         }
     }
-    
     
     @objc func trackerButtonTapped() {
         
@@ -277,14 +257,13 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @objc func saveButtonTapped(withReset: Bool = false) {
 
-        // ignore the save button if there is nothing to save.
         if (gpxTrackingStatus == .notStarted) {
             return
         }
         
         let date = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd-HH-mm"
+        dateFormatter.dateFormat = "yyyy-MM-dd_HH-mm"
         let time = dateFormatter.string(from: date as Date)
         let defaultFileName = "\(time)"
         
@@ -297,12 +276,10 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
             textField.text =  defaultFileName
         })
 
-        
         let saveAction = UIAlertAction(title: "Save",
                                        style: .default) { _ in
             
             let gpxString = self.map.exportToGPXString()
-            print(gpxString)
             
             let fileName = alertController.textFields?[0].text
             
@@ -392,21 +369,20 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         
     }
     
-    
     func displayLocationServicesDeniedAlert() {
         if isDisplayingLocationServicesDenied {
-            return // display it only once.
+            return
         }
-        let alertController = UIAlertController(title: "ACCESS_TO_LOCATION_DENIED",
-                                                message: "ALLOW_LOCATION",
+        let alertController = UIAlertController(title: "Access to location denied",
+                                                message: "Allow location",
                                                 preferredStyle: .alert)
-        let settingsAction = UIAlertAction(title: "SETTINGS",
+        let settingsAction = UIAlertAction(title: "Settings",
                                            style: .default) { _ in
             if let url = URL(string: UIApplication.openSettingsURLString) {
                 UIApplication.shared.openURL(url)
             }
         }
-        let cancelAction = UIAlertAction(title: "CANCEL",
+        let cancelAction = UIAlertAction(title: "Cancel",
                                          style: .cancel) { _ in }
         
         alertController.addAction(settingsAction)
@@ -458,9 +434,9 @@ extension JourneyViewController: CLLocationManagerDelegate {
         let lonFormat = String(format: "%.6f", newLocation.coordinate.longitude)
         let altitude = newLocation.altitude.toAltitude()
         var text = "latitude:\(latFormat) \rlongtitude: \(lonFormat) \raltitude:\(altitude)"
+        
         coordsLabel.text = text
         
-        //Update Map center and track overlay if user is being followed
         if followUser {
             map.setCenter(newLocation.coordinate, animated: true)
         }
@@ -474,8 +450,7 @@ extension JourneyViewController: CLLocationManagerDelegate {
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        print("ViewController::didUpdateHeading true: \(newHeading.trueHeading) magnetic: \(newHeading.magneticHeading)")
-        print("mkMapcamera heading=\(map.camera.heading)")
+
         map.heading = newHeading // updates heading variable
         map.updateHeading()
     }
@@ -485,4 +460,3 @@ extension Notification.Name {
     static let loadRecoveredFile = Notification.Name("loadRecoveredFile")
     static let updateAppearance = Notification.Name("updateAppearance")
 }
-

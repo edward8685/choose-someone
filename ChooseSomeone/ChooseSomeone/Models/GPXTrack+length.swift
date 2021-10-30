@@ -1,8 +1,8 @@
 //
 //  GPXTrack+length.swift
-//  OpenGpxTracker
+//  ChooseSomeone
 //
-//  Created by merlos on 30/09/15.
+//  Created by Ed Chang on 2021/10/27.
 //
 
 import Foundation

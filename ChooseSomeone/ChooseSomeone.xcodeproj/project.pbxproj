@@ -30,6 +30,8 @@
 		7457A1D2271EEEDC00A947AE /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457A1D1271EEEDC00A947AE /* Request.swift */; };
 		745A6EFC272BA417006064C4 /* GPXFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6EFB272BA417006064C4 /* GPXFileManager.swift */; };
 		745A6EFE272BABC6006064C4 /* GPXFileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6EFD272BABC6006064C4 /* GPXFileInfo.swift */; };
+		745A6F00272C0104006064C4 /* RecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6EFF272C0104006064C4 /* RecordManager.swift */; };
+		745A6F02272CF4C5006064C4 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F01272CF4C5006064C4 /* Record.swift */; };
 		74608D1D271D1CEC002BD125 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D1B271D1CEC002BD125 /* UIScreen+Extension.swift */; };
 		74608D1E271D1CEC002BD125 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D1C271D1CEC002BD125 /* UIViewExtension.swift */; };
 		74608D21271D1DE1002BD125 /* GroupInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D1F271D1DE1002BD125 /* GroupInfoCell.swift */; };
@@ -102,6 +104,8 @@
 		7457A1D1271EEEDC00A947AE /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		745A6EFB272BA417006064C4 /* GPXFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPXFileManager.swift; sourceTree = "<group>"; };
 		745A6EFD272BABC6006064C4 /* GPXFileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPXFileInfo.swift; sourceTree = "<group>"; };
+		745A6EFF272C0104006064C4 /* RecordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordManager.swift; sourceTree = "<group>"; };
+		745A6F01272CF4C5006064C4 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		74608D1B271D1CEC002BD125 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		74608D1C271D1CEC002BD125 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		74608D1F271D1DE1002BD125 /* GroupInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoCell.swift; sourceTree = "<group>"; };
@@ -126,7 +130,6 @@
 		74E5735A27268E3E00F490BF /* TrialInfoScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialInfoScrollView.swift; sourceTree = "<group>"; };
 		74E5735E2726D6A500F490BF /* KingFisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingFisherWrapper.swift; sourceTree = "<group>"; };
 		74E5736227279A2800F490BF /* JourneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyViewController.swift; sourceTree = "<group>"; };
-		74E573642727EC1C00F490BF /* CurrentLocation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CurrentLocation.gpx; sourceTree = "<group>"; };
 		74E573692728241F00F490BF /* GPXTrack+length.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GPXTrack+length.swift"; sourceTree = "<group>"; };
 		74E5736A2728241F00F490BF /* GPXRoot+length.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GPXRoot+length.swift"; sourceTree = "<group>"; };
 		74E5736C2728241F00F490BF /* GPXExtentCoordinates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPXExtentCoordinates.swift; sourceTree = "<group>"; };
@@ -167,7 +170,6 @@
 			isa = PBXGroup;
 			children = (
 				8806AC3D54657A853EA85620 /* Pods-ChooseSomeone.debug.xcconfig */,
-				74E573642727EC1C00F490BF /* CurrentLocation.gpx */,
 				715A0A3D1C233AFC5A6955E0 /* Pods-ChooseSomeone.release.xcconfig */,
 			);
 			path = Pods;
@@ -265,8 +267,8 @@
 				740B1B852723FF2500A1CD3B /* HomeViewController.swift */,
 				74F96503272481F800B77DC5 /* TrailListViewController.swift */,
 				7449349B272548BC002D8FE3 /* TrailInfoViewController.swift */,
-				74E573882728F4B300F490BF /* MapViewDelegate.swift */,
 				74E5736227279A2800F490BF /* JourneyViewController.swift */,
+				74E573882728F4B300F490BF /* MapViewDelegate.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -286,6 +288,7 @@
 				74608D42271E9C67002BD125 /* Group.swift */,
 				7457A1CF271EECEF00A947AE /* Message.swift */,
 				74608D44271EA5E1002BD125 /* User.swift */,
+				745A6F01272CF4C5006064C4 /* Record.swift */,
 				7457A1D1271EEEDC00A947AE /* Request.swift */,
 				74E573772728700C00F490BF /* StopWatch.swift */,
 				74E5737E2728E92400F490BF /* GPXSession.swift */,
@@ -315,6 +318,7 @@
 				74608D46271EC727002BD125 /* GroupRoomManager.swift */,
 				744934A0272562C8002D8FE3 /* TrailManager.swift */,
 				745A6EFB272BA417006064C4 /* GPXFileManager.swift */,
+				745A6EFF272C0104006064C4 /* RecordManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -525,6 +529,7 @@
 				7457A1D0271EECEF00A947AE /* Message.swift in Sources */,
 				74E5737F2728E92500F490BF /* GPXSession.swift in Sources */,
 				74608D25271D20B0002BD125 /* GroupHeaderCell.swift in Sources */,
+				745A6F02272CF4C5006064C4 /* Record.swift in Sources */,
 				74608D34271D7AE1002BD125 /* UIButtonExtension.swift in Sources */,
 				745A6EFC272BA417006064C4 /* GPXFileManager.swift in Sources */,
 				74608D29271D4A80002BD125 /* GroupChatCell.swift in Sources */,
@@ -547,6 +552,7 @@
 				74608D21271D1DE1002BD125 /* GroupInfoCell.swift in Sources */,
 				74E573782728700C00F490BF /* StopWatch.swift in Sources */,
 				740B1B8F2724280D00A1CD3B /* TrailThemeCell.swift in Sources */,
+				745A6F00272C0104006064C4 /* RecordManager.swift in Sources */,
 				74E5737A2728725A00F490BF /* StopWatchDelegate.swift in Sources */,
 				74608D2C271D51F6002BD125 /* ChatRoomViewController.swift in Sources */,
 			);

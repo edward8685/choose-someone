@@ -1,8 +1,8 @@
 //
 //  Double+Meatures.swift
-//  OpenGpxTracker
+//  ChooseSomeone
 //
-//  Created by merlos on 03/05/2019.
+//  Created by Ed Chang on 2021/10/27.
 //
 
 import Foundation
@@ -48,5 +48,4 @@ extension Double {
     func toAccuracy(useImperial: Bool = false) -> String {
         return "±\(toMeters() as String)"
     }
-
 }

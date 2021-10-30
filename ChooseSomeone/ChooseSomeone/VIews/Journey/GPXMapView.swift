@@ -10,7 +10,6 @@ import UIKit
 import MapKit
 import CoreLocation
 import CoreGPX
-import CoreData
 
 class GPXMapView: MKMapView {
     
@@ -28,8 +27,6 @@ class GPXMapView: MKMapView {
     /// Overlay that holds map tiles
     var tileServerOverlay: MKTileOverlay = MKTileOverlay()
     
-//    let coreDataHelper = CoreDataHelper()
-    
     /// Heading of device
     var heading: CLHeading?
     
@@ -39,9 +36,6 @@ class GPXMapView: MKMapView {
     /// Gesture for heading arrow to be updated in realtime during user's map interactions
     var rotationGesture = UIRotationGestureRecognizer()
     
-    ///
-    /// Initializes the map with an empty currentSegmentOverlay.
-    ///
     required init?(coder aDecoder: NSCoder) {
         var tmpCoords: [CLLocationCoordinate2D] = [] //init with empty
         currentSegmentOverlay = MKPolyline(coordinates: &tmpCoords, count: 0)
@@ -91,28 +85,15 @@ class GPXMapView: MKMapView {
         }
     }
 
-    
-    
-    /// Adds a new point to current segment.
-    /// - Parameters:
-    ///    - location: Typically a location provided by CLLocation
-    ///
     func addPointToCurrentTrackSegmentAtLocation(_ location: CLLocation) {
-    let pt = GPXTrackPoint(location: location)
-//        coreDataHelper.add(toCoreData: pt, withTrackSegmentID: session.trackSegments.count)
         session.addPointToCurrentTrackSegmentAtLocation(location)
-        //redrawCurrent track segment overlay
-        //First remove last overlay, then re-add the overlay updated with the new point
+
         removeOverlay(currentSegmentOverlay)
         currentSegmentOverlay = session.currentSegment.overlay
         addOverlay(currentSegmentOverlay)
         extent.extendAreaToIncludeLocation(location.coordinate)
     }
-    
-    ///
-    /// If current segmet has points, it appends currentSegment to trackSegments and
-    /// initializes currentSegment to a new one.
-    ///
+
     func startNewTrackSegment() {
         if session.currentSegment.trackpoints.count > 0 {
             session.startNewTrackSegment()
@@ -120,9 +101,6 @@ class GPXMapView: MKMapView {
         }
     }
     
-    ///
-    /// Finishes current segment.
-    ///
     func finishCurrentSegment() {
         startNewTrackSegment() //basically, we need to append the segment to the list of segments
     }
@@ -133,30 +111,17 @@ class GPXMapView: MKMapView {
         removeAnnotations(annotations)
         extent = GPXExtentCoordinates()
     }
-    ///
-    ///
-    /// Converts current map into a GPX String
-    ///
-    ///
+
     func exportToGPXString() -> String {
         return session.exportToGPXString()
     }
    
-    ///
-    /// Sets the map region to display all the GPX data in the map (segments and waypoints).
-    ///
     func regionToGPXExtent() {
         setRegion(extent.region, animated: true)
     }
     
-    /// Imports GPX contents into the map.
-    ///
-    /// - Parameters:
-    ///     - gpx: The result of loading a gpx file with iOS-GPX-Framework.
-    ///
     func importFromGPXRoot(_ gpx: GPXRoot) {
-//        clearMap()
-//        addWaypoints(for: gpx)
+        clearMap()
         addTrackSegments(for: gpx)
     }
 
@@ -178,9 +143,8 @@ class GPXMapView: MKMapView {
     }
     
     func continueFromGPXRoot(_ gpx: GPXRoot) {
-//        clearMap()
-//        addWaypoints(for: gpx, fromImport: false)
-        
+        clearMap()
+
         session.continueFromGPXRoot(gpx)
         
         // for last session's previous tracks, through resuming
@@ -210,6 +174,5 @@ class GPXMapView: MKMapView {
                 extent.extendAreaToIncludeLocation(waypoint.coordinate)
             }
         }
-        
     }
 }

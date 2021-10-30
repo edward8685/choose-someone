@@ -32,12 +32,13 @@ class GPXFileManager {
    
                 let sortedURLs = directoryURLs.map { url in
                     (url: url,
-                     modificationDate: (try? url.resourceValues(forKeys: [.contentModificationDateKey]))?.contentModificationDate ?? Date.distantPast,
+                     modificationDate: (try? url.resourceValues(forKeys: [.contentModificationDateKey]))?
+                        .contentModificationDate ?? Date.distantPast,
                      fileSize: (try? url.resourceValues(forKeys: [.fileSizeKey]))?.fileSize ?? 0)
                     }
-                    .sorted(by: { $0.1 > $1.1 }) // sort descending modification dates
+                    .sorted(by: { $0.1 > $1.1 }) 
                 print(sortedURLs)
-                //Now we filter GPX Files
+                
                 for (url, modificationDate, fileSize) in sortedURLs {
                     if kFileExt.contains(url.pathExtension) {
                         GPXFiles.append(GPXFileInfo(fileURL: url))
@@ -51,8 +52,8 @@ class GPXFileManager {
     }
     
     class func URLForFilename(_ filename: String) -> URL {
-        var fullURL = self.GPXFilesFolderURL.appendingPathComponent(filename)
         
+        var fullURL = self.GPXFilesFolderURL.appendingPathComponent(filename)
 //        if  !(kFileExt.contains(fullURL.pathExtension)) {
             fullURL = fullURL.appendingPathExtension("gpx")
 //        }
@@ -62,24 +63,48 @@ class GPXFileManager {
     class func saveToURL(fileURL: URL, gpxContents: String) {
 
         var writeError: NSError?
+        
         let saved: Bool
+        
         do {
+            
             try gpxContents.write(toFile: fileURL.path, atomically: true, encoding: String.Encoding.utf8)
             saved = true
+            
         } catch let error as NSError {
+            
             writeError = error
             saved = false
+            
         }
         if !saved {
+            
             if let error = writeError {
-                print("[ERROR] GPXFileManager:save: \(error.localizedDescription)")
+                print("\(error.localizedDescription)")
+                
             }
         }
 
     }
+    
     class func save(filename: String, gpxContents: String) {
+        
         let fileURL: URL = self.URLForFilename(filename)
-        print(fileURL)
+        
         GPXFileManager.saveToURL(fileURL: fileURL, gpxContents: gpxContents)
+        
+        RecordManager.shared.uploadRecord(fileName: filename, fileURL: fileURL) { result in
+            
+            switch result {
+                
+            case .success:
+                
+                print("save to Firebase successfully")
+                
+            case .failure(let error):
+                
+                print("save to Firebase failure: \(error)")
+            }
+        }
     }
 }
