@@ -125,7 +125,7 @@ class ChooseGroupViewController: UIViewController {
     
     @objc func segmentValueChanged(_ sender: MASegmentedControl) {
   
-        switch sender.selectedSegmentIndex{
+        switch sender.selectedSegmentIndex {
         case 0:
             groupsToDisplay = groups
             
@@ -250,7 +250,8 @@ extension ChooseGroupViewController: UITableViewDataSource {
 extension ChooseGroupViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        searchGroups = groupsToDisplay.filter { $0.trailName.lowercased().prefix(searchText.count) == searchText.lowercased() }
+        searchGroups = groupsToDisplay.filter {
+            $0.trailName.lowercased().prefix(searchText.count) == searchText.lowercased() }
         
         searching = true
         

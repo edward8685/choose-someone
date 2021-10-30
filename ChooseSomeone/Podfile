@@ -17,5 +17,6 @@ target 'ChooseSomeone' do
   pod 'MJRefresh'
   pod 'MASegmentedControl'
   pod 'Kingfisher'
+  pod 'CoreGPX'
 
 end
