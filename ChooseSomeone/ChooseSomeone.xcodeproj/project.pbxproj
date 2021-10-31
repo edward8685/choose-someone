@@ -32,6 +32,11 @@
 		745A6EFE272BABC6006064C4 /* GPXFileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6EFD272BABC6006064C4 /* GPXFileInfo.swift */; };
 		745A6F00272C0104006064C4 /* RecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6EFF272C0104006064C4 /* RecordManager.swift */; };
 		745A6F02272CF4C5006064C4 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F01272CF4C5006064C4 /* Record.swift */; };
+		745A6F04272D6809006064C4 /* TrackRecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F03272D6809006064C4 /* TrackRecordsViewController.swift */; };
+		745A6F09272D7B08006064C4 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F07272D7B08006064C4 /* ProfileCell.swift */; };
+		745A6F0A272D7B08006064C4 /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 745A6F08272D7B08006064C4 /* ProfileCell.xib */; };
+		745A6F0C272DAE9C006064C4 /* TimestampExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F0B272DAE9C006064C4 /* TimestampExtension.swift */; };
+		745A6F0E272E4B57006064C4 /* UserRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F0D272E4B57006064C4 /* UserRecordViewController.swift */; };
 		74608D1D271D1CEC002BD125 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D1B271D1CEC002BD125 /* UIScreen+Extension.swift */; };
 		74608D1E271D1CEC002BD125 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D1C271D1CEC002BD125 /* UIViewExtension.swift */; };
 		74608D21271D1DE1002BD125 /* GroupInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D1F271D1DE1002BD125 /* GroupInfoCell.swift */; };
@@ -106,6 +111,11 @@
 		745A6EFD272BABC6006064C4 /* GPXFileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPXFileInfo.swift; sourceTree = "<group>"; };
 		745A6EFF272C0104006064C4 /* RecordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordManager.swift; sourceTree = "<group>"; };
 		745A6F01272CF4C5006064C4 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		745A6F03272D6809006064C4 /* TrackRecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRecordsViewController.swift; sourceTree = "<group>"; };
+		745A6F07272D7B08006064C4 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		745A6F08272D7B08006064C4 /* ProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCell.xib; sourceTree = "<group>"; };
+		745A6F0B272DAE9C006064C4 /* TimestampExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimestampExtension.swift; sourceTree = "<group>"; };
+		745A6F0D272E4B57006064C4 /* UserRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRecordViewController.swift; sourceTree = "<group>"; };
 		74608D1B271D1CEC002BD125 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		74608D1C271D1CEC002BD125 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		74608D1F271D1DE1002BD125 /* GroupInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoCell.swift; sourceTree = "<group>"; };
@@ -269,6 +279,8 @@
 				7449349B272548BC002D8FE3 /* TrailInfoViewController.swift */,
 				74E5736227279A2800F490BF /* JourneyViewController.swift */,
 				74E573882728F4B300F490BF /* MapViewDelegate.swift */,
+				745A6F03272D6809006064C4 /* TrackRecordsViewController.swift */,
+				745A6F0D272E4B57006064C4 /* UserRecordViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -308,6 +320,7 @@
 				74FDD9272722C47D0014D2B2 /* UITableView+ColloectionVIewExtension.swift */,
 				74FDD9292722C5670014D2B2 /* UITextFieldExtexsion.swift */,
 				7449349E27255A0B002D8FE3 /* UIStoryboard+Extension.swift */,
+				745A6F0B272DAE9C006064C4 /* TimestampExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -327,6 +340,8 @@
 			isa = PBXGroup;
 			children = (
 				74F9650E2725394F00B77DC5 /* Profile.storyboard */,
+				745A6F07272D7B08006064C4 /* ProfileCell.swift */,
+				745A6F08272D7B08006064C4 /* ProfileCell.xib */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -430,6 +445,7 @@
 				740B1B902724280D00A1CD3B /* TrailThemeCell.xib in Resources */,
 				74F9650F2725394F00B77DC5 /* Profile.storyboard in Resources */,
 				740FC394271D17160071459A /* ChooseGroup.storyboard in Resources */,
+				745A6F0A272D7B08006064C4 /* ProfileCell.xib in Resources */,
 				74608D22271D1DE1002BD125 /* GroupInfoCell.xib in Resources */,
 				74608D2A271D4A80002BD125 /* GroupChatCell.xib in Resources */,
 				74F9650C2725393B00B77DC5 /* Journey.storyboard in Resources */,
@@ -513,6 +529,7 @@
 				74E573D427292CE300F490BF /* DistanceLabel.swift in Sources */,
 				742516FB272197A30011166B /* UILabelExtension.swift in Sources */,
 				74E573722728241F00F490BF /* GPXExtentCoordinates.swift in Sources */,
+				745A6F0E272E4B57006064C4 /* UserRecordViewController.swift in Sources */,
 				742516F927218A520011166B /* UIColor+Extension.swift in Sources */,
 				745A6EFE272BABC6006064C4 /* GPXFileInfo.swift in Sources */,
 				74E573D627292EBD00F490BF /* Double+Measures.swift in Sources */,
@@ -529,12 +546,15 @@
 				7457A1D0271EECEF00A947AE /* Message.swift in Sources */,
 				74E5737F2728E92500F490BF /* GPXSession.swift in Sources */,
 				74608D25271D20B0002BD125 /* GroupHeaderCell.swift in Sources */,
+				745A6F04272D6809006064C4 /* TrackRecordsViewController.swift in Sources */,
 				745A6F02272CF4C5006064C4 /* Record.swift in Sources */,
 				74608D34271D7AE1002BD125 /* UIButtonExtension.swift in Sources */,
 				745A6EFC272BA417006064C4 /* GPXFileManager.swift in Sources */,
+				745A6F0C272DAE9C006064C4 /* TimestampExtension.swift in Sources */,
 				74608D29271D4A80002BD125 /* GroupChatCell.swift in Sources */,
 				74608D1D271D1CEC002BD125 /* UIScreen+Extension.swift in Sources */,
 				74E573852728EBEE00F490BF /* GPXTrackPoint+MapKit.swift in Sources */,
+				745A6F09272D7B08006064C4 /* ProfileCell.swift in Sources */,
 				74E573842728EBEE00F490BF /* GPXTrackSegment+MapKit.swift in Sources */,
 				74608D45271EA5E1002BD125 /* User.swift in Sources */,
 				74E5735B27268E3E00F490BF /* TrialInfoScrollView.swift in Sources */,

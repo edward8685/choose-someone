@@ -63,7 +63,7 @@
         <!--Profile-->
         <scene sceneID="wwB-yt-feV">
             <objects>
-                <viewControllerPlaceholder storyboardName="ChooseGroup" id="e5d-IV-vt5" userLabel="Profile" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Profile" id="e5d-IV-vt5" userLabel="Profile" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="Mca-k0-xKF"/>
                     <navigationItem key="navigationItem" id="D0r-xy-Pa9"/>
                 </viewControllerPlaceholder>
