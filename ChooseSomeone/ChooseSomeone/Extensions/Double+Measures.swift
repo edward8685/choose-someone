@@ -24,11 +24,11 @@ extension Double {
     func toMeters() -> String {
         return String(format: "%.0fm", self)
     }
-
+    
     func toDistance() -> String {
-            return self > kMetersPerKilometer ? toKilometers() as String : toMeters() as String
+        return self > kMetersPerKilometer ? toKilometers() as String : toMeters() as String
     }
-  
+    
     func toKilometersPerHour() -> Double {
         return self * kKilometersPerHourInOneMeterPerSecond
     }
@@ -48,4 +48,25 @@ extension Double {
     func toAccuracy(useImperial: Bool = false) -> String {
         return "±\(toMeters() as String)"
     }
+    
+    func tohmsTimeFormat () -> String {
+        
+        let seconds = Int(self)
+        print(seconds)
+        let hour = (seconds % 3600) % 60
+        let minute = (seconds % 3600) / 60
+        let second = seconds / 3600
+        
+        var timeString = ""
+        timeString += second.description
+        timeString += ":"
+        timeString += minute.description
+        timeString += ":"
+        timeString += hour.description
+        
+      return timeString
+        
+    }
+    
+    
 }

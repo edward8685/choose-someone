@@ -10,87 +10,197 @@ import MapKit
 import CoreGPX
 import CoreLocation
 import Firebase
+import Charts
 
-class UserRecordViewController: UIViewController {
+class UserRecordViewController: UIViewController, ChartViewDelegate {
     
     @IBOutlet weak var map: GPXMapView!
     
-    let mapViewDelegate = MapViewDelegate()
+    @IBOutlet weak var recordInfoView: RecordInfoView!
+    
+    @IBOutlet weak var chartView: LineChartView! {
+        didSet {
+            chartView.delegate = self
+        }
+    }
+    
+    private let mapViewDelegate = MapViewDelegate()
     
     var record = Record()
     
-    let timeLabel = UILabel()
+    var trackInfo = TrackInfo()
     
-    let totalTrackedDistanceLabel = DistanceLabel()
+    lazy var elevation: [Double] = []
     
-    let coordsLabel = UILabel()
+    lazy var trackTime: [Double] = []
+    
+    lazy var distanceFromOrigin: [Double] = []
+    
+    private let timeLabel = UILabel()
+    
+    private let totalTrackedDistanceLabel = DistanceLabel()
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         map.delegate = mapViewDelegate
-
-//        let center = locationManager.location?.coordinate ??
-//        CLLocationCoordinate2D(latitude: 25.042393, longitude: 121.56496)
-//        let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
-//        let region = MKCoordinateRegion(center: center, span: span)
-//        map.setRegion(region, animated: true)
+        
         self.view.addSubview(map)
         
-        setUpLabels()
+        setUpButton()
+        
+        parseGPXFile()
+        
+        setChart(distance: distanceFromOrigin, values: elevation)
+        
+        recordInfoView.updateTrackInfo(data: trackInfo)
+        
     }
     
-    func setUpLabels() {
+    func setChart(distance: [Double], values: [Double]) {
         
-        map.addSubview(coordsLabel)
-        coordsLabel.numberOfLines = 0
-        coordsLabel.frame = CGRect(x: 15, y: 30, width: 200, height: 100)
-        coordsLabel.textAlignment = .left
-        coordsLabel.font = .systemFont(ofSize: 14)
-        coordsLabel.textColor = UIColor.black
+        var dataEntries: [ChartDataEntry] = []
         
-        map.addSubview(timeLabel)
-        timeLabel.frame = CGRect(x: UIScreen.width - 100, y: 40, width: 80, height: 30)
-        timeLabel.textAlignment = .right
-        timeLabel.font = .systemFont(ofSize: 26)
-        timeLabel.textColor = UIColor.black
-        timeLabel.text = "00:00"
+        chartView.noDataText = "Can not get track record!"
         
-        map.addSubview(totalTrackedDistanceLabel)
-        totalTrackedDistanceLabel.frame = CGRect(x: UIScreen.width - 100, y: 70, width: 80, height: 30)
-        totalTrackedDistanceLabel.textAlignment = .right
-        totalTrackedDistanceLabel.font = .systemFont(ofSize: 26)
-        totalTrackedDistanceLabel.textColor = UIColor.black
-        totalTrackedDistanceLabel.distance = 0.00
-    }
-    
-    func didLoadGPXFileWithName(_ gpxFilename: String, gpxRoot: GPXRoot) {
- 
-        self.map.importFromGPXRoot(gpxRoot)
-        
-        self.map.regionToGPXExtent()
-        
-        self.totalTrackedDistanceLabel.distance = self.map.session.totalTrackedDistance
-    }
-    
-    func actionLoadFileAtIndex(_ rowIndex: Int) {
-            
-//            guard let gpxFileInfo: GPXFileInfo = (self.fileList.object(at: rowIndex) as? GPXFileInfo) else {
-//
-//                return
-//            }
-//
-//            print("Load gpx File: \(gpxFileInfo.fileName)")
-//            guard let gpx = GPXParser(withURL: gpxFileInfo.fileURL)?.parsedData() else {
-//                print("GPXFileTableViewController:: actionLoadFileAtIndex(\(rowIndex)): failed to parse GPX file")
-//                self.displayLoadingFileAlert(false)
-//                return
-//            }
-//
-//            DispatchQueue.main.sync {
-//                    self.delegate?.didLoadGPXFileWithName(gpxFileInfo.fileName, gpxRoot: gpx)
-//            }
+        for index in 0..<elevation.count {
+            let xvalue = distance[index]
+            let yvalue = values[index]
+            let dataEntry = ChartDataEntry(x: xvalue, y: yvalue)
+            dataEntries.append(dataEntry)
         }
+        
+        let dataSet = LineChartDataSet(entries: dataEntries, label: "")
+        dataSet.colors = [UIColor.gray]
+        
+        dataSet.drawFilledEnabled = true
+        
+        dataSet.drawCirclesEnabled = false
+        
+        dataSet.drawValuesEnabled = false
+        
+        dataSet.lineWidth = 2
+        
+        dataSet.fillAlpha = 0.8
+        
+        dataSet.fillColor = .lightGray
+        
+        chartView.data = LineChartData(dataSets: [dataSet])
+        
+        chartView.xAxis.setLabelCount(values.count, force: true)
+        
+        setUpChartLayout()
+
+    }
+    
+    func setUpChartLayout() {
+ 
+        let xAxis = chartView.xAxis
+        xAxis.labelPosition = .bottom
+        xAxis.setLabelCount(10, force: false)
+        xAxis.drawGridLinesEnabled = true
+        xAxis.granularityEnabled = true
+        
+        let yAxis = chartView.leftAxis
+        yAxis.axisMinimum = 0
+        yAxis.setLabelCount(10, force: false)
+        yAxis.labelPosition = .outsideChart
+        yAxis.drawGridLinesEnabled = true
+        yAxis.granularityEnabled = true
+        
+        chartView.rightAxis.enabled = false
+        
+        chartView.animate(xAxisDuration: 2.5)
+    }
+    
+    func setUpButton() {
+        
+        let returnButton = UIButton()
+        
+        let radius = UIScreen.width * 13 / 107
+        returnButton.frame = CGRect(x: 20, y: 40, width: radius, height: radius)
+        returnButton.backgroundColor = UIColor.hexStringToUIColor(hex: "FFFFFF")
+        let image = UIImage(systemName: "chevron.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .medium))
+        returnButton.setImage(image, for: .normal)
+        returnButton.tintColor = UIColor.hexStringToUIColor(hex: "19C3DA")
+        returnButton.layer.cornerRadius = radius / 2
+        returnButton.layer.masksToBounds = true
+        
+        returnButton.addTarget(self, action: #selector(returnToPreviousPage), for: .touchUpInside)
+        
+        view.addSubview(returnButton)
+    }
+    
+    @objc func returnToPreviousPage() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
+    func parseGPXFile() {
+        let inputURL = URL(string: record.recordRef)
+        
+        if let inputURL = inputURL {
+            
+            guard let gpx = GPXParser(withURL: inputURL)?.parsedData() else { return }
+            
+            didLoadGPXFile(gpxRoot: gpx)
+            
+            for track in gpx.tracks {
+                
+                for segment in track.segments {
+                   
+                    for trackPoints in segment.points {
+                        
+                        if let ele = trackPoints.elevation,
+                           
+                            let time = trackPoints.time?.timeIntervalSinceReferenceDate {
+                            elevation.append(ele)
+                            trackTime.append(Double(time))
+                        }
+                    }
+                    
+                    distanceFromOrigin = segment.distanceFromOrigin()
+                    
+                }
+            }
+            trackTime = trackTime.map { $0 - self.trackTime[0]}
+            trackInfo.distance = distanceFromOrigin.last ?? 0
+            trackInfo.spentTime = trackTime.last ?? 0
+            if let maxValue = elevation.max(),
+               let minValue = elevation.min() {
+                trackInfo.elevationDiff = maxValue - minValue
+            }
+            calculateElevation(elevation: elevation)
+
+        }
+        
+        
+    }
+    
+    func didLoadGPXFile(gpxRoot: GPXRoot) {
+        
+        map.importFromGPXRoot(gpxRoot)
+        
+        map.regionToGPXExtent()
+        
+    }
+    
+    func calculateElevation(elevation: [Double]) {
+        var totalClimp: Double = 0.0
+        var totalDrop: Double = 0.0
+        for index in 0..<elevation.count - 1 {
+            let diff = elevation[index + 1] - elevation[index]
+            if diff < 0 {
+                totalDrop += diff
+            } else {
+                totalClimp += diff
+            }
+        }
+        totalDrop = abs(totalDrop)
+        trackInfo.totalClimb = totalClimp
+        trackInfo.totalDrop = totalDrop
+    }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         updatePolylineColor()

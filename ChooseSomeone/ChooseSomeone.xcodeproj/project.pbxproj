@@ -23,6 +23,7 @@
 		740FC399271D17180071459A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740FC397271D17180071459A /* LaunchScreen.storyboard */; };
 		742516F927218A520011166B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742516F827218A520011166B /* UIColor+Extension.swift */; };
 		742516FB272197A30011166B /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742516FA272197A30011166B /* UILabelExtension.swift */; };
+		7441B7A5273052C000614D9B /* TrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7441B7A4273052C000614D9B /* TrackInfo.swift */; };
 		7449349C272548BC002D8FE3 /* TrailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7449349B272548BC002D8FE3 /* TrailInfoViewController.swift */; };
 		7449349F27255A0B002D8FE3 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7449349E27255A0B002D8FE3 /* UIStoryboard+Extension.swift */; };
 		744934A1272562C8002D8FE3 /* TrailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744934A0272562C8002D8FE3 /* TrailManager.swift */; };
@@ -37,6 +38,7 @@
 		745A6F0A272D7B08006064C4 /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 745A6F08272D7B08006064C4 /* ProfileCell.xib */; };
 		745A6F0C272DAE9C006064C4 /* TimestampExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F0B272DAE9C006064C4 /* TimestampExtension.swift */; };
 		745A6F0E272E4B57006064C4 /* UserRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F0D272E4B57006064C4 /* UserRecordViewController.swift */; };
+		745A6F11272E9D0A006064C4 /* RecordInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F10272E9D0A006064C4 /* RecordInfoView.swift */; };
 		74608D1D271D1CEC002BD125 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D1B271D1CEC002BD125 /* UIScreen+Extension.swift */; };
 		74608D1E271D1CEC002BD125 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D1C271D1CEC002BD125 /* UIViewExtension.swift */; };
 		74608D21271D1DE1002BD125 /* GroupInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D1F271D1DE1002BD125 /* GroupInfoCell.swift */; };
@@ -102,6 +104,7 @@
 		740FC39A271D17180071459A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		742516F827218A520011166B /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		742516FA272197A30011166B /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
+		7441B7A4273052C000614D9B /* TrackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfo.swift; sourceTree = "<group>"; };
 		7449349B272548BC002D8FE3 /* TrailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailInfoViewController.swift; sourceTree = "<group>"; };
 		7449349E27255A0B002D8FE3 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		744934A0272562C8002D8FE3 /* TrailManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailManager.swift; sourceTree = "<group>"; };
@@ -116,6 +119,7 @@
 		745A6F08272D7B08006064C4 /* ProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCell.xib; sourceTree = "<group>"; };
 		745A6F0B272DAE9C006064C4 /* TimestampExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimestampExtension.swift; sourceTree = "<group>"; };
 		745A6F0D272E4B57006064C4 /* UserRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRecordViewController.swift; sourceTree = "<group>"; };
+		745A6F10272E9D0A006064C4 /* RecordInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordInfoView.swift; sourceTree = "<group>"; };
 		74608D1B271D1CEC002BD125 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		74608D1C271D1CEC002BD125 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		74608D1F271D1DE1002BD125 /* GroupInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoCell.swift; sourceTree = "<group>"; };
@@ -254,6 +258,23 @@
 			path = ChooseSomeone;
 			sourceTree = "<group>";
 		};
+		745A6F0F272E8A62006064C4 /* GPX */ = {
+			isa = PBXGroup;
+			children = (
+				74E5737E2728E92400F490BF /* GPXSession.swift */,
+				745A6EFD272BABC6006064C4 /* GPXFileInfo.swift */,
+				74E5736C2728241F00F490BF /* GPXExtentCoordinates.swift */,
+				74E5736A2728241F00F490BF /* GPXRoot+length.swift */,
+				74E573832728EBEE00F490BF /* GPXTrackPoint+MapKit.swift */,
+				74E573822728EBEE00F490BF /* GPXTrackSegment+MapKit.swift */,
+				74E573862728F45600F490BF /* GPXWaypoint+MKAnnotation.swift */,
+				74E573692728241F00F490BF /* GPXTrack+length.swift */,
+				74E573772728700C00F490BF /* StopWatch.swift */,
+				74E573792728725A00F490BF /* StopWatchDelegate.swift */,
+			);
+			path = GPX;
+			sourceTree = "<group>";
+		};
 		74608D17271D1C8E002BD125 /* VIews */ = {
 			isa = PBXGroup;
 			children = (
@@ -288,23 +309,14 @@
 		74608D19271D1CA4002BD125 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				74E5736C2728241F00F490BF /* GPXExtentCoordinates.swift */,
-				74E5736A2728241F00F490BF /* GPXRoot+length.swift */,
-				74E573832728EBEE00F490BF /* GPXTrackPoint+MapKit.swift */,
-				74E573822728EBEE00F490BF /* GPXTrackSegment+MapKit.swift */,
-				74E573862728F45600F490BF /* GPXWaypoint+MKAnnotation.swift */,
-				74E573692728241F00F490BF /* GPXTrack+length.swift */,
-				74E573D527292EBD00F490BF /* Double+Measures.swift */,
-				74E573792728725A00F490BF /* StopWatchDelegate.swift */,
+				745A6F0F272E8A62006064C4 /* GPX */,
 				74608D40271E97DC002BD125 /* Trail.swift */,
 				74608D42271E9C67002BD125 /* Group.swift */,
 				7457A1CF271EECEF00A947AE /* Message.swift */,
 				74608D44271EA5E1002BD125 /* User.swift */,
 				745A6F01272CF4C5006064C4 /* Record.swift */,
+				7441B7A4273052C000614D9B /* TrackInfo.swift */,
 				7457A1D1271EEEDC00A947AE /* Request.swift */,
-				74E573772728700C00F490BF /* StopWatch.swift */,
-				74E5737E2728E92400F490BF /* GPXSession.swift */,
-				745A6EFD272BABC6006064C4 /* GPXFileInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -321,6 +333,7 @@
 				74FDD9292722C5670014D2B2 /* UITextFieldExtexsion.swift */,
 				7449349E27255A0B002D8FE3 /* UIStoryboard+Extension.swift */,
 				745A6F0B272DAE9C006064C4 /* TimestampExtension.swift */,
+				74E573D527292EBD00F490BF /* Double+Measures.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -342,6 +355,7 @@
 				74F9650E2725394F00B77DC5 /* Profile.storyboard */,
 				745A6F07272D7B08006064C4 /* ProfileCell.swift */,
 				745A6F08272D7B08006064C4 /* ProfileCell.xib */,
+				745A6F10272E9D0A006064C4 /* RecordInfoView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -520,6 +534,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				740B1B862723FF2500A1CD3B /* HomeViewController.swift in Sources */,
+				745A6F11272E9D0A006064C4 /* RecordInfoView.swift in Sources */,
 				74E5738B2728F61C00F490BF /* GPXMapView.swift in Sources */,
 				7449349F27255A0B002D8FE3 /* UIStoryboard+Extension.swift in Sources */,
 				74608D32271D7253002BD125 /* BuildTeamViewController.swift in Sources */,
@@ -539,6 +554,7 @@
 				74E5736F2728241F00F490BF /* GPXTrack+length.swift in Sources */,
 				74608D37271DD2F2002BD125 /* JoinRequestCell.swift in Sources */,
 				740B1B8B2724161600A1CD3B /* HomeHeaderCell.swift in Sources */,
+				7441B7A5273052C000614D9B /* TrackInfo.swift in Sources */,
 				74FDD92A2722C5670014D2B2 /* UITextFieldExtexsion.swift in Sources */,
 				74E573702728241F00F490BF /* GPXRoot+length.swift in Sources */,
 				74608D43271E9C67002BD125 /* Group.swift in Sources */,

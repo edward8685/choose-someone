@@ -1,8 +1,8 @@
 //
 //  DistanceLabel.swift
-//  OpenGpxTracker
+//  ChooseSomeone
 //
-//  Created by merlos on 01/10/15.
+//  Created by Ed Chang on 2021/10/30.
 //
 
 import Foundation
@@ -11,11 +11,8 @@ import MapKit
 
 open class DistanceLabel: UILabel {
     
-    /// Internal variable that keeps the actual distance
     private var _distance = 0.0
 
-    
-    /// Distance in meters
     open var distance: CLLocationDistance {
         get {
             return _distance

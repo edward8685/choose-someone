@@ -38,7 +38,7 @@ extension GPXTrackSegment {
         var prev: CLLocation?
         for point in self.points {
             let point: CLLocation = CLLocation(latitude: Double(point.latitude!), longitude: Double(point.longitude!) )
-            if prev == nil { //if first point => set it as previous and go for next
+            if prev == nil {
                 prev = point
                 continue
             }
@@ -47,5 +47,27 @@ extension GPXTrackSegment {
             prev = point
         }
         return length
-    }    
+    }
+    
+    func distanceFromOrigin() -> [Double] {
+        var distanceFromOrigin: [Double] = [0.0]
+        var length: Double = 0.0
+        var interval: Double = 0.0
+        if self.points.count < 2 {
+            return distanceFromOrigin
+        }
+        var prev: CLLocation?
+        for point in self.points {
+            let point: CLLocation = CLLocation(latitude: Double(point.latitude!), longitude: Double(point.longitude!) )
+            if prev == nil {
+                prev = point
+                continue
+            }
+            interval = point.distance(from: prev!)
+            length += interval
+            distanceFromOrigin.append(length)
+            prev = point
+        }
+        return distanceFromOrigin
+    }
 }

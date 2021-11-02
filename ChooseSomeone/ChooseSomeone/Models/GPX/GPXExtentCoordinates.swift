@@ -10,13 +10,10 @@ import MapKit
 
 class GPXExtentCoordinates: NSObject {
     
-    /// Top left coordinate point.
     var topLeftCoordinate = CLLocationCoordinate2D(latitude: 0.00, longitude: 0.00)
-    
-    /// Bottom Right coordinate point.
+
     var bottomRightCoordinate = CLLocationCoordinate2D(latitude: 0.00, longitude: 0.00)
     
-    /// Sets the area to einclude the location point
     func extendAreaToIncludeLocation(_ location: CLLocationCoordinate2D) {
         if (topLeftCoordinate.latitude == 0.00) || (location.latitude < topLeftCoordinate.latitude) {
             topLeftCoordinate.latitude = location.latitude
@@ -34,12 +31,6 @@ class GPXExtentCoordinates: NSObject {
     }
     
     var region: MKCoordinateRegion {
-        set {
-            topLeftCoordinate.latitude = newValue.center.latitude - newValue.span.latitudeDelta/2
-            topLeftCoordinate.longitude = newValue.center.longitude + newValue.span.longitudeDelta/2
-            bottomRightCoordinate.latitude = newValue.center.latitude + newValue.span.latitudeDelta/2
-            bottomRightCoordinate.longitude = newValue.center.longitude - newValue.span.longitudeDelta/2
-        }
         
         get {
             let centerLat = (bottomRightCoordinate.latitude + topLeftCoordinate.latitude) / 2
@@ -51,5 +42,15 @@ class GPXExtentCoordinates: NSObject {
             
             return MKCoordinateRegion.init(center: center, span: span)
         }
+        
+        set {
+            
+            topLeftCoordinate.latitude = newValue.center.latitude - newValue.span.latitudeDelta/2
+            topLeftCoordinate.longitude = newValue.center.longitude + newValue.span.longitudeDelta/2
+            bottomRightCoordinate.latitude = newValue.center.latitude + newValue.span.latitudeDelta/2
+            bottomRightCoordinate.longitude = newValue.center.longitude - newValue.span.longitudeDelta/2
+            
+        }
+        
     }
 }

@@ -1,18 +1,15 @@
 //
-//  Localized by nitricware on 19/08/19.
+//  MapViewDelegate.swift
+//  ChooseSomeone
+//
+//  Created by Ed Chang on 2021/10/26.
 //
 
 import MapKit
 import CoreGPX
 
-/// Handles all delegate functions of the GPX Mapview
-///
-class MapViewDelegate: NSObject, MKMapViewDelegate, UIAlertViewDelegate {
-
-    /// The Waypoint is being edited (if there is any)
-    var waypointBeingEdited: GPXWaypoint = GPXWaypoint()
+class MapViewDelegate: NSObject, MKMapViewDelegate {
     
-    // Displays the line for each segment
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
 
         if overlay is MKPolyline {
@@ -20,10 +17,17 @@ class MapViewDelegate: NSObject, MKMapViewDelegate, UIAlertViewDelegate {
 
             pr.alpha = 0.8
             pr.strokeColor = UIColor.blue
-
-            pr.lineWidth = 3
+            pr.lineWidth = 2
             return pr
         }
         return MKOverlayRenderer()
+    }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        guard let map = mapView as? GPXMapView else {
+            return
+        }
+        map.updateHeading()
+        
     }
 }

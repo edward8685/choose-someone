@@ -18,5 +18,6 @@ target 'ChooseSomeone' do
   pod 'MASegmentedControl'
   pod 'Kingfisher'
   pod 'CoreGPX'
+  pod 'Charts'
 
 end

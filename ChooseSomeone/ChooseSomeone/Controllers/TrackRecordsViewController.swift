@@ -53,7 +53,7 @@ class TrackRecordsViewController: UIViewController {
   
         view.stickSubView(tableView)
         
-        tableView.backgroundColor = .gray
+        tableView.backgroundColor = .lightGray
         
 //        configureDataSource()
 //        
@@ -98,6 +98,10 @@ extension TrackRecordsViewController: UITableViewDelegate{
 }
 
 extension TrackRecordsViewController: UITableViewDataSource{
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        "My records"
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return records.count
