@@ -65,14 +65,15 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         chartView.noDataText = "Can not get track record!"
         
         for index in 0..<elevation.count {
-            let xvalue = distance[index]
+            let xvalue = distance[index] / 100
             let yvalue = values[index]
             let dataEntry = ChartDataEntry(x: xvalue, y: yvalue)
             dataEntries.append(dataEntry)
         }
         
         let dataSet = LineChartDataSet(entries: dataEntries, label: "")
-        dataSet.colors = [UIColor.gray]
+        
+        dataSet.colors = [.B1 ?? .systemGray]
         
         dataSet.drawFilledEnabled = true
         
@@ -84,11 +85,13 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         
         dataSet.fillAlpha = 0.8
         
-        dataSet.fillColor = .lightGray
+        dataSet.fillColor = .B2 ?? .lightGray
         
         chartView.data = LineChartData(dataSets: [dataSet])
         
         chartView.xAxis.setLabelCount(values.count, force: true)
+        
+        chartView.legend.enabled = false
         
         setUpChartLayout()
 
@@ -120,10 +123,10 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         
         let radius = UIScreen.width * 13 / 107
         returnButton.frame = CGRect(x: 20, y: 40, width: radius, height: radius)
-        returnButton.backgroundColor = UIColor.hexStringToUIColor(hex: "FFFFFF")
+        returnButton.backgroundColor = .white
         let image = UIImage(systemName: "chevron.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .medium))
         returnButton.setImage(image, for: .normal)
-        returnButton.tintColor = UIColor.hexStringToUIColor(hex: "19C3DA")
+        returnButton.tintColor = UIColor.G1
         returnButton.layer.cornerRadius = radius / 2
         returnButton.layer.masksToBounds = true
         
@@ -174,7 +177,6 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
             calculateElevation(elevation: elevation)
 
         }
-        
         
     }
     

@@ -1,15 +1,15 @@
 //
 //  UIButtonExtension.swift
-//  Publisher
+//  ChooseSomeone
 //
-//  Created by Ed Chang on 2021/10/6.
+//  Created by Ed Chang on 2021/10/21.
 //
 
 import UIKit
 
 @IBDesignable extension UIButton {
     
-    @IBInspectable var borderWidth: CGFloat {
+    @IBInspectable var CSBorderWidth: CGFloat {
         set {
             layer.borderWidth = newValue
         }
@@ -18,7 +18,7 @@ import UIKit
         }
     }
     
-    @IBInspectable var cornerRadius: CGFloat {
+    @IBInspectable var CSCornerRadius: CGFloat {
         set {
             layer.cornerRadius = newValue
         }
@@ -27,7 +27,7 @@ import UIKit
         }
     }
     
-    @IBInspectable var borderColor: UIColor? {
+    @IBInspectable var CSBorderColor: UIColor? {
         set {
             guard let uiColor = newValue else { return }
             layer.borderColor = uiColor.cgColor

@@ -20,7 +20,7 @@ extension UITextField {
     }
     
     @IBInspectable
-    var cornerRadius: CGFloat {
+    var CSCornerRadius: CGFloat {
         get {
             return layer.cornerRadius
         }
@@ -31,7 +31,7 @@ extension UITextField {
     }
     
     @IBInspectable
-    var borderWidth: CGFloat {
+    var CSBorderWidth: CGFloat {
         get {
             return layer.borderWidth
         }
@@ -41,7 +41,7 @@ extension UITextField {
     }
     
     @IBInspectable
-    var borderColor: UIColor? {
+    var CSBorderColor: UIColor? {
         get {
             let color = UIColor.init(cgColor: layer.borderColor!)
             return color

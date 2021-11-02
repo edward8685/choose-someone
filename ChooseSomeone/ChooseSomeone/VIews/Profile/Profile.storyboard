@@ -8,6 +8,11 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="NotoSansTC-Regular.otf">
+            <string>NotoSansTC-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Track Records View Controller-->
         <scene sceneID="s0d-6b-0kx">
@@ -46,54 +51,54 @@
                                         <rect key="frame" x="20" y="20" width="374" height="94.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Miq-6W-53K">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="41"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="47"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Heo-sl-60K">
-                                                        <rect key="frame" x="0.0" y="0.0" width="111.5" height="41"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="111.5" height="47"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hyb-Wz-3ea" customClass="DistanceLabel" customModule="ChooseSomeone" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="111.5" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="111.5" height="23.5"/>
+                                                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="16"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="距離(km)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kyJ-Bg-Mzq">
-                                                                <rect key="frame" x="0.0" y="20.5" width="111.5" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="距離" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kyJ-Bg-Mzq">
+                                                                <rect key="frame" x="0.0" y="23.5" width="111.5" height="23.5"/>
+                                                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="16"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NUh-oN-WXI">
-                                                        <rect key="frame" x="131.5" y="0.0" width="111" height="41"/>
+                                                        <rect key="frame" x="131.5" y="0.0" width="111" height="47"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGc-N2-wwR">
-                                                                <rect key="frame" x="0.0" y="0.0" width="111" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="111" height="23.5"/>
+                                                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="16"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="總時間" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JsU-OE-NXZ">
-                                                                <rect key="frame" x="0.0" y="20.5" width="111" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <rect key="frame" x="0.0" y="23.5" width="111" height="23.5"/>
+                                                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="16"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vCS-Rb-iZI">
-                                                        <rect key="frame" x="262.5" y="0.0" width="111.5" height="41"/>
+                                                        <rect key="frame" x="262.5" y="0.0" width="111.5" height="47"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eCL-eF-9eV">
-                                                                <rect key="frame" x="0.0" y="0.0" width="111.5" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="111.5" height="23.5"/>
+                                                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="16"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="均速(km/h)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubg-gR-xmT">
-                                                                <rect key="frame" x="0.0" y="20.5" width="111.5" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="平均速度" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubg-gR-xmT">
+                                                                <rect key="frame" x="0.0" y="23.5" width="111.5" height="23.5"/>
+                                                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="16"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -102,54 +107,54 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="odJ-y1-R4L">
-                                                <rect key="frame" x="0.0" y="53.5" width="374" height="41"/>
+                                                <rect key="frame" x="0.0" y="47.5" width="374" height="47"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vvs-DP-Nqo">
-                                                        <rect key="frame" x="0.0" y="0.0" width="111.5" height="41"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="111.5" height="47"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t1I-bu-Myy">
-                                                                <rect key="frame" x="0.0" y="0.0" width="111.5" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="111.5" height="23.5"/>
+                                                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="16"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="高度差(m)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMh-59-04A">
-                                                                <rect key="frame" x="0.0" y="20.5" width="111.5" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="高度落差" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMh-59-04A">
+                                                                <rect key="frame" x="0.0" y="23.5" width="111.5" height="23.5"/>
+                                                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="16"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="b78-og-PPo">
-                                                        <rect key="frame" x="131.5" y="0.0" width="111" height="41"/>
+                                                        <rect key="frame" x="131.5" y="0.0" width="111" height="47"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUQ-jX-dyy">
-                                                                <rect key="frame" x="0.0" y="0.0" width="111" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="111" height="23.5"/>
+                                                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="16"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="總上升(m)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ef-od-zvM">
-                                                                <rect key="frame" x="0.0" y="20.5" width="111" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="累積爬升" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ef-od-zvM">
+                                                                <rect key="frame" x="0.0" y="23.5" width="111" height="23.5"/>
+                                                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="16"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ac8-WQ-keJ">
-                                                        <rect key="frame" x="262.5" y="0.0" width="111.5" height="41"/>
+                                                        <rect key="frame" x="262.5" y="0.0" width="111.5" height="47"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fHm-4C-bqr">
-                                                                <rect key="frame" x="0.0" y="0.0" width="111.5" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="111.5" height="23.5"/>
+                                                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="16"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="總下降(m)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYu-Ps-yQx">
-                                                                <rect key="frame" x="0.0" y="20.5" width="111.5" height="20.5"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="累積下降" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYu-Ps-yQx">
+                                                                <rect key="frame" x="0.0" y="23.5" width="111.5" height="23.5"/>
+                                                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="16"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
