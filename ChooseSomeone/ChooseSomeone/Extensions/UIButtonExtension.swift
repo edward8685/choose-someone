@@ -10,31 +10,31 @@ import UIKit
 @IBDesignable extension UIButton {
     
     @IBInspectable var CSBorderWidth: CGFloat {
-        set {
-            layer.borderWidth = newValue
-        }
         get {
             return layer.borderWidth
+        }
+        set {
+            layer.borderWidth = newValue
         }
     }
     
     @IBInspectable var CSCornerRadius: CGFloat {
-        set {
-            layer.cornerRadius = newValue
-        }
         get {
             return layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = newValue
         }
     }
     
     @IBInspectable var CSBorderColor: UIColor? {
-        set {
-            guard let uiColor = newValue else { return }
-            layer.borderColor = uiColor.cgColor
-        }
         get {
             guard let color = layer.borderColor else { return nil }
             return UIColor(cgColor: color)
+        }
+        set {
+            guard let uiColor = newValue else { return }
+            layer.borderColor = uiColor.cgColor
         }
     }
     

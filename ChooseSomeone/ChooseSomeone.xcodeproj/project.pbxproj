@@ -32,6 +32,7 @@
 		7441B7B427313F3E00614D9B /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7441B7AD27313F3D00614D9B /* OFL.txt */; };
 		7441B7B527313F3E00614D9B /* NotoSansTC-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7441B7AE27313F3D00614D9B /* NotoSansTC-Medium.otf */; };
 		7441B7B627313F3E00614D9B /* NotoSansTC-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7441B7AF27313F3D00614D9B /* NotoSansTC-Black.otf */; };
+		7441B7C327323B4B00614D9B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7441B7C227323B4B00614D9B /* LoginViewController.swift */; };
 		7449349C272548BC002D8FE3 /* TrailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7449349B272548BC002D8FE3 /* TrailInfoViewController.swift */; };
 		7449349F27255A0B002D8FE3 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7449349E27255A0B002D8FE3 /* UIStoryboard+Extension.swift */; };
 		744934A1272562C8002D8FE3 /* TrailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744934A0272562C8002D8FE3 /* TrailManager.swift */; };
@@ -110,6 +111,7 @@
 		740FC395271D17180071459A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		740FC398271D17180071459A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		740FC39A271D17180071459A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		742349332732662E001EC7A1 /* ChooseSomeone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChooseSomeone.entitlements; sourceTree = "<group>"; };
 		742516F827218A520011166B /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		742516FA272197A30011166B /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		7441B7A4273052C000614D9B /* TrackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfo.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 		7441B7AD27313F3D00614D9B /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		7441B7AE27313F3D00614D9B /* NotoSansTC-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Medium.otf"; sourceTree = "<group>"; };
 		7441B7AF27313F3D00614D9B /* NotoSansTC-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Black.otf"; sourceTree = "<group>"; };
+		7441B7C227323B4B00614D9B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7449349B272548BC002D8FE3 /* TrailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailInfoViewController.swift; sourceTree = "<group>"; };
 		7449349E27255A0B002D8FE3 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		744934A0272562C8002D8FE3 /* TrailManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailManager.swift; sourceTree = "<group>"; };
@@ -260,6 +263,7 @@
 		740FC38B271D17160071459A /* ChooseSomeone */ = {
 			isa = PBXGroup;
 			children = (
+				742349332732662E001EC7A1 /* ChooseSomeone.entitlements */,
 				740FC38C271D17160071459A /* AppDelegate.swift */,
 				740FC38E271D17160071459A /* SceneDelegate.swift */,
 				74608D3F271E9201002BD125 /* Managers */,
@@ -333,6 +337,7 @@
 				74E573882728F4B300F490BF /* MapViewDelegate.swift */,
 				745A6F03272D6809006064C4 /* TrackRecordsViewController.swift */,
 				745A6F0D272E4B57006064C4 /* UserRecordViewController.swift */,
+				7441B7C227323B4B00614D9B /* LoginViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -430,7 +435,7 @@
 				740FC386271D17160071459A /* Frameworks */,
 				740FC387271D17160071459A /* Resources */,
 				74608D14271D1895002BD125 /* ShellScript */,
-				88A669A3A9D0AFB00AB108CD /* [CP] Embed Pods Frameworks */,
+				403936DA63AD36BF24E2C7B1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -531,6 +536,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		403936DA63AD36BF24E2C7B1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		74608D14271D1895002BD125 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -547,23 +569,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
-		};
-		88A669A3A9D0AFB00AB108CD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -620,6 +625,7 @@
 				74F965072724830900B77DC5 /* TrailCell.swift in Sources */,
 				74E573872728F45700F490BF /* GPXWaypoint+MKAnnotation.swift in Sources */,
 				74608D3A271DDA05002BD125 /* JoinRequestViewController.swift in Sources */,
+				7441B7C327323B4B00614D9B /* LoginViewController.swift in Sources */,
 				7449349C272548BC002D8FE3 /* TrailInfoViewController.swift in Sources */,
 				74E573892728F4B300F490BF /* MapViewDelegate.swift in Sources */,
 				74FDD9282722C47D0014D2B2 /* UITableView+ColloectionVIewExtension.swift in Sources */,
@@ -779,6 +785,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ChooseSomeone/ChooseSomeone.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2THHZQ7GX3;
@@ -812,6 +819,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ChooseSomeone/ChooseSomeone.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2THHZQ7GX3;

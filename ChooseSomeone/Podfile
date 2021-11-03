@@ -19,5 +19,7 @@ target 'ChooseSomeone' do
   pod 'Kingfisher'
   pod 'CoreGPX'
   pod 'Charts'
+#  pod 'FirebaseUI'
+  pod 'Firebase/Auth'
 
 end
