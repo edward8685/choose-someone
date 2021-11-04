@@ -9,8 +9,6 @@ import UIKit
 
 class GroupChatHeaderCell: UITableViewCell {
     
-    private let userId = "1357988"
-    
     @IBOutlet weak var groupName: UILabel!
     
     @IBOutlet weak var travelDate: UILabel!
@@ -28,6 +26,8 @@ class GroupChatHeaderCell: UITableViewCell {
     @IBOutlet weak var infoButton: UIButton!
     
     func setUpCell(groups: Group) {
+        
+        let userId = UserManager.shared.userInfo.uid
         
         groupName.text = groups.groupName
         

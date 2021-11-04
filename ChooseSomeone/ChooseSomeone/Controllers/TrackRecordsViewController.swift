@@ -49,7 +49,7 @@ class TrackRecordsViewController: UIViewController {
         
         tableView = UITableView(frame: .zero, style: .insetGrouped)
         
-        tableView.lk_registerCellWithNib(identifier: ProfileCell.identifier, bundle: nil)
+        tableView.registerCellWithNib(identifier: ProfileCell.identifier, bundle: nil)
   
         view.stickSubView(tableView)
         

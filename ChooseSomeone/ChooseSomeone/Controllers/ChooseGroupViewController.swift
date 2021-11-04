@@ -12,7 +12,7 @@ import MASegmentedControl
 
 class ChooseGroupViewController: UIViewController {
     
-    private var userId = "1357988"
+    let userId = UserManager.shared.userInfo.uid
     
     var searchText: String = "" {
         didSet {
@@ -50,7 +50,7 @@ class ChooseGroupViewController: UIViewController {
         
         tableView = UITableView()
         
-        tableView.lk_registerCellWithNib(identifier: GroupInfoCell.identifier, bundle: nil)
+        tableView.registerCellWithNib(identifier: GroupInfoCell.identifier, bundle: nil)
         
         setUpHeaderView()
         

@@ -16,6 +16,8 @@ class LoginViewController: UIViewController, ASAuthorizationControllerPresentati
     
     var handle: AuthStateDidChangeListenerHandle?
     
+    var userInfo = UserInfo()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpSignInButton()
@@ -29,21 +31,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerPresentati
                 
                 let uid = user.uid
                 
-                let name = user.displayName
-                
-                let email = user.email
-                
-                let photoURL = user.photoURL
-                
-                var multiFactorString = "MultiFactor: "
-                
-                for info in user.multiFactor.enrolledFactors {
-                    
-                    multiFactorString += info.displayName ?? "[DispayName]"
-                    
-                    multiFactorString += " "
-                }
-                print("\(uid),\(name),\(email),\(multiFactorString)")
+                print("\(uid)")
             }
             
         }
@@ -131,6 +119,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             
+            userInfo.userName = appleIDCredential.fullName?.givenName
+            
             guard let nonce = currentNonce else {
                 
                 fatalError("Invalid state: A login callback was received, but no login request was sent.")
@@ -157,8 +147,48 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             
             Auth.auth().signIn(with: credential) { (authResult, error) in
                 
-                if let user = authResult?.user {
-                    print ("sign in as \(user.uid), email:\(user.email ?? "")")
+                
+                
+                if let additionalUserInfo = authResult?.additionalUserInfo?.isNewUser,
+                   let uid = authResult?.user.uid {
+                    
+                    if additionalUserInfo {
+                        
+                        self.userInfo.uid = uid
+                        
+                        UserManager.shared.signUpUserInfo(userInfo: self.userInfo) { result in
+                            
+                            switch result {
+                                
+                            case .success:
+                                
+                                print("User Sign up successfully")
+                                
+                            case .failure(let error):
+                                
+                                print("Sign up failure: \(error)")
+                            }
+                            
+                        }
+                        
+                    } else {
+                        
+                        UserManager.shared.fetchUserInfo { result in
+                            
+                            switch result {
+                                
+                            case .success:
+                                
+                                print("Fetch user info successfully")
+                                
+                            case .failure(let error):
+                                
+                                print("Fetch user info failure: \(error)")
+                            }
+                            
+                        }
+                        
+                    }
                     
                 }
             }
@@ -167,6 +197,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
             
             print("Sign in with Apple errored: \(error)")
+            
         }
         
     }
@@ -204,3 +235,4 @@ private func randomNonceString(length: Int = 32) -> String {
     }
     return result
 }
+

@@ -21,6 +21,7 @@
 		740FC394271D17160071459A /* ChooseGroup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740FC392271D17160071459A /* ChooseGroup.storyboard */; };
 		740FC396271D17180071459A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 740FC395271D17180071459A /* Assets.xcassets */; };
 		740FC399271D17180071459A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740FC397271D17180071459A /* LaunchScreen.storyboard */; };
+		742349352732B032001EC7A1 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742349342732B032001EC7A1 /* UserManager.swift */; };
 		742516F927218A520011166B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742516F827218A520011166B /* UIColor+Extension.swift */; };
 		742516FB272197A30011166B /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742516FA272197A30011166B /* UILabelExtension.swift */; };
 		7441B7A5273052C000614D9B /* TrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7441B7A4273052C000614D9B /* TrackInfo.swift */; };
@@ -67,7 +68,7 @@
 		74608D3E271E7A63002BD125 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74608D3D271E7A63002BD125 /* GoogleService-Info.plist */; };
 		74608D41271E97DC002BD125 /* Trail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D40271E97DC002BD125 /* Trail.swift */; };
 		74608D43271E9C67002BD125 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D42271E9C67002BD125 /* Group.swift */; };
-		74608D45271EA5E1002BD125 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D44271EA5E1002BD125 /* User.swift */; };
+		74608D45271EA5E1002BD125 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D44271EA5E1002BD125 /* UserInfo.swift */; };
 		74608D47271EC727002BD125 /* GroupRoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D46271EC727002BD125 /* GroupRoomManager.swift */; };
 		74E5735B27268E3E00F490BF /* TrialInfoScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5735A27268E3E00F490BF /* TrialInfoScrollView.swift */; };
 		74E5735F2726D6A500F490BF /* KingFisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5735E2726D6A500F490BF /* KingFisherWrapper.swift */; };
@@ -112,6 +113,7 @@
 		740FC398271D17180071459A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		740FC39A271D17180071459A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		742349332732662E001EC7A1 /* ChooseSomeone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChooseSomeone.entitlements; sourceTree = "<group>"; };
+		742349342732B032001EC7A1 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		742516F827218A520011166B /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		742516FA272197A30011166B /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		7441B7A4273052C000614D9B /* TrackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfo.swift; sourceTree = "<group>"; };
@@ -158,7 +160,7 @@
 		74608D3D271E7A63002BD125 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		74608D40271E97DC002BD125 /* Trail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trail.swift; sourceTree = "<group>"; };
 		74608D42271E9C67002BD125 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
-		74608D44271EA5E1002BD125 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		74608D44271EA5E1002BD125 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		74608D46271EC727002BD125 /* GroupRoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRoomManager.swift; sourceTree = "<group>"; };
 		74E5735A27268E3E00F490BF /* TrialInfoScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialInfoScrollView.swift; sourceTree = "<group>"; };
 		74E5735E2726D6A500F490BF /* KingFisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingFisherWrapper.swift; sourceTree = "<group>"; };
@@ -349,10 +351,10 @@
 				74608D40271E97DC002BD125 /* Trail.swift */,
 				74608D42271E9C67002BD125 /* Group.swift */,
 				7457A1CF271EECEF00A947AE /* Message.swift */,
-				74608D44271EA5E1002BD125 /* User.swift */,
+				74608D44271EA5E1002BD125 /* UserInfo.swift */,
 				745A6F01272CF4C5006064C4 /* Record.swift */,
-				7441B7A4273052C000614D9B /* TrackInfo.swift */,
 				7457A1D1271EEEDC00A947AE /* Request.swift */,
+				7441B7A4273052C000614D9B /* TrackInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -382,6 +384,7 @@
 				744934A0272562C8002D8FE3 /* TrailManager.swift */,
 				745A6EFB272BA417006064C4 /* GPXFileManager.swift */,
 				745A6EFF272C0104006064C4 /* RecordManager.swift */,
+				742349342732B032001EC7A1 /* UserManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -617,7 +620,7 @@
 				74E573852728EBEE00F490BF /* GPXTrackPoint+MapKit.swift in Sources */,
 				745A6F09272D7B08006064C4 /* ProfileCell.swift in Sources */,
 				74E573842728EBEE00F490BF /* GPXTrackSegment+MapKit.swift in Sources */,
-				74608D45271EA5E1002BD125 /* User.swift in Sources */,
+				74608D45271EA5E1002BD125 /* UserInfo.swift in Sources */,
 				74E5735B27268E3E00F490BF /* TrialInfoScrollView.swift in Sources */,
 				7457A1D2271EEEDC00A947AE /* Request.swift in Sources */,
 				74608D47271EC727002BD125 /* GroupRoomManager.swift in Sources */,
@@ -633,6 +636,7 @@
 				740FC38F271D17160071459A /* SceneDelegate.swift in Sources */,
 				74608D21271D1DE1002BD125 /* GroupInfoCell.swift in Sources */,
 				74E573782728700C00F490BF /* StopWatch.swift in Sources */,
+				742349352732B032001EC7A1 /* UserManager.swift in Sources */,
 				740B1B8F2724280D00A1CD3B /* TrailThemeCell.swift in Sources */,
 				745A6F00272C0104006064C4 /* RecordManager.swift in Sources */,
 				74E5737A2728725A00F490BF /* StopWatchDelegate.swift in Sources */,

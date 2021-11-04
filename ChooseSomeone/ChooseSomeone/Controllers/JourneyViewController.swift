@@ -13,7 +13,7 @@ import Firebase
 
 class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     
-    private var userId = "1357988"
+    let userId = UserManager.shared.userInfo.uid
     
     var isDisplayingLocationServicesDenied: Bool = false
     

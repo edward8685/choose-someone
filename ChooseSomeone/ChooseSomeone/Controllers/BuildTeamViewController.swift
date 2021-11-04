@@ -10,18 +10,7 @@ import FirebaseFirestore
 
 class BuildTeamViewController: UIViewController {
     
-    private var hostId = "1357988"
-    
-    private var group = Group(
-        groupId: "",
-        groupName: "",
-        hostId: "",
-        date: Timestamp(),
-        upperLimit: 1,
-        trailName: "",
-        note: "",
-        userIds: []
-    )
+    private var group = Group()
     
     @IBOutlet weak var groupNameTextField: UITextField! {
         didSet {
@@ -71,6 +60,9 @@ class BuildTeamViewController: UIViewController {
     }
     
     @objc func sendPost() {
+        
+        let hostId = UserManager.shared.userInfo.uid
+        
         textViewDidEndEditing(notedTextView)
         group.hostId = hostId
         group.date = Timestamp(date: travelDate.date)

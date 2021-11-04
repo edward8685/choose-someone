@@ -23,7 +23,7 @@ class JoinRequestCell: UITableViewCell {
     
     func setUpCell(requests: [Request], indexPath: IndexPath) {
         
-        requestName.text = requests[indexPath.row].requestName
+//        requestName.text = requests[indexPath.row].requestName
         requestLabel.text = "Wanna join your \(requests[indexPath.row].groupName)"
         
     }

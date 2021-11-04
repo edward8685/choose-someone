@@ -10,14 +10,14 @@ import FirebaseFirestore
 
 class HomeViewController: UIViewController {
     
-    private var userId = "1357988"
+    let userId = UserManager.shared.userInfo.uid
     
     private let themes = ["愜意的走", "想流點汗", "百岳挑戰"]
     
     private let images = ["", "", ""]
     
     private var trails = [Trail]() {
-        didSet{
+        didSet {
             manageTrailData()
         }
     }
@@ -26,14 +26,7 @@ class HomeViewController: UIViewController {
     private var mediumTrails = [Trail]()
     private var hardTrails = [Trail]()
     
-    var user = User(
-        uid: "",
-        userName: "Ed Chang",
-        userEmail: "",
-        joinedRoomIds: [],
-        totalKilos: 100,
-        totalFriends: 20,
-        totalGroups: 5)
+    var user = UserInfo()
     
     private var tableView: UITableView! {
         didSet {
@@ -57,7 +50,7 @@ class HomeViewController: UIViewController {
         
         tableView = UITableView(frame: .zero, style: .grouped)
         
-        tableView.lk_registerCellWithNib(identifier: TrailThemeCell.identifier, bundle: nil)
+        tableView.registerCellWithNib(identifier: TrailThemeCell.identifier, bundle: nil)
         
         view.stickSubView(tableView)
         
@@ -108,7 +101,7 @@ extension HomeViewController: UITableViewDelegate {
         guard let headerView = Bundle.main.loadNibNamed(HomeHeaderCell.identifier, owner: self, options: nil)?.first as? HomeHeaderCell
         else {fatalError("Could not create HeaderView")}
         
-        headerView.setUpHeaderView(user: user)
+        headerView.updateUserInfo(user: user)
         
         return headerView
     }

@@ -19,8 +19,8 @@ class HomeHeaderCell: UITableViewCell {
     
     @IBOutlet weak var genderImage: UIImageView!
     
-    func setUpHeaderView(user: User) {
-        totalKilos.text = user.totalKilos.description
+    func updateUserInfo(user: UserInfo) {
+        totalKilos.text = user.totalLength.description
         totalFriends.text = user.totalFriends.description
         totalGroups.text = user.totalGroups.description
         userName.text = user.userName

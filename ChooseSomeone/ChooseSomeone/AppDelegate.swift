@@ -24,6 +24,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("sign in as \(user.uid), email: \(user.email)")
         }
         
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+        }
+        
+        
         return true
     }
 

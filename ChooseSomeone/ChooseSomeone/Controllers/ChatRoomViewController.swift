@@ -8,12 +8,11 @@
 import UIKit
 import FirebaseFirestore
 
-
 class ChatRoomViewController: UIViewController {
-    
-    private var userId = "1357988"
-    
-    private var userName = "蘋果張"
+ 
+    let userId = UserManager.shared.userInfo.uid
+
+    private var userName = UserManager.shared.userInfo.userName
     
     private var messages = [Message]() {
         didSet{
@@ -21,14 +20,8 @@ class ChatRoomViewController: UIViewController {
         }
     }
     
-    private var newMessage = Message(
-        groupId: "",
-        userId: "",
-        userName: "",
-        body: "",
-        createdTime: Timestamp()
-        )
-
+    private var newMessage = Message()
+      
     private var tableView: UITableView! {
         didSet {
             tableView.delegate = self
@@ -70,7 +63,7 @@ class ChatRoomViewController: UIViewController {
         
         tableView = UITableView()
         
-        tableView.lk_registerCellWithNib(identifier: GroupChatCell.identifier, bundle: nil)
+        tableView.registerCellWithNib(identifier: GroupChatCell.identifier, bundle: nil)
         
         setUpHeaderView()
         
@@ -210,7 +203,6 @@ class ChatRoomViewController: UIViewController {
                                   groupName: groupInfo.groupName,
                                   hostId: groupInfo.hostId,
                                   requestId: userId,
-                                  requestName: userName,
                                   createdTime: Timestamp())
 
         GroupRoomManager.shared.sendRequest(request: joinRequest) { result in
@@ -244,7 +236,6 @@ class ChatRoomViewController: UIViewController {
         newMessage.body = text
         newMessage.groupId = groupInfo.groupId
         newMessage.userId = userId
-        newMessage.userName = userName
         
         GroupRoomManager.shared.sendMessage(groupId: newMessage.groupId, message: newMessage) { result in
                

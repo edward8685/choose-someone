@@ -27,7 +27,7 @@ class JoinRequestViewController: UIViewController {
         
         tableView = UITableView()
         
-        tableView.lk_registerCellWithNib(identifier: JoinRequestCell.identifier, bundle: nil)
+        tableView.registerCellWithNib(identifier: JoinRequestCell.identifier, bundle: nil)
         
         setUpTableView()
         

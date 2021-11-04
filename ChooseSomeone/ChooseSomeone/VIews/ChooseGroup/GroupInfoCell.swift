@@ -9,8 +9,6 @@ import UIKit
 
 class GroupInfoCell: UITableViewCell {
     
-    private let userId = "1357988"
-    
     @IBOutlet weak var groupName: UILabel!
     
     @IBOutlet weak var travelDate: UILabel!
@@ -24,6 +22,8 @@ class GroupInfoCell: UITableViewCell {
     @IBOutlet weak var flagImage: UIImageView!
     
     func setUpCell(group: Group, indexPath: IndexPath){
+        
+        let userId = UserManager.shared.userInfo.uid
         
         groupName.text = group.groupName
         
