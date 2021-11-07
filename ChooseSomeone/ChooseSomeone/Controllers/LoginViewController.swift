@@ -16,7 +16,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerPresentati
     
     var handle: AuthStateDidChangeListenerHandle?
     
-    var userInfo = UserInfo()
+    var userInfo = UserManager.shared.userInfo
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,17 +25,23 @@ class LoginViewController: UIViewController, ASAuthorizationControllerPresentati
     
     override func viewWillAppear(_ animated: Bool) {
         
-        handle = Auth.auth().addStateDidChangeListener { auth, user in
+        handle = Auth.auth().addStateDidChangeListener {auth, user in
             
             if let user = user {
+
+                guard let tabbarVC = UIStoryboard.main.instantiateViewController(identifier: "TabbarController") as? UITabBarController else { return }
                 
-                let uid = user.uid
+                tabbarVC.modalPresentationStyle = .fullScreen
                 
-                print("\(uid)")
+                self.present(tabbarVC, animated: true, completion: nil)
+                
+                print("detect user ID : \(user.uid) ")
+                
             }
             
+            return
+            
         }
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -81,7 +87,7 @@ class LoginViewController: UIViewController, ASAuthorizationControllerPresentati
         
         let request = appleIDProvider.createRequest()
         
-        request.requestedScopes = [.fullName, .email]
+        request.requestedScopes = [.fullName]
         
         let nonce = randomNonceString()
         
@@ -152,6 +158,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                 if let additionalUserInfo = authResult?.additionalUserInfo?.isNewUser,
                    let uid = authResult?.user.uid {
                     
+                    print(uid)
+                    
                     if additionalUserInfo {
                         
                         self.userInfo.uid = uid
@@ -173,13 +181,14 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                         
                     } else {
                         
-                        UserManager.shared.fetchUserInfo { result in
+                        UserManager.shared.fetchUserInfo(uid: uid) { result in
                             
                             switch result {
                                 
                             case .success:
                                 
                                 print("Fetch user info successfully")
+                                print(UserManager.shared.userInfo)
                                 
                             case .failure(let error):
                                 

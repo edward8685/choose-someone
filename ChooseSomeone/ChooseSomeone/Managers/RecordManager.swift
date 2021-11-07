@@ -51,7 +51,7 @@ class RecordManager {
                                 
                                 completion(.success(url))
                                 
-                                self.uploadToDb(fileName: fileName, fileURL: url)
+                                self.uploadRecordToDb(fileName: fileName, fileURL: url)
                                 
                             case .failure(let error):
                                 
@@ -73,7 +73,7 @@ class RecordManager {
         
     }
     
-    func uploadToDb(fileName: String, fileURL: URL) {
+    func uploadRecordToDb(fileName: String, fileURL: URL) {
         
         let document = dataBase.collection("Records").document()
         

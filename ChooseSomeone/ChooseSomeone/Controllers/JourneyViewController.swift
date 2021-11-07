@@ -105,6 +105,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         
         setUpButtons()
         setUpLabels()
+        navigationController?.isNavigationBarHidden = true
         
     }
 

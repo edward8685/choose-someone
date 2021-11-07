@@ -48,6 +48,8 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         
         self.view.addSubview(map)
         
+        navigationController?.isNavigationBarHidden = true
+        
         setUpButton()
         
         parseGPXFile()

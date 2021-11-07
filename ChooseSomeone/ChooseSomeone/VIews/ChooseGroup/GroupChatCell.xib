@@ -57,6 +57,9 @@
                                             <userDefinedRuntimeAttribute type="number" keyPath="paddingBottom">
                                                 <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
@@ -89,20 +92,30 @@
                             <userDefinedRuntimeAttribute type="number" keyPath="paddingBottom">
                                 <real key="value" value="5"/>
                             </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="78y-gr-sZl" firstAttribute="width" relation="lessThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.7" id="3le-JR-P5s"/>
                     <constraint firstItem="78y-gr-sZl" firstAttribute="centerY" secondItem="ql0-xW-VgH" secondAttribute="centerY" id="5Kz-yw-YfD"/>
                     <constraint firstItem="Uwr-cl-uQ9" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="5Tt-3f-2Ms"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="78y-gr-sZl" secondAttribute="bottom" constant="10" id="C5Z-Hn-2Mx"/>
                     <constraint firstItem="JZT-0I-ddi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="EdU-d3-Yjc"/>
                     <constraint firstItem="Uwr-cl-uQ9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="Eej-Me-OUE"/>
+                    <constraint firstItem="uOX-qy-6fl" firstAttribute="width" relation="lessThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.7" id="GXR-GC-cy8"/>
                     <constraint firstAttribute="bottom" secondItem="JZT-0I-ddi" secondAttribute="bottom" constant="5" id="Rhu-EO-DEd"/>
                     <constraint firstAttribute="trailing" secondItem="JZT-0I-ddi" secondAttribute="trailing" constant="10" id="Xk3-hc-2zR"/>
                     <constraint firstAttribute="trailing" secondItem="78y-gr-sZl" secondAttribute="trailing" constant="10" id="peH-w6-ALf"/>
                     <constraint firstItem="JZT-0I-ddi" firstAttribute="top" secondItem="Uwr-cl-uQ9" secondAttribute="bottom" constant="5" id="xRu-5r-uBx"/>
                 </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                        <real key="value" value="15"/>
+                    </userDefinedRuntimeAttribute>
+                </userDefinedRuntimeAttributes>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>

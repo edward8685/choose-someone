@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseStorage
 import FirebaseFirestoreSwift
 import FirebaseFirestore
 import FirebaseAuth
@@ -17,6 +18,10 @@ class UserManager {
     var userInfo = UserInfo()
     
     static let shared = UserManager()
+    
+    let storage = Storage.storage()
+    
+    lazy var storageRef = storage.reference()
     
     lazy var dataBase = Firestore.firestore()
     
@@ -38,42 +43,115 @@ class UserManager {
         
         completion(.success("Success"))
         
+    }
+    
+    func fetchUserInfo(uid: String, completion: @escaping (Result<UserInfo, Error>) -> Void) {
+        print(uid)
+        let docRef = dataBase.collection("Users").document(uid)
+        
+        docRef.getDocument{ (document, error) in
+            
+            guard let document = document else { return }
+            
+            if let error = error {
+                
+                completion(.failure(error))
+                
+            } else {
+                
+                do {
+                    if let userInfo = try document.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
+                        
+                        self.userInfo = userInfo
+                        print(UserManager.shared.userInfo)
+                        
+                    }
+                    
+                } catch {
+                    
+                    completion(.failure(error))
+                }
+                
+                completion(.success(self.userInfo))
+            }
+            
+        }
         
     }
     
-    
-    func fetchUserInfo(completion: @escaping (Result<UserInfo, Error>) -> Void) {
-        if let userId = Auth.auth().currentUser?.uid {
+    func uploadUserPicture(imageData: Data, completion: @escaping (Result<URL, Error>) -> Void) {
+        
+        let userId = userInfo.uid
+        
+        let spaceRef = storageRef.child("pictures").child(userId)
+        
+        spaceRef.putData(imageData, metadata: nil) { result in
             
-            let docRef = dataBase.collection("Users").document(userId)
-            
-            docRef.getDocument{ (document, error) in
+            switch result {
                 
-                guard let document = document else { return }
+            case .success(_):
                 
-                if let error = error {
+                spaceRef.downloadURL { result in
                     
-                    completion(.failure(error))
-                    
-                } else {
-                    
-                    do {
-                        if let userInfo = try document.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
-                            
-                            self.userInfo = userInfo
-                            
-                        }
+                    switch result {
                         
-                    } catch {
+                    case .success(let url):
+                        
+                        completion(.success(url))
+                        
+                        self.updateImageToDb(fileURL: url)
+                        
+                    case .failure(let error):
                         
                         completion(.failure(error))
                     }
-                    
-                    completion(.success(self.userInfo))
                 }
                 
+            case .failure(let error):
+                
+                completion(.failure(error))
             }
+        }
+        
+    }
+    
+    func updateImageToDb(fileURL: URL) {
+        
+        let userId = userInfo.uid
+        
+        let docRef = dataBase.collection("Users").document(userId)
+        
+        userInfo.pictureRef = fileURL.absoluteString
+        
+        do {
             
+            try docRef.setData(from: userInfo)
+            
+        } catch {
+            
+            print("error")
+            
+        }
+        
+        print("sucessfully")
+        
+    }
+    
+    func updateUserName(name: String) {
+        
+        let userId = userInfo.uid
+
+        let post = [UserInfo.CodingKeys.userName.rawValue: name ]
+        
+        let docRef = dataBase.collection("Users").document(userId)
+        
+        docRef.updateData(post) { error in
+            
+            if let error = error {
+                print("Error updating document: \(error)")
+            } else {
+                print("User name successfully updated")
+            }
         }
     }
 }

@@ -49,7 +49,7 @@ class TrackRecordsViewController: UIViewController {
         
         tableView = UITableView(frame: .zero, style: .insetGrouped)
         
-        tableView.registerCellWithNib(identifier: ProfileCell.identifier, bundle: nil)
+        tableView.registerCellWithNib(identifier: TrackRecordCell.identifier, bundle: nil)
   
         view.stickSubView(tableView)
         
@@ -109,7 +109,7 @@ extension TrackRecordsViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileCell.identifier, for: indexPath) as? ProfileCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TrackRecordCell.identifier, for: indexPath) as? TrackRecordCell else {
             fatalError("Cannot create new cell")
         }
         
@@ -125,7 +125,7 @@ extension TrackRecordsViewController {
     func configureDataSource() {
         dataSource = DataSource(tableView: tableView, cellProvider: { (tableView, indexPath, model) -> UITableViewCell? in
             
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileCell.identifier, for: indexPath) as? ProfileCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: TrackRecordCell.identifier, for: indexPath) as? TrackRecordCell else {
                 fatalError("Cannot create new cell")
             }
             

@@ -2,30 +2,36 @@
 //  ProfileCell.swift
 //  ChooseSomeone
 //
-//  Created by Ed Chang on 2021/10/30.
+//  Created by Ed Chang on 2021/11/5.
 //
 
 import UIKit
-import FirebaseFirestore
 
 class ProfileCell: UITableViewCell {
-
-    @IBOutlet weak var recordName: UILabel!
     
-    @IBOutlet weak var uploadTime: UILabel!
+    @IBOutlet weak var itemImage: UIImageView!
     
-    func setUpCell(model: Record) {
+    @IBOutlet weak var itemBackground: UIView!
+    
+    @IBOutlet weak var itemTitle: UILabel!
+    
+    func setUpCell(indexPath: IndexPath) {
+        itemImage.image = ProfileFeat.allCases[indexPath.row].image
+        itemImage.contentMode = .scaleToFill
         
-        recordName.text = model.recordName
+        itemBackground.backgroundColor = ProfileFeat.allCases[indexPath.row].backgroundColor
         
-        uploadTime.text = Timestamp.timeFormat(time: model.createdTime)
-    
+        itemTitle.text = ProfileFeat.allCases[indexPath.row].title
     }
-    
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        selectionStyle = .none
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        itemBackground.layer.cornerRadius = itemBackground.frame.height / 2
     }
     
 }

@@ -260,7 +260,7 @@ extension ChatRoomViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        UITableView.automaticDimension
+        80
     }
 }
 
