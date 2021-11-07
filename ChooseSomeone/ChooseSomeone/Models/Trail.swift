@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Trail: Codable,Hashable {
+struct Trail: Codable, Hashable {
     let trailId: String
     let trailName: String
     let trailLocation: String

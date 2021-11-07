@@ -1,8 +1,8 @@
 //
 //  UIViewExtension.swift
-//  Publisher
+//  ChooseSomeone
 //
-//  Created by Ed Chang on 2021/10/6.
+//  Created by Ed Chang on 2021/10/21.
 //
 
 import UIKit
@@ -10,7 +10,7 @@ import UIKit
 extension UIView {
     
     //Border Color
-    @IBInspectable var lkBorderColor: UIColor? {
+    @IBInspectable var borderColor: UIColor? {
         get {
             
             guard let borderColor = layer.borderColor else {
@@ -26,7 +26,7 @@ extension UIView {
     }
     
     //Border width
-    @IBInspectable var lkBorderWidth: CGFloat {
+    @IBInspectable var borderWidth: CGFloat {
         get {
             return layer.borderWidth
         }
@@ -36,7 +36,7 @@ extension UIView {
     }
     
     //Corner radius
-    @IBInspectable var lkCornerRadius: CGFloat {
+    @IBInspectable var cornerRadius: CGFloat {
         get {
             return layer.cornerRadius
         }
@@ -98,6 +98,6 @@ extension UIView {
         
         objectView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         
-        objectView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        objectView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
 }

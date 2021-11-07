@@ -107,7 +107,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="5" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="9VF-wg-qX1">
+                                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="30" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="9VF-wg-qX1">
                                                         <rect key="frame" x="40" y="0.0" width="354" height="35"/>
                                                         <date key="minimumDate" timeIntervalSinceReferenceDate="656308800">
                                                             <!--2021-10-19 04:00:00 +0000-->

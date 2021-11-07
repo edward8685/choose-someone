@@ -18,5 +18,7 @@ target 'ChooseSomeone' do
   pod 'MASegmentedControl'
   pod 'Kingfisher'
   pod 'CoreGPX'
+  pod 'Charts'
+  pod 'Firebase/Auth'
 
 end

@@ -13,7 +13,7 @@ import Firebase
 
 class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     
-    private var userId = "1357988"
+    let userId = UserManager.shared.userInfo.uid
     
     var isDisplayingLocationServicesDenied: Bool = false
     
@@ -105,6 +105,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         
         setUpButtons()
         setUpLabels()
+        navigationController?.isNavigationBarHidden = true
         
     }
 
@@ -428,7 +429,7 @@ extension JourneyViewController: CLLocationManagerDelegate {
         let newLocation = locations.first!
         let hAcc = newLocation.horizontalAccuracy
         let vAcc = newLocation.verticalAccuracy
-        print("didUpdateLocation: received \(newLocation.coordinate) hAcc: \(hAcc) vAcc: \(vAcc) floor: \(newLocation.floor?.description ?? "''")")
+//        print("didUpdateLocation: received \(newLocation.coordinate) hAcc: \(hAcc) vAcc: \(vAcc) floor: \(newLocation.floor?.description ?? "''")")
         //Update coordsLabel
         let latFormat = String(format: "%.6f", newLocation.coordinate.latitude)
         let lonFormat = String(format: "%.6f", newLocation.coordinate.longitude)
@@ -441,7 +442,7 @@ extension JourneyViewController: CLLocationManagerDelegate {
             map.setCenter(newLocation.coordinate, animated: true)
         }
         if gpxTrackingStatus == .tracking {
-            print("didUpdateLocation: adding point to track (\(newLocation.coordinate.latitude),\(newLocation.coordinate.longitude))")
+//            print("didUpdateLocation: adding point to track (\(newLocation.coordinate.latitude),\(newLocation.coordinate.longitude))")
             map.addPointToCurrentTrackSegmentAtLocation(newLocation)
             totalTrackedDistanceLabel.distance = map.session.totalTrackedDistance
             currentSegmentDistanceLabel.distance = map.session.currentSegmentDistance
@@ -451,12 +452,8 @@ extension JourneyViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
 
-        map.heading = newHeading // updates heading variable
+        map.heading = newHeading
+        
         map.updateHeading()
     }
-}
-
-extension Notification.Name {
-    static let loadRecoveredFile = Notification.Name("loadRecoveredFile")
-    static let updateAppearance = Notification.Name("updateAppearance")
 }

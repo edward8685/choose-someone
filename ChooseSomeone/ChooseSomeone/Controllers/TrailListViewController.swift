@@ -50,7 +50,7 @@ class TrailListViewController: UIViewController {
     
     private func setupCollectionView() {
         
-        collectionView.lk_registerCellWithNib(reuseIdentifier: TrailCell.reuseIdentifier, bundle: nil)
+        collectionView.registerCellWithNib(reuseIdentifier: TrailCell.reuseIdentifier, bundle: nil)
         
         collectionView.backgroundColor = .clear
         collectionView.collectionViewLayout = configureCollectionViewLayout()

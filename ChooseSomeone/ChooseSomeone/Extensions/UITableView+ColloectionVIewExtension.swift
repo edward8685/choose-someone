@@ -9,7 +9,7 @@ import UIKit
 
 extension UITableView {
     
-    func lk_registerCellWithNib(identifier: String, bundle: Bundle?) {
+    func registerCellWithNib(identifier: String, bundle: Bundle?) {
         
         let nib = UINib(nibName: identifier, bundle: bundle)
         
@@ -28,7 +28,7 @@ extension UITableViewCell {
 
 extension UICollectionView {
     
-    func lk_registerCellWithNib(reuseIdentifier: String, bundle: Bundle?) {
+    func registerCellWithNib(reuseIdentifier: String, bundle: Bundle?) {
         
         let nib = UINib(nibName: reuseIdentifier, bundle: bundle)
         

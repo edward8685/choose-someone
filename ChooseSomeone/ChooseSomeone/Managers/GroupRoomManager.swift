@@ -6,12 +6,12 @@
 //
 
 import Foundation
-import Firebase
 import FirebaseFirestoreSwift
+import FirebaseFirestore
 
 class GroupRoomManager {
     
-    private var hostId = "1357988"
+    let userId = UserManager.shared.userInfo.uid
     
     static let shared = GroupRoomManager()
     
@@ -87,7 +87,7 @@ class GroupRoomManager {
     
     func fetchRequest(completion: @escaping (Result<[Request], Error>) -> Void) {
         
-        dataBase.collection("Requests").whereField("host_id", isEqualTo: hostId).addSnapshotListener { (querySnapshot, error) in
+        dataBase.collection("Requests").whereField("host_id", isEqualTo: userId).addSnapshotListener { (querySnapshot, error) in
             
             guard let querySnapshot = querySnapshot else { return }
             
@@ -124,7 +124,7 @@ class GroupRoomManager {
         }
     }
     
-    func buildTeam(group: inout Group, completion: @escaping (Result<String, Error>) -> Void) {
+    func buildTeam(group: inout Group, completion: (Result<String, Error>) -> Void) {
         
         let document = dataBase.collection("Groups").document()
         
@@ -143,7 +143,7 @@ class GroupRoomManager {
         completion(.success("Success"))
     }
     
-    func sendMessage(groupId: String, message: Message, completion: @escaping (Result<String, Error>) -> Void) {
+    func sendMessage(groupId: String, message: Message, completion: (Result<String, Error>) -> Void) {
         
         let document = dataBase.collection("Messages").document()
         
@@ -160,7 +160,7 @@ class GroupRoomManager {
         
     }
     
-    func sendRequest(request: Request, completion: @escaping (Result<String, Error>) -> Void) {
+    func sendRequest(request: Request, completion: (Result<String, Error>) -> Void) {
         
         let document = dataBase.collection("Requests").document()
         

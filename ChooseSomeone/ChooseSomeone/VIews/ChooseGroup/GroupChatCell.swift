@@ -10,8 +10,6 @@ import FirebaseFirestore
 
 class GroupChatCell: UITableViewCell {
     
-    private let userId = "1357988"
-    
     @IBOutlet weak var createdTime: UILabel!
     
     @IBOutlet weak var memberName: UILabel!
@@ -23,6 +21,8 @@ class GroupChatCell: UITableViewCell {
     @IBOutlet weak var userMessage: UILabel!
     
     func setUpCell(messages: [Message], indexPath: IndexPath) {
+        
+        let userId = UserManager.shared.userInfo.uid
         
         let timeInterval = messages[indexPath.row].createdTime
         let date = timeInterval.dateValue()
@@ -36,7 +36,7 @@ class GroupChatCell: UITableViewCell {
             isSentFromUser = true
         } else {
             isSentFromUser = false
-            memberName.text = messages[indexPath.row].userName
+//            memberName.text = messages[indexPath.row].userName
             memberMessage.text = messages[indexPath.row].body
         }
     }

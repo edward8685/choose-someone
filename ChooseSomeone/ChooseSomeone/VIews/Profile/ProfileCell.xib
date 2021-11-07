@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="NotoSansTC-Regular.otf">
+            <string>NotoSansTC-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="96" id="KGk-i7-Jjw" customClass="ProfileCell" customModule="ChooseSomeone" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="354" height="96"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="354" height="96"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LhC-SV-B3h">
+                        <rect key="frame" x="20" y="5" width="314" height="86"/>
+                        <color key="backgroundColor" name="B2"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="15"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N8u-SM-JtR">
+                        <rect key="frame" x="40" y="20" width="56" height="56"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="âPngtreeâmeeting record_4477173" translatesAutoresizingMaskIntoConstraints="NO" id="uRK-sJ-KjZ">
+                                <rect key="frame" x="11" y="11" width="34" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="uRK-sJ-KjZ" secondAttribute="height" multiplier="1:1" id="Zxe-Jh-HCU"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" name="G1"/>
+                        <constraints>
+                            <constraint firstItem="uRK-sJ-KjZ" firstAttribute="centerX" secondItem="N8u-SM-JtR" secondAttribute="centerXWithinMargins" id="2I7-ow-Y6i"/>
+                            <constraint firstItem="uRK-sJ-KjZ" firstAttribute="width" secondItem="N8u-SM-JtR" secondAttribute="width" multiplier="0.6" id="7eH-AW-mzx"/>
+                            <constraint firstItem="uRK-sJ-KjZ" firstAttribute="centerY" secondItem="N8u-SM-JtR" secondAttribute="centerYWithinMargins" id="Pjh-IB-mOp"/>
+                            <constraint firstItem="uRK-sJ-KjZ" firstAttribute="height" secondItem="N8u-SM-JtR" secondAttribute="height" multiplier="0.6" id="cpx-Kb-sXG"/>
+                            <constraint firstAttribute="width" secondItem="N8u-SM-JtR" secondAttribute="height" multiplier="1:1" id="eCc-K2-fmE"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d11-BC-rTk">
+                        <rect key="frame" x="116" y="33.5" width="51.5" height="29"/>
+                        <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="20"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="N8u-SM-JtR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="40" id="8nw-JE-4ZC"/>
+                    <constraint firstItem="LhC-SV-B3h" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Af7-YJ-vyG"/>
+                    <constraint firstItem="d11-BC-rTk" firstAttribute="leading" secondItem="N8u-SM-JtR" secondAttribute="trailing" constant="20" id="B8f-WB-laP"/>
+                    <constraint firstAttribute="bottom" secondItem="LhC-SV-B3h" secondAttribute="bottom" constant="5" id="CTM-fr-zi1"/>
+                    <constraint firstItem="d11-BC-rTk" firstAttribute="centerY" secondItem="N8u-SM-JtR" secondAttribute="centerY" id="J9c-Pa-o2Z"/>
+                    <constraint firstItem="N8u-SM-JtR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Pm1-BC-MUU"/>
+                    <constraint firstAttribute="trailing" secondItem="LhC-SV-B3h" secondAttribute="trailing" constant="20" id="TeF-aT-ZXR"/>
+                    <constraint firstAttribute="bottom" secondItem="N8u-SM-JtR" secondAttribute="bottom" constant="20" id="Tpe-fv-Al9"/>
+                    <constraint firstItem="LhC-SV-B3h" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="nOn-VV-6at"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="itemBackground" destination="N8u-SM-JtR" id="0Mk-lD-alt"/>
+                <outlet property="itemImage" destination="uRK-sJ-KjZ" id="8z8-pq-nT9"/>
+                <outlet property="itemTitle" destination="d11-BC-rTk" id="7kS-IU-mcS"/>
+            </connections>
+            <point key="canvasLocation" x="124.6376811594203" y="127.90178571428571"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="âPngtreeâmeeting record_4477173" width="2000" height="2000"/>
+        <namedColor name="B2">
+            <color red="0.81199997663497925" green="1" blue="0.85500001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="G1">
+            <color red="0.097999997437000275" green="0.76499998569488525" blue="0.85500001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

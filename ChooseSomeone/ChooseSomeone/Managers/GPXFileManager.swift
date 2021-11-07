@@ -16,41 +16,6 @@ class GPXFileManager {
         return documentsUrl
     }
     
-    class var fileList: [GPXFileInfo] {
-        
-        var GPXFiles: [GPXFileInfo] = []
-        
-        let fileManager = FileManager.default
-        
-        let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        
-        do {
-            
-            if let directoryURLs = try? fileManager.contentsOfDirectory(at: documentsURL,
-                includingPropertiesForKeys: [.attributeModificationDateKey, .fileSizeKey],
-                options: .skipsSubdirectoryDescendants) {
-   
-                let sortedURLs = directoryURLs.map { url in
-                    (url: url,
-                     modificationDate: (try? url.resourceValues(forKeys: [.contentModificationDateKey]))?
-                        .contentModificationDate ?? Date.distantPast,
-                     fileSize: (try? url.resourceValues(forKeys: [.fileSizeKey]))?.fileSize ?? 0)
-                    }
-                    .sorted(by: { $0.1 > $1.1 }) 
-                print(sortedURLs)
-                
-                for (url, modificationDate, fileSize) in sortedURLs {
-                    if kFileExt.contains(url.pathExtension) {
-                        GPXFiles.append(GPXFileInfo(fileURL: url))
-                        let lastPathComponent = url.deletingPathExtension().lastPathComponent
-                        print("\(modificationDate) \(fileSize)bytes -- \(lastPathComponent)")
-                    }
-                }
-            }
-        }
-        return GPXFiles
-    }
-    
     class func URLForFilename(_ filename: String) -> URL {
         
         var fullURL = self.GPXFilesFolderURL.appendingPathComponent(filename)

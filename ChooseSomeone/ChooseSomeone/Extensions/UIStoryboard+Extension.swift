@@ -12,10 +12,14 @@ private struct StoryboardCategory {
     static let home = "Home"
 
     static let group = "ChooseGroup"
+    
+    static let login = "Login"
+    
+    static let journey = "Journey"
 
-//    static let journey = "Journey"
-//
-//    static let profile = "Profile"
+    static let profile = "Profile"
+    
+    static let main = "Main"
 }
 
 extension UIStoryboard {
@@ -23,10 +27,14 @@ extension UIStoryboard {
     static var home: UIStoryboard { return storyboard(name: StoryboardCategory.home) }
 
     static var group: UIStoryboard { return storyboard(name: StoryboardCategory.group) }
+    
+    static var login: UIStoryboard { return storyboard(name: StoryboardCategory.login) }
 
-//    static var product: UIStoryboard { return storyboard(name: StoryboardCategory.journey) }
-//
-//    static var profile: UIStoryboard { return storyboard(name: StoryboardCategory.profile) }
+    static var product: UIStoryboard { return storyboard(name: StoryboardCategory.journey) }
+
+    static var profile: UIStoryboard { return storyboard(name: StoryboardCategory.profile) }
+    
+    static var main: UIStoryboard { return storyboard(name: StoryboardCategory.main) }
 
 
     private static func storyboard(name: String) -> UIStoryboard {

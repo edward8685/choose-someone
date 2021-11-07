@@ -6,6 +6,15 @@
 	<array>
 		<dict/>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>NotoSansTC-Black</string>
+		<string>NotoSansTC-Bold</string>
+		<string>NotoSansTC-Light</string>
+		<string>NotoSansTC-Medium</string>
+		<string>NotoSansTC-Regular</string>
+		<string>NotoSansTC-Thin</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

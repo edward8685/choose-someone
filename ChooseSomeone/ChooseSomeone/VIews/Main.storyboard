@@ -10,7 +10,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="irm-ag-iVg">
             <objects>
-                <tabBarController id="Gcw-Sl-xTf" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabbarController" id="Gcw-Sl-xTf" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="abP-oV-E9o">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -63,7 +63,7 @@
         <!--Profile-->
         <scene sceneID="wwB-yt-feV">
             <objects>
-                <viewControllerPlaceholder storyboardName="ChooseGroup" id="e5d-IV-vt5" userLabel="Profile" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Profile" id="e5d-IV-vt5" userLabel="Profile" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="Mca-k0-xKF"/>
                     <navigationItem key="navigationItem" id="D0r-xy-Pa9"/>
                 </viewControllerPlaceholder>

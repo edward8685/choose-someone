@@ -1,27 +1,44 @@
 //
 //  UIColor+Extension.swift
-//  STYLiSH
+//  ChooseSomeone
 //
-//  Created by WU CHIH WEI on 2019/2/13.
-//  Copyright © 2019 WU CHIH WEI. All rights reserved.
+//  Created by Ed Chang on 2021/10/21.
 //
 
 import UIKit
 
-private enum STColor: String {
+private enum CSColor: String {
 
     // swiftlint:disable identifier_name
-    case B1
-
+    case B1,B2,B3,B4
+    case G1,G2,G3,G4,G5,G6
 }
 
 extension UIColor {
 
-    static let B1 = STColor(.B1)
+    static let B1 = CSColor(.B1)
+    
+    static let B2 = CSColor(.B2)
+    
+    static let B3 = CSColor(.B3)
+    
+    static let B4 = CSColor(.B4)
+    
+    static let G1 = CSColor(.G1)
+    
+    static let G2 = CSColor(.G2)
+    
+    static let G3 = CSColor(.G3)
+    
+    static let G4 = CSColor(.G4)
+    
+    static let G5 = CSColor(.G5)
+    
+    static let G6 = CSColor(.G6)
     
     // swiftlint:enable identifier_name
     
-    private static func STColor(_ color: STColor) -> UIColor? {
+    private static func CSColor(_ color: CSColor) -> UIColor? {
 
         return UIColor(named: color.rawValue)
     }

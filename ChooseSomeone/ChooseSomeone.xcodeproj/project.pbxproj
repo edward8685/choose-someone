@@ -15,14 +15,32 @@
 		740B1B8C2724161600A1CD3B /* HomeHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 740B1B8A2724161600A1CD3B /* HomeHeaderCell.xib */; };
 		740B1B8F2724280D00A1CD3B /* TrailThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740B1B8D2724280D00A1CD3B /* TrailThemeCell.swift */; };
 		740B1B902724280D00A1CD3B /* TrailThemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 740B1B8E2724280D00A1CD3B /* TrailThemeCell.xib */; };
+		740E98A92734CE3B006163B8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740E98A82734CE3B006163B8 /* ProfileViewController.swift */; };
+		740E98AC2734DF79006163B8 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740E98AA2734DF79006163B8 /* ProfileCell.swift */; };
+		740E98AD2734DF79006163B8 /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 740E98AB2734DF79006163B8 /* ProfileCell.xib */; };
+		740E98AF2734E2D7006163B8 /* ProfileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740E98AE2734E2D6006163B8 /* ProfileItem.swift */; };
+		740E98B127352589006163B8 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740E98B027352589006163B8 /* ProfileView.swift */; };
+		740E98B327362D3A006163B8 /* ImagePickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740E98B227362D3A006163B8 /* ImagePickerButton.swift */; };
 		740FC38D271D17160071459A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740FC38C271D17160071459A /* AppDelegate.swift */; };
 		740FC38F271D17160071459A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740FC38E271D17160071459A /* SceneDelegate.swift */; };
 		740FC391271D17160071459A /* ChooseGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740FC390271D17160071459A /* ChooseGroupViewController.swift */; };
 		740FC394271D17160071459A /* ChooseGroup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740FC392271D17160071459A /* ChooseGroup.storyboard */; };
 		740FC396271D17180071459A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 740FC395271D17180071459A /* Assets.xcassets */; };
 		740FC399271D17180071459A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740FC397271D17180071459A /* LaunchScreen.storyboard */; };
+		742349352732B032001EC7A1 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742349342732B032001EC7A1 /* UserManager.swift */; };
+		7423493A273415AB001EC7A1 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74234939273415AB001EC7A1 /* Login.storyboard */; };
 		742516F927218A520011166B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742516F827218A520011166B /* UIColor+Extension.swift */; };
 		742516FB272197A30011166B /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742516FA272197A30011166B /* UILabelExtension.swift */; };
+		7441B7A5273052C000614D9B /* TrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7441B7A4273052C000614D9B /* TrackInfo.swift */; };
+		7441B7A727313E1C00614D9B /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7441B7A627313E1C00614D9B /* UIFontExtension.swift */; };
+		7441B7B027313F3E00614D9B /* NotoSansTC-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7441B7A927313F3D00614D9B /* NotoSansTC-Regular.otf */; };
+		7441B7B127313F3E00614D9B /* NotoSansTC-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7441B7AA27313F3D00614D9B /* NotoSansTC-Bold.otf */; };
+		7441B7B227313F3E00614D9B /* NotoSansTC-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7441B7AB27313F3D00614D9B /* NotoSansTC-Thin.otf */; };
+		7441B7B327313F3E00614D9B /* NotoSansTC-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7441B7AC27313F3D00614D9B /* NotoSansTC-Light.otf */; };
+		7441B7B427313F3E00614D9B /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7441B7AD27313F3D00614D9B /* OFL.txt */; };
+		7441B7B527313F3E00614D9B /* NotoSansTC-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7441B7AE27313F3D00614D9B /* NotoSansTC-Medium.otf */; };
+		7441B7B627313F3E00614D9B /* NotoSansTC-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7441B7AF27313F3D00614D9B /* NotoSansTC-Black.otf */; };
+		7441B7C327323B4B00614D9B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7441B7C227323B4B00614D9B /* LoginViewController.swift */; };
 		7449349C272548BC002D8FE3 /* TrailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7449349B272548BC002D8FE3 /* TrailInfoViewController.swift */; };
 		7449349F27255A0B002D8FE3 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7449349E27255A0B002D8FE3 /* UIStoryboard+Extension.swift */; };
 		744934A1272562C8002D8FE3 /* TrailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744934A0272562C8002D8FE3 /* TrailManager.swift */; };
@@ -32,6 +50,12 @@
 		745A6EFE272BABC6006064C4 /* GPXFileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6EFD272BABC6006064C4 /* GPXFileInfo.swift */; };
 		745A6F00272C0104006064C4 /* RecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6EFF272C0104006064C4 /* RecordManager.swift */; };
 		745A6F02272CF4C5006064C4 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F01272CF4C5006064C4 /* Record.swift */; };
+		745A6F04272D6809006064C4 /* TrackRecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F03272D6809006064C4 /* TrackRecordsViewController.swift */; };
+		745A6F09272D7B08006064C4 /* TrackRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F07272D7B08006064C4 /* TrackRecordCell.swift */; };
+		745A6F0A272D7B08006064C4 /* TrackRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 745A6F08272D7B08006064C4 /* TrackRecordCell.xib */; };
+		745A6F0C272DAE9C006064C4 /* TimestampExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F0B272DAE9C006064C4 /* TimestampExtension.swift */; };
+		745A6F0E272E4B57006064C4 /* UserRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F0D272E4B57006064C4 /* UserRecordViewController.swift */; };
+		745A6F11272E9D0A006064C4 /* RecordInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F10272E9D0A006064C4 /* RecordInfoView.swift */; };
 		74608D1D271D1CEC002BD125 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D1B271D1CEC002BD125 /* UIScreen+Extension.swift */; };
 		74608D1E271D1CEC002BD125 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D1C271D1CEC002BD125 /* UIViewExtension.swift */; };
 		74608D21271D1DE1002BD125 /* GroupInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D1F271D1DE1002BD125 /* GroupInfoCell.swift */; };
@@ -51,7 +75,7 @@
 		74608D3E271E7A63002BD125 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74608D3D271E7A63002BD125 /* GoogleService-Info.plist */; };
 		74608D41271E97DC002BD125 /* Trail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D40271E97DC002BD125 /* Trail.swift */; };
 		74608D43271E9C67002BD125 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D42271E9C67002BD125 /* Group.swift */; };
-		74608D45271EA5E1002BD125 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D44271EA5E1002BD125 /* User.swift */; };
+		74608D45271EA5E1002BD125 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D44271EA5E1002BD125 /* UserInfo.swift */; };
 		74608D47271EC727002BD125 /* GroupRoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D46271EC727002BD125 /* GroupRoomManager.swift */; };
 		74E5735B27268E3E00F490BF /* TrialInfoScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5735A27268E3E00F490BF /* TrialInfoScrollView.swift */; };
 		74E5735F2726D6A500F490BF /* KingFisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5735E2726D6A500F490BF /* KingFisherWrapper.swift */; };
@@ -87,6 +111,12 @@
 		740B1B8A2724161600A1CD3B /* HomeHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeHeaderCell.xib; sourceTree = "<group>"; };
 		740B1B8D2724280D00A1CD3B /* TrailThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailThemeCell.swift; sourceTree = "<group>"; };
 		740B1B8E2724280D00A1CD3B /* TrailThemeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrailThemeCell.xib; sourceTree = "<group>"; };
+		740E98A82734CE3B006163B8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		740E98AA2734DF79006163B8 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		740E98AB2734DF79006163B8 /* ProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCell.xib; sourceTree = "<group>"; };
+		740E98AE2734E2D6006163B8 /* ProfileItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileItem.swift; sourceTree = "<group>"; };
+		740E98B027352589006163B8 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		740E98B227362D3A006163B8 /* ImagePickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerButton.swift; sourceTree = "<group>"; };
 		740FC389271D17160071459A /* ChooseSomeone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChooseSomeone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		740FC38C271D17160071459A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		740FC38E271D17160071459A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,8 +125,21 @@
 		740FC395271D17180071459A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		740FC398271D17180071459A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		740FC39A271D17180071459A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		742349332732662E001EC7A1 /* ChooseSomeone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChooseSomeone.entitlements; sourceTree = "<group>"; };
+		742349342732B032001EC7A1 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		74234939273415AB001EC7A1 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		742516F827218A520011166B /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		742516FA272197A30011166B /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
+		7441B7A4273052C000614D9B /* TrackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfo.swift; sourceTree = "<group>"; };
+		7441B7A627313E1C00614D9B /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
+		7441B7A927313F3D00614D9B /* NotoSansTC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Regular.otf"; sourceTree = "<group>"; };
+		7441B7AA27313F3D00614D9B /* NotoSansTC-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Bold.otf"; sourceTree = "<group>"; };
+		7441B7AB27313F3D00614D9B /* NotoSansTC-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Thin.otf"; sourceTree = "<group>"; };
+		7441B7AC27313F3D00614D9B /* NotoSansTC-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Light.otf"; sourceTree = "<group>"; };
+		7441B7AD27313F3D00614D9B /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		7441B7AE27313F3D00614D9B /* NotoSansTC-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Medium.otf"; sourceTree = "<group>"; };
+		7441B7AF27313F3D00614D9B /* NotoSansTC-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Black.otf"; sourceTree = "<group>"; };
+		7441B7C227323B4B00614D9B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7449349B272548BC002D8FE3 /* TrailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailInfoViewController.swift; sourceTree = "<group>"; };
 		7449349E27255A0B002D8FE3 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		744934A0272562C8002D8FE3 /* TrailManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailManager.swift; sourceTree = "<group>"; };
@@ -106,6 +149,12 @@
 		745A6EFD272BABC6006064C4 /* GPXFileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPXFileInfo.swift; sourceTree = "<group>"; };
 		745A6EFF272C0104006064C4 /* RecordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordManager.swift; sourceTree = "<group>"; };
 		745A6F01272CF4C5006064C4 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		745A6F03272D6809006064C4 /* TrackRecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRecordsViewController.swift; sourceTree = "<group>"; };
+		745A6F07272D7B08006064C4 /* TrackRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRecordCell.swift; sourceTree = "<group>"; };
+		745A6F08272D7B08006064C4 /* TrackRecordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackRecordCell.xib; sourceTree = "<group>"; };
+		745A6F0B272DAE9C006064C4 /* TimestampExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimestampExtension.swift; sourceTree = "<group>"; };
+		745A6F0D272E4B57006064C4 /* UserRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRecordViewController.swift; sourceTree = "<group>"; };
+		745A6F10272E9D0A006064C4 /* RecordInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordInfoView.swift; sourceTree = "<group>"; };
 		74608D1B271D1CEC002BD125 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		74608D1C271D1CEC002BD125 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		74608D1F271D1DE1002BD125 /* GroupInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoCell.swift; sourceTree = "<group>"; };
@@ -125,7 +174,7 @@
 		74608D3D271E7A63002BD125 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		74608D40271E97DC002BD125 /* Trail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trail.swift; sourceTree = "<group>"; };
 		74608D42271E9C67002BD125 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
-		74608D44271EA5E1002BD125 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		74608D44271EA5E1002BD125 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		74608D46271EC727002BD125 /* GroupRoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRoomManager.swift; sourceTree = "<group>"; };
 		74E5735A27268E3E00F490BF /* TrialInfoScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialInfoScrollView.swift; sourceTree = "<group>"; };
 		74E5735E2726D6A500F490BF /* KingFisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingFisherWrapper.swift; sourceTree = "<group>"; };
@@ -230,6 +279,7 @@
 		740FC38B271D17160071459A /* ChooseSomeone */ = {
 			isa = PBXGroup;
 			children = (
+				742349332732662E001EC7A1 /* ChooseSomeone.entitlements */,
 				740FC38C271D17160071459A /* AppDelegate.swift */,
 				740FC38E271D17160071459A /* SceneDelegate.swift */,
 				74608D3F271E9201002BD125 /* Managers */,
@@ -239,14 +289,55 @@
 				74608D17271D1C8E002BD125 /* VIews */,
 				740FC395271D17180071459A /* Assets.xcassets */,
 				740FC39A271D17180071459A /* Info.plist */,
+				7441B7A827313F3D00614D9B /* Noto_Sans_TC */,
 				74608D3D271E7A63002BD125 /* GoogleService-Info.plist */,
 			);
 			path = ChooseSomeone;
 			sourceTree = "<group>";
 		};
+		7423493627341589001EC7A1 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				74234939273415AB001EC7A1 /* Login.storyboard */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		7441B7A827313F3D00614D9B /* Noto_Sans_TC */ = {
+			isa = PBXGroup;
+			children = (
+				7441B7A927313F3D00614D9B /* NotoSansTC-Regular.otf */,
+				7441B7AA27313F3D00614D9B /* NotoSansTC-Bold.otf */,
+				7441B7AB27313F3D00614D9B /* NotoSansTC-Thin.otf */,
+				7441B7AC27313F3D00614D9B /* NotoSansTC-Light.otf */,
+				7441B7AE27313F3D00614D9B /* NotoSansTC-Medium.otf */,
+				7441B7AF27313F3D00614D9B /* NotoSansTC-Black.otf */,
+				7441B7AD27313F3D00614D9B /* OFL.txt */,
+			);
+			path = Noto_Sans_TC;
+			sourceTree = "<group>";
+		};
+		745A6F0F272E8A62006064C4 /* GPX */ = {
+			isa = PBXGroup;
+			children = (
+				74E5737E2728E92400F490BF /* GPXSession.swift */,
+				745A6EFD272BABC6006064C4 /* GPXFileInfo.swift */,
+				74E5736C2728241F00F490BF /* GPXExtentCoordinates.swift */,
+				74E5736A2728241F00F490BF /* GPXRoot+length.swift */,
+				74E573832728EBEE00F490BF /* GPXTrackPoint+MapKit.swift */,
+				74E573822728EBEE00F490BF /* GPXTrackSegment+MapKit.swift */,
+				74E573862728F45600F490BF /* GPXWaypoint+MKAnnotation.swift */,
+				74E573692728241F00F490BF /* GPXTrack+length.swift */,
+				74E573772728700C00F490BF /* StopWatch.swift */,
+				74E573792728725A00F490BF /* StopWatchDelegate.swift */,
+			);
+			path = GPX;
+			sourceTree = "<group>";
+		};
 		74608D17271D1C8E002BD125 /* VIews */ = {
 			isa = PBXGroup;
 			children = (
+				7423493627341589001EC7A1 /* Login */,
 				74F9650A2725392100B77DC5 /* Journey */,
 				74F965092725391500B77DC5 /* Profile */,
 				740B1B88272400C800A1CD3B /* Home */,
@@ -269,6 +360,10 @@
 				7449349B272548BC002D8FE3 /* TrailInfoViewController.swift */,
 				74E5736227279A2800F490BF /* JourneyViewController.swift */,
 				74E573882728F4B300F490BF /* MapViewDelegate.swift */,
+				745A6F03272D6809006064C4 /* TrackRecordsViewController.swift */,
+				745A6F0D272E4B57006064C4 /* UserRecordViewController.swift */,
+				7441B7C227323B4B00614D9B /* LoginViewController.swift */,
+				740E98A82734CE3B006163B8 /* ProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -276,23 +371,15 @@
 		74608D19271D1CA4002BD125 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				74E5736C2728241F00F490BF /* GPXExtentCoordinates.swift */,
-				74E5736A2728241F00F490BF /* GPXRoot+length.swift */,
-				74E573832728EBEE00F490BF /* GPXTrackPoint+MapKit.swift */,
-				74E573822728EBEE00F490BF /* GPXTrackSegment+MapKit.swift */,
-				74E573862728F45600F490BF /* GPXWaypoint+MKAnnotation.swift */,
-				74E573692728241F00F490BF /* GPXTrack+length.swift */,
-				74E573D527292EBD00F490BF /* Double+Measures.swift */,
-				74E573792728725A00F490BF /* StopWatchDelegate.swift */,
+				745A6F0F272E8A62006064C4 /* GPX */,
 				74608D40271E97DC002BD125 /* Trail.swift */,
 				74608D42271E9C67002BD125 /* Group.swift */,
 				7457A1CF271EECEF00A947AE /* Message.swift */,
-				74608D44271EA5E1002BD125 /* User.swift */,
+				74608D44271EA5E1002BD125 /* UserInfo.swift */,
 				745A6F01272CF4C5006064C4 /* Record.swift */,
 				7457A1D1271EEEDC00A947AE /* Request.swift */,
-				74E573772728700C00F490BF /* StopWatch.swift */,
-				74E5737E2728E92400F490BF /* GPXSession.swift */,
-				745A6EFD272BABC6006064C4 /* GPXFileInfo.swift */,
+				7441B7A4273052C000614D9B /* TrackInfo.swift */,
+				740E98AE2734E2D6006163B8 /* ProfileItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -308,6 +395,9 @@
 				74FDD9272722C47D0014D2B2 /* UITableView+ColloectionVIewExtension.swift */,
 				74FDD9292722C5670014D2B2 /* UITextFieldExtexsion.swift */,
 				7449349E27255A0B002D8FE3 /* UIStoryboard+Extension.swift */,
+				745A6F0B272DAE9C006064C4 /* TimestampExtension.swift */,
+				74E573D527292EBD00F490BF /* Double+Measures.swift */,
+				7441B7A627313E1C00614D9B /* UIFontExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -319,6 +409,7 @@
 				744934A0272562C8002D8FE3 /* TrailManager.swift */,
 				745A6EFB272BA417006064C4 /* GPXFileManager.swift */,
 				745A6EFF272C0104006064C4 /* RecordManager.swift */,
+				742349342732B032001EC7A1 /* UserManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -327,6 +418,13 @@
 			isa = PBXGroup;
 			children = (
 				74F9650E2725394F00B77DC5 /* Profile.storyboard */,
+				745A6F07272D7B08006064C4 /* TrackRecordCell.swift */,
+				745A6F08272D7B08006064C4 /* TrackRecordCell.xib */,
+				740E98AA2734DF79006163B8 /* ProfileCell.swift */,
+				740E98AB2734DF79006163B8 /* ProfileCell.xib */,
+				740E98B027352589006163B8 /* ProfileView.swift */,
+				745A6F10272E9D0A006064C4 /* RecordInfoView.swift */,
+				740E98B227362D3A006163B8 /* ImagePickerButton.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -369,7 +467,7 @@
 				740FC386271D17160071459A /* Frameworks */,
 				740FC387271D17160071459A /* Resources */,
 				74608D14271D1895002BD125 /* ShellScript */,
-				88A669A3A9D0AFB00AB108CD /* [CP] Embed Pods Frameworks */,
+				403936DA63AD36BF24E2C7B1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -419,21 +517,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				74F965082724830900B77DC5 /* TrailCell.xib in Resources */,
+				7441B7B627313F3E00614D9B /* NotoSansTC-Black.otf in Resources */,
 				74608D26271D20B0002BD125 /* GroupHeaderCell.xib in Resources */,
 				740B1B842723FECC00A1CD3B /* Home.storyboard in Resources */,
 				740B1B822723F41D00A1CD3B /* Main.storyboard in Resources */,
 				740FC399271D17180071459A /* LaunchScreen.storyboard in Resources */,
 				74608D3E271E7A63002BD125 /* GoogleService-Info.plist in Resources */,
+				740E98AD2734DF79006163B8 /* ProfileCell.xib in Resources */,
 				740B1B8C2724161600A1CD3B /* HomeHeaderCell.xib in Resources */,
 				740FC396271D17180071459A /* Assets.xcassets in Resources */,
+				7441B7B327313F3E00614D9B /* NotoSansTC-Light.otf in Resources */,
 				74608D30271D54C7002BD125 /* GroupChatHeaderCell.xib in Resources */,
 				740B1B902724280D00A1CD3B /* TrailThemeCell.xib in Resources */,
+				7441B7B227313F3E00614D9B /* NotoSansTC-Thin.otf in Resources */,
+				7441B7B427313F3E00614D9B /* OFL.txt in Resources */,
 				74F9650F2725394F00B77DC5 /* Profile.storyboard in Resources */,
 				740FC394271D17160071459A /* ChooseGroup.storyboard in Resources */,
+				7441B7B027313F3E00614D9B /* NotoSansTC-Regular.otf in Resources */,
+				745A6F0A272D7B08006064C4 /* TrackRecordCell.xib in Resources */,
 				74608D22271D1DE1002BD125 /* GroupInfoCell.xib in Resources */,
 				74608D2A271D4A80002BD125 /* GroupChatCell.xib in Resources */,
+				7441B7B527313F3E00614D9B /* NotoSansTC-Medium.otf in Resources */,
 				74F9650C2725393B00B77DC5 /* Journey.storyboard in Resources */,
+				7423493A273415AB001EC7A1 /* Login.storyboard in Resources */,
 				74608D38271DD2F2002BD125 /* JoinRequestCell.xib in Resources */,
+				7441B7B127313F3E00614D9B /* NotoSansTC-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,6 +570,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		403936DA63AD36BF24E2C7B1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		74608D14271D1895002BD125 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -479,23 +604,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
-		88A669A3A9D0AFB00AB108CD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -504,39 +612,50 @@
 			buildActionMask = 2147483647;
 			files = (
 				740B1B862723FF2500A1CD3B /* HomeViewController.swift in Sources */,
+				745A6F11272E9D0A006064C4 /* RecordInfoView.swift in Sources */,
 				74E5738B2728F61C00F490BF /* GPXMapView.swift in Sources */,
 				7449349F27255A0B002D8FE3 /* UIStoryboard+Extension.swift in Sources */,
 				74608D32271D7253002BD125 /* BuildTeamViewController.swift in Sources */,
 				74608D41271E97DC002BD125 /* Trail.swift in Sources */,
+				740E98AC2734DF79006163B8 /* ProfileCell.swift in Sources */,
 				744934A1272562C8002D8FE3 /* TrailManager.swift in Sources */,
 				740FC391271D17160071459A /* ChooseGroupViewController.swift in Sources */,
 				74E573D427292CE300F490BF /* DistanceLabel.swift in Sources */,
 				742516FB272197A30011166B /* UILabelExtension.swift in Sources */,
 				74E573722728241F00F490BF /* GPXExtentCoordinates.swift in Sources */,
+				745A6F0E272E4B57006064C4 /* UserRecordViewController.swift in Sources */,
+				740E98A92734CE3B006163B8 /* ProfileViewController.swift in Sources */,
 				742516F927218A520011166B /* UIColor+Extension.swift in Sources */,
 				745A6EFE272BABC6006064C4 /* GPXFileInfo.swift in Sources */,
 				74E573D627292EBD00F490BF /* Double+Measures.swift in Sources */,
 				74F96504272481F800B77DC5 /* TrailListViewController.swift in Sources */,
 				74608D1E271D1CEC002BD125 /* UIViewExtension.swift in Sources */,
 				74608D2F271D54C7002BD125 /* GroupChatHeaderCell.swift in Sources */,
+				7441B7A727313E1C00614D9B /* UIFontExtension.swift in Sources */,
 				74E5736F2728241F00F490BF /* GPXTrack+length.swift in Sources */,
 				74608D37271DD2F2002BD125 /* JoinRequestCell.swift in Sources */,
 				740B1B8B2724161600A1CD3B /* HomeHeaderCell.swift in Sources */,
+				7441B7A5273052C000614D9B /* TrackInfo.swift in Sources */,
+				740E98AF2734E2D7006163B8 /* ProfileItem.swift in Sources */,
 				74FDD92A2722C5670014D2B2 /* UITextFieldExtexsion.swift in Sources */,
+				740E98B127352589006163B8 /* ProfileView.swift in Sources */,
 				74E573702728241F00F490BF /* GPXRoot+length.swift in Sources */,
 				74608D43271E9C67002BD125 /* Group.swift in Sources */,
 				74E5736327279A2800F490BF /* JourneyViewController.swift in Sources */,
 				7457A1D0271EECEF00A947AE /* Message.swift in Sources */,
 				74E5737F2728E92500F490BF /* GPXSession.swift in Sources */,
 				74608D25271D20B0002BD125 /* GroupHeaderCell.swift in Sources */,
+				745A6F04272D6809006064C4 /* TrackRecordsViewController.swift in Sources */,
 				745A6F02272CF4C5006064C4 /* Record.swift in Sources */,
 				74608D34271D7AE1002BD125 /* UIButtonExtension.swift in Sources */,
 				745A6EFC272BA417006064C4 /* GPXFileManager.swift in Sources */,
+				745A6F0C272DAE9C006064C4 /* TimestampExtension.swift in Sources */,
 				74608D29271D4A80002BD125 /* GroupChatCell.swift in Sources */,
 				74608D1D271D1CEC002BD125 /* UIScreen+Extension.swift in Sources */,
 				74E573852728EBEE00F490BF /* GPXTrackPoint+MapKit.swift in Sources */,
+				745A6F09272D7B08006064C4 /* TrackRecordCell.swift in Sources */,
 				74E573842728EBEE00F490BF /* GPXTrackSegment+MapKit.swift in Sources */,
-				74608D45271EA5E1002BD125 /* User.swift in Sources */,
+				74608D45271EA5E1002BD125 /* UserInfo.swift in Sources */,
 				74E5735B27268E3E00F490BF /* TrialInfoScrollView.swift in Sources */,
 				7457A1D2271EEEDC00A947AE /* Request.swift in Sources */,
 				74608D47271EC727002BD125 /* GroupRoomManager.swift in Sources */,
@@ -544,13 +663,16 @@
 				74F965072724830900B77DC5 /* TrailCell.swift in Sources */,
 				74E573872728F45700F490BF /* GPXWaypoint+MKAnnotation.swift in Sources */,
 				74608D3A271DDA05002BD125 /* JoinRequestViewController.swift in Sources */,
+				7441B7C327323B4B00614D9B /* LoginViewController.swift in Sources */,
 				7449349C272548BC002D8FE3 /* TrailInfoViewController.swift in Sources */,
 				74E573892728F4B300F490BF /* MapViewDelegate.swift in Sources */,
 				74FDD9282722C47D0014D2B2 /* UITableView+ColloectionVIewExtension.swift in Sources */,
 				74E5735F2726D6A500F490BF /* KingFisherWrapper.swift in Sources */,
 				740FC38F271D17160071459A /* SceneDelegate.swift in Sources */,
+				740E98B327362D3A006163B8 /* ImagePickerButton.swift in Sources */,
 				74608D21271D1DE1002BD125 /* GroupInfoCell.swift in Sources */,
 				74E573782728700C00F490BF /* StopWatch.swift in Sources */,
+				742349352732B032001EC7A1 /* UserManager.swift in Sources */,
 				740B1B8F2724280D00A1CD3B /* TrailThemeCell.swift in Sources */,
 				745A6F00272C0104006064C4 /* RecordManager.swift in Sources */,
 				74E5737A2728725A00F490BF /* StopWatchDelegate.swift in Sources */,
@@ -703,11 +825,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ChooseSomeone/ChooseSomeone.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2THHZQ7GX3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChooseSomeone/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "For user to edit whose picture in app";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location is only used to display your position in the map. Select always allow to track your position even if the app is in background.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Location is needed to create the GPX track even when the app is in background.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "Location is needed to create GPX and add PDIs";
@@ -717,6 +841,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -736,12 +861,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ChooseSomeone/ChooseSomeone.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2THHZQ7GX3;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChooseSomeone/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "For user to edit whose picture in app";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Location is only used to display your position in the map. Select always allow to track your position even if the app is in background.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Location is needed to create the GPX track even when the app is in background.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "Location is needed to create GPX and add PDIs";
@@ -751,6 +878,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
