@@ -55,7 +55,7 @@ extension UIFont {
         return UIFont(name: FontName.black.rawValue, size: size)
     }
 
-    private static func font(_ font: FontName, size: CGFloat) -> UIFont? {
+    static func font(_ font: FontName, size: CGFloat) -> UIFont? {
 
         return UIFont(name: font.rawValue, size: size)
     }

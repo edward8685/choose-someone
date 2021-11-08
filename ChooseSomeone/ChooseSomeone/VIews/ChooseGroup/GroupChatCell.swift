@@ -22,16 +22,12 @@ class GroupChatCell: UITableViewCell {
     
     func setUpCell(messages: [Message], indexPath: IndexPath) {
         
-        let userId = UserManager.shared.userInfo.uid
+        let userInfo = UserManager.shared.userInfo
         
-        let timeInterval = messages[indexPath.row].createdTime
-        let date = timeInterval.dateValue()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy/MM/dd  HH:mm"
-        let time = dateFormatter.string(from: date as Date)
-        createdTime.text = time
+        let time = messages[indexPath.row].createdTime
+        createdTime.text = TimeFormater.preciseTime.timeFormat(time: time)
         
-        if messages[indexPath.row].userId == userId {
+        if messages[indexPath.row].userId == userInfo.uid {
             userMessage.text = messages[indexPath.row].body
             isSentFromUser = true
         } else {
@@ -51,12 +47,22 @@ class GroupChatCell: UITableViewCell {
     }
     
     override func awakeFromNib() {
+        
         super.awakeFromNib()
         userMessage.layer.cornerRadius = 5
         userMessage.layer.masksToBounds = true
         memberMessage.layer.cornerRadius = 5
         memberMessage.layer.masksToBounds = true
+
+ 
         selectionStyle = .none
+        self.backgroundColor = .clear
     }
-    
+
+    override func layoutSubviews() {
+        
+//        userMessage.applyGradient(colors: [.C4, .C3], locations: [0.0, 1.0], direction: .topToBottom)
+//
+//        memberMessage.applyGradient(colors: [.C2, .C1], locations: [0.0, 1.0], direction: .topToBottom)
+    }
 }

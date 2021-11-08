@@ -6,58 +6,68 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class GroupInfoCell: UITableViewCell {
     
     @IBOutlet weak var groupName: UILabel!
     
+    @IBOutlet weak var trailName: UILabel!
+    
     @IBOutlet weak var travelDate: UILabel!
     
-    @IBOutlet weak var trailName: UILabel!
+    @IBOutlet weak var travelTime: UILabel!
     
     @IBOutlet weak var numOfPeople: UILabel!
     
-    @IBOutlet weak var participationLabel: UILabel!
+    @IBOutlet weak var hostName: UILabel!
     
     @IBOutlet weak var flagImage: UIImageView!
     
-    func setUpCell(group: Group, indexPath: IndexPath){
+    @IBOutlet weak var chevronView: UIImageView!
+    
+    func setUpCell(group: Group, indexPath: IndexPath) {
         
-        let userId = UserManager.shared.userInfo.uid
-        
+        let userInfo = UserManager.shared.userInfo
+
         groupName.text = group.groupName
-        
-        let timeInterval = group.date
-        let date = timeInterval.dateValue()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy/MM/dd  HH:mm"
-        let time = dateFormatter.string(from: date as Date)
-        travelDate.text = time
         
         trailName.text = group.trailName
         
+        travelDate.text = TimeFormater.dateStyle.timeFormat(time: group.date)
+        
+        travelTime.text = TimeFormater.timeStyle.timeFormat(time: group.date)
+        
         let upperLimit = group.upperLimit.description
+        
         let counts = group.userIds.count
         numOfPeople.text = "\(counts) / \(upperLimit)"
         
-        if group.hostId == userId {
+        if group.hostId == userInfo.uid {
             flagImage.isHidden = false
         } else {
             flagImage.isHidden = true
         }
         
         for userInGroup in group.userIds {
-            if userInGroup != userId {
-                participationLabel.isHidden = true
+            if userInGroup != userInfo.uid {
+                chevronView.isHidden = true
             } else {
-                participationLabel.isHidden = false
+                chevronView.isHidden = false
             }
         }
     }
     
     override func awakeFromNib() {
+        
         super.awakeFromNib()
         selectionStyle = .none
+        self.backgroundColor = .clear
+        
+    }
+    
+    override func layoutSubviews() {
+//        chevronView.layer.cornerRadius = chevronView.frame.height / 2
     }
     
 }

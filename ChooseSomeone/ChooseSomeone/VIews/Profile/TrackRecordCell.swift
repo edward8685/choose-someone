@@ -18,10 +18,9 @@ class TrackRecordCell: UITableViewCell {
         
         recordName.text = model.recordName
         
-        uploadTime.text = Timestamp.timeFormat(time: model.createdTime)
+        uploadTime.text = TimeFormater.preciseTime.timeFormat(time: model.createdTime)
     
     }
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()

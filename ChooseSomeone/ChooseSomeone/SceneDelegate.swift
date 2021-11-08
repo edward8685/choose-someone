@@ -49,11 +49,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             guard let loginVC = UIStoryboard.login.instantiateViewController(identifier: "LoginViewController") as? LoginViewController else { return }
             
-//            guard let tabbarVC = UIStoryboard.main.instantiateViewController(identifier: "TabbarController") as? UITabBarController else { return }
-//            
-//            self.window?.rootViewController = tabbarVC
+            guard let tabbarVC = UIStoryboard.main.instantiateViewController(identifier: "TabbarController") as? UITabBarController else { return }
             
-            self.window?.rootViewController = loginVC
+             self.window?.rootViewController = tabbarVC
+            
+//           self.window?.rootViewController = loginVC
             
         }
     }

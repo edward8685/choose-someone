@@ -53,7 +53,7 @@
 		745A6F04272D6809006064C4 /* TrackRecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F03272D6809006064C4 /* TrackRecordsViewController.swift */; };
 		745A6F09272D7B08006064C4 /* TrackRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F07272D7B08006064C4 /* TrackRecordCell.swift */; };
 		745A6F0A272D7B08006064C4 /* TrackRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 745A6F08272D7B08006064C4 /* TrackRecordCell.xib */; };
-		745A6F0C272DAE9C006064C4 /* TimestampExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F0B272DAE9C006064C4 /* TimestampExtension.swift */; };
+		745A6F0C272DAE9C006064C4 /* TimeFormater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F0B272DAE9C006064C4 /* TimeFormater.swift */; };
 		745A6F0E272E4B57006064C4 /* UserRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F0D272E4B57006064C4 /* UserRecordViewController.swift */; };
 		745A6F11272E9D0A006064C4 /* RecordInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F10272E9D0A006064C4 /* RecordInfoView.swift */; };
 		74608D1D271D1CEC002BD125 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D1B271D1CEC002BD125 /* UIScreen+Extension.swift */; };
@@ -152,7 +152,7 @@
 		745A6F03272D6809006064C4 /* TrackRecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRecordsViewController.swift; sourceTree = "<group>"; };
 		745A6F07272D7B08006064C4 /* TrackRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRecordCell.swift; sourceTree = "<group>"; };
 		745A6F08272D7B08006064C4 /* TrackRecordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackRecordCell.xib; sourceTree = "<group>"; };
-		745A6F0B272DAE9C006064C4 /* TimestampExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimestampExtension.swift; sourceTree = "<group>"; };
+		745A6F0B272DAE9C006064C4 /* TimeFormater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormater.swift; sourceTree = "<group>"; };
 		745A6F0D272E4B57006064C4 /* UserRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRecordViewController.swift; sourceTree = "<group>"; };
 		745A6F10272E9D0A006064C4 /* RecordInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordInfoView.swift; sourceTree = "<group>"; };
 		74608D1B271D1CEC002BD125 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
@@ -320,6 +320,7 @@
 		745A6F0F272E8A62006064C4 /* GPX */ = {
 			isa = PBXGroup;
 			children = (
+				745A6F0B272DAE9C006064C4 /* TimeFormater.swift */,
 				74E5737E2728E92400F490BF /* GPXSession.swift */,
 				745A6EFD272BABC6006064C4 /* GPXFileInfo.swift */,
 				74E5736C2728241F00F490BF /* GPXExtentCoordinates.swift */,
@@ -395,7 +396,6 @@
 				74FDD9272722C47D0014D2B2 /* UITableView+ColloectionVIewExtension.swift */,
 				74FDD9292722C5670014D2B2 /* UITextFieldExtexsion.swift */,
 				7449349E27255A0B002D8FE3 /* UIStoryboard+Extension.swift */,
-				745A6F0B272DAE9C006064C4 /* TimestampExtension.swift */,
 				74E573D527292EBD00F490BF /* Double+Measures.swift */,
 				7441B7A627313E1C00614D9B /* UIFontExtension.swift */,
 			);
@@ -467,7 +467,7 @@
 				740FC386271D17160071459A /* Frameworks */,
 				740FC387271D17160071459A /* Resources */,
 				74608D14271D1895002BD125 /* ShellScript */,
-				403936DA63AD36BF24E2C7B1 /* [CP] Embed Pods Frameworks */,
+				149118221917D21A9C45213D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -548,6 +548,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		149118221917D21A9C45213D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		339DD1896FE1AA4B94EDCC34 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -568,23 +585,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		403936DA63AD36BF24E2C7B1 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		74608D14271D1895002BD125 /* ShellScript */ = {
@@ -649,7 +649,7 @@
 				745A6F02272CF4C5006064C4 /* Record.swift in Sources */,
 				74608D34271D7AE1002BD125 /* UIButtonExtension.swift in Sources */,
 				745A6EFC272BA417006064C4 /* GPXFileManager.swift in Sources */,
-				745A6F0C272DAE9C006064C4 /* TimestampExtension.swift in Sources */,
+				745A6F0C272DAE9C006064C4 /* TimeFormater.swift in Sources */,
 				74608D29271D4A80002BD125 /* GroupChatCell.swift in Sources */,
 				74608D1D271D1CEC002BD125 /* UIScreen+Extension.swift in Sources */,
 				74E573852728EBEE00F490BF /* GPXTrackPoint+MapKit.swift in Sources */,

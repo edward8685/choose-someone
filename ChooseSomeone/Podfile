@@ -9,16 +9,16 @@ target 'ChooseSomeone' do
 
   pod 'SwiftLint'
   pod 'IQKeyboardManagerSwift'
-  pod 'FirebaseFirestoreSwift'
-  pod 'FirebaseFirestore'
   pod 'Firebase/Core'
+  pod 'FirebaseFirestore'
+  pod 'FirebaseFirestoreSwift'
   pod 'FirebaseStorage'
   pod 'FirebaseStorageSwift'
+  pod 'Firebase/Auth'
   pod 'MJRefresh'
   pod 'MASegmentedControl'
   pod 'Kingfisher'
   pod 'CoreGPX'
   pod 'Charts'
-  pod 'Firebase/Auth'
-
+  pod 'RSKPlaceholderTextView'
 end

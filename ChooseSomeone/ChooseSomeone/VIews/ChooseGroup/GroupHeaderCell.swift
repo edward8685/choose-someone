@@ -10,24 +10,24 @@ import MASegmentedControl
 
 class GroupHeaderCell: UITableViewCell {
     
+    @IBOutlet weak var badgeView: UIView!
+    
     @IBOutlet weak var textSegmentedControl: MASegmentedControl! {
         didSet {
-            //Set this booleans to adapt control
             textSegmentedControl.itemsWithText = true
             textSegmentedControl.fillEqually = true
             textSegmentedControl.roundedControl = true
             
             textSegmentedControl.setSegmentedWith(items: ["揪團中", "我的揪團"])
             textSegmentedControl.padding = 2
-            textSegmentedControl.textColor = .white
             
-            textSegmentedControl.selectedSegmentIndex
+            textSegmentedControl.textColor = .black
             
-            textSegmentedControl.selectedTextColor = UIColor.white
-            textSegmentedControl.thumbViewColor = UIColor.hexStringToUIColor(hex: "72E717")
-            textSegmentedControl.segmentedBackGroundColor = UIColor.systemGray
+            textSegmentedControl.selectedTextColor = .black
             
-            textSegmentedControl.titlesFont = UIFont(name: "OpenSans-Semibold", size: 15)
+            textSegmentedControl.thumbViewColor = .U2 ?? .systemGreen
+
+            textSegmentedControl.titlesFont = UIFont(name: "NotoSansTC-Regular", size: 16)
         }
     }
     
@@ -36,7 +36,18 @@ class GroupHeaderCell: UITableViewCell {
     @IBOutlet weak var requestListButton: UIButton!
     
     override func awakeFromNib() {
+        
         super.awakeFromNib()
+        
+        self.backgroundColor = .clear
+        
+        let image = UIImage()
+        
+        groupSearchBar.backgroundImage = image
+        
+        groupSearchBar.searchBarStyle = .default
+        
         selectionStyle = .none
+        
     }
 }

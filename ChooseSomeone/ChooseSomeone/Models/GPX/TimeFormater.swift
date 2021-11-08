@@ -1,5 +1,5 @@
 //
-//  TimestampExtension.swift
+//  TimeFormater.swift
 //  ChooseSomeone
 //
 //  Created by Ed Chang on 2021/10/31.
@@ -8,9 +8,15 @@
 import Foundation
 import FirebaseFirestore
 
-extension Timestamp {
+enum TimeFormater: String {
     
-    static func timeFormat(time: Timestamp) -> String {
+    case dateStyle = "yyyy/MM/dd"
+    
+    case timeStyle = "HH:mm"
+    
+    case preciseTime = "yyyy/MM/dd  HH:mm"
+    
+    func timeFormat(time: Timestamp) -> String {
         
         let timeInterval = time
         
@@ -18,7 +24,7 @@ extension Timestamp {
         
         let dateFormatter = DateFormatter()
         
-        dateFormatter.dateFormat = "yyyy/MM/dd  HH:mm"
+        dateFormatter.dateFormat = self.rawValue
         
         let formatTime = dateFormatter.string(from: date as Date)
         

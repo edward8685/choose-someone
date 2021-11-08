@@ -9,80 +9,113 @@ import UIKit
 
 extension UIView {
     
-    //Border Color
     @IBInspectable var borderColor: UIColor? {
+        
         get {
-            
             guard let borderColor = layer.borderColor else {
-                
                 return nil
             }
-            
             return UIColor(cgColor: borderColor)
         }
+        
         set {
             layer.borderColor = newValue?.cgColor
         }
     }
     
-    //Border width
     @IBInspectable var borderWidth: CGFloat {
+        
         get {
             return layer.borderWidth
         }
+        
         set {
             layer.borderWidth = newValue
         }
     }
     
-    //Corner radius
     @IBInspectable var cornerRadius: CGFloat {
+        
         get {
             return layer.cornerRadius
         }
+        
         set {
             layer.cornerRadius = newValue
         }
     }
     
-    @IBInspectable var shadowColor: UIColor?{
-            set {
-                guard let uiColor = newValue else { return }
-                layer.shadowColor = uiColor.cgColor
-            }
-            get{
-                guard let color = layer.shadowColor else { return nil }
-                return UIColor(cgColor: color)
-            }
+    @IBInspectable var shadowColor: UIColor? {
+        
+        get {
+            guard let color = layer.shadowColor else { return nil }
+            return UIColor(cgColor: color)
         }
-
-        @IBInspectable var shadowOpacity: Float{
-            set {
-                layer.shadowOpacity = newValue
-            }
-            get{
-                return layer.shadowOpacity
-            }
+        
+        set {
+            guard let uiColor = newValue else { return }
+            layer.shadowColor = uiColor.cgColor
         }
-
-        @IBInspectable var shadowOffset: CGSize{
-            set {
-                layer.shadowOffset = newValue
-            }
-            get{
-                return layer.shadowOffset
-            }
-        }
-
-        @IBInspectable var shadowRadius: CGFloat{
-            set {
-                layer.shadowRadius = newValue
-            }
-            get{
-                return layer.shadowRadius
-            }
-        }
+        
+    }
     
+    @IBInspectable var shadowOpacity: Float {
+        
+        get {
+            return layer.shadowOpacity
+        }
+        
+        set {
+            layer.shadowOpacity = newValue
+        }
+    }
+    
+    @IBInspectable var shadowOffset: CGSize {
+        
+        get {
+            return layer.shadowOffset
+        }
+        
+        set {
+            layer.shadowOffset = newValue
+        }
+    }
+    
+    enum Direction: Int {
+        case topToBottom = 0
+        case leftSkewed
+    }
+    
+    func applyGradient(colors: [UIColor?], locations: [NSNumber]? = [0.0, 1.0], direction: Direction = .topToBottom) {
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.bounds
+        gradientLayer.colors = colors.map{ $0?.cgColor as Any }
+        gradientLayer.locations = locations
+        
+        switch direction {
+        case .topToBottom:
+            gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
+            gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+            
+        case .leftSkewed:
+            gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+            gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+            
+        }
+        
+        self.layer.addSublayer(gradientLayer)
+    }
+    
+    func roundCornersTop(cornerRadius: Double) {
+        
+        self.layer.cornerRadius = CGFloat(cornerRadius)
+        
+        self.clipsToBounds = true
+        
+        self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
+    }
     
     func stickSubView(_ objectView: UIView) {
         

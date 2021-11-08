@@ -14,6 +14,8 @@ class ChatRoomViewController: UIViewController {
 
     private var userName = UserManager.shared.userInfo.userName
     
+    let textFieldView = UIView()
+    
     private var messages = [Message]() {
         didSet{
             tableView.reloadData()
@@ -43,13 +45,13 @@ class ChatRoomViewController: UIViewController {
         
         guard let groupInfo = groupInfo else { return }
         
-        GroupRoomManager.shared.fetchMessages(groupId: groupInfo.groupId) { [weak self] result in
+        GroupRoomManager.shared.fetchMessages(groupId: groupInfo.groupId) { result in
             
             switch result {
             
             case .success(let messages):
                 
-                self?.messages = messages
+                self.messages = messages
                 
             case .failure(let error):
                 
@@ -75,25 +77,6 @@ class ChatRoomViewController: UIViewController {
 
     }
     
-    func setUpTableView() {
-        
-        view.addSubview(tableView)
-        
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 170),
-            
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 60)
-        ])
-        tableView.separatorStyle = .none
-    }
-    
     func setUpHeaderView() {
         
         guard let headerView = Bundle.main.loadNibNamed(GroupChatHeaderCell.identifier, owner: self, options: nil)?.first as? GroupChatHeaderCell
@@ -111,7 +94,7 @@ class ChatRoomViewController: UIViewController {
             
             headerView.rightAnchor.constraint(equalTo: view.rightAnchor),
             
-            headerView.heightAnchor.constraint(equalToConstant: 170)
+            headerView.heightAnchor.constraint(equalToConstant: 220)
         ])
         headerView.requestButton.addTarget(self, action: #selector(sendRequest), for: .touchUpInside)
 
@@ -119,8 +102,27 @@ class ChatRoomViewController: UIViewController {
         headerView.infoButton.addTarget(self, action: #selector(showMembers), for: .touchUpInside)
         
         if let groupInfo = groupInfo {
-        headerView.setUpCell(groups: groupInfo)
+        headerView.setUpCell(group: groupInfo)
         }
+    }
+    
+    func setUpTableView() {
+        
+        view.addSubview(tableView)
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 220),
+            
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        ])
+        tableView.separatorStyle = .none
     }
     
     @objc func backToPreviousVC() {
@@ -132,7 +134,7 @@ class ChatRoomViewController: UIViewController {
     
     func setUpTextField() {
         
-        let textFieldView = UIView()
+        
         view.addSubview(textFieldView)
         
         textFieldView.translatesAutoresizingMaskIntoConstraints = false
@@ -147,7 +149,7 @@ class ChatRoomViewController: UIViewController {
             
             textFieldView.heightAnchor.constraint(equalToConstant: 60)
         ])
-        textFieldView.backgroundColor = .green
+        textFieldView.backgroundColor = .B1
         
         textFieldView.addSubview(textField)
         
@@ -189,7 +191,6 @@ class ChatRoomViewController: UIViewController {
         
         sendButton.setBackgroundImage(image, for: .normal)
         sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
-//        sendButton.backgroundColor = .lightGray
         sendButton.layer.cornerRadius = sendButton.frame.width / 2
         sendButton.layer.masksToBounds = true
 

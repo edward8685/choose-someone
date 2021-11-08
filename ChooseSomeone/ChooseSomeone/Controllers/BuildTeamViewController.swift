@@ -7,10 +7,15 @@
 
 import UIKit
 import FirebaseFirestore
+import RSKPlaceholderTextView
 
 class BuildTeamViewController: UIViewController {
     
     private var group = Group()
+    
+    @IBOutlet weak var buildTeamView: UIView!
+    
+    @IBOutlet weak var headerView: UIView!
     
     @IBOutlet weak var groupNameTextField: UITextField! {
         didSet {
@@ -35,10 +40,10 @@ class BuildTeamViewController: UIViewController {
             numOfPeopleTextfield.delegate = self
         }
     }
-    
-    @IBOutlet weak var notedTextView: UITextView! {
+
+    @IBOutlet weak var noteTextView: RSKPlaceholderTextView! {
         didSet {
-            notedTextView.delegate = self
+            noteTextView.delegate = self
         }
     }
     
@@ -54,6 +59,20 @@ class BuildTeamViewController: UIViewController {
         setUpButton()
     }
     
+    override func viewWillLayoutSubviews() {
+        
+        headerView.applyGradient(colors: [.U2, .U1], locations: [0.0, 1.0], direction: .topToBottom)
+        
+        headerView.roundCornersTop(cornerRadius: 25)
+        
+        noteTextView.placeholder = "對團員說些什麼.."
+        noteTextView.layer.masksToBounds = false
+        noteTextView.layer.shadowColor = UIColor.black.cgColor
+        noteTextView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        noteTextView.layer.shadowOpacity = 0.2
+
+    }
+    
     func setUpButton() {
         sendPostButton.addTarget(self, action: #selector(sendPost), for: .touchUpInside)
         dismiss(animated: true, completion: nil)
@@ -63,7 +82,7 @@ class BuildTeamViewController: UIViewController {
         
         let hostId = UserManager.shared.userInfo.uid
         
-        textViewDidEndEditing(notedTextView)
+        textViewDidEndEditing(noteTextView)
         group.hostId = hostId
         group.date = Timestamp(date: travelDate.date)
         group.userIds = [hostId]

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class GroupChatHeaderCell: UITableViewCell {
     
@@ -15,7 +16,11 @@ class GroupChatHeaderCell: UITableViewCell {
     
     @IBOutlet weak var trailName: UILabel!
     
+    @IBOutlet weak var travelTime: UILabel!
+    
     @IBOutlet weak var numOfPeople: UILabel!
+    
+    @IBOutlet weak var hostName: UILabel!
     
     @IBOutlet weak var note: UILabel!
     
@@ -25,45 +30,55 @@ class GroupChatHeaderCell: UITableViewCell {
     
     @IBOutlet weak var infoButton: UIButton!
     
-    func setUpCell(groups: Group) {
+    func setUpCell(group: Group) {
         
         let userId = UserManager.shared.userInfo.uid
         
-        groupName.text = groups.groupName
+        groupName.text = group.groupName
         
-        let timeInterval = groups.date
-        let date = timeInterval.dateValue()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy/MM/dd  HH:mm"
-        let time = dateFormatter.string(from: date as Date)
-        travelDate.text = time
+        travelDate.text = TimeFormater.dateStyle.timeFormat(time: group.date)
         
-        trailName.text = groups.trailName
-        let upperLimit = groups.upperLimit.description
-        let counts = groups.userIds.count
+        travelTime.text = TimeFormater.timeStyle.timeFormat(time: group.date)
+        
+        trailName.text = group.trailName
+        
+        let upperLimit = group.upperLimit.description
+        
+        let counts = group.userIds.count
+        
         numOfPeople.text = "\(counts) / \(upperLimit)"
-        note.text = groups.note
         
-        for userInGroup in groups.userIds {
-            if userInGroup != userId {
-                requestButton.setTitle("送出申請", for: .normal)
-            } else {
-                requestButton.setTitle("退出隊伍", for: .normal)
+        note.text = group.note
+        
+        if group.hostId == userId {
+            
+            requestButton.setTitle("編輯資訊", for: .normal)
+            
+        } else {
+            
+            for userInGroup in group.userIds {
+                
+                if userInGroup != userId {
+                    
+                    requestButton.setTitle("送出申請", for: .normal)
+                    
+                } else {
+                    
+                    requestButton.setTitle("退出隊伍", for: .normal)
+                }
             }
         }
-        
     }
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         selectionStyle = .none
+        self.backgroundColor = .clear
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
     }
     
 }

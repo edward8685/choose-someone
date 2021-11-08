@@ -75,7 +75,7 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         
         let dataSet = LineChartDataSet(entries: dataEntries, label: "")
         
-        dataSet.colors = [.B1 ?? .systemGray]
+        dataSet.colors = [.U1 ?? .systemGray]
         
         dataSet.drawFilledEnabled = true
         
@@ -128,7 +128,7 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         returnButton.backgroundColor = .white
         let image = UIImage(systemName: "chevron.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .medium))
         returnButton.setImage(image, for: .normal)
-        returnButton.tintColor = UIColor.G1
+        returnButton.tintColor = UIColor.U1
         returnButton.layer.cornerRadius = radius / 2
         returnButton.layer.masksToBounds = true
         

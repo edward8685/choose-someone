@@ -48,6 +48,8 @@ class ChooseGroupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.applyGradient(colors: [.B2, .B6], locations: [0.0, 1.0], direction: .leftSkewed)
+        
         tableView = UITableView()
         
         tableView.registerCellWithNib(identifier: GroupInfoCell.identifier, bundle: nil)
@@ -66,6 +68,7 @@ class ChooseGroupViewController: UIViewController {
         self.tableView.mj_header = header
         
         groupsToDisplay = groups
+        
     }
     
     @objc func headerRefresh() {
@@ -77,6 +80,8 @@ class ChooseGroupViewController: UIViewController {
     func setUpTableView() {
         
         view.addSubview(tableView)
+        
+        tableView.backgroundColor = .clear
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
