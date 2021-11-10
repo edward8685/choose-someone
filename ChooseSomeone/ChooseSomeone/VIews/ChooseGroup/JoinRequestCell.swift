@@ -24,22 +24,36 @@ class JoinRequestCell: UITableViewCell {
     func setUpCell(requests: [Request], indexPath: IndexPath) {
         
 //        requestName.text = requests[indexPath.row].requestName
-        requestLabel.text = "Wanna join your \(requests[indexPath.row].groupName)"
+        requestLabel.text = "want to join your \(requests[indexPath.row].groupName)"
+        
+    }
+    func setUpCell(group: Group, indexPath: IndexPath) {
+        
+        requestLabel.isHidden = true
+        acceptButton.isHidden = true
+        requestName.text = group.userIds[indexPath.row]
         
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         self.backgroundColor = .clear
         viewOfBackground.layer.cornerRadius = 10
         viewOfBackground.layer.masksToBounds = true
         selectionStyle = .none
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    override func layoutSubviews() {
+        
+        acceptButton.layer.cornerRadius = acceptButton.frame.height / 2
+        acceptButton.layer.masksToBounds = true
+        
+        rejectButton.layer.cornerRadius = acceptButton.frame.height / 2
+        rejectButton.layer.masksToBounds = true
+        
+        userImage.cornerRadius = acceptButton.frame.height / 2
+        
     }
     
 }

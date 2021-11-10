@@ -45,9 +45,13 @@ class GroupHeaderCell: UITableViewCell {
         
         groupSearchBar.backgroundImage = image
         
-        groupSearchBar.searchBarStyle = .default
+        groupSearchBar.backgroundColor = .white
+        groupSearchBar.searchTextField.backgroundColor = .white
+        groupSearchBar.layer.cornerRadius = 15
+        groupSearchBar.clipsToBounds = true
         
         selectionStyle = .none
         
     }
+    
 }

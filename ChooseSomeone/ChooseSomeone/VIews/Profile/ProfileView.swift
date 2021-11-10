@@ -28,8 +28,6 @@ class ProfileView: UIView {
     
     func setUpProfileView(userInfo: UserInfo) {
         
-        userImage.loadImage(userInfo.pictureRef, placeHolder: nil)
-        
         userName.text = userInfo.userName
         
         editNameTextField.text = userInfo.userName

@@ -20,12 +20,14 @@ class BuildTeamViewController: UIViewController {
     @IBOutlet weak var groupNameTextField: UITextField! {
         didSet {
             groupNameTextField.delegate = self
+            groupNameTextField.setLeftPaddingPoints(8)
         }
     }
     
     @IBOutlet weak var trailNameTextField: UITextField! {
         didSet {
             trailNameTextField.delegate = self
+            trailNameTextField.setLeftPaddingPoints(8)
         }
     }
     
@@ -38,6 +40,7 @@ class BuildTeamViewController: UIViewController {
     @IBOutlet weak var numOfPeopleTextfield: UITextField! {
         didSet {
             numOfPeopleTextfield.delegate = self
+            numOfPeopleTextfield.setLeftPaddingPoints(8)
         }
     }
 
@@ -63,14 +66,20 @@ class BuildTeamViewController: UIViewController {
         
         headerView.applyGradient(colors: [.U2, .U1], locations: [0.0, 1.0], direction: .topToBottom)
         
-        headerView.roundCornersTop(cornerRadius: 25)
+        headerView.roundCornersTop(cornerRadius: 15)
         
+        setUpTextView()
+
+    }
+    
+    func setUpTextView() {
         noteTextView.placeholder = "對團員說些什麼.."
         noteTextView.layer.masksToBounds = false
         noteTextView.layer.shadowColor = UIColor.black.cgColor
-        noteTextView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        noteTextView.layer.shadowOffset = CGSize(width: 1.0, height: 3.0)
         noteTextView.layer.shadowOpacity = 0.2
-
+        noteTextView.textContainer.maximumNumberOfLines = 2
+        noteTextView.textContainer.lineBreakMode = .byWordWrapping
     }
     
     func setUpButton() {

@@ -4,80 +4,71 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="NotoSansTC-Regular.otf">
+            <string>NotoSansTC-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="89" id="KGk-i7-Jjw" customClass="GroupChatCell" customModule="ChooseSomeone" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="471" height="89"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="94" id="KGk-i7-Jjw" customClass="GroupChatCell" customModule="ChooseSomeone" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="474" height="94"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="471" height="89"/>
+                <rect key="frame" x="0.0" y="0.0" width="474" height="94"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uwr-cl-uQ9">
-                        <rect key="frame" x="222.5" y="3" width="26.5" height="20.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <rect key="frame" x="226.5" y="3" width="21.5" height="13"/>
+                        <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="11"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="JZT-0I-ddi">
-                        <rect key="frame" x="10" y="28.5" width="451" height="55.5"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="y5v-Zy-Tpv">
+                        <rect key="frame" x="60" y="18" width="37" height="35.5"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ql0-xW-VgH">
-                                <rect key="frame" x="0.0" y="0.0" width="111.5" height="20.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="leQ-Xk-abQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="60" height="20.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="sCU-DZ-ztl"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uOX-qy-6fl" customClass="PaddingLabel" customModule="ChooseSomeone" customModuleProvider="target">
-                                        <rect key="frame" x="70" y="0.0" width="41.5" height="20.5"/>
-                                        <color key="backgroundColor" name="C4"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="paddingLeft">
-                                                <real key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="paddingRight">
-                                                <real key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="paddingTop">
-                                                <real key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="paddingBottom">
-                                                <real key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="glG-eb-gMS">
-                                <rect key="frame" x="0.0" y="26" width="30" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="0RR-pG-TpR"/>
-                                    <constraint firstAttribute="height" constant="30" id="U7K-Og-hwt"/>
-                                </constraints>
-                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="leQ-Xk-abQ">
+                                <rect key="frame" x="0.0" y="0.0" width="37" height="14"/>
+                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uOX-qy-6fl" customClass="PaddingLabel" customModule="ChooseSomeone" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="18" width="37" height="17.5"/>
+                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="paddingLeft">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="paddingRight">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="paddingTop">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="paddingBottom">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                         </subviews>
                     </stackView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="glG-eb-gMS">
+                        <rect key="frame" x="10" y="18.5" width="40" height="39"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="0RR-pG-TpR"/>
+                            <constraint firstAttribute="height" constant="40" id="U7K-Og-hwt"/>
+                        </constraints>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="78y-gr-sZl" customClass="PaddingLabel" customModule="ChooseSomeone" customModuleProvider="target">
-                        <rect key="frame" x="419.5" y="28.5" width="41.5" height="20.5"/>
-                        <color key="backgroundColor" name="C2"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="422" y="18" width="37" height="17.5"/>
+                        <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
@@ -93,24 +84,21 @@
                             <userDefinedRuntimeAttribute type="number" keyPath="paddingBottom">
                                 <real key="value" value="5"/>
                             </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="5"/>
-                            </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="78y-gr-sZl" firstAttribute="width" relation="lessThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.7" id="3le-JR-P5s"/>
-                    <constraint firstItem="78y-gr-sZl" firstAttribute="centerY" secondItem="ql0-xW-VgH" secondAttribute="centerY" id="5Kz-yw-YfD"/>
                     <constraint firstItem="Uwr-cl-uQ9" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="5Tt-3f-2Ms"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="78y-gr-sZl" secondAttribute="bottom" constant="10" id="C5Z-Hn-2Mx"/>
-                    <constraint firstItem="JZT-0I-ddi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="EdU-d3-Yjc"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="y5v-Zy-Tpv" secondAttribute="bottom" constant="10" id="9Yo-xy-Onf"/>
                     <constraint firstItem="Uwr-cl-uQ9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="Eej-Me-OUE"/>
-                    <constraint firstItem="uOX-qy-6fl" firstAttribute="width" relation="lessThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.7" id="GXR-GC-cy8"/>
-                    <constraint firstAttribute="bottom" secondItem="JZT-0I-ddi" secondAttribute="bottom" constant="5" id="Rhu-EO-DEd"/>
-                    <constraint firstAttribute="trailing" secondItem="JZT-0I-ddi" secondAttribute="trailing" constant="10" id="Xk3-hc-2zR"/>
-                    <constraint firstAttribute="trailing" secondItem="78y-gr-sZl" secondAttribute="trailing" constant="10" id="peH-w6-ALf"/>
-                    <constraint firstItem="JZT-0I-ddi" firstAttribute="top" secondItem="Uwr-cl-uQ9" secondAttribute="bottom" constant="5" id="xRu-5r-uBx"/>
+                    <constraint firstItem="glG-eb-gMS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Fb5-3H-JI3"/>
+                    <constraint firstItem="glG-eb-gMS" firstAttribute="top" secondItem="Uwr-cl-uQ9" secondAttribute="bottom" constant="2" id="Xvg-2O-VJh"/>
+                    <constraint firstItem="y5v-Zy-Tpv" firstAttribute="leading" secondItem="glG-eb-gMS" secondAttribute="trailing" constant="10" id="bxw-Oe-52U"/>
+                    <constraint firstItem="78y-gr-sZl" firstAttribute="top" secondItem="Uwr-cl-uQ9" secondAttribute="bottom" constant="2" id="f7g-VY-AIQ"/>
+                    <constraint firstItem="y5v-Zy-Tpv" firstAttribute="top" secondItem="glG-eb-gMS" secondAttribute="bottom" constant="-40" id="h85-Ta-hZE"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="78y-gr-sZl" secondAttribute="bottom" constant="10" id="hPo-CL-dzt"/>
+                    <constraint firstAttribute="trailing" secondItem="78y-gr-sZl" secondAttribute="trailing" constant="15" id="peH-w6-ALf"/>
                 </constraints>
                 <userDefinedRuntimeAttributes>
                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -126,24 +114,18 @@
                 <outlet property="memberName" destination="leQ-Xk-abQ" id="jZe-rC-k0R"/>
                 <outlet property="userMessage" destination="78y-gr-sZl" id="QXv-fR-8A3"/>
             </connections>
-            <point key="canvasLocation" x="252.89855072463769" y="360.60267857142856"/>
+            <point key="canvasLocation" x="251" y="359"/>
         </tableViewCell>
     </objects>
     <designables>
         <designable name="78y-gr-sZl">
-            <size key="intrinsicContentSize" width="41.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="37" height="17.5"/>
         </designable>
         <designable name="uOX-qy-6fl">
-            <size key="intrinsicContentSize" width="41.5" height="20.5"/>
+            <size key="intrinsicContentSize" width="37" height="17.5"/>
         </designable>
     </designables>
     <resources>
         <image name="person.circle" catalog="system" width="128" height="121"/>
-        <namedColor name="C2">
-            <color red="0.097999997437000275" green="0.76499998569488525" blue="0.85500001907348633" alpha="0.80000001192092896" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="C4">
-            <color red="0.46299999952316284" green="0.89800000190734863" blue="0.70999997854232788" alpha="0.80000001192092896" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
 </document>

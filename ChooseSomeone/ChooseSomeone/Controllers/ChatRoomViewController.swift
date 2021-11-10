@@ -7,58 +7,61 @@
 
 import UIKit
 import FirebaseFirestore
+import RSKPlaceholderTextView
 
 class ChatRoomViewController: UIViewController {
- 
-    let userId = UserManager.shared.userInfo.uid
-
-    private var userName = UserManager.shared.userInfo.userName
     
-    let textFieldView = UIView()
+    private let userId = UserManager.shared.userInfo.uid
+    
+    private var userInfo = UserManager.shared.userInfo
+    
+    var groupInfo: Group?
+    
+    private var textViewMessage: String? {
+        didSet {
+            if textViewMessage != nil {
+                sendButton.isEnabled = true
+            } else {
+                sendButton.isEnabled = false
+            }
+        }
+    }
     
     private var messages = [Message]() {
-        didSet{
+        didSet {
             tableView.reloadData()
         }
     }
     
     private var newMessage = Message()
-      
+    
     private var tableView: UITableView! {
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
+            tableView.separatorStyle = .none
         }
     }
     
-    var groupInfo: Group?
+    private let textViewView = UIView()
     
-    var textField = UITextField() {
+    private let sendButton = UIButton()
+    
+    private var isInGroup: Bool = false {
         didSet {
-            textField.delegate = self
+            textViewView.isHidden = isInGroup ? false : true
+            textView.isHidden = isInGroup ? false : true
+            sendButton.isHidden = isInGroup ? false : true
         }
     }
     
-    var textFieldMessage: String?
-    
-    func addMessageListener() {
-        
-        guard let groupInfo = groupInfo else { return }
-        
-        GroupRoomManager.shared.fetchMessages(groupId: groupInfo.groupId) { result in
-            
-            switch result {
-            
-            case .success(let messages):
-                
-                self.messages = messages
-                
-            case .failure(let error):
-                
-                print("fetchData.failure: \(error)")
-            }
+    private var textView = RSKPlaceholderTextView() {
+        didSet {
+            textView.delegate = self
         }
     }
+    
+    // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,14 +72,186 @@ class ChatRoomViewController: UIViewController {
         
         setUpHeaderView()
         
+        setUpTextView()
+        
         setUpTableView()
         
-        setUpTextField()
-        
         addMessageListener()
-
+        
+        setNavigationBar()
+        
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = false
+    }
+  
+    
+    override func viewWillLayoutSubviews() {
+        
+        textView.layer.cornerRadius = textView.frame.height / 2
+        textView.layer.masksToBounds = true
+        
+    }
+    
+    // MARK: - Action
+    
+    func addMessageListener() {
+        
+        guard let groupInfo = groupInfo else { return }
+        
+        GroupRoomManager.shared.addSnapshotListener(groupId: groupInfo.groupId) { result in
+            
+            switch result {
+                
+            case .success(let messages):
+                
+                var filtedmessages = [Message]()
+                
+                for message in messages where self.userInfo.blockList?.contains(message.userId) == false {
+                    filtedmessages.append(message)
+                }
+                
+                self.messages = filtedmessages
+                
+            case .failure(let error):
+                
+                print("fetchData.failure: \(error)")
+            }
+        }
+    }
+    
+    @objc func sendRequest(_ sender: UIButton) {
+        
+        guard let groupInfo = groupInfo else { return }
+        
+        let joinRequest = Request(groupId: groupInfo.groupId,
+                                  groupName: groupInfo.groupName,
+                                  hostId: groupInfo.hostId,
+                                  requestId: userId,
+                                  createdTime: Timestamp())
+        
+        GroupRoomManager.shared.sendRequest(request: joinRequest) { result in
+            
+            switch result {
+                
+            case .success:
+                
+                print("send request successfully")
+                
+                let controller = UIAlertController(title: "成功申請囉", message: nil, preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+                    self.dismiss(animated: true, completion: nil)
+                }
+                controller.addAction(okAction)
+                self.present(controller, animated: true, completion: nil)
+                
+            case .failure(let error):
+                
+                print("send request failure: \(error)")
+            }
+        }
+        
+    }
+    
+    @objc func sendMessage(_ sender: UIButton) {
+        textViewDidEndEditing(textView)
+        guard let text = textView.text,
+              let groupInfo = groupInfo else { return }
+        
+        newMessage.body = text
+        newMessage.groupId = groupInfo.groupId
+        newMessage.userId = userId
+        
+        GroupRoomManager.shared.sendMessage(groupId: newMessage.groupId, message: newMessage) { result in
+            
+            switch result {
+                
+            case .success:
+                print("send message successfully")
+                self.textView.text = ""
+                
+            case .failure(let error):
+                
+                print("send message failure: \(error)")
+            }
+        }
+    }
+    
+    func setNavigationBar() {
+        
+        self.title = "\(groupInfo?.groupName ?? "揪團隊伍")"
+        
+        UINavigationBar.appearance().backgroundColor = .B1
+        
+        UINavigationBar.appearance().barTintColor = .B1
+        
+        UINavigationBar.appearance().isTranslucent = true
+        
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white,
+                                                            NSAttributedString.Key.font: UIFont.medium(size: 22) ?? UIFont.systemFont(ofSize: 22)]
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+        let leftButton = UIButton()
+        
+        leftButton.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+     
+        let chevroImage = UIImage(systemName: "chevron.left")
+        
+        leftButton.setImage(chevroImage, for: .normal)
+        
+        leftButton.layer.cornerRadius = leftButton.frame.height / 2
+        
+        leftButton.layer.masksToBounds = true
+        
+        leftButton.tintColor = .B1
+        
+        leftButton.backgroundColor = .white
+        
+        leftButton.addTarget(self, action: #selector(backToPreviousVC), for: .touchUpInside)
+        
+        self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: leftButton), animated: true)
+        
+        let rightButton = UIButton()
+        
+        rightButton.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+     
+        let infoImage = UIImage(systemName: "info")
+        
+        rightButton.setImage(infoImage, for: .normal)
+        
+        rightButton.layer.cornerRadius = rightButton.frame.height / 2
+        
+        rightButton.layer.masksToBounds = true
+        
+        rightButton.tintColor = .B1
+        
+        rightButton.backgroundColor = .white
+        
+        rightButton.addTarget(self, action: #selector(showMembers), for: .touchUpInside)
+        
+        self.navigationItem.setRightBarButton(UIBarButtonItem(customView: rightButton), animated: true)
+        
+    }
+    
+    @objc func backToPreviousVC() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func showMembers() {
+        
+        if let teammateVC = self.storyboard?.instantiateViewController(withIdentifier: "TeammateViewController") as? TeammateViewController {
+        
+        teammateVC.groupInfo = groupInfo
+        
+        navigationController?.pushViewController(teammateVC, animated: true)
+            
+        }
+
+    }
+        
     func setUpHeaderView() {
         
         guard let headerView = Bundle.main.loadNibNamed(GroupChatHeaderCell.identifier, owner: self, options: nil)?.first as? GroupChatHeaderCell
@@ -94,15 +269,12 @@ class ChatRoomViewController: UIViewController {
             
             headerView.rightAnchor.constraint(equalTo: view.rightAnchor),
             
-            headerView.heightAnchor.constraint(equalToConstant: 220)
+            headerView.heightAnchor.constraint(equalToConstant: 180)
         ])
         headerView.requestButton.addTarget(self, action: #selector(sendRequest), for: .touchUpInside)
-
-        headerView.backButton.addTarget(self, action: #selector(backToPreviousVC), for: .touchUpInside)
-        headerView.infoButton.addTarget(self, action: #selector(showMembers), for: .touchUpInside)
         
         if let groupInfo = groupInfo {
-        headerView.setUpCell(group: groupInfo)
+            headerView.setUpCell(group: groupInfo)
         }
     }
     
@@ -114,65 +286,58 @@ class ChatRoomViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 220),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 180),
             
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: textViewView.safeAreaLayoutGuide.topAnchor)
         ])
-        tableView.separatorStyle = .none
     }
     
-    @objc func backToPreviousVC() {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func showMembers() {
-    }
-    
-    func setUpTextField() {
+    func setUpTextView() {
         
+        view.addSubview(textViewView)
         
-        view.addSubview(textFieldView)
+        textView.placeholder = "輸入訊息..."
         
-        textFieldView.translatesAutoresizingMaskIntoConstraints = false
+        textViewView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
-            textFieldView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            textViewView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            textFieldView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            textViewView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             
-            textFieldView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            textViewView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            textFieldView.heightAnchor.constraint(equalToConstant: 60)
+            textViewView.heightAnchor.constraint(equalToConstant: 50)
         ])
-        textFieldView.backgroundColor = .B1
         
-        textFieldView.addSubview(textField)
+        textViewView.backgroundColor = .B1
         
-        textField.translatesAutoresizingMaskIntoConstraints = false
+        textViewView.addSubview(textView)
+        
+        textView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
-            textField.heightAnchor.constraint(equalToConstant: 40),
+            textView.heightAnchor.constraint(equalToConstant: 30),
             
-            textField.bottomAnchor.constraint(equalTo: textFieldView.bottomAnchor, constant: -10),
+            textView.bottomAnchor.constraint(equalTo: textViewView.bottomAnchor, constant: -10),
             
-            textField.leadingAnchor.constraint(equalTo: textFieldView.leadingAnchor, constant: 10),
+            textView.leadingAnchor.constraint(equalTo: textViewView.leadingAnchor, constant: 10),
             
-            textField.widthAnchor.constraint(equalToConstant: UIScreen.width - 10 * 2 - 10 - 30)
+            textView.widthAnchor.constraint(equalToConstant: UIScreen.width - 10 * 2 - 10 - 30)
         ])
-        textField.textAlignment = .left
-        textField.backgroundColor = .white
-        textField.layer.cornerRadius = textField.frame.height / 2
-        textField.layer.masksToBounds = true
+        textView.textAlignment = .left
         
-        let sendButton = UIButton()
+        textView.textContainerInset = UIEdgeInsets(top: 8, left: 5, bottom: 5, right: 5);
         
-        textFieldView.addSubview(sendButton)
+        textView.backgroundColor = .white
+        
+        textViewView.addSubview(sendButton)
         
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -182,76 +347,19 @@ class ChatRoomViewController: UIViewController {
             
             sendButton.widthAnchor.constraint(equalToConstant: 30),
             
-            sendButton.centerYAnchor.constraint(equalTo: textFieldView.centerYAnchor),
+            sendButton.centerYAnchor.constraint(equalTo: textViewView.centerYAnchor),
             
-            sendButton.trailingAnchor.constraint(equalTo: textFieldView.trailingAnchor, constant: -10)
+            sendButton.trailingAnchor.constraint(equalTo: textViewView.trailingAnchor, constant: -10)
         ])
         
         let image = UIImage(systemName: "paperplane")
         
         sendButton.setBackgroundImage(image, for: .normal)
         sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
-        sendButton.layer.cornerRadius = sendButton.frame.width / 2
-        sendButton.layer.masksToBounds = true
-
+        sendButton.tintColor = .white
+        
     }
     
-    @objc func sendRequest(_ sender: UIButton) {
-        
-        guard let groupInfo = groupInfo else { return }
-        
-        let joinRequest = Request(groupId: groupInfo.groupId,
-                                  groupName: groupInfo.groupName,
-                                  hostId: groupInfo.hostId,
-                                  requestId: userId,
-                                  createdTime: Timestamp())
-
-        GroupRoomManager.shared.sendRequest(request: joinRequest) { result in
-            
-            switch result {
-            
-            case .success:
-                
-                print("send request successfully")
-                
-                let controller = UIAlertController(title: "成功申請囉", message: nil, preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-                    self.dismiss(animated: true, completion: nil)
-                }
-                controller.addAction(okAction)
-                self.present(controller, animated: true, completion: nil)
-
-            case .failure(let error):
-                
-                print("send request failure: \(error)")
-            }
-        }
-            
-    }
-    
-    @objc func sendMessage(_ sender: UIButton) {
-        textFieldDidEndEditing(textField)
-        guard let text = textField.text,
-              let groupInfo = groupInfo else { return }
-            
-        newMessage.body = text
-        newMessage.groupId = groupInfo.groupId
-        newMessage.userId = userId
-        
-        GroupRoomManager.shared.sendMessage(groupId: newMessage.groupId, message: newMessage) { result in
-               
-               switch result {
-               
-               case .success:
-                   print("send message successfully")
-                   self.textField.text = ""
-
-               case .failure(let error):
-                   
-                   print("send message failure: \(error)")
-               }
-           }
-    }
 }
 
 extension ChatRoomViewController: UITableViewDelegate {
@@ -268,8 +376,10 @@ extension ChatRoomViewController: UITableViewDelegate {
 extension ChatRoomViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if groupInfo?.userIds.contains(userId) == true {
-        return messages.count
+            isInGroup = true
+            return messages.count
         } else {
+            isInGroup = false
             return 0
         }
     }
@@ -285,8 +395,9 @@ extension ChatRoomViewController: UITableViewDataSource {
     }
 }
 
-extension ChatRoomViewController: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        textFieldMessage = textField.text
+extension ChatRoomViewController: UITextViewDelegate {
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        textViewMessage = textView.text
     }
 }

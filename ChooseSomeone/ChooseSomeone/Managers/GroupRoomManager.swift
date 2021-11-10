@@ -17,7 +17,7 @@ class GroupRoomManager {
     
     lazy var dataBase = Firestore.firestore()
     
-    func fetchMessages(groupId: String, completion: @escaping (Result<[Message], Error>) -> Void) {
+    func addSnapshotListener(groupId: String, completion: @escaping (Result<[Message], Error>) -> Void) {
         
         dataBase.collection("Messages").whereField("group_id", isEqualTo: groupId).addSnapshotListener { (snapshot, error) in
             

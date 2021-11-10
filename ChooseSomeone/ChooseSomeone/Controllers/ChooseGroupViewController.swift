@@ -45,6 +45,8 @@ class ChooseGroupViewController: UIViewController {
     private var searching = false
     private var searchGroups = [Group]()
     
+    // MARK: - View Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,14 +64,20 @@ class ChooseGroupViewController: UIViewController {
         
         fetchGroupData()
         
-        navigationController?.isNavigationBarHidden = true
-        
         header.setRefreshingTarget(self, refreshingAction: #selector(self.headerRefresh))
         self.tableView.mj_header = header
         
         groupsToDisplay = groups
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        navigationController?.isNavigationBarHidden = true
+        
+    }
+    
+    // MARK: - Action
     
     @objc func headerRefresh() {
         fetchGroupData()
@@ -87,7 +95,7 @@ class ChooseGroupViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 120),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
             
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             
@@ -117,7 +125,7 @@ class ChooseGroupViewController: UIViewController {
             
             headerView.rightAnchor.constraint(equalTo: view.rightAnchor),
             
-            headerView.heightAnchor.constraint(equalToConstant: 120)
+            headerView.heightAnchor.constraint(equalToConstant: 100)
         ])
         
         headerView.requestListButton.addTarget(self, action: #selector(checkRequestList), for: .touchUpInside)
@@ -253,6 +261,7 @@ extension ChooseGroupViewController: UITableViewDataSource {
 }
 
 extension ChooseGroupViewController: UISearchBarDelegate {
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         searchGroups = groupsToDisplay.filter {
@@ -261,8 +270,14 @@ extension ChooseGroupViewController: UISearchBarDelegate {
         searching = true
         
         tableView.reloadData()
-        
     }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        
+        resignFirstResponder()
+    }
+    
+    
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         
@@ -272,5 +287,6 @@ extension ChooseGroupViewController: UISearchBarDelegate {
         
         tableView.reloadData()
         
+        resignFirstResponder()
     }
 }

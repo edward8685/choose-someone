@@ -21,7 +21,7 @@ class GroupChatCell: UITableViewCell {
     @IBOutlet weak var userMessage: UILabel!
     
     func setUpCell(messages: [Message], indexPath: IndexPath) {
-        
+       
         let userInfo = UserManager.shared.userInfo
         
         let time = messages[indexPath.row].createdTime
@@ -35,6 +35,7 @@ class GroupChatCell: UITableViewCell {
 //            memberName.text = messages[indexPath.row].userName
             memberMessage.text = messages[indexPath.row].body
         }
+        
     }
     
     var isSentFromUser: Bool = true {
@@ -49,20 +50,21 @@ class GroupChatCell: UITableViewCell {
     override func awakeFromNib() {
         
         super.awakeFromNib()
+ 
+        selectionStyle = .none
+        self.backgroundColor = .clear
         userMessage.layer.cornerRadius = 5
         userMessage.layer.masksToBounds = true
         memberMessage.layer.cornerRadius = 5
         memberMessage.layer.masksToBounds = true
-
- 
-        selectionStyle = .none
-        self.backgroundColor = .clear
-    }
-
-    override func layoutSubviews() {
         
-//        userMessage.applyGradient(colors: [.C4, .C3], locations: [0.0, 1.0], direction: .topToBottom)
-//
-//        memberMessage.applyGradient(colors: [.C2, .C1], locations: [0.0, 1.0], direction: .topToBottom)
+        DispatchQueue.main.async {
+            
+            self.userMessage.applyGradient(colors: [.C3, .C4], locations: [0.0, 1.0], direction: .topToBottom)
+
+            self.memberMessage.applyGradient(colors: [.C1, .C2], locations: [0.0, 1.0], direction: .topToBottom)
+        }
+        
     }
+
 }

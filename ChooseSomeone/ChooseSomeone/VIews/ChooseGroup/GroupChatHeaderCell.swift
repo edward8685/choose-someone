@@ -10,8 +10,6 @@ import FirebaseFirestore
 
 class GroupChatHeaderCell: UITableViewCell {
     
-    @IBOutlet weak var groupName: UILabel!
-    
     @IBOutlet weak var travelDate: UILabel!
     
     @IBOutlet weak var trailName: UILabel!
@@ -26,15 +24,9 @@ class GroupChatHeaderCell: UITableViewCell {
     
     @IBOutlet weak var requestButton: UIButton!
     
-    @IBOutlet weak var backButton: UIButton!
-    
-    @IBOutlet weak var infoButton: UIButton!
-    
     func setUpCell(group: Group) {
         
         let userId = UserManager.shared.userInfo.uid
-        
-        groupName.text = group.groupName
         
         travelDate.text = TimeFormater.dateStyle.timeFormat(time: group.date)
         
@@ -42,7 +34,7 @@ class GroupChatHeaderCell: UITableViewCell {
         
         trailName.text = group.trailName
         
-        let upperLimit = group.upperLimit.description
+        let upperLimit = group.upperLimit
         
         let counts = group.userIds.count
         
@@ -62,6 +54,11 @@ class GroupChatHeaderCell: UITableViewCell {
                     
                     requestButton.setTitle("送出申請", for: .normal)
                     
+                    guard counts != upperLimit else {
+                        requestButton.isEnabled = false
+                        return
+                    }
+                    
                 } else {
                     
                     requestButton.setTitle("退出隊伍", for: .normal)
@@ -74,11 +71,6 @@ class GroupChatHeaderCell: UITableViewCell {
         super.awakeFromNib()
         selectionStyle = .none
         self.backgroundColor = .clear
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
     }
     
 }

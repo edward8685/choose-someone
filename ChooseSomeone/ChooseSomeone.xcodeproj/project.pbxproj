@@ -27,10 +27,13 @@
 		740FC394271D17160071459A /* ChooseGroup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740FC392271D17160071459A /* ChooseGroup.storyboard */; };
 		740FC396271D17180071459A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 740FC395271D17180071459A /* Assets.xcassets */; };
 		740FC399271D17180071459A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740FC397271D17180071459A /* LaunchScreen.storyboard */; };
+		7419126C273A5AAF006750EA /* TeammateVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7419126B273A5AAF006750EA /* TeammateVIewController.swift */; };
+		7419126E273A9AAE006750EA /* ChevronButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7419126D273A9AAE006750EA /* ChevronButton.swift */; };
 		742349352732B032001EC7A1 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742349342732B032001EC7A1 /* UserManager.swift */; };
 		7423493A273415AB001EC7A1 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74234939273415AB001EC7A1 /* Login.storyboard */; };
 		742516F927218A520011166B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742516F827218A520011166B /* UIColor+Extension.swift */; };
 		742516FB272197A30011166B /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742516FA272197A30011166B /* UILabelExtension.swift */; };
+		74377466273962DD006AA44E /* ShadowTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74377465273962DC006AA44E /* ShadowTextfield.swift */; };
 		7441B7A5273052C000614D9B /* TrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7441B7A4273052C000614D9B /* TrackInfo.swift */; };
 		7441B7A727313E1C00614D9B /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7441B7A627313E1C00614D9B /* UIFontExtension.swift */; };
 		7441B7B027313F3E00614D9B /* NotoSansTC-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7441B7A927313F3D00614D9B /* NotoSansTC-Regular.otf */; };
@@ -125,11 +128,14 @@
 		740FC395271D17180071459A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		740FC398271D17180071459A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		740FC39A271D17180071459A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7419126B273A5AAF006750EA /* TeammateVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeammateVIewController.swift; sourceTree = "<group>"; };
+		7419126D273A9AAE006750EA /* ChevronButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChevronButton.swift; sourceTree = "<group>"; };
 		742349332732662E001EC7A1 /* ChooseSomeone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChooseSomeone.entitlements; sourceTree = "<group>"; };
 		742349342732B032001EC7A1 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		74234939273415AB001EC7A1 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		742516F827218A520011166B /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		742516FA272197A30011166B /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
+		74377465273962DC006AA44E /* ShadowTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowTextfield.swift; sourceTree = "<group>"; };
 		7441B7A4273052C000614D9B /* TrackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfo.swift; sourceTree = "<group>"; };
 		7441B7A627313E1C00614D9B /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
 		7441B7A927313F3D00614D9B /* NotoSansTC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Regular.otf"; sourceTree = "<group>"; };
@@ -338,6 +344,9 @@
 		74608D17271D1C8E002BD125 /* VIews */ = {
 			isa = PBXGroup;
 			children = (
+				7419126D273A9AAE006750EA /* ChevronButton.swift */,
+				74377465273962DC006AA44E /* ShadowTextfield.swift */,
+				740E98B227362D3A006163B8 /* ImagePickerButton.swift */,
 				7423493627341589001EC7A1 /* Login */,
 				74F9650A2725392100B77DC5 /* Journey */,
 				74F965092725391500B77DC5 /* Profile */,
@@ -354,6 +363,7 @@
 			children = (
 				740FC390271D17160071459A /* ChooseGroupViewController.swift */,
 				74608D2B271D51F6002BD125 /* ChatRoomViewController.swift */,
+				7419126B273A5AAF006750EA /* TeammateVIewController.swift */,
 				74608D31271D7253002BD125 /* BuildTeamViewController.swift */,
 				74608D39271DDA05002BD125 /* JoinRequestViewController.swift */,
 				740B1B852723FF2500A1CD3B /* HomeViewController.swift */,
@@ -424,7 +434,6 @@
 				740E98AB2734DF79006163B8 /* ProfileCell.xib */,
 				740E98B027352589006163B8 /* ProfileView.swift */,
 				745A6F10272E9D0A006064C4 /* RecordInfoView.swift */,
-				740E98B227362D3A006163B8 /* ImagePickerButton.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -622,6 +631,7 @@
 				740FC391271D17160071459A /* ChooseGroupViewController.swift in Sources */,
 				74E573D427292CE300F490BF /* DistanceLabel.swift in Sources */,
 				742516FB272197A30011166B /* UILabelExtension.swift in Sources */,
+				7419126C273A5AAF006750EA /* TeammateVIewController.swift in Sources */,
 				74E573722728241F00F490BF /* GPXExtentCoordinates.swift in Sources */,
 				745A6F0E272E4B57006064C4 /* UserRecordViewController.swift in Sources */,
 				740E98A92734CE3B006163B8 /* ProfileViewController.swift in Sources */,
@@ -636,6 +646,7 @@
 				74608D37271DD2F2002BD125 /* JoinRequestCell.swift in Sources */,
 				740B1B8B2724161600A1CD3B /* HomeHeaderCell.swift in Sources */,
 				7441B7A5273052C000614D9B /* TrackInfo.swift in Sources */,
+				7419126E273A9AAE006750EA /* ChevronButton.swift in Sources */,
 				740E98AF2734E2D7006163B8 /* ProfileItem.swift in Sources */,
 				74FDD92A2722C5670014D2B2 /* UITextFieldExtexsion.swift in Sources */,
 				740E98B127352589006163B8 /* ProfileView.swift in Sources */,
@@ -645,6 +656,7 @@
 				7457A1D0271EECEF00A947AE /* Message.swift in Sources */,
 				74E5737F2728E92500F490BF /* GPXSession.swift in Sources */,
 				74608D25271D20B0002BD125 /* GroupHeaderCell.swift in Sources */,
+				74377466273962DD006AA44E /* ShadowTextfield.swift in Sources */,
 				745A6F04272D6809006064C4 /* TrackRecordsViewController.swift in Sources */,
 				745A6F02272CF4C5006064C4 /* Record.swift in Sources */,
 				74608D34271D7AE1002BD125 /* UIButtonExtension.swift in Sources */,
@@ -846,7 +858,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ed.ChooseSomeone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -883,7 +895,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ed.ChooseSomeone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -130,27 +130,49 @@ class UserManager {
         } catch {
             
             print("error")
-            
         }
         
         print("sucessfully")
-        
     }
     
     func updateUserName(name: String) {
         
         let userId = userInfo.uid
 
-        let post = [UserInfo.CodingKeys.userName.rawValue: name ]
+        let post = [UserInfo.CodingKeys.userName.rawValue: name]
         
         let docRef = dataBase.collection("Users").document(userId)
         
         docRef.updateData(post) { error in
             
             if let error = error {
+                
                 print("Error updating document: \(error)")
+                
             } else {
+                
                 print("User name successfully updated")
+            }
+        }
+    }
+    
+    func blockUser(blockUserId: String) {
+        
+        let userId = userInfo.uid
+        
+        let docRef = dataBase.collection("Users").document(userId)
+        
+        docRef.updateData([
+            "block_list": FieldValue.arrayUnion([blockUserId])
+        ]) {error in
+            
+            if let error = error {
+                
+                print("Error updating document: \(error)")
+                
+            } else {
+                
+                print("Block list successfully updated")
             }
         }
     }

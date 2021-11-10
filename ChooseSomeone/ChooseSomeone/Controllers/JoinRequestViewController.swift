@@ -10,7 +10,7 @@ import UIKit
 class JoinRequestViewController: UIViewController {
     
     private var requests = [Request]() {
-        didSet{
+        didSet {
             tableView.reloadData()
         }
     }
@@ -123,7 +123,6 @@ extension JoinRequestViewController: UITableViewDataSource {
     }
     
     @objc func acceptRequest(_ sender: UIButton) {
-        print(requests[sender.tag].groupId)
         
         GroupRoomManager.shared.addUserToGroup(
             groupId: requests[sender.tag].groupId,
@@ -179,4 +178,3 @@ extension JoinRequestViewController: UITableViewDataSource {
     }
     
 }
-
