@@ -17,6 +17,8 @@ class ChatRoomViewController: UIViewController {
     
     var groupInfo: Group?
     
+    var userStatus: GroupStatus = .notInGroup
+    
     private var textViewMessage: String? {
         didSet {
             if textViewMessage != nil {
@@ -82,12 +84,13 @@ class ChatRoomViewController: UIViewController {
         
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
+        
+        checkUserStatus()
+        
         navigationController?.isNavigationBarHidden = false
     }
   
-    
     override func viewWillLayoutSubviews() {
         
         textView.layer.cornerRadius = textView.frame.height / 2
@@ -96,6 +99,29 @@ class ChatRoomViewController: UIViewController {
     }
     
     // MARK: - Action
+    
+    func checkUserStatus() {
+        
+        guard let groupInfo = groupInfo else { return }
+        
+        if groupInfo.hostId == userId {
+            
+            userStatus = .ishost
+            
+        } else {
+            
+                if groupInfo.userIds.contains(userId) {
+                    
+                    userStatus = .isInGroup
+                    
+                } else {
+                    
+                    userStatus = .notInGroup
+                    
+                }
+        }
+        
+    }
     
     func addMessageListener() {
         
@@ -124,6 +150,24 @@ class ChatRoomViewController: UIViewController {
     
     @objc func sendRequest(_ sender: UIButton) {
         
+        switch userStatus {
+            
+        case .notInGroup:
+            
+            sendJoinRequest()
+            
+        case .isInGroup:
+            
+            leaveGroup()
+            
+        case .ishost:
+            
+            editGroupInfo()
+        }
+    }
+        
+    func sendJoinRequest() {
+        
         guard let groupInfo = groupInfo else { return }
         
         let joinRequest = Request(groupId: groupInfo.groupId,
@@ -138,8 +182,6 @@ class ChatRoomViewController: UIViewController {
                 
             case .success:
                 
-                print("send request successfully")
-                
                 let controller = UIAlertController(title: "成功申請囉", message: nil, preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK", style: .default) { _ in
                     self.dismiss(animated: true, completion: nil)
@@ -152,6 +194,37 @@ class ChatRoomViewController: UIViewController {
                 print("send request failure: \(error)")
             }
         }
+        
+    }
+    
+    func leaveGroup() {
+        
+        guard let groupInfo = groupInfo else { return }
+        
+        GroupRoomManager.shared.leaveGroup(groupId: groupInfo.groupId) { result in
+        
+            switch result {
+                
+            case .success:
+                
+                print("User leave group Successfully")
+                
+                let controller = UIAlertController(title: "已退出揪團QQ", message: nil, preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+                    self.dismiss(animated: true, completion: nil)
+                }
+                controller.addAction(okAction)
+                self.present(controller, animated: true, completion: nil)
+                
+            case .failure(let error):
+                
+                print("leave group failure: \(error)")
+            }
+  
+        }
+    }
+    
+    func editGroupInfo() {
         
     }
     
@@ -269,7 +342,7 @@ class ChatRoomViewController: UIViewController {
             
             headerView.rightAnchor.constraint(equalTo: view.rightAnchor),
             
-            headerView.heightAnchor.constraint(equalToConstant: 180)
+            headerView.heightAnchor.constraint(equalToConstant: 220)
         ])
         headerView.requestButton.addTarget(self, action: #selector(sendRequest), for: .touchUpInside)
         
@@ -286,7 +359,7 @@ class ChatRoomViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 180),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 220),
             
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             

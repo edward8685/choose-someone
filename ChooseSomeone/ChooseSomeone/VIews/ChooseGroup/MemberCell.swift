@@ -7,7 +7,7 @@
 
 import UIKit
 
-class JoinRequestCell: UITableViewCell {
+class MemberCell: UITableViewCell {
     
     @IBOutlet weak var userImage: UIImageView!
     
