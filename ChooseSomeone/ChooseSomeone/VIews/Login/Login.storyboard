@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Artboard 15" translatesAutoresizingMaskIntoConstraints="NO" id="taY-hn-koQ">
-                                <rect key="frame" x="87" y="194" width="240" height="128"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo_flap" translatesAutoresizingMaskIntoConstraints="NO" id="taY-hn-koQ">
+                                <rect key="frame" x="87" y="344" width="240" height="128"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="AQ0-JK-Kvm"/>
@@ -27,9 +27,12 @@
                             <constraint firstItem="taY-hn-koQ" firstAttribute="height" secondItem="ey7-TV-ZuU" secondAttribute="height" multiplier="0.142857" id="623-Mq-fE7"/>
                             <constraint firstItem="taY-hn-koQ" firstAttribute="width" secondItem="ey7-TV-ZuU" secondAttribute="width" multiplier="0.57971" id="THc-CL-Roc"/>
                             <constraint firstItem="taY-hn-koQ" firstAttribute="centerX" secondItem="AQ0-JK-Kvm" secondAttribute="centerX" id="lBG-SM-jnf"/>
-                            <constraint firstItem="taY-hn-koQ" firstAttribute="top" secondItem="ey7-TV-ZuU" secondAttribute="topMargin" constant="150" id="vTz-oC-Scc"/>
+                            <constraint firstItem="taY-hn-koQ" firstAttribute="top" secondItem="ey7-TV-ZuU" secondAttribute="topMargin" constant="300" id="vTz-oC-Scc"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="appLogo" destination="taY-hn-koQ" id="f8l-pb-BzA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HHx-qz-D9N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -37,7 +40,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Artboard 15" width="178.78999328613281" height="61.419998168945312"/>
+        <image name="Logo_flap" width="298.6199951171875" height="50.470001220703125"/>
         <namedColor name="B2">
             <color red="1" green="0.96862745098039216" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

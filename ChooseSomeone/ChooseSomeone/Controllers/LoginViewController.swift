@@ -14,25 +14,61 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
     
     fileprivate var currentNonce: String?
     
+    private let button = ASAuthorizationAppleIDButton()
+    
+    @IBOutlet weak var appLogo: UIImageView!
+    
     var handle: AuthStateDidChangeListenerHandle?
     
     var userInfo = UserManager.shared.userInfo
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+    
         setUpSignInButton()
+        
+        buttonComeout ()
     }
     
     func setUpSignInButton() {
         
-        let button = ASAuthorizationAppleIDButton()
+        view.addSubview(button)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
         
         button.addTarget(self, action: #selector(handleSignInWithAppleTapped), for: .touchUpInside)
         
-        button.center = view.center
+        NSLayoutConstraint.activate([
+            
+            button.heightAnchor.constraint(equalToConstant: 36),
+            
+            button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            
+            button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
+            button.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: 60)
+        ])
         
-        view.addSubview(button)
+        button.alpha = 0.0
+    }
+    
+    func buttonComeout () {
         
+        appLogo.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        UIView.animate(withDuration: 0.5, delay: 1) {
+            
+            NSLayoutConstraint.activate([
+                self.appLogo.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 150)
+        ])
+        }
+
+        UIView.animate(withDuration: 0.5, delay: 1.5) {
+            
+            self.button.alpha = 1.0
+        }
     }
     
     @objc func handleSignInWithAppleTapped() {
@@ -139,7 +175,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                                 
                             case .success:
                                 
-                                fetchUserInfo (uid: uid)
+                                fetchUserInfo(uid: uid)
                                 
                                 print("User Sign up successfully")
                                 
@@ -152,8 +188,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                         
                     } else {
                         
-                        fetchUserInfo (uid: uid)
-                        
+                        fetchUserInfo(uid: uid)
                     }
                 }
             }

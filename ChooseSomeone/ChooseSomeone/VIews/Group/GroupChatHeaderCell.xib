@@ -225,7 +225,7 @@
                         <state key="normal" image="Artboard 5">
                             <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
-                        <buttonConfiguration key="configuration" style="plain" image="Artboard 5">
+                        <buttonConfiguration key="configuration" style="plain" image="badge">
                             <color key="baseForegroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </buttonConfiguration>
                     </button>
@@ -274,6 +274,7 @@
     </objects>
     <resources>
         <image name="Artboard 5" width="41.119998931884766" height="49.119998931884766"/>
+        <image name="badge" width="41.119998931884766" height="49.119998931884766"/>
         <namedColor name="B1">
             <color red="0.098039209842681885" green="0.76470589637756348" blue="0.85490196943283081" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

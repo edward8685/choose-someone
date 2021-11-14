@@ -159,7 +159,7 @@
                             <constraint firstAttribute="width" constant="20" id="U1F-Ze-QII"/>
                         </constraints>
                     </imageView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Artboard 5" translatesAutoresizingMaskIntoConstraints="NO" id="2mf-4B-nnL">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="badge" translatesAutoresizingMaskIntoConstraints="NO" id="2mf-4B-nnL">
                         <rect key="frame" x="497" y="5" width="36" height="43"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="43" id="NRZ-9h-kyA"/>
@@ -204,7 +204,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Artboard 5" width="41.119998931884766" height="49.119998931884766"/>
+        <image name="badge" width="41.119998931884766" height="49.119998931884766"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
         <namedColor name="B1">
             <color red="0.098039209842681885" green="0.76470589637756348" blue="0.85490196943283081" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

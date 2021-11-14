@@ -13,7 +13,9 @@ import FirebaseAuth
 
 class UserManager {
     
-    let userId = Auth.auth().currentUser?.uid
+//    let userId = Auth.auth().currentUser?.uid
+    
+    let userId :String? = "5s5d5a4s5s5s5s5s5ss"
     
     var userInfo = UserInfo() {
         didSet {
@@ -42,18 +44,16 @@ class UserManager {
         } catch {
             
             completion(.failure(error))
-            
         }
         
         completion(.success("Success"))
-        
     }
     
     func fetchUserInfo(uid: String, completion: @escaping (Result<UserInfo, Error>) -> Void) {
 
         let docRef = dataBase.collection("Users").document(uid)
         
-        docRef.getDocument{ (document, error) in
+        docRef.getDocument{(document, error) in
             
             guard let document = document else { return }
             
@@ -67,7 +67,6 @@ class UserManager {
                     if let userData = try document.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
                         
                         completion(.success(userData))
- 
                     }
                     
                 } catch {
@@ -111,7 +110,6 @@ class UserManager {
                 completion(.failure(error))
             }
         }
-        
     }
     
     func updateImageToDb(fileURL: URL) {

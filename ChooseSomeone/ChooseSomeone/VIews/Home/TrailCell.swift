@@ -19,23 +19,27 @@ class TrailCell: UICollectionViewCell {
     
     @IBOutlet weak var trailDifficult: UIStackView!
     
-    func setUpCell(model: Trail, indexPath: IndexPath) {
+    func setUpCell(model: Trail) {
         
         trailName.text = model.trailName
+        
         trailArea.text = model.trailLocation
+        
         trailLength.text = model.trailLength.description
         
         trailDifficult.arrangedSubviews[0].isHidden = true
         
         for _ in 0..<model.trailLevel {
             
-            
             let image = UIImageView()
+            
             image.translatesAutoresizingMaskIntoConstraints = false
+            
             image.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            
             image.widthAnchor.constraint(equalToConstant: 40).isActive = true
 
-            image.image = UIImage(named: "mountain_difficult")
+            image.image = UIImage.asset(.mountain)
      
             trailDifficult.addArrangedSubview(image)
             }
@@ -44,7 +48,7 @@ class TrailCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
     }
 
 }

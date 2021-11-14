@@ -9,7 +9,6 @@ import UIKit
 
 private enum CSColor: String {
 
-    // swiftlint:disable identifier_name
     case U1, U2, U3, U4
     case B1, B2, B3, B4, B5, B6
     case C1, C2, C3, C4
@@ -49,7 +48,6 @@ extension UIColor {
 //
 //    static let G2 = [CSColor(.B2), CSColor(.B6)]
     
-    // swiftlint:enable identifier_name
     private static func CSColor(_ color: CSColor) -> UIColor? {
 
         return UIColor(named: color.rawValue)

@@ -24,6 +24,9 @@ class TrialInfoView: UIView {
     
     @IBOutlet weak var trailMap: UIImageView!
     
+    @IBOutlet weak var dimmingView: UIView!
+    
+    
     func setUpLayout(trail: Trail) {
         
         trailName.text = trail.trailName
@@ -36,20 +39,21 @@ class TrialInfoView: UIView {
         
         trafficInfo.text = trail.trailTraffic
         
-        
-        let fileReference = Storage.storage().reference().child("maps/\(trail.trailId)_MAP.jpg")
-        print("maps/\(trail.trailId).jpg")
-        fileReference.getData(maxSize: 10 * 1024 * 1024) { result in
+        TrailManager.shared.fetchTrailMap(tralId: trail.trailId) {result in
+            
             switch result {
-            case .success(let data):
-//                trailMap.loadImage(data, placeHolder: nil)
-                let image = UIImage(data: data)
+                
+            case .success(let image):
+                
                 self.trailMap.image = image
+                
                 self.trailMap.contentMode = .scaleAspectFill
+                
             case .failure(let error):
-                print(error)
+                
+                print("fetch map failure \(error)")
+                
             }
         }
-        
     }
 }
