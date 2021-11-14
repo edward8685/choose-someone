@@ -7,10 +7,13 @@
 
 import UIKit
 import FirebaseFirestore
+import FirebaseAuth
 
-class HomeViewController: UIViewController {
+class HomeViewController: BaseViewController {
     
-    let userInfo = UserManager.shared.userInfo
+    private var uid = UserManager.shared.userInfo.uid
+    
+    private var userInfo = UserManager.shared.userInfo
     
     private let themes = ["愜意的走", "想流點汗", "百岳挑戰"]
     
@@ -33,8 +36,12 @@ class HomeViewController: UIViewController {
         }
     }
     
+    var headerView: HomeHeaderCell?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUserInfo), name: NSNotification.userInfoDidChanged, object: nil)
         
         setUpTableView()
         
@@ -42,8 +49,15 @@ class HomeViewController: UIViewController {
         
         navigationController?.isNavigationBarHidden = true
         
-        print(userInfo)
-        
+    }
+    
+    @objc func updateUserInfo(notification: NSNotification) {
+        DispatchQueue.main.async { 
+            if let userInfo = notification.userInfo?[self.uid] as? UserInfo {
+                self.headerView?.updateUserInfo(user: userInfo)
+        }
+            self.tableView.reloadData()
+        }
     }
     
     func setUpTableView() {
@@ -92,7 +106,6 @@ class HomeViewController: UIViewController {
     }
 }
 
-
 extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -100,9 +113,11 @@ extension HomeViewController: UITableViewDelegate {
         guard let headerView = Bundle.main.loadNibNamed(HomeHeaderCell.identifier, owner: self, options: nil)?.first as? HomeHeaderCell
         else {fatalError("Could not create HeaderView")}
         
+        self.headerView = headerView
+        
         headerView.updateUserInfo(user: userInfo)
         
-        return headerView
+        return self.headerView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

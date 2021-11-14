@@ -39,7 +39,7 @@
     <resources>
         <image name="Artboard 15" width="178.78999328613281" height="61.419998168945312"/>
         <namedColor name="B2">
-            <color red="0.81199997663497925" green="1" blue="0.85500001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.96862745098039216" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

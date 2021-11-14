@@ -10,12 +10,21 @@ import UIKit
 private enum CSColor: String {
 
     // swiftlint:disable identifier_name
-    case B1,B2,B3,B4
-    case G1,G2,G3,G4,G5,G6
+    case U1, U2, U3, U4
+    case B1, B2, B3, B4, B5, B6
+    case C1, C2, C3, C4
 }
 
 extension UIColor {
 
+    static let U1 = CSColor(.U1)
+    
+    static let U2 = CSColor(.U2)
+    
+    static let U3 = CSColor(.U3)
+    
+    static let U4 = CSColor(.U4)
+    
     static let B1 = CSColor(.B1)
     
     static let B2 = CSColor(.B2)
@@ -24,20 +33,23 @@ extension UIColor {
     
     static let B4 = CSColor(.B4)
     
-    static let G1 = CSColor(.G1)
+    static let B5 = CSColor(.B5)
     
-    static let G2 = CSColor(.G2)
+    static let B6 = CSColor(.B6)
     
-    static let G3 = CSColor(.G3)
+    static let C1 = CSColor(.C1)
     
-    static let G4 = CSColor(.G4)
+    static let C2 = CSColor(.C2)
     
-    static let G5 = CSColor(.G5)
+    static let C3 = CSColor(.C3)
     
-    static let G6 = CSColor(.G6)
+    static let C4 = CSColor(.C4)
+    
+//    static let G1 = [CSColor(.U2), CSColor(.U1)]
+//
+//    static let G2 = [CSColor(.B2), CSColor(.B6)]
     
     // swiftlint:enable identifier_name
-    
     private static func CSColor(_ color: CSColor) -> UIColor? {
 
         return UIColor(named: color.rawValue)

@@ -27,10 +27,13 @@
 		740FC394271D17160071459A /* ChooseGroup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740FC392271D17160071459A /* ChooseGroup.storyboard */; };
 		740FC396271D17180071459A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 740FC395271D17180071459A /* Assets.xcassets */; };
 		740FC399271D17180071459A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740FC397271D17180071459A /* LaunchScreen.storyboard */; };
+		7419126C273A5AAF006750EA /* TeammateVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7419126B273A5AAF006750EA /* TeammateVIewController.swift */; };
+		7419126E273A9AAE006750EA /* ChevronButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7419126D273A9AAE006750EA /* ChevronButton.swift */; };
 		742349352732B032001EC7A1 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742349342732B032001EC7A1 /* UserManager.swift */; };
 		7423493A273415AB001EC7A1 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74234939273415AB001EC7A1 /* Login.storyboard */; };
 		742516F927218A520011166B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742516F827218A520011166B /* UIColor+Extension.swift */; };
 		742516FB272197A30011166B /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742516FA272197A30011166B /* UILabelExtension.swift */; };
+		74377466273962DD006AA44E /* ShadowTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74377465273962DC006AA44E /* ShadowTextfield.swift */; };
 		7441B7A5273052C000614D9B /* TrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7441B7A4273052C000614D9B /* TrackInfo.swift */; };
 		7441B7A727313E1C00614D9B /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7441B7A627313E1C00614D9B /* UIFontExtension.swift */; };
 		7441B7B027313F3E00614D9B /* NotoSansTC-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7441B7A927313F3D00614D9B /* NotoSansTC-Regular.otf */; };
@@ -53,7 +56,7 @@
 		745A6F04272D6809006064C4 /* TrackRecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F03272D6809006064C4 /* TrackRecordsViewController.swift */; };
 		745A6F09272D7B08006064C4 /* TrackRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F07272D7B08006064C4 /* TrackRecordCell.swift */; };
 		745A6F0A272D7B08006064C4 /* TrackRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 745A6F08272D7B08006064C4 /* TrackRecordCell.xib */; };
-		745A6F0C272DAE9C006064C4 /* TimestampExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F0B272DAE9C006064C4 /* TimestampExtension.swift */; };
+		745A6F0C272DAE9C006064C4 /* TimeFormater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F0B272DAE9C006064C4 /* TimeFormater.swift */; };
 		745A6F0E272E4B57006064C4 /* UserRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F0D272E4B57006064C4 /* UserRecordViewController.swift */; };
 		745A6F11272E9D0A006064C4 /* RecordInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6F10272E9D0A006064C4 /* RecordInfoView.swift */; };
 		74608D1D271D1CEC002BD125 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D1B271D1CEC002BD125 /* UIScreen+Extension.swift */; };
@@ -69,14 +72,16 @@
 		74608D30271D54C7002BD125 /* GroupChatHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74608D2E271D54C7002BD125 /* GroupChatHeaderCell.xib */; };
 		74608D32271D7253002BD125 /* BuildTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D31271D7253002BD125 /* BuildTeamViewController.swift */; };
 		74608D34271D7AE1002BD125 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D33271D7AE1002BD125 /* UIButtonExtension.swift */; };
-		74608D37271DD2F2002BD125 /* JoinRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D35271DD2F2002BD125 /* JoinRequestCell.swift */; };
-		74608D38271DD2F2002BD125 /* JoinRequestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74608D36271DD2F2002BD125 /* JoinRequestCell.xib */; };
+		74608D37271DD2F2002BD125 /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D35271DD2F2002BD125 /* MemberCell.swift */; };
+		74608D38271DD2F2002BD125 /* MemberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74608D36271DD2F2002BD125 /* MemberCell.xib */; };
 		74608D3A271DDA05002BD125 /* JoinRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D39271DDA05002BD125 /* JoinRequestViewController.swift */; };
 		74608D3E271E7A63002BD125 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 74608D3D271E7A63002BD125 /* GoogleService-Info.plist */; };
 		74608D41271E97DC002BD125 /* Trail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D40271E97DC002BD125 /* Trail.swift */; };
 		74608D43271E9C67002BD125 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D42271E9C67002BD125 /* Group.swift */; };
 		74608D45271EA5E1002BD125 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D44271EA5E1002BD125 /* UserInfo.swift */; };
 		74608D47271EC727002BD125 /* GroupRoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D46271EC727002BD125 /* GroupRoomManager.swift */; };
+		748EF102273BAC8E00B97EE0 /* GroupStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EF101273BAC8E00B97EE0 /* GroupStatus.swift */; };
+		748EF106273CAB4D00B97EE0 /* UIViewController+NotificationExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EF105273CAB4D00B97EE0 /* UIViewController+NotificationExtenstion.swift */; };
 		74E5735B27268E3E00F490BF /* TrialInfoScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5735A27268E3E00F490BF /* TrialInfoScrollView.swift */; };
 		74E5735F2726D6A500F490BF /* KingFisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5735E2726D6A500F490BF /* KingFisherWrapper.swift */; };
 		74E5736327279A2800F490BF /* JourneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5736227279A2800F490BF /* JourneyViewController.swift */; };
@@ -125,11 +130,14 @@
 		740FC395271D17180071459A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		740FC398271D17180071459A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		740FC39A271D17180071459A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7419126B273A5AAF006750EA /* TeammateVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeammateVIewController.swift; sourceTree = "<group>"; };
+		7419126D273A9AAE006750EA /* ChevronButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChevronButton.swift; sourceTree = "<group>"; };
 		742349332732662E001EC7A1 /* ChooseSomeone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChooseSomeone.entitlements; sourceTree = "<group>"; };
 		742349342732B032001EC7A1 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		74234939273415AB001EC7A1 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		742516F827218A520011166B /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		742516FA272197A30011166B /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
+		74377465273962DC006AA44E /* ShadowTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowTextfield.swift; sourceTree = "<group>"; };
 		7441B7A4273052C000614D9B /* TrackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfo.swift; sourceTree = "<group>"; };
 		7441B7A627313E1C00614D9B /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
 		7441B7A927313F3D00614D9B /* NotoSansTC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Regular.otf"; sourceTree = "<group>"; };
@@ -152,7 +160,7 @@
 		745A6F03272D6809006064C4 /* TrackRecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRecordsViewController.swift; sourceTree = "<group>"; };
 		745A6F07272D7B08006064C4 /* TrackRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRecordCell.swift; sourceTree = "<group>"; };
 		745A6F08272D7B08006064C4 /* TrackRecordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackRecordCell.xib; sourceTree = "<group>"; };
-		745A6F0B272DAE9C006064C4 /* TimestampExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimestampExtension.swift; sourceTree = "<group>"; };
+		745A6F0B272DAE9C006064C4 /* TimeFormater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormater.swift; sourceTree = "<group>"; };
 		745A6F0D272E4B57006064C4 /* UserRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRecordViewController.swift; sourceTree = "<group>"; };
 		745A6F10272E9D0A006064C4 /* RecordInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordInfoView.swift; sourceTree = "<group>"; };
 		74608D1B271D1CEC002BD125 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
@@ -168,14 +176,16 @@
 		74608D2E271D54C7002BD125 /* GroupChatHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupChatHeaderCell.xib; sourceTree = "<group>"; };
 		74608D31271D7253002BD125 /* BuildTeamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildTeamViewController.swift; sourceTree = "<group>"; };
 		74608D33271D7AE1002BD125 /* UIButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
-		74608D35271DD2F2002BD125 /* JoinRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRequestCell.swift; sourceTree = "<group>"; };
-		74608D36271DD2F2002BD125 /* JoinRequestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JoinRequestCell.xib; sourceTree = "<group>"; };
+		74608D35271DD2F2002BD125 /* MemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
+		74608D36271DD2F2002BD125 /* MemberCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberCell.xib; sourceTree = "<group>"; };
 		74608D39271DDA05002BD125 /* JoinRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRequestViewController.swift; sourceTree = "<group>"; };
 		74608D3D271E7A63002BD125 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		74608D40271E97DC002BD125 /* Trail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trail.swift; sourceTree = "<group>"; };
 		74608D42271E9C67002BD125 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		74608D44271EA5E1002BD125 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		74608D46271EC727002BD125 /* GroupRoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRoomManager.swift; sourceTree = "<group>"; };
+		748EF101273BAC8E00B97EE0 /* GroupStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupStatus.swift; sourceTree = "<group>"; };
+		748EF105273CAB4D00B97EE0 /* UIViewController+NotificationExtenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+NotificationExtenstion.swift"; sourceTree = "<group>"; };
 		74E5735A27268E3E00F490BF /* TrialInfoScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialInfoScrollView.swift; sourceTree = "<group>"; };
 		74E5735E2726D6A500F490BF /* KingFisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingFisherWrapper.swift; sourceTree = "<group>"; };
 		74E5736227279A2800F490BF /* JourneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyViewController.swift; sourceTree = "<group>"; };
@@ -224,7 +234,7 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		740B1B872724008E00A1CD3B /* ChooseGroup */ = {
+		740B1B872724008E00A1CD3B /* Group */ = {
 			isa = PBXGroup;
 			children = (
 				740FC392271D17160071459A /* ChooseGroup.storyboard */,
@@ -236,10 +246,10 @@
 				74608D24271D20B0002BD125 /* GroupHeaderCell.xib */,
 				74608D1F271D1DE1002BD125 /* GroupInfoCell.swift */,
 				74608D20271D1DE1002BD125 /* GroupInfoCell.xib */,
-				74608D35271DD2F2002BD125 /* JoinRequestCell.swift */,
-				74608D36271DD2F2002BD125 /* JoinRequestCell.xib */,
+				74608D35271DD2F2002BD125 /* MemberCell.swift */,
+				74608D36271DD2F2002BD125 /* MemberCell.xib */,
 			);
-			path = ChooseGroup;
+			path = Group;
 			sourceTree = "<group>";
 		};
 		740B1B88272400C800A1CD3B /* Home */ = {
@@ -337,11 +347,14 @@
 		74608D17271D1C8E002BD125 /* VIews */ = {
 			isa = PBXGroup;
 			children = (
+				7419126D273A9AAE006750EA /* ChevronButton.swift */,
+				74377465273962DC006AA44E /* ShadowTextfield.swift */,
+				740E98B227362D3A006163B8 /* ImagePickerButton.swift */,
 				7423493627341589001EC7A1 /* Login */,
 				74F9650A2725392100B77DC5 /* Journey */,
 				74F965092725391500B77DC5 /* Profile */,
 				740B1B88272400C800A1CD3B /* Home */,
-				740B1B872724008E00A1CD3B /* ChooseGroup */,
+				740B1B872724008E00A1CD3B /* Group */,
 				740B1B812723F41D00A1CD3B /* Main.storyboard */,
 				740FC397271D17180071459A /* LaunchScreen.storyboard */,
 			);
@@ -351,10 +364,7 @@
 		74608D18271D1C95002BD125 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				740FC390271D17160071459A /* ChooseGroupViewController.swift */,
-				74608D2B271D51F6002BD125 /* ChatRoomViewController.swift */,
-				74608D31271D7253002BD125 /* BuildTeamViewController.swift */,
-				74608D39271DDA05002BD125 /* JoinRequestViewController.swift */,
+				747A1DB4273FE60200D08A37 /* Group */,
 				740B1B852723FF2500A1CD3B /* HomeViewController.swift */,
 				74F96503272481F800B77DC5 /* TrailListViewController.swift */,
 				7449349B272548BC002D8FE3 /* TrailInfoViewController.swift */,
@@ -373,6 +383,7 @@
 			children = (
 				745A6F0F272E8A62006064C4 /* GPX */,
 				74608D40271E97DC002BD125 /* Trail.swift */,
+				748EF101273BAC8E00B97EE0 /* GroupStatus.swift */,
 				74608D42271E9C67002BD125 /* Group.swift */,
 				7457A1CF271EECEF00A947AE /* Message.swift */,
 				74608D44271EA5E1002BD125 /* UserInfo.swift */,
@@ -388,6 +399,7 @@
 			isa = PBXGroup;
 			children = (
 				74608D1B271D1CEC002BD125 /* UIScreen+Extension.swift */,
+				748EF105273CAB4D00B97EE0 /* UIViewController+NotificationExtenstion.swift */,
 				74608D33271D7AE1002BD125 /* UIButtonExtension.swift */,
 				74608D1C271D1CEC002BD125 /* UIViewExtension.swift */,
 				742516F827218A520011166B /* UIColor+Extension.swift */,
@@ -395,9 +407,9 @@
 				74FDD9272722C47D0014D2B2 /* UITableView+ColloectionVIewExtension.swift */,
 				74FDD9292722C5670014D2B2 /* UITextFieldExtexsion.swift */,
 				7449349E27255A0B002D8FE3 /* UIStoryboard+Extension.swift */,
-				745A6F0B272DAE9C006064C4 /* TimestampExtension.swift */,
 				74E573D527292EBD00F490BF /* Double+Measures.swift */,
 				7441B7A627313E1C00614D9B /* UIFontExtension.swift */,
+				745A6F0B272DAE9C006064C4 /* TimeFormater.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -414,6 +426,18 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		747A1DB4273FE60200D08A37 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				740FC390271D17160071459A /* ChooseGroupViewController.swift */,
+				74608D2B271D51F6002BD125 /* ChatRoomViewController.swift */,
+				7419126B273A5AAF006750EA /* TeammateVIewController.swift */,
+				74608D31271D7253002BD125 /* BuildTeamViewController.swift */,
+				74608D39271DDA05002BD125 /* JoinRequestViewController.swift */,
+			);
+			path = Group;
+			sourceTree = "<group>";
+		};
 		74F965092725391500B77DC5 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -424,7 +448,6 @@
 				740E98AB2734DF79006163B8 /* ProfileCell.xib */,
 				740E98B027352589006163B8 /* ProfileView.swift */,
 				745A6F10272E9D0A006064C4 /* RecordInfoView.swift */,
-				740E98B227362D3A006163B8 /* ImagePickerButton.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -467,7 +490,7 @@
 				740FC386271D17160071459A /* Frameworks */,
 				740FC387271D17160071459A /* Resources */,
 				74608D14271D1895002BD125 /* ShellScript */,
-				403936DA63AD36BF24E2C7B1 /* [CP] Embed Pods Frameworks */,
+				149118221917D21A9C45213D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -540,7 +563,7 @@
 				7441B7B527313F3E00614D9B /* NotoSansTC-Medium.otf in Resources */,
 				74F9650C2725393B00B77DC5 /* Journey.storyboard in Resources */,
 				7423493A273415AB001EC7A1 /* Login.storyboard in Resources */,
-				74608D38271DD2F2002BD125 /* JoinRequestCell.xib in Resources */,
+				74608D38271DD2F2002BD125 /* MemberCell.xib in Resources */,
 				7441B7B127313F3E00614D9B /* NotoSansTC-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -548,6 +571,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		149118221917D21A9C45213D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		339DD1896FE1AA4B94EDCC34 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -568,23 +608,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		403936DA63AD36BF24E2C7B1 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		74608D14271D1895002BD125 /* ShellScript */ = {
@@ -622,6 +645,7 @@
 				740FC391271D17160071459A /* ChooseGroupViewController.swift in Sources */,
 				74E573D427292CE300F490BF /* DistanceLabel.swift in Sources */,
 				742516FB272197A30011166B /* UILabelExtension.swift in Sources */,
+				7419126C273A5AAF006750EA /* TeammateVIewController.swift in Sources */,
 				74E573722728241F00F490BF /* GPXExtentCoordinates.swift in Sources */,
 				745A6F0E272E4B57006064C4 /* UserRecordViewController.swift in Sources */,
 				740E98A92734CE3B006163B8 /* ProfileViewController.swift in Sources */,
@@ -633,9 +657,10 @@
 				74608D2F271D54C7002BD125 /* GroupChatHeaderCell.swift in Sources */,
 				7441B7A727313E1C00614D9B /* UIFontExtension.swift in Sources */,
 				74E5736F2728241F00F490BF /* GPXTrack+length.swift in Sources */,
-				74608D37271DD2F2002BD125 /* JoinRequestCell.swift in Sources */,
+				74608D37271DD2F2002BD125 /* MemberCell.swift in Sources */,
 				740B1B8B2724161600A1CD3B /* HomeHeaderCell.swift in Sources */,
 				7441B7A5273052C000614D9B /* TrackInfo.swift in Sources */,
+				7419126E273A9AAE006750EA /* ChevronButton.swift in Sources */,
 				740E98AF2734E2D7006163B8 /* ProfileItem.swift in Sources */,
 				74FDD92A2722C5670014D2B2 /* UITextFieldExtexsion.swift in Sources */,
 				740E98B127352589006163B8 /* ProfileView.swift in Sources */,
@@ -645,16 +670,19 @@
 				7457A1D0271EECEF00A947AE /* Message.swift in Sources */,
 				74E5737F2728E92500F490BF /* GPXSession.swift in Sources */,
 				74608D25271D20B0002BD125 /* GroupHeaderCell.swift in Sources */,
+				74377466273962DD006AA44E /* ShadowTextfield.swift in Sources */,
+				748EF102273BAC8E00B97EE0 /* GroupStatus.swift in Sources */,
 				745A6F04272D6809006064C4 /* TrackRecordsViewController.swift in Sources */,
 				745A6F02272CF4C5006064C4 /* Record.swift in Sources */,
 				74608D34271D7AE1002BD125 /* UIButtonExtension.swift in Sources */,
 				745A6EFC272BA417006064C4 /* GPXFileManager.swift in Sources */,
-				745A6F0C272DAE9C006064C4 /* TimestampExtension.swift in Sources */,
+				745A6F0C272DAE9C006064C4 /* TimeFormater.swift in Sources */,
 				74608D29271D4A80002BD125 /* GroupChatCell.swift in Sources */,
 				74608D1D271D1CEC002BD125 /* UIScreen+Extension.swift in Sources */,
 				74E573852728EBEE00F490BF /* GPXTrackPoint+MapKit.swift in Sources */,
 				745A6F09272D7B08006064C4 /* TrackRecordCell.swift in Sources */,
 				74E573842728EBEE00F490BF /* GPXTrackSegment+MapKit.swift in Sources */,
+				748EF106273CAB4D00B97EE0 /* UIViewController+NotificationExtenstion.swift in Sources */,
 				74608D45271EA5E1002BD125 /* UserInfo.swift in Sources */,
 				74E5735B27268E3E00F490BF /* TrialInfoScrollView.swift in Sources */,
 				7457A1D2271EEEDC00A947AE /* Request.swift in Sources */,
@@ -846,7 +874,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ed.ChooseSomeone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -883,7 +911,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ed.ChooseSomeone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

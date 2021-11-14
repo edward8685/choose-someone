@@ -15,7 +15,11 @@ class UserManager {
     
     let userId = Auth.auth().currentUser?.uid
     
-    var userInfo = UserInfo()
+    var userInfo = UserInfo() {
+        didSet {
+            NotificationCenter.default.post(name: NSNotification.userInfoDidChanged, object: nil,userInfo: [userId : [userInfo]] )
+        }
+    }
     
     static let shared = UserManager()
     
@@ -46,7 +50,7 @@ class UserManager {
     }
     
     func fetchUserInfo(uid: String, completion: @escaping (Result<UserInfo, Error>) -> Void) {
-        print(uid)
+
         let docRef = dataBase.collection("Users").document(uid)
         
         docRef.getDocument{ (document, error) in
@@ -60,23 +64,18 @@ class UserManager {
             } else {
                 
                 do {
-                    if let userInfo = try document.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
+                    if let userData = try document.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
                         
-                        self.userInfo = userInfo
-                        print(UserManager.shared.userInfo)
-                        
+                        completion(.success(userData))
+ 
                     }
                     
                 } catch {
                     
                     completion(.failure(error))
                 }
-                
-                completion(.success(self.userInfo))
             }
-            
         }
-        
     }
     
     func uploadUserPicture(imageData: Data, completion: @escaping (Result<URL, Error>) -> Void) {
@@ -130,27 +129,49 @@ class UserManager {
         } catch {
             
             print("error")
-            
         }
         
         print("sucessfully")
-        
     }
     
     func updateUserName(name: String) {
         
         let userId = userInfo.uid
 
-        let post = [UserInfo.CodingKeys.userName.rawValue: name ]
+        let post = [UserInfo.CodingKeys.userName.rawValue: name]
         
         let docRef = dataBase.collection("Users").document(userId)
         
         docRef.updateData(post) { error in
             
             if let error = error {
+                
                 print("Error updating document: \(error)")
+                
             } else {
+                
                 print("User name successfully updated")
+            }
+        }
+    }
+    
+    func blockUser(blockUserId: String) {
+        
+        let userId = userInfo.uid
+        
+        let docRef = dataBase.collection("Users").document(userId)
+        
+        docRef.updateData([
+            "block_list": FieldValue.arrayUnion([blockUserId])
+        ]) {error in
+            
+            if let error = error {
+                
+                print("Error updating document: \(error)")
+                
+            } else {
+                
+                print("Block list successfully updated")
             }
         }
     }

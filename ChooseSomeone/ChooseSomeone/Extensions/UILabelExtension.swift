@@ -26,25 +26,26 @@ class PaddingLabel: UILabel {
     
     @IBInspectable
     var paddingLeft: CGFloat {
-        set { textEdgeInsets.left = newValue }
         get { return textEdgeInsets.left }
+        set { textEdgeInsets.left = newValue }
+
     }
     
     @IBInspectable
     var paddingRight: CGFloat {
-        set { textEdgeInsets.right = newValue }
         get { return textEdgeInsets.right }
+        set { textEdgeInsets.right = newValue }
     }
     
     @IBInspectable
     var paddingTop: CGFloat {
-        set { textEdgeInsets.top = newValue }
         get { return textEdgeInsets.top }
+        set { textEdgeInsets.top = newValue }
     }
     
     @IBInspectable
     var paddingBottom: CGFloat {
-        set { textEdgeInsets.bottom = newValue }
         get { return textEdgeInsets.bottom }
+        set { textEdgeInsets.bottom = newValue }
     }
 }

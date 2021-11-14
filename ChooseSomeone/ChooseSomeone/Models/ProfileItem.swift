@@ -35,7 +35,7 @@ struct ProfileGroup {
     let items: [ProfileItem]
 }
 
-enum ProfileFeat: ProfileItem, CaseIterable{
+enum ProfileFeat: ProfileItem, CaseIterable {
     
     case record
     
@@ -78,13 +78,13 @@ enum ProfileFeat: ProfileItem, CaseIterable{
         
         switch self {
             
-        case .record: return UIColor.B1
+        case .record: return UIColor.U1
             
-        case .notice: return UIColor.B3
+        case .notice: return UIColor.U3
             
-        case .account: return UIColor.G5
+        case .account: return UIColor.B1
             
-        case .share: return UIColor.G2
+        case .share: return UIColor.B2
             
         }
         
