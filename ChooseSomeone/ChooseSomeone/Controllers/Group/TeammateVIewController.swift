@@ -7,13 +7,18 @@
 
 import UIKit
 
-class TeammateViewController: UIViewController {
+class TeammateViewController: BaseViewController {
+    
+    var cache: [String: UserInfo]?
     
     var groupInfo: Group?
     
     private var tableView: UITableView! {
+        
         didSet {
+            
             tableView.delegate = self
+            
             tableView.dataSource = self
         }
     }
@@ -25,7 +30,7 @@ class TeammateViewController: UIViewController {
         
         tableView = UITableView()
         
-        tableView.registerCellWithNib(identifier: JoinRequestCell.identifier, bundle: nil)
+        tableView.registerCellWithNib(identifier: MemberCell.identifier, bundle: nil)
         
         setNavigationBar()
         
@@ -60,7 +65,7 @@ class TeammateViewController: UIViewController {
         let button = UIButton()
         
         button.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-     
+        
         let image = UIImage(systemName: "chevron.left")
         
         button.setImage(image, for: .normal)
@@ -98,18 +103,20 @@ extension TeammateViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: JoinRequestCell.identifier, for: indexPath) as? JoinRequestCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberCell.identifier, for: indexPath) as? MemberCell
                 
         else {fatalError("Could not create Cell")}
         
-        if let group = groupInfo {
-        cell.setUpCell(group: group, indexPath: indexPath)
-        
-        cell.acceptButton.tag = indexPath.row
-        
-        cell.rejectButton.addTarget(self, action: #selector(blockUser), for: .touchUpInside)
-        
-        cell.rejectButton.tag = indexPath.row
+        if let group = groupInfo,
+           let userInfo = cache?[group.userIds[indexPath.row]] {
+            
+            cell.setUpCell(group: group, userInfo: userInfo)
+            
+            cell.acceptButton.tag = indexPath.row
+            
+            cell.rejectButton.addTarget(self, action: #selector(blockUser), for: .touchUpInside)
+            
+            cell.rejectButton.tag = indexPath.row
         }
         
         return cell
@@ -117,12 +124,15 @@ extension TeammateViewController: UITableViewDataSource {
     
     @objc func blockUser (_ sender: UIButton) {
         
-        if let blockUserId = groupInfo?.userIds[sender.tag]  {
-  
-        UserManager.shared.blockUser(blockUserId: blockUserId )
+        if let blockUserId = groupInfo?.userIds[sender.tag] {
+            
+            UserManager.shared.blockUser(blockUserId: blockUserId)
+            
+            UserManager.shared.userInfo.blockList?.append(blockUserId)
             
         }
+        sender.isEnabled = false
+        
+        sender.alpha = 0.5
     }
-    
 }
-

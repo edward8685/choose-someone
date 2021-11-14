@@ -7,45 +7,85 @@
 
 import UIKit
 
-class JoinRequestViewController: UIViewController {
+class JoinRequestViewController: BaseViewController {
     
-    private var requests = [Request]() {
+    lazy var requests = [Request]() {
+        
         didSet {
+            
+            requests.forEach { request in
+                
+                fetchUserData(uid: request.requestId)
+            }
+        }
+    }
+    
+    lazy var cache = [String: UserInfo]() {
+        
+        didSet {
+            
             tableView.reloadData()
         }
     }
     
     private var tableView: UITableView! {
+        
         didSet {
+            
             tableView.delegate = self
+            
             tableView.dataSource = self
         }
     }
     
+    lazy var dimmingView = UIView()
+    
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         tableView = UITableView()
         
-        tableView.registerCellWithNib(identifier: JoinRequestCell.identifier, bundle: nil)
+        tableView.registerCellWithNib(identifier: MemberCell.identifier, bundle: nil)
+        
+        setUpDimmingView()
         
         setUpTableView()
         
         tableView.backgroundColor = .clear
         
-        addRequestListener()
-        
         setUpButton()
         
     }
     
+    func setUpDimmingView() {
+        
+        view.stickSubView(dimmingView)
+        
+        dimmingView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+            dimmingView.addGestureRecognizer(recognizer)
+        
+    }
+    
+    @objc func handleTap(recognizer: UITapGestureRecognizer) {
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
     func addRequestListener() {
-        GroupRoomManager.shared.fetchRequest { [weak self] result in
+        
+        GroupRoomManager.shared.fetchRequest { result in
             
             switch result {
                 
             case .success(let requests):
-                self?.requests = requests
+                
+                self.requests = requests
+                
+                self.tableView.reloadData()
                 
             case .failure(let error):
                 
@@ -54,6 +94,23 @@ class JoinRequestViewController: UIViewController {
         }
     }
     
+    func fetchUserData(uid: String) {
+        
+        UserManager.shared.fetchUserInfo(uid: uid, completion: { result in
+            
+            switch result {
+                
+            case .success(let user):
+                
+                self.cache[user.uid] = user
+                
+            case .failure(let error):
+                
+                print("fetchData.failure: \(error)")
+            }
+        })
+    }
+
     func setUpTableView() {
         
         view.addSubview(tableView)
@@ -76,13 +133,20 @@ class JoinRequestViewController: UIViewController {
         
         let dismissButton = UIButton()
         
-        dismissButton.frame = CGRect(x: UIScreen.width - 40, y: 40, width: 20, height: 20)
+        dismissButton.frame = CGRect(x: UIScreen.width - 50, y: 30, width: 30, height: 30)
+        
         dismissButton.titleEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        
         dismissButton.backgroundColor = UIColor.hexStringToUIColor(hex: "64696F")
-        let image = UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 10, weight: .light))
+        
+        let image = UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 15, weight: .regular))
+        
         dismissButton.setImage(image, for: .normal)
+        
         dismissButton.tintColor = .white
-        dismissButton.layer.cornerRadius = 10
+        
+        dismissButton.layer.cornerRadius = dismissButton.frame.height / 2
+        
         dismissButton.layer.masksToBounds = true
         
         dismissButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
@@ -91,6 +155,7 @@ class JoinRequestViewController: UIViewController {
     }
     
     @objc func dismissVC() {
+        
         dismiss(animated: true, completion: nil)
     }
 }
@@ -105,11 +170,14 @@ extension JoinRequestViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: JoinRequestCell.identifier, for: indexPath) as? JoinRequestCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberCell.identifier, for: indexPath) as? MemberCell
                 
         else {fatalError("Could not create Cell")}
         
-        cell.setUpCell(requests: requests, indexPath: indexPath)
+        if let user = cache[requests[indexPath.row].requestId] {
+            
+            cell.setUpCell(request: requests[indexPath.row], userInfo: user)
+        }
         
         cell.acceptButton.addTarget(self, action: #selector(acceptRequest), for: .touchUpInside)
         
@@ -128,6 +196,7 @@ extension JoinRequestViewController: UITableViewDataSource {
             groupId: requests[sender.tag].groupId,
             userId: requests[sender.tag].requestId
         ) { result in
+            
             switch result {
                 
             case .success:
@@ -149,6 +218,8 @@ extension JoinRequestViewController: UITableViewDataSource {
             case .success:
                 
                 print("accept succesfully")
+                self.requests.remove(at: sender.tag)
+                
                 
             case .failure(let error):
                 
@@ -159,22 +230,24 @@ extension JoinRequestViewController: UITableViewDataSource {
     }
     
     @objc func rejectRequest(_ sender: UIButton) {
-        print(requests[sender.tag].groupId)
+        
         GroupRoomManager.shared.removeRequest(
             groupId: requests[sender.tag].groupId,
             userId: requests[sender.tag].requestId
         ) { result in
+            
             switch result {
                 
             case .success:
                 
-                print("accept succesfully")
+                print("reject succesfully")
+                
+                self.requests.remove(at: sender.tag)
                 
             case .failure(let error):
                 
-                print("accept failure: \(error)")
+                print("reject failure: \(error)")
             }
         }
     }
-    
 }

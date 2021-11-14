@@ -31,7 +31,14 @@ class GroupHeaderCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var groupSearchBar: UISearchBar!
+    @IBOutlet weak var groupSearchBar: UISearchBar! {
+        
+        didSet {
+        
+        self.groupSearchBar.searchTextField.font = UIFont.regular(size: 14)
+            
+        }
+    }
     
     @IBOutlet weak var requestListButton: UIButton!
     
@@ -44,13 +51,14 @@ class GroupHeaderCell: UITableViewCell {
         let image = UIImage()
         
         groupSearchBar.backgroundImage = image
-        
         groupSearchBar.backgroundColor = .white
         groupSearchBar.searchTextField.backgroundColor = .white
         groupSearchBar.layer.cornerRadius = 15
         groupSearchBar.clipsToBounds = true
         
         selectionStyle = .none
+        
+        badgeView.isHidden = true
         
     }
     

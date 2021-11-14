@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseFirestore
+import Kingfisher
 
 class GroupChatCell: UITableViewCell {
     
@@ -20,20 +21,32 @@ class GroupChatCell: UITableViewCell {
     
     @IBOutlet weak var userMessage: UILabel!
     
-    func setUpCell(messages: [Message], indexPath: IndexPath) {
+    func setUpCell(message: Message, memberInfo: UserInfo) {
        
         let userInfo = UserManager.shared.userInfo
         
-        let time = messages[indexPath.row].createdTime
+        let time = message.createdTime
         createdTime.text = TimeFormater.preciseTime.timeFormat(time: time)
         
-        if messages[indexPath.row].userId == userInfo.uid {
-            userMessage.text = messages[indexPath.row].body
+        let userId = message.userId
+        
+        if userId == userInfo.uid {
+            
+            userMessage.text = message.body
             isSentFromUser = true
+            
         } else {
+            
             isSentFromUser = false
-//            memberName.text = messages[indexPath.row].userName
-            memberMessage.text = messages[indexPath.row].body
+        
+            memberName.text = memberInfo.userName
+            
+            memberMessage.text = message.body
+            
+            guard let ref = memberInfo.pictureRef else { return }
+            
+            memberImage.loadImage(ref)
+
         }
         
     }
@@ -64,7 +77,10 @@ class GroupChatCell: UITableViewCell {
 
             self.memberMessage.applyGradient(colors: [.C1, .C2], locations: [0.0, 1.0], direction: .topToBottom)
         }
-        
     }
-
+    
+    override func layoutSubviews() {
+        memberImage.layer.cornerRadius = memberImage.frame.height / 2
+        memberImage.clipsToBounds = true
+    }
 }

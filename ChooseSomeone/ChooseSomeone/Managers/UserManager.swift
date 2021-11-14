@@ -15,7 +15,11 @@ class UserManager {
     
     let userId = Auth.auth().currentUser?.uid
     
-    var userInfo = UserInfo()
+    var userInfo = UserInfo() {
+        didSet {
+            NotificationCenter.default.post(name: NSNotification.userInfoDidChanged, object: nil,userInfo: [userId : [userInfo]] )
+        }
+    }
     
     static let shared = UserManager()
     
@@ -46,7 +50,7 @@ class UserManager {
     }
     
     func fetchUserInfo(uid: String, completion: @escaping (Result<UserInfo, Error>) -> Void) {
-        print(uid)
+
         let docRef = dataBase.collection("Users").document(uid)
         
         docRef.getDocument{ (document, error) in
@@ -60,23 +64,18 @@ class UserManager {
             } else {
                 
                 do {
-                    if let userInfo = try document.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
+                    if let userData = try document.data(as: UserInfo.self, decoder: Firestore.Decoder()) {
                         
-                        self.userInfo = userInfo
-                        print(UserManager.shared.userInfo)
-                        
+                        completion(.success(userData))
+ 
                     }
                     
                 } catch {
                     
                     completion(.failure(error))
                 }
-                
-                completion(.success(self.userInfo))
             }
-            
         }
-        
     }
     
     func uploadUserPicture(imageData: Data, completion: @escaping (Result<URL, Error>) -> Void) {

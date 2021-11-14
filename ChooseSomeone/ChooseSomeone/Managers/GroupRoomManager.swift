@@ -50,7 +50,7 @@ class GroupRoomManager {
             }
         }
     }
-    
+
     func fetchGroups(completion: @escaping (Result<[Group], Error>) -> Void) {
         let collection = dataBase.collection("Groups")
         collection.order(by: "date", descending: false).getDocuments() {(querySnapshot,error) in
@@ -71,7 +71,6 @@ class GroupRoomManager {
                         
                         if let group = try document.data(as: Group.self, decoder: Firestore.Decoder()) {
                             groups.append(group)
-                            
                         }
                         
                     } catch {
@@ -143,6 +142,23 @@ class GroupRoomManager {
         completion(.success("Success"))
     }
     
+    func updateTeam(group: Group, completion: (Result<String, Error>) -> Void) {
+        
+        let document = dataBase.collection("Groups").document(group.groupId)
+        
+        do {
+            
+            try document.setData(from: group)
+            
+        } catch {
+            
+            completion(.failure(error))
+            
+        }
+        
+        completion(.success("Success"))
+    }
+    
     func sendMessage(groupId: String, message: Message, completion: (Result<String, Error>) -> Void) {
         
         let document = dataBase.collection("Messages").document()
@@ -195,7 +211,7 @@ class GroupRoomManager {
                     for document in querySnapshot.documents {
                         
                         document.reference.updateData([
-                            "user_ids": FieldValue.arrayUnion([userId])
+                            "user_ids": FieldValue.arrayUnion([self.userId])
                         ])
                         completion(.success("Success"))
                     }
@@ -227,4 +243,23 @@ class GroupRoomManager {
                 }
             }
     }
+    
+    func leaveGroup(groupId: String, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        let docRef = dataBase.collection("Groups").document(groupId)
+        
+        docRef.updateData([
+            "user_ids": FieldValue.arrayRemove([userId])
+        ]) { error in
+            if let error = error {
+                
+                print("Error updating document: \(error)")
+                
+            } else {
+                
+                print("User leave group successfully")
+            }
+            }
+        }
+    
 }

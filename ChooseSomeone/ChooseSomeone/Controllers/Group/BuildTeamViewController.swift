@@ -8,8 +8,21 @@
 import UIKit
 import FirebaseFirestore
 import RSKPlaceholderTextView
+import FirebaseAuth
 
-class BuildTeamViewController: UIViewController {
+class BuildTeamViewController: BaseViewController {
+    
+    @IBOutlet weak var dimmingView: UIView! {
+        
+        didSet {
+            
+            let recognizer = UITapGestureRecognizer(target: self,
+                                                    action: #selector(handleTap(recognizer:)))
+            
+            dimmingView.addGestureRecognizer(recognizer)
+        }
+        
+    }
     
     private var group = Group()
     
@@ -18,34 +31,41 @@ class BuildTeamViewController: UIViewController {
     @IBOutlet weak var headerView: UIView!
     
     @IBOutlet weak var groupNameTextField: UITextField! {
+        
         didSet {
+            
             groupNameTextField.delegate = self
+            
             groupNameTextField.setLeftPaddingPoints(8)
         }
     }
     
     @IBOutlet weak var trailNameTextField: UITextField! {
+        
         didSet {
+            
             trailNameTextField.delegate = self
+            
             trailNameTextField.setLeftPaddingPoints(8)
         }
     }
     
-    @IBOutlet weak var travelDate: UIDatePicker! {
-        didSet {
-  
-        }
-    }
+    @IBOutlet weak var travelDate: UIDatePicker!
     
     @IBOutlet weak var numOfPeopleTextfield: UITextField! {
+        
         didSet {
+            
             numOfPeopleTextfield.delegate = self
+            
             numOfPeopleTextfield.setLeftPaddingPoints(8)
         }
     }
-
+    
     @IBOutlet weak var noteTextView: RSKPlaceholderTextView! {
+        
         didSet {
+            
             noteTextView.delegate = self
         }
     }
@@ -53,10 +73,12 @@ class BuildTeamViewController: UIViewController {
     @IBOutlet weak var sendPostButton: UIButton!
     
     @IBAction func dismiss(_ sender: UIButton) {
+        
         dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         setUpButton()
@@ -69,48 +91,64 @@ class BuildTeamViewController: UIViewController {
         headerView.roundCornersTop(cornerRadius: 15)
         
         setUpTextView()
-
+        
     }
     
     func setUpTextView() {
+        
         noteTextView.placeholder = "對團員說些什麼.."
-        noteTextView.layer.masksToBounds = false
-        noteTextView.layer.shadowColor = UIColor.black.cgColor
-        noteTextView.layer.shadowOffset = CGSize(width: 1.0, height: 3.0)
-        noteTextView.layer.shadowOpacity = 0.2
+        
+        noteTextView.clipsToBounds = true
+        
+        noteTextView.layer.cornerRadius = 10
+        
         noteTextView.textContainer.maximumNumberOfLines = 2
+        
         noteTextView.textContainer.lineBreakMode = .byWordWrapping
     }
     
     func setUpButton() {
+        
         sendPostButton.addTarget(self, action: #selector(sendPost), for: .touchUpInside)
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func handleTap(recognizer: UITapGestureRecognizer) {
+        
         dismiss(animated: true, completion: nil)
     }
     
     @objc func sendPost() {
         
-        let hostId = UserManager.shared.userInfo.uid
+        guard let hostId = Auth.auth().currentUser?.uid else { return }
         
         textViewDidEndEditing(noteTextView)
+        
         group.hostId = hostId
+        
         group.date = Timestamp(date: travelDate.date)
+        
         group.userIds = [hostId]
         
         GroupRoomManager.shared.buildTeam(group: &group) { result in
             
             switch result {
-            
+                
             case .success:
                 
                 print("build team success")
                 
                 let controller = UIAlertController(title: "開啟揪團囉", message: nil, preferredStyle: .alert)
+                
                 let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+                    
                     self.dismiss(animated: true, completion: nil)
                 }
                 controller.addAction(okAction)
+                
                 self.present(controller, animated: true, completion: nil)
-
+                
             case .failure(let error):
                 
                 print("build team failure: \(error)")
@@ -127,6 +165,7 @@ extension BuildTeamViewController: UITextFieldDelegate, UITextViewDelegate {
               !text.isEmpty else {
                   return
               }
+        
         group.note = text
     }
     
@@ -140,15 +179,19 @@ extension BuildTeamViewController: UITextFieldDelegate, UITextViewDelegate {
         switch textField {
             
         case groupNameTextField:
+            
             group.groupName = text
             
         case trailNameTextField:
+            
             group.trailName = text
             
         case numOfPeopleTextfield:
+            
             group.upperLimit = Int(text) ?? 1
             
         default:
+            
             return
         }
     }

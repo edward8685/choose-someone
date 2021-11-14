@@ -52,7 +52,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TmS-Nq-4s3">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="695"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kW2-Bb-jQp">
                                     <size key="itemSize" width="128" height="128"/>
@@ -85,7 +85,7 @@
                             <constraint firstItem="W3s-s0-FYV" firstAttribute="trailing" secondItem="mX5-jH-pAJ" secondAttribute="trailing" id="aUK-R6-yld"/>
                             <constraint firstItem="TmS-Nq-4s3" firstAttribute="top" secondItem="mX5-jH-pAJ" secondAttribute="top" id="mI8-ES-Ul7"/>
                             <constraint firstItem="TmS-Nq-4s3" firstAttribute="leading" secondItem="mX5-jH-pAJ" secondAttribute="leading" id="vCX-n8-mwP"/>
-                            <constraint firstItem="mX5-jH-pAJ" firstAttribute="bottom" secondItem="TmS-Nq-4s3" secondAttribute="bottom" id="xse-DF-LPa"/>
+                            <constraint firstItem="mX5-jH-pAJ" firstAttribute="bottom" secondItem="TmS-Nq-4s3" secondAttribute="bottom" constant="30" id="xse-DF-LPa"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Qc8-XU-66X"/>
@@ -100,10 +100,10 @@
         <!--ChooseGroup-->
         <scene sceneID="mep-M4-tvZ">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Jx-zA-QNM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="ChooseGroup" id="zXb-xO-zKt" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="VM6-fa-c6I"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7Jx-zA-QNM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2438" y="339"/>
         </scene>

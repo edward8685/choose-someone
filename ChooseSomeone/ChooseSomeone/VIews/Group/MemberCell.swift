@@ -11,7 +11,7 @@ class MemberCell: UITableViewCell {
     
     @IBOutlet weak var userImage: UIImageView!
     
-    @IBOutlet weak var requestName: UILabel!
+    @IBOutlet weak var requestNameLabel: UILabel!
     
     @IBOutlet weak var requestLabel: UILabel!
     
@@ -21,17 +21,41 @@ class MemberCell: UITableViewCell {
     
     @IBOutlet weak var viewOfBackground: UIView!
     
-    func setUpCell(requests: [Request], indexPath: IndexPath) {
+    @IBOutlet weak var groupNameLabel: UILabel!
+    
+    //Join Request
+    
+    func setUpCell(request: Request, userInfo: UserInfo) {
         
-//        requestName.text = requests[indexPath.row].requestName
-        requestLabel.text = "want to join your \(requests[indexPath.row].groupName)"
+        requestNameLabel.text = userInfo.userName
+        
+        requestLabel.text = "want to join your group"
+        
+        groupNameLabel.text = "\(request.groupName)"
+        
+        guard let ref = userInfo.pictureRef else { return }
+        
+        userImage.loadImage(ref)
         
     }
-    func setUpCell(group: Group, indexPath: IndexPath) {
+    
+    //Check Teammate
+    
+    func setUpCell(group: Group, userInfo: UserInfo) {
         
         requestLabel.isHidden = true
         acceptButton.isHidden = true
-        requestName.text = group.userIds[indexPath.row]
+        groupNameLabel.isHidden = true
+        let image = UIImage(named: "exclamationmark.square")
+        rejectButton.setImage(image, for: .normal)
+        rejectButton.layer.cornerRadius = 0
+        rejectButton.layer.masksToBounds = true
+        
+        if userInfo.uid == UserManager.shared.userId {
+            rejectButton.isHidden = true
+        }
+        
+        requestNameLabel.text = userInfo.userName
         
     }
     

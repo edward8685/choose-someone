@@ -10,7 +10,7 @@ import AuthenticationServices
 import CryptoKit
 import FirebaseAuth
 
-class LoginViewController: UIViewController, ASAuthorizationControllerPresentationContextProviding{
+class LoginViewController: BaseViewController, ASAuthorizationControllerPresentationContextProviding{
     
     fileprivate var currentNonce: String?
     
@@ -21,33 +21,6 @@ class LoginViewController: UIViewController, ASAuthorizationControllerPresentati
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpSignInButton()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-        handle = Auth.auth().addStateDidChangeListener {auth, user in
-            
-            if let user = user {
-
-                guard let tabbarVC = UIStoryboard.main.instantiateViewController(identifier: "TabbarController") as? UITabBarController else { return }
-                
-                tabbarVC.modalPresentationStyle = .fullScreen
-                
-                self.present(tabbarVC, animated: true, completion: nil)
-                
-                print("detect user ID : \(user.uid) ")
-                
-            }
-            
-            return
-            
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        Auth.auth().removeStateDidChangeListener(handle!)
-        
     }
     
     func setUpSignInButton() {
@@ -153,14 +126,10 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             
             Auth.auth().signIn(with: credential) { (authResult, error) in
                 
-                
-                
-                if let additionalUserInfo = authResult?.additionalUserInfo?.isNewUser,
+                if let isNewUser = authResult?.additionalUserInfo?.isNewUser,
                    let uid = authResult?.user.uid {
                     
-                    print(uid)
-                    
-                    if additionalUserInfo {
+                    if isNewUser {
                         
                         self.userInfo.uid = uid
                         
@@ -169,6 +138,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                             switch result {
                                 
                             case .success:
+                                
+                                fetchUserInfo (uid: uid)
                                 
                                 print("User Sign up successfully")
                                 
@@ -181,32 +152,41 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                         
                     } else {
                         
-                        UserManager.shared.fetchUserInfo(uid: uid) { result in
-                            
-                            switch result {
-                                
-                            case .success:
-                                
-                                print("Fetch user info successfully")
-                                print(UserManager.shared.userInfo)
-                                
-                            case .failure(let error):
-                                
-                                print("Fetch user info failure: \(error)")
-                            }
-                            
-                        }
+                        fetchUserInfo (uid: uid)
                         
                     }
-                    
                 }
             }
         }
-        
         func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
             
             print("Sign in with Apple errored: \(error)")
             
+        }
+        
+        func fetchUserInfo (uid: String) {
+            
+            UserManager.shared.fetchUserInfo(uid: uid) { result in
+                
+                switch result {
+                    
+                case .success(let userInfo):
+                    
+                    UserManager.shared.userInfo = userInfo
+                    
+                    print("Fetch user info successfully")
+                    
+                    guard let tabbarVC = UIStoryboard.main.instantiateViewController(identifier: "TabbarController") as? UITabBarController else { return }
+                    
+                    tabbarVC.modalPresentationStyle = .fullScreen
+                    
+                    self.present(tabbarVC, animated: false, completion: nil)
+                    
+                case .failure(let error):
+                    
+                    print("Fetch user info failure: \(error)")
+                }
+            }
         }
         
     }
@@ -244,4 +224,3 @@ private func randomNonceString(length: Int = 32) -> String {
     }
     return result
 }
-

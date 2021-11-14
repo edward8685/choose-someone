@@ -26,7 +26,7 @@ class GroupInfoCell: UITableViewCell {
     
     @IBOutlet weak var chevronView: UIImageView!
     
-    func setUpCell(group: Group, indexPath: IndexPath) {
+    func setUpCell(group: Group, hostname: String) {
         
         let userInfo = UserManager.shared.userInfo
 
@@ -37,6 +37,8 @@ class GroupInfoCell: UITableViewCell {
         travelDate.text = TimeFormater.dateStyle.timeFormat(time: group.date)
         
         travelTime.text = TimeFormater.timeStyle.timeFormat(time: group.date)
+        
+        hostName.text = hostname
         
         let upperLimit = group.upperLimit.description
         
