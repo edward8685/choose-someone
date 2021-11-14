@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		471C164F4EB6DE16AC7F7423 /* Pods_ChooseSomeone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED384022C302A500A96722DB /* Pods_ChooseSomeone.framework */; };
+		7406D9302740D242003FBFD6 /* UIImageExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7406D92F2740D242003FBFD6 /* UIImageExtenstion.swift */; };
 		740B1B822723F41D00A1CD3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740B1B812723F41D00A1CD3B /* Main.storyboard */; };
 		740B1B842723FECC00A1CD3B /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740B1B832723FECB00A1CD3B /* Home.storyboard */; };
 		740B1B862723FF2500A1CD3B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740B1B852723FF2500A1CD3B /* HomeViewController.swift */; };
@@ -109,6 +110,7 @@
 
 /* Begin PBXFileReference section */
 		715A0A3D1C233AFC5A6955E0 /* Pods-ChooseSomeone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChooseSomeone.release.xcconfig"; path = "Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone.release.xcconfig"; sourceTree = "<group>"; };
+		7406D92F2740D242003FBFD6 /* UIImageExtenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtenstion.swift; sourceTree = "<group>"; };
 		740B1B812723F41D00A1CD3B /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		740B1B832723FECB00A1CD3B /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		740B1B852723FF2500A1CD3B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -365,9 +367,7 @@
 			isa = PBXGroup;
 			children = (
 				747A1DB4273FE60200D08A37 /* Group */,
-				740B1B852723FF2500A1CD3B /* HomeViewController.swift */,
-				74F96503272481F800B77DC5 /* TrailListViewController.swift */,
-				7449349B272548BC002D8FE3 /* TrailInfoViewController.swift */,
+				74F10299274135060097AC6F /* Home */,
 				74E5736227279A2800F490BF /* JourneyViewController.swift */,
 				74E573882728F4B300F490BF /* MapViewDelegate.swift */,
 				745A6F03272D6809006064C4 /* TrackRecordsViewController.swift */,
@@ -410,6 +410,7 @@
 				74E573D527292EBD00F490BF /* Double+Measures.swift */,
 				7441B7A627313E1C00614D9B /* UIFontExtension.swift */,
 				745A6F0B272DAE9C006064C4 /* TimeFormater.swift */,
+				7406D92F2740D242003FBFD6 /* UIImageExtenstion.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -436,6 +437,16 @@
 				74608D39271DDA05002BD125 /* JoinRequestViewController.swift */,
 			);
 			path = Group;
+			sourceTree = "<group>";
+		};
+		74F10299274135060097AC6F /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				740B1B852723FF2500A1CD3B /* HomeViewController.swift */,
+				74F96503272481F800B77DC5 /* TrailListViewController.swift */,
+				7449349B272548BC002D8FE3 /* TrailInfoViewController.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		74F965092725391500B77DC5 /* Profile */ = {
@@ -638,6 +649,7 @@
 				745A6F11272E9D0A006064C4 /* RecordInfoView.swift in Sources */,
 				74E5738B2728F61C00F490BF /* GPXMapView.swift in Sources */,
 				7449349F27255A0B002D8FE3 /* UIStoryboard+Extension.swift in Sources */,
+				7406D9302740D242003FBFD6 /* UIImageExtenstion.swift in Sources */,
 				74608D32271D7253002BD125 /* BuildTeamViewController.swift in Sources */,
 				74608D41271E97DC002BD125 /* Trail.swift in Sources */,
 				740E98AC2734DF79006163B8 /* ProfileCell.swift in Sources */,

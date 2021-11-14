@@ -13,16 +13,25 @@ class TrailThemeCell: UITableViewCell {
     
     @IBOutlet weak var themeLabel: UILabel!
     
-    func setUpCell(theme: [String], image: [String], indexPath: IndexPath) {
-        themeLabel.text = theme[indexPath.row]
+    func setUpCell(theme: String, image: UIImage?) {
+        
+        themeLabel.text = theme
+        
+        themeImage.image = image
+        
+        themeImage.contentMode = .scaleToFill
     }
     
     override func awakeFromNib() {
-        super.awakeFromNib()
-        contentView.backgroundColor = .clear
-        self.backgroundView?.backgroundColor = .clear
-        self.backgroundColor = .clear
-        selectionStyle = .none
         
+        super.awakeFromNib()
+        
+        contentView.backgroundColor = .clear
+        
+        self.backgroundView?.backgroundColor = .clear
+        
+        self.backgroundColor = .clear
+        
+        selectionStyle = .none
     }
 }

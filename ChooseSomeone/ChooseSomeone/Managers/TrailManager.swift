@@ -7,7 +7,9 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseStorage
 import FirebaseFirestoreSwift
+import SwiftUI
 
 class TrailManager {
     
@@ -45,6 +47,30 @@ class TrailManager {
                 }
                 
                 completion(.success(trails))
+            }
+        }
+    }
+    
+    func fetchTrailMap(tralId: String, completion: @escaping (Result<UIImage, Error>) -> Void) {
+        
+        let fileReference = Storage.storage().reference().child("maps/\(tralId)_MAP.jpg")
+        
+        fileReference.getData(maxSize: 10 * 1024 * 1024) { result in
+            
+            switch result {
+                
+            case .success(let data):
+                
+                if let image = UIImage(data: data) {
+                
+                completion(.success(image))
+                
+                }
+                
+            case .failure(let error):
+                
+                print(error)
+                completion(.failure(error))
             }
         }
     }
