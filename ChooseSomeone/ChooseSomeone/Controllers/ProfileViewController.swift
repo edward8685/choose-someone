@@ -7,40 +7,55 @@
 
 import UIKit
 import Firebase
+import AVFoundation
+
+enum ActionSheet: String{
+    
+    case camera = "Camera"
+    case library = "Library"
+    case cancel = "Cancel"
+}
 
 class ProfileViewController: UIViewController {
     
-    var textInTextfield: String?
+    var textInTextfield: String = ""
     
     let userInfo = UserManager.shared.userInfo
     
     let items = ProfileFeat.allCases
     
     @IBOutlet weak var tableView: UITableView! {
+        
         didSet {
             tableView.delegate = self
+            
             tableView.dataSource = self
+            
+            tableView.backgroundColor = .clear
+            
+            tableView.isScrollEnabled = false
+            
+            tableView.separatorStyle = .none
         }
     }
     
     @IBOutlet weak var profileView: ProfileView!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
+        self.view.applyGradient(colors: [.white, .U2], locations: [0.0, 1.0], direction: .leftSkewed)
+        
+        view.bringSubviewToFront(profileView)
+        
         tableView.registerCellWithNib(identifier: ProfileCell.identifier, bundle: nil)
-        
-        tableView.backgroundColor = .clear
-        
-        tableView.isScrollEnabled = false
-        
-        tableView.separatorStyle = .none
         
         profileView.setUpProfileView(userInfo: userInfo)
         
         profileView.editImageButton.delegate = self
         
-        profileView.editNameTextField.isHidden = true
+        profileView.editNameTextField.isHidden = false
         
         profileView.editNameTextField.delegate = self
         
@@ -48,16 +63,29 @@ class ProfileViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        navigationController?.isNavigationBarHidden = true
+    }
+    
     @IBAction func editName(_ sender: UIButton) {
-        if profileView.isEditing == false {
-            profileView.isEditing.toggle()
+        
+        if profileView.isEditting == false {
+            
+            profileView.isEditting.toggle()
+            
         } else {
-            let name = profileView.editNameTextField.text
-            profileView.userName.text = name
-            if let name = textInTextfield {
-                UserManager.shared.updateUserName(name: name)
-                profileView.isEditing.toggle()
+            
+            if let name = profileView.editNameTextField.text {
+                
+                profileView.editNameTextField.text = name
+                
+                updateUserInfo(name: name)
+                
             }
+            
+            profileView.isEditting.toggle()
+            
         }
     }
     
@@ -86,10 +114,27 @@ class ProfileViewController: UIViewController {
         
     }
     
-    func setUpUserInfo() {
+    func updateUserInfo(imageData: Data) {
         
+        UserManager.shared.uploadUserPicture(imageData: imageData) { result in
+            
+            switch result {
+                
+            case .success:
+                
+                print("Upload user picture successfully")
+                
+            case .failure(let error):
+                
+                print("Upload failure: \(error)")
+            }
+        }
     }
     
+    func updateUserInfo(name: String) {
+        
+        UserManager.shared.updateUserName(name: name)
+    }
 }
 
 extension ProfileViewController: UITableViewDelegate {
@@ -113,14 +158,15 @@ extension ProfileViewController: UITableViewDelegate {
     }
 }
 
-
 extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileCell.identifier, for: indexPath) as? ProfileCell
                 
         else {fatalError("Could not create Cell")}
@@ -129,49 +175,46 @@ extension ProfileViewController: UITableViewDataSource {
         
         return cell
     }
-    
 }
 
 extension ProfileViewController: UITextFieldDelegate {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         
-        textInTextfield = textField.text
-        
+        textInTextfield = textField.text ?? ""
     }
 }
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    enum ActionSheet: String{
-        
-        case camera = "Camera"
-        case library = "Library"
-        case cancel = "Cancel"
-        
-    }
     
     func showPickerController() {
         
         let imagePickerController = UIImagePickerController()
         
         imagePickerController.delegate = self
+        
         imagePickerController.modalPresentationStyle = .fullScreen
+        
         imagePickerController.allowsEditing = true
         
         let actionSheet = UIAlertController(title: "Choose a source", message: nil, preferredStyle: .actionSheet)
         
-        actionSheet.addAction(UIAlertAction(title: ActionSheet.camera.rawValue, style: .default, handler:{ (UIAlertAction)in
+        actionSheet.addAction(UIAlertAction(title: ActionSheet.camera.rawValue, style: .default, handler:{ (UIAlertAction) in
+            
             imagePickerController.sourceType = .camera
+            
             self.present(imagePickerController, animated: true, completion: nil)
         }))
         
-        actionSheet.addAction(UIAlertAction(title: ActionSheet.library.rawValue, style: .default, handler:{ (UIAlertAction)in
+        actionSheet.addAction(UIAlertAction(title: ActionSheet.library.rawValue, style: .default, handler:{ (UIAlertAction) in
+            
             imagePickerController.sourceType = .photoLibrary
+            
             self.present(imagePickerController, animated: true, completion: nil)
         }))
         
-        actionSheet.addAction(UIAlertAction(title: ActionSheet.cancel.rawValue, style: .cancel, handler:{ (UIAlertAction)in
+        actionSheet.addAction(UIAlertAction(title: ActionSheet.cancel.rawValue, style: .cancel, handler:{ (UIAlertAction) in
+            
             self.dismiss(animated: true, completion: nil)
         }))
         
@@ -182,33 +225,20 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         
         guard let image = info[.editedImage] as? UIImage else { return }
         
-        guard let imageData = image.pngData() else { return }
+        guard let imageData = image.jpegData(compressionQuality: 0.1) else { return }
         
         profileView.userImage.image = image
         
-        UserManager.shared.uploadUserPicture(imageData: imageData) { result in
-            
-            switch result {
-                
-            case .success:
-                
-                print("Upload user picture successfully")
-                
-            case .failure(let error):
-                
-                print("Upload failure: \(error)")
-            }
-        }
+        updateUserInfo(imageData: imageData)
         
         dismiss(animated: true)
-        
     }
-    
 }
 
 extension ProfileViewController: ImagePickerDelegate {
     
     func presentImagePicker() {
+        
         showPickerController()
     }
 }

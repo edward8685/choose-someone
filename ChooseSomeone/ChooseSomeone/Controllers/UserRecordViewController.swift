@@ -67,9 +67,13 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         chartView.noDataText = "Can not get track record!"
         
         for index in 0..<elevation.count {
-            let xvalue = distance[index] / 100
+            
+            let xvalue = distance[index] / 1000
+            
             let yvalue = values[index]
+            
             let dataEntry = ChartDataEntry(x: xvalue, y: yvalue)
+            
             dataEntries.append(dataEntry)
         }
         
@@ -87,7 +91,7 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         
         dataSet.fillAlpha = 0.8
         
-        dataSet.fillColor = .B2 ?? .lightGray
+        dataSet.fillColor = .U2 ?? .lightGray
         
         chartView.data = LineChartData(dataSets: [dataSet])
         
@@ -116,7 +120,7 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         
         chartView.rightAxis.enabled = false
         
-        chartView.animate(xAxisDuration: 2.5)
+        chartView.animate(xAxisDuration: 2.0)
     }
     
     func setUpButton() {
@@ -124,12 +128,19 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         let returnButton = UIButton()
         
         let radius = UIScreen.width * 13 / 107
+        
         returnButton.frame = CGRect(x: 20, y: 40, width: radius, height: radius)
+        
         returnButton.backgroundColor = .white
+        
         let image = UIImage(systemName: "chevron.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .medium))
+        
         returnButton.setImage(image, for: .normal)
-        returnButton.tintColor = UIColor.U1
+        
+        returnButton.tintColor = .B1
+        
         returnButton.layer.cornerRadius = radius / 2
+        
         returnButton.layer.masksToBounds = true
         
         returnButton.addTarget(self, action: #selector(returnToPreviousPage), for: .touchUpInside)
@@ -140,7 +151,6 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
     @objc func returnToPreviousPage() {
         navigationController?.popViewController(animated: true)
     }
-    
     
     func parseGPXFile() {
         let inputURL = URL(string: record.recordRef)
@@ -166,20 +176,22 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
                     }
                     
                     distanceFromOrigin = segment.distanceFromOrigin()
-                    
                 }
             }
             trackTime = trackTime.map { $0 - self.trackTime[0]}
+            
             trackInfo.distance = distanceFromOrigin.last ?? 0
+            
             trackInfo.spentTime = trackTime.last ?? 0
+            
             if let maxValue = elevation.max(),
                let minValue = elevation.min() {
+                
                 trackInfo.elevationDiff = maxValue - minValue
             }
+            
             calculateElevation(elevation: elevation)
-
         }
-        
     }
     
     func didLoadGPXFile(gpxRoot: GPXRoot) {
@@ -187,32 +199,46 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         map.importFromGPXRoot(gpxRoot)
         
         map.regionToGPXExtent()
-        
     }
     
     func calculateElevation(elevation: [Double]) {
+        
         var totalClimp: Double = 0.0
+        
         var totalDrop: Double = 0.0
+        
         for index in 0..<elevation.count - 1 {
+            
             let diff = elevation[index + 1] - elevation[index]
+            
             if diff < 0 {
+                
                 totalDrop += diff
+                
             } else {
+                
                 totalClimp += diff
             }
         }
+        
         totalDrop = abs(totalDrop)
+        
         trackInfo.totalClimb = totalClimp
+        
         trackInfo.totalDrop = totalDrop
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        
         updatePolylineColor()
     }
     
     func updatePolylineColor() {
+        
         for overlay in map.overlays where overlay is MKPolyline {
+            
             map.removeOverlay(overlay)
+            
             map.addOverlay(overlay)
         }
     }

@@ -83,6 +83,8 @@ class GroupChatHeaderCell: UITableViewCell {
                 
                 travelTime.text = TimeFormater.timeStyle.timeFormat(time: groupInfo.date)
                 
+                note.text =  groupInfo.note
+                
                 let upperLimit = groupInfo.upperLimit
                 
                 let counts = groupInfo.userIds.count

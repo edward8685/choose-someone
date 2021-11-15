@@ -28,8 +28,6 @@ class TrailThemeCell: UITableViewCell {
         
         contentView.backgroundColor = .clear
         
-        self.backgroundView?.backgroundColor = .clear
-        
         self.backgroundColor = .clear
         
         selectionStyle = .none

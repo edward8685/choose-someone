@@ -49,11 +49,11 @@ enum ProfileFeat: ProfileItem, CaseIterable {
         
         switch self {
             
-        case .record: return UIImage(named: "edit")
+        case .record: return UIImage.asset(.Icon_edit)
             
-        case .notice: return UIImage(named: "backpack")
+        case .notice: return UIImage.asset(.Icon_notice)
             
-        case .account: return UIImage(named: "gear")
+        case .account: return UIImage.asset(.Icon_gear)
             
         case .share: return UIImage(named: "hourglass")
         }
@@ -78,13 +78,13 @@ enum ProfileFeat: ProfileItem, CaseIterable {
         
         switch self {
             
-        case .record: return UIColor.U1
+        case .record: return UIColor.clear
             
-        case .notice: return UIColor.U3
+        case .notice: return UIColor.clear
             
-        case .account: return UIColor.B1
+        case .account: return UIColor.clear
             
-        case .share: return UIColor.B2
+        case .share: return UIColor.clear
             
         }
         

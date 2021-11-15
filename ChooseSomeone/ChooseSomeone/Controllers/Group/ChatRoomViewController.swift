@@ -9,6 +9,7 @@ import UIKit
 import FirebaseFirestore
 import RSKPlaceholderTextView
 import FirebaseAuth
+import AVFoundation
 
 class ChatRoomViewController: BaseViewController {
     
@@ -87,6 +88,8 @@ class ChatRoomViewController: BaseViewController {
         
         super.viewDidLoad()
         
+        checkUserStatus()
+        
         tableView = UITableView()
         
         tableView.registerCellWithNib(identifier: GroupChatCell.identifier, bundle: nil)
@@ -105,6 +108,8 @@ class ChatRoomViewController: BaseViewController {
         
         checkUserStatus()
         
+        fetchMessages()
+        
         navigationController?.isNavigationBarHidden = false
     }
     
@@ -113,6 +118,12 @@ class ChatRoomViewController: BaseViewController {
         textView.layer.cornerRadius = textView.frame.height / 2
         textView.layer.masksToBounds = true
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        messages.removeAll()
+        tableView.reloadData()
+
     }
     
     // MARK: - Action
@@ -125,12 +136,14 @@ class ChatRoomViewController: BaseViewController {
             
             userStatus = .ishost
             
+            isInGroup = true
+            
         } else {
             
             guard let userId = userId else { fatalError() }
             
             userStatus = groupInfo.userIds.contains(userId) ? .isInGroup : .notInGroup
-            
+            isInGroup = groupInfo.userIds.contains(userId) ? true : false
         }
     }
     
@@ -149,6 +162,7 @@ class ChatRoomViewController: BaseViewController {
                 for message in messages where self.userInfo.blockList?.contains(message.userId) == false {
                     
                     filtedmessages.append(message)
+//                    self.messages.append(message)
                     
                     guard self.cache[message.userId] != nil else {
                         
@@ -156,6 +170,32 @@ class ChatRoomViewController: BaseViewController {
                         
                         return
                     }
+                }
+                
+                self.messages = filtedmessages
+                
+            case .failure(let error):
+                
+                print("fetchData.failure: \(error)")
+            }
+        }
+    }
+    
+    func fetchMessages() {
+        
+        guard let groupInfo = groupInfo else { return }
+        
+        GroupRoomManager.shared.fetchMessages(groupId: groupInfo.groupId) { result in
+            
+            switch result {
+                
+            case .success(let messages):
+                
+                var filtedmessages = [Message]()
+                
+                for message in messages where self.userInfo.blockList?.contains(message.userId) == false {
+                    
+                    filtedmessages.append(message)
                 }
                 
                 self.messages = filtedmessages
@@ -217,9 +257,9 @@ class ChatRoomViewController: BaseViewController {
                 editGroupInfo(groupInfo: group)
                     
                 }
-                
-                tableView.reloadData()
             }
+            
+//        tableView.reloadData()
         }
     }
     
@@ -362,7 +402,7 @@ class ChatRoomViewController: BaseViewController {
         
         let leftButton = UIButton()
         
-        leftButton.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        leftButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         
         let chevroImage = UIImage(systemName: "chevron.left")
         
@@ -382,7 +422,7 @@ class ChatRoomViewController: BaseViewController {
         
         let rightButton = UIButton()
         
-        rightButton.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        rightButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         
         let infoImage = UIImage(systemName: "info")
         

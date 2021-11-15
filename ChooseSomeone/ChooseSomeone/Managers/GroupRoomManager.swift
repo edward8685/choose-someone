@@ -50,7 +50,40 @@ class GroupRoomManager {
             }
         }
     }
-
+    
+    func fetchMessages(groupId: String, completion: @escaping (Result<[Message], Error>) -> Void) {
+        let collection = dataBase.collection("Messages")
+        collection.getDocuments() {(querySnapshot,error) in
+            
+            guard let querySnapshot = querySnapshot else { return }
+            
+            if let error = error {
+                
+                completion(.failure(error))
+                
+            } else {
+                
+                var messages = [Message]()
+                
+                for document in querySnapshot.documents {
+                    
+                    do {
+                        
+                        if let message = try document.data(as: Message.self, decoder: Firestore.Decoder()) {
+                            messages.append(message)
+                        }
+                        
+                    } catch {
+                        
+                        completion(.failure(error))
+                    }
+                }
+                
+                completion(.success(messages))
+            }
+        }
+    }
+    
     func fetchGroups(completion: @escaping (Result<[Group], Error>) -> Void) {
         let collection = dataBase.collection("Groups")
         collection.order(by: "date", descending: false).getDocuments() {(querySnapshot,error) in
@@ -196,28 +229,25 @@ class GroupRoomManager {
     
     func addUserToGroup(groupId: String, userId: String, completion: @escaping (Result<String, Error>) -> Void) {
         
-        dataBase.collection("Groups")
-            .whereField("group_id", isEqualTo: groupId)
-            .getDocuments { (querySnapshot, error) in
-                
-                guard let querySnapshot = querySnapshot else { return }
-                
-                if let error = error {
-                    
-                    completion(.failure(error))
-                    
-                } else {
-                    
-                    for document in querySnapshot.documents {
-                        
-                        document.reference.updateData([
-                            "user_ids": FieldValue.arrayUnion([self.userId])
-                        ])
-                        completion(.success("Success"))
+        let docRef = dataBase.collection("Groups").document(groupId)
+   
+                docRef.updateData([
+                            "user_ids": FieldValue.arrayUnion([userId])
+                        ]) { error in
+                            if let error = error {
+                                
+                                print("Error updating document: \(error)")
+                                
+                                completion(.failure(error))
+                                
+                            } else {
+                                
+                                print("User leave group successfully")
+                                
+                                completion(.success("Success"))
                     }
                 }
             }
-    }
     
     func removeRequest(groupId: String, userId: String, completion: @escaping (Result<String, Error>) -> Void) {
         

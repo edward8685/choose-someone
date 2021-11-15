@@ -46,8 +46,13 @@ class MemberCell: UITableViewCell {
         requestLabel.isHidden = true
         acceptButton.isHidden = true
         groupNameLabel.isHidden = true
-        let image = UIImage(named: "exclamationmark.square")
-        rejectButton.setImage(image, for: .normal)
+//        let image = UIImage.asset(.block)
+        
+//        let image = UIImage(systemName: "block", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .medium))
+        
+//        rejectButton.setImage(image, for: .normal)
+//        rejectButton.backgroundColor = .clear
+//        rejectButton.imageView?.contentMode = .scaleAspectFill
         rejectButton.layer.cornerRadius = 0
         rejectButton.layer.masksToBounds = true
         

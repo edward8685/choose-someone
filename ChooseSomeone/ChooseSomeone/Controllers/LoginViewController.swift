@@ -18,6 +18,8 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
     
     @IBOutlet weak var appLogo: UIImageView!
     
+    @IBOutlet weak var logoTopConstrain: NSLayoutConstraint!
+    
     var handle: AuthStateDidChangeListenerHandle?
     
     var userInfo = UserManager.shared.userInfo
@@ -43,11 +45,11 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
             
             button.heightAnchor.constraint(equalToConstant: 36),
             
-            button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             
-            button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             
-            button.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: 60)
+            button.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: 80)
         ])
         
         button.alpha = 0.0
@@ -60,9 +62,7 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
         
         UIView.animate(withDuration: 0.5, delay: 1) {
             
-            NSLayoutConstraint.activate([
-                self.appLogo.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 150)
-        ])
+                self.logoTopConstrain.constant = 150
         }
 
         UIView.animate(withDuration: 0.5, delay: 1.5) {

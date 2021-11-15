@@ -100,7 +100,7 @@
                                 </constraints>
                                 <color key="textColor" name="B1"/>
                                 <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                         <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -109,8 +109,8 @@
                             </textField>
                         </subviews>
                     </stackView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="83D-Ad-ynZ">
-                        <rect key="frame" x="237.5" y="53" width="80" height="64"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="83D-Ad-ynZ">
+                        <rect key="frame" x="237.5" y="49" width="80" height="68"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="2ch-WO-80z">
                                 <rect key="frame" x="0.0" y="0.0" width="80" height="25"/>
@@ -133,7 +133,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ml3-uN-FHp">
-                                <rect key="frame" x="0.0" y="36" width="80" height="28"/>
+                                <rect key="frame" x="0.0" y="40" width="80" height="28"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="主揪" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IdP-By-sxr">
                                         <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>

@@ -9,12 +9,11 @@ import Foundation
 import FirebaseStorage
 import FirebaseFirestoreSwift
 import FirebaseFirestore
+import CloudKit
 
 class RecordManager {
     
     let userId = UserManager.shared.userInfo.uid
-    
-    var record = Record()
     
     let storage = Storage.storage()
     
@@ -27,43 +26,40 @@ class RecordManager {
     func uploadRecord(fileName: String, fileURL: URL, completion: @escaping (Result<URL, Error>) -> Void) {
         
         do {
+            
             let data: Data = try Data(contentsOf: fileURL)
- 
-                let recordRef = storageRef.child("records").child("\(userId)")
+            
+            let recordRef = storageRef.child("records").child(userId)
+            
+            let spaceRef = recordRef.child(fileName)
+            
+            spaceRef.putData(data, metadata: nil) { result in
                 
-                //            let filename = fileURL.lastPathComponent
-                
-                //            let spaceRef = recordRef.child(UUID().uuidString + ".gpx")
-                
-                let spaceRef = recordRef.child(fileName)
-                
-                spaceRef.putData(data, metadata: nil) { result in
+                switch result {
                     
-                    switch result {
+                case .success(_):
+                    
+                    spaceRef.downloadURL { result in
                         
-                    case .success(_):
-                        
-                        spaceRef.downloadURL { result in
+                        switch result {
                             
-                            switch result {
-                                
-                            case .success(let url):
-                                
-                                completion(.success(url))
-                                
-                                self.uploadRecordToDb(fileName: fileName, fileURL: url)
-                                
-                            case .failure(let error):
-                                
-                                completion(.failure(error))
-                            }
+                        case .success(let url):
+                            
+                            completion(.success(url))
+                            
+                            self.uploadRecordToDb(fileName: fileName, fileURL: url)
+                            
+                        case .failure(let error):
+                            
+                            completion(.failure(error))
                         }
-                        
-                    case .failure(let error):
-                        
-                        completion(.failure(error))
                     }
+                    
+                case .failure(let error):
+                    
+                    completion(.failure(error))
                 }
+            }
             
         } catch {
             
@@ -77,7 +73,9 @@ class RecordManager {
         
         let document = dataBase.collection("Records").document()
         
-            record.uid = userId
+        var record = Record()
+        
+        record.uid = userId
         
         record.recordId = document.documentID
         
@@ -92,11 +90,9 @@ class RecordManager {
         } catch {
             
             print("error")
-            
         }
         
         print("sucessfully")
-        
     }
     
     func fetchRecords(completion: @escaping (Result<[Record], Error>) -> Void) {
@@ -132,6 +128,51 @@ class RecordManager {
                 records.sort{ $0.createdTime.seconds < $1.createdTime.seconds }
                 
                 completion(.success(records))
+            }
+        }
+    }
+    
+    func deleteStorageRecords(fileName: String, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        let recordRef = storageRef.child("records").child(userId)
+        
+        let spaceRef = recordRef.child(fileName)
+        
+        spaceRef.delete { error in
+            
+            if let error = error {
+                
+                print ("\(error)")
+                
+                completion(.failure(error))
+                
+            } else {
+                
+                self.deleteDbRecords(fileName: fileName)
+                
+                completion(.success("Success"))
+            }
+        }
+    }
+    
+    func deleteDbRecords(fileName:String) {
+        
+        let collection = dataBase.collection("Records").whereField("record_name", isEqualTo: fileName)
+        
+        collection.getDocuments { (querySnapshot, error) in
+            
+            guard let querySnapshot = querySnapshot else { return }
+            
+            if let error = error {
+                
+                print("\(error)")
+                
+            } else {
+                
+                for document in querySnapshot.documents {
+                    
+                    document.reference.delete()
+                }
             }
         }
     }

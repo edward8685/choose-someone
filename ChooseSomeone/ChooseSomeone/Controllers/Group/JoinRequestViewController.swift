@@ -219,6 +219,7 @@ extension JoinRequestViewController: UITableViewDataSource {
                 
                 print("accept succesfully")
                 self.requests.remove(at: sender.tag)
+                self.tableView.reloadData()
                 
                 
             case .failure(let error):
@@ -243,6 +244,7 @@ extension JoinRequestViewController: UITableViewDataSource {
                 print("reject succesfully")
                 
                 self.requests.remove(at: sender.tag)
+                self.tableView.reloadData()
                 
             case .failure(let error):
                 

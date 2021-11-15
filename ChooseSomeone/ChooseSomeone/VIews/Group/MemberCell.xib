@@ -127,7 +127,7 @@
     </objects>
     <resources>
         <image name="checkmark" catalog="system" width="128" height="114"/>
-        <image name="placeholder" width="600" height="600"/>
+        <image name="placeholder" width="1200" height="1200"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="U1">
             <color red="0.46274509803921571" green="0.89411764705882357" blue="0.70980392156862748" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

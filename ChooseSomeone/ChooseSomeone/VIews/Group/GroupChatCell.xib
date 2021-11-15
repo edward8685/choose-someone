@@ -126,6 +126,6 @@
         </designable>
     </designables>
     <resources>
-        <image name="placeholder" width="600" height="600"/>
+        <image name="placeholder" width="1200" height="1200"/>
     </resources>
 </document>

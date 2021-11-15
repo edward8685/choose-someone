@@ -16,7 +16,9 @@ class ProfileCell: UITableViewCell {
     @IBOutlet weak var itemTitle: UILabel!
     
     func setUpCell(indexPath: IndexPath) {
+        
         itemImage.image = ProfileFeat.allCases[indexPath.row].image
+        
         itemImage.contentMode = .scaleToFill
         
         itemBackground.backgroundColor = ProfileFeat.allCases[indexPath.row].backgroundColor
@@ -25,13 +27,20 @@ class ProfileCell: UITableViewCell {
     }
 
     override func awakeFromNib() {
+        
         super.awakeFromNib()
+        
         selectionStyle = .none
+        
+        contentView.backgroundColor = .clear
+        
+        self.backgroundColor = .clear
     }
 
     override func layoutSubviews() {
+        
         super.layoutSubviews()
+        
         itemBackground.layer.cornerRadius = itemBackground.frame.height / 2
     }
-    
 }
