@@ -19,7 +19,11 @@ class GroupChatHeaderCell: UITableViewCell {
     
     @IBOutlet weak var numOfPeople: UITextField!
     
-    @IBOutlet weak var note: RSKPlaceholderTextView!
+    @IBOutlet weak var note: RSKPlaceholderTextView!{
+        didSet {
+            note.isScrollEnabled = false
+        }
+    }
     
     @IBOutlet weak var travelDate: UILabel!
     

@@ -46,9 +46,7 @@ class GroupChatCell: UITableViewCell {
             guard let ref = memberInfo.pictureRef else { return }
             
             memberImage.loadImage(ref)
-
         }
-        
     }
     
     var isSentFromUser: Bool = true {
@@ -66,10 +64,10 @@ class GroupChatCell: UITableViewCell {
  
         selectionStyle = .none
         self.backgroundColor = .clear
-//        userMessage.layer.cornerRadius = 5
-//        userMessage.layer.masksToBounds = true
-//        memberMessage.layer.cornerRadius = 5
-//        memberMessage.layer.masksToBounds = true
+        userMessage.layer.cornerRadius = 5
+        userMessage.layer.masksToBounds = true
+        memberMessage.layer.cornerRadius = 5
+        memberMessage.layer.masksToBounds = true
         
         DispatchQueue.main.async {
             
@@ -80,12 +78,7 @@ class GroupChatCell: UITableViewCell {
     }
     
     override func layoutSubviews() {
-        
-        userMessage.layer.cornerRadius = 5
-        userMessage.layer.masksToBounds = true
-        memberMessage.layer.cornerRadius = 5
-        memberMessage.layer.masksToBounds = true
-        
+            
         memberImage.layer.cornerRadius = memberImage.frame.height / 2
         memberImage.clipsToBounds = true
     }

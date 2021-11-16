@@ -230,6 +230,7 @@
                         </buttonConfiguration>
                     </button>
                 </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="Wko-Vi-dw9" firstAttribute="top" secondItem="FoQ-ft-MB1" secondAttribute="bottom" constant="15" id="1nx-Ji-tUU"/>
                     <constraint firstItem="wjB-Kc-wgE" firstAttribute="leading" secondItem="MEX-QY-CSb" secondAttribute="trailing" constant="30" id="59a-BL-qUU"/>

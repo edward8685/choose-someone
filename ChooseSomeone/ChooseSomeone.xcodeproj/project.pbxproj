@@ -369,11 +369,8 @@
 				7441B7C227323B4B00614D9B /* LoginViewController.swift */,
 				74F10299274135060097AC6F /* Home */,
 				747A1DB4273FE60200D08A37 /* Group */,
-				74E5736227279A2800F490BF /* JourneyViewController.swift */,
-				74E573882728F4B300F490BF /* MapViewDelegate.swift */,
-				745A6F03272D6809006064C4 /* TrackRecordsViewController.swift */,
-				745A6F0D272E4B57006064C4 /* UserRecordViewController.swift */,
-				740E98A82734CE3B006163B8 /* ProfileViewController.swift */,
+				749CF7482742B7B6008BAC76 /* Journey */,
+				749CF7472742B79A008BAC76 /* Profile */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -437,6 +434,25 @@
 				74608D39271DDA05002BD125 /* JoinRequestViewController.swift */,
 			);
 			path = Group;
+			sourceTree = "<group>";
+		};
+		749CF7472742B79A008BAC76 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				740E98A82734CE3B006163B8 /* ProfileViewController.swift */,
+				745A6F03272D6809006064C4 /* TrackRecordsViewController.swift */,
+				745A6F0D272E4B57006064C4 /* UserRecordViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		749CF7482742B7B6008BAC76 /* Journey */ = {
+			isa = PBXGroup;
+			children = (
+				74E573882728F4B300F490BF /* MapViewDelegate.swift */,
+				74E5736227279A2800F490BF /* JourneyViewController.swift */,
+			);
+			path = Journey;
 			sourceTree = "<group>";
 		};
 		74F10299274135060097AC6F /* Home */ = {
@@ -886,7 +902,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ed.ChooseSomeone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -923,7 +939,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ed.ChooseSomeone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

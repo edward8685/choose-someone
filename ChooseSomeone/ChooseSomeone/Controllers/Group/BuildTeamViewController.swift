@@ -26,6 +26,16 @@ class BuildTeamViewController: BaseViewController {
     
     private var group = Group()
     
+    private var textsWerefilled: Bool = false {
+        
+        didSet {
+            
+            sendPostButton.isUserInteractionEnabled = textsWerefilled
+            
+            sendPostButton.alpha = textsWerefilled ? 1.0 : 0.5
+        }
+    }
+    
     @IBOutlet weak var buildTeamView: UIView!
     
     @IBOutlet weak var headerView: UIView!
@@ -70,7 +80,14 @@ class BuildTeamViewController: BaseViewController {
         }
     }
     
-    @IBOutlet weak var sendPostButton: UIButton!
+    @IBOutlet weak var sendPostButton: UIButton! {
+        
+        didSet {
+            
+            sendPostButton.isUserInteractionEnabled = false
+            sendPostButton.alpha = 0.5
+        }
+    }
     
     @IBAction func dismiss(_ sender: UIButton) {
         
@@ -91,7 +108,6 @@ class BuildTeamViewController: BaseViewController {
         headerView.roundCornersTop(cornerRadius: 15)
         
         setUpTextView()
-        
     }
     
     func setUpTextView() {
@@ -105,6 +121,15 @@ class BuildTeamViewController: BaseViewController {
         noteTextView.textContainer.maximumNumberOfLines = 2
         
         noteTextView.textContainer.lineBreakMode = .byWordWrapping
+    }
+    
+    func checkTextsFilled() {
+        
+        let textfields = [ groupNameTextField, trailNameTextField, numOfPeopleTextfield]
+        
+        if noteTextView.text != nil {
+        textsWerefilled = textfields.allSatisfy{ $0?.text?.isEmpty  == false }
+        }
     }
     
     func setUpButton() {
@@ -167,6 +192,7 @@ extension BuildTeamViewController: UITextFieldDelegate, UITextViewDelegate {
               }
         
         group.note = text
+        checkTextsFilled()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -194,5 +220,6 @@ extension BuildTeamViewController: UITextFieldDelegate, UITextViewDelegate {
             
             return
         }
+        checkTextsFilled()
     }
 }

@@ -16,7 +16,6 @@ struct Trail: Codable, Hashable {
     let trailInfo: String
     let trailTraffic: String
 //    let trailMap: String?
-//    let trailLikedList: [String]?
     
     enum CodingKeys: String, CodingKey {
         case trailId = "trail_id"
@@ -27,6 +26,5 @@ struct Trail: Codable, Hashable {
         case trailInfo = "trail_info"
         case trailTraffic = "trail_traffic"
 //        case trailMap = "trail_map"
-//        case trailLikedList = "trail_liked_list"
     }
 }

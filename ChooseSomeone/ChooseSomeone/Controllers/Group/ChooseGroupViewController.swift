@@ -18,9 +18,11 @@ class ChooseGroupViewController: BaseViewController {
     private var userInfo = UserManager.shared.userInfo
     
     private lazy var groups = [Group]() {
+        
         didSet {
-            tableView.reloadData()
             myGroups = groups.filter { $0.userIds.contains(userId) }
+            
+            tableView.reloadData()
         }
     }
     
@@ -106,6 +108,8 @@ class ChooseGroupViewController: BaseViewController {
         fetchGroupData()
         
         navigationController?.isNavigationBarHidden = true
+        
+        self.tabBarController?.tabBar.isHidden = false
         
     }
     
@@ -344,10 +348,22 @@ extension ChooseGroupViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        performSegue(withIdentifier: "toGroupChatVC", sender: groups[indexPath.row])
-        
+        if searching {
+            
+            performSegue(withIdentifier: "toGroupChatVC", sender: searchGroups[indexPath.row])
+            
+        } else {
+            
+            if onlyUserGroup {
+                
+                performSegue(withIdentifier: "toGroupChatVC", sender: myGroups[indexPath.row])
+                
+            } else {
+                
+                performSegue(withIdentifier: "toGroupChatVC", sender: groups[indexPath.row])
+            }
+        }
     }
-    
 }
 
 extension ChooseGroupViewController: UITableViewDataSource {

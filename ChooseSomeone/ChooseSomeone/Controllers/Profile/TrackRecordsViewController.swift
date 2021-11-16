@@ -7,20 +7,28 @@
 
 import UIKit
 
+enum Section {
+    case section
+}
+
+//class customDataSource: UITableViewDiffableDataSource<Section, Record> {
+//
+//    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
+//
+//}
+
 class TrackRecordsViewController: UIViewController {
     
     // MARK: - DataSource & DataSourceSnapshot typelias -
-    //    typealias DataSource = UITableViewDiffableDataSource<Section, Record>
-    //
-    //    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Record>
-    //
-    //    enum Section {
-    //        case section
-    //    }
-    //
-    //    private var dataSource: DataSource!
-    //
-    //    private var snapshot = DataSourceSnapshot()
+//        typealias DataSource = UITableViewDiffableDataSource<Section, Record>
+//
+//        typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Record>
+//
+//        private var dataSource: customDataSource!
+//
+//        private var snapshot = DataSourceSnapshot()
     
     var records = [Record]()
     
@@ -112,6 +120,9 @@ class TrackRecordsViewController: UIViewController {
                 
                 self?.records = records
                 
+//                self?.configureDataSource()
+//                self?.configureSnapshot()
+                
                 self?.tableView.reloadData()
                 
             case .failure(let error):
@@ -184,6 +195,25 @@ extension TrackRecordsViewController: UITableViewDataSource {
         
         return cell
     }
+    
+    
+    
+//
+//
+//   func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+//        return .delete
+//   }
+//
+//   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (contextualAction, view, completionHandler) in
+//
+//            self.records.remove(at: indexPath.row)
+//
+//            completionHandler(true)
+//        }
+//
+//        return UISwipeActionsConfiguration(actions: [deleteAction])
+//    }
 }
 
 //extension TrackRecordsViewController {
