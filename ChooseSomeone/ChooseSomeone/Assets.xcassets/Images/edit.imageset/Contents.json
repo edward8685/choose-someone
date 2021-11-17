@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "âPngtreeâmeeting record_4477173.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "âPngtreeâmeeting record_4477173-1.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "âPngtreeâmeeting record_4477173-2.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

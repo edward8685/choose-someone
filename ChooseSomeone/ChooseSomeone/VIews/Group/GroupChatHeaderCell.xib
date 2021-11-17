@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="NotoSansTC-Regular.otf">
+            <string>NotoSansTC-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="248" id="KGk-i7-Jjw" customClass="GroupChatHeaderCell" customModule="ChooseSomeone" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="495" height="248"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="495" height="248"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2021/11/18" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nc4-Ib-nfJ">
+                        <rect key="frame" x="71" y="51.5" width="150" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="150" id="qe2-jR-WB0"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="13"/>
+                        <color key="textColor" name="B1"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="MEX-QY-CSb">
+                        <rect key="frame" x="20" y="5" width="389" height="30"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="路線" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WRm-ab-6lF">
+                                <rect key="frame" x="0.0" y="0.0" width="28" height="30"/>
+                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uEF-3L-MlP">
+                                <rect key="frame" x="45" y="0.0" width="344" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="roQ-TB-npm"/>
+                                </constraints>
+                                <color key="textColor" name="B1"/>
+                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                        </subviews>
+                    </stackView>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HLS-QC-iHV">
+                        <rect key="frame" x="20" y="45" width="435" height="32"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5M-SY-Wog">
+                                <rect key="frame" x="0.0" y="0.0" width="28" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="28" id="DHt-zX-g78"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="30" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="zEY-08-bNf">
+                                <rect key="frame" x="38" y="0.0" width="397" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="w6H-pz-OT3"/>
+                                </constraints>
+                                <date key="minimumDate" timeIntervalSinceReferenceDate="658336271">
+                                    <!--2021-11-11 15:11:11 +0000-->
+                                </date>
+                            </datePicker>
+                        </subviews>
+                    </stackView>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="FoQ-ft-MB1">
+                        <rect key="frame" x="20" y="87" width="95" height="30"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="人數" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="twO-0b-qco">
+                                <rect key="frame" x="0.0" y="0.0" width="28" height="30"/>
+                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SXt-dC-zwc">
+                                <rect key="frame" x="45" y="0.0" width="50" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="FIs-Cj-nLk"/>
+                                    <constraint firstAttribute="width" constant="50" id="fBO-T4-uP7"/>
+                                </constraints>
+                                <color key="textColor" name="B1"/>
+                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                        </subviews>
+                    </stackView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="83D-Ad-ynZ">
+                        <rect key="frame" x="237.5" y="49" width="80" height="68"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="2ch-WO-80z">
+                                <rect key="frame" x="0.0" y="0.0" width="80" height="25"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="時間" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xW1-qn-FL9">
+                                        <rect key="frame" x="0.0" y="0.0" width="28" height="25"/>
+                                        <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CEo-6o-mcO">
+                                        <rect key="frame" x="45" y="0.0" width="35" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="84n-1e-7Qu"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="14"/>
+                                        <color key="textColor" name="B1"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ml3-uN-FHp">
+                                <rect key="frame" x="0.0" y="40" width="80" height="28"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="主揪" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IdP-By-sxr">
+                                        <rect key="frame" x="0.0" y="0.0" width="28" height="28"/>
+                                        <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="主揪" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bh9-2V-izY">
+                                        <rect key="frame" x="45" y="0.0" width="35" height="28"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="28" id="rRs-TZ-por"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="14"/>
+                                        <color key="textColor" name="B1"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                    </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="備註：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wko-Vi-dw9">
+                        <rect key="frame" x="20" y="132" width="42" height="20"/>
+                        <fontDescription key="fontDescription" name="NotoSansOriya" family="Noto Sans Oriya" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fF-nP-eFG">
+                        <rect key="frame" x="50" y="208" width="395" height="30"/>
+                        <color key="backgroundColor" name="U3"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="x3k-Vk-Qyn"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="12"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" title="送出申請"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                <color key="value" systemColor="labelColor"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                <size key="value" width="0.0" height="2"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                <real key="value" value="0.25"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="15"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                    <view contentMode="scaleToFill" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="JOg-iM-DqC">
+                        <rect key="frame" x="20" y="160" width="455" height="40"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6O6-M9-vaB" customClass="RSKPlaceholderTextView" customModule="RSKPlaceholderTextView">
+                                <rect key="frame" x="0.0" y="0.0" width="455" height="40"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" name="B1"/>
+                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="6O6-M9-vaB" secondAttribute="bottom" id="2md-2K-WhW"/>
+                            <constraint firstAttribute="trailing" secondItem="6O6-M9-vaB" secondAttribute="trailing" id="IIw-K1-orf"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="Uyd-rc-Ee1"/>
+                            <constraint firstItem="6O6-M9-vaB" firstAttribute="top" secondItem="JOg-iM-DqC" secondAttribute="top" id="dim-rd-1Kt"/>
+                            <constraint firstItem="6O6-M9-vaB" firstAttribute="leading" secondItem="JOg-iM-DqC" secondAttribute="leading" id="eGm-wn-hbP"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wjB-Kc-wgE">
+                        <rect key="frame" x="439" y="0.0" width="36" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="36" id="ry1-Gk-b7t"/>
+                            <constraint firstAttribute="height" constant="40" id="vCq-b4-Pen"/>
+                        </constraints>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" image="Artboard 5">
+                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <buttonConfiguration key="configuration" style="plain" image="badge">
+                            <color key="baseForegroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </buttonConfiguration>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="Wko-Vi-dw9" firstAttribute="top" secondItem="FoQ-ft-MB1" secondAttribute="bottom" constant="15" id="1nx-Ji-tUU"/>
+                    <constraint firstItem="wjB-Kc-wgE" firstAttribute="leading" secondItem="MEX-QY-CSb" secondAttribute="trailing" constant="30" id="59a-BL-qUU"/>
+                    <constraint firstItem="Ml3-uN-FHp" firstAttribute="bottom" secondItem="FoQ-ft-MB1" secondAttribute="bottom" id="784-5H-Mb8"/>
+                    <constraint firstItem="wjB-Kc-wgE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="8ph-kw-QoV"/>
+                    <constraint firstAttribute="trailing" secondItem="JOg-iM-DqC" secondAttribute="trailing" constant="20" id="EZ4-vZ-2IN"/>
+                    <constraint firstAttribute="trailing" secondItem="wjB-Kc-wgE" secondAttribute="trailing" constant="20" id="Gua-yt-Oyo"/>
+                    <constraint firstItem="HLS-QC-iHV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="GxR-pf-mFU"/>
+                    <constraint firstAttribute="bottom" secondItem="1fF-nP-eFG" secondAttribute="bottom" constant="10" id="Kb5-8w-Kd9"/>
+                    <constraint firstItem="HLS-QC-iHV" firstAttribute="top" secondItem="MEX-QY-CSb" secondAttribute="bottom" constant="10" id="Peh-SU-LDc"/>
+                    <constraint firstItem="Nc4-Ib-nfJ" firstAttribute="centerY" secondItem="E5M-SY-Wog" secondAttribute="centerY" id="QId-Pi-jhl"/>
+                    <constraint firstItem="83D-Ad-ynZ" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" constant="30" id="QPT-gL-gyO"/>
+                    <constraint firstItem="Wko-Vi-dw9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="U1h-yb-zyY"/>
+                    <constraint firstItem="MEX-QY-CSb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Xnj-YY-ezY"/>
+                    <constraint firstItem="JOg-iM-DqC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="ZdC-UZ-d8n"/>
+                    <constraint firstItem="Nc4-Ib-nfJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="71" id="aDv-bh-ATa"/>
+                    <constraint firstItem="FoQ-ft-MB1" firstAttribute="top" secondItem="HLS-QC-iHV" secondAttribute="bottom" constant="10" id="bpq-HV-L1c"/>
+                    <constraint firstItem="1fF-nP-eFG" firstAttribute="top" secondItem="JOg-iM-DqC" secondAttribute="bottom" constant="8" id="hFW-fa-Cqg"/>
+                    <constraint firstAttribute="trailing" secondItem="HLS-QC-iHV" secondAttribute="trailing" constant="40" id="kGH-WU-tdt"/>
+                    <constraint firstAttribute="trailing" secondItem="1fF-nP-eFG" secondAttribute="trailing" constant="50" id="lOM-JB-n8d"/>
+                    <constraint firstItem="JOg-iM-DqC" firstAttribute="top" secondItem="Wko-Vi-dw9" secondAttribute="bottom" constant="8" id="n2B-r3-ndD"/>
+                    <constraint firstItem="FoQ-ft-MB1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="qN3-a5-mYa"/>
+                    <constraint firstItem="1fF-nP-eFG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="sqK-fR-AHL"/>
+                    <constraint firstItem="MEX-QY-CSb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="zFc-cR-Bj0"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="hostBadgeButton" destination="wjB-Kc-wgE" id="GXQ-tB-ZLl"/>
+                <outlet property="hostName" destination="bh9-2V-izY" id="8Ns-qR-iLO"/>
+                <outlet property="note" destination="6O6-M9-vaB" id="GW5-cm-hHf"/>
+                <outlet property="numOfPeople" destination="SXt-dC-zwc" id="X0X-nA-Puh"/>
+                <outlet property="requestButton" destination="1fF-nP-eFG" id="WZ6-rD-8Hy"/>
+                <outlet property="timeLabel" destination="xW1-qn-FL9" id="Erg-jG-gu5"/>
+                <outlet property="trailName" destination="uEF-3L-MlP" id="1BA-tL-f39"/>
+                <outlet property="travelDate" destination="Nc4-Ib-nfJ" id="GLU-vc-MYo"/>
+                <outlet property="travelTime" destination="CEo-6o-mcO" id="hHP-Oi-L2B"/>
+                <outlet property="travelTimePicker" destination="zEY-08-bNf" id="Hxg-fa-3Rk"/>
+            </connections>
+            <point key="canvasLocation" x="254.34782608695653" y="97.098214285714278"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Artboard 5" width="41.119998931884766" height="49.119998931884766"/>
+        <image name="badge" width="41.119998931884766" height="49.119998931884766"/>
+        <namedColor name="B1">
+            <color red="0.098039209842681885" green="0.76470589637756348" blue="0.85490196943283081" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="U3">
+            <color red="1" green="0.50199997425079346" blue="0.50199997425079346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

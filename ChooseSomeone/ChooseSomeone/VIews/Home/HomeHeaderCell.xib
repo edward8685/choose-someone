@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="NotoSansTC-Light.otf">
+            <string>NotoSansTC-Light</string>
+        </array>
+        <array key="NotoSansTC-Regular.otf">
+            <string>NotoSansTC-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="555" id="KGk-i7-Jjw" customClass="HomeHeaderCell" customModule="ChooseSomeone" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="356" height="555"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="356" height="555"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3qi-0C-x3b">
+                        <rect key="frame" x="194" y="0.0" width="137" height="375"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="hbF-bc-FM0">
+                                <rect key="frame" x="0.0" y="0.0" width="137" height="125"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eg8-a7-Kk8" customClass="PaddingLabel" customModule="ChooseSomeone" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="137" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="erw-PO-6xx"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NotoSansTC-Light" family="Noto Sans TC" pointSize="68"/>
+                                        <color key="textColor" name="B1"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="paddingTop">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kilometers I hiked." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kWg-Cv-7hd">
+                                        <rect key="frame" x="0.0" y="100" width="137" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="Y3V-vl-aW7"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="16"/>
+                                        <color key="textColor" red="0.098039215686274508" green="0.76470588235294112" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Nrf-Or-AFs">
+                                <rect key="frame" x="0.0" y="125" width="137" height="125"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DPR-ib-Gtw" customClass="PaddingLabel" customModule="ChooseSomeone" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="137" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="jlk-KC-tnN"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NotoSansTC-Light" family="Noto Sans TC" pointSize="68"/>
+                                        <color key="textColor" name="B1"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="paddingTop">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="friends I made." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uL-ve-4g8">
+                                        <rect key="frame" x="0.0" y="100" width="137" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="sKc-ao-dKh"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="16"/>
+                                        <color key="textColor" red="0.098039215690000001" green="0.76470588240000004" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="NY8-aV-S01">
+                                <rect key="frame" x="0.0" y="250" width="137" height="125"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jgv-Ss-Xtb" customClass="PaddingLabel" customModule="ChooseSomeone" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="137" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="ZbY-uI-V5Q"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NotoSansTC-Light" family="Noto Sans TC" pointSize="68"/>
+                                        <color key="textColor" name="B1"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="paddingTop">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="groups I joined." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZn-lS-Lo5">
+                                        <rect key="frame" x="0.0" y="100" width="137" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="yHT-aj-k32"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="16"/>
+                                        <color key="textColor" red="0.098039215690000001" green="0.76470588240000004" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                    </stackView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="VLy-ds-3T0">
+                        <rect key="frame" x="259" y="390" width="64" height="135"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi!" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rMP-ug-2VQ">
+                                <rect key="frame" x="0.0" y="0.0" width="64" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="3Za-U6-Y0u"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="48"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.050000000000000003"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="1" height="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFh-Wd-hOH">
+                                <rect key="frame" x="0.0" y="75" width="64" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="2Df-Zy-toD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="38"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo_stack" translatesAutoresizingMaskIntoConstraints="NO" id="OKa-VN-jnA">
+                        <rect key="frame" x="25" y="25" width="114" height="62.5"/>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Woman" translatesAutoresizingMaskIntoConstraints="NO" id="Kdg-oT-sNl">
+                        <rect key="frame" x="20" y="177.5" width="242.5" height="317.5"/>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Man" translatesAutoresizingMaskIntoConstraints="NO" id="D3U-t9-2d9">
+                        <rect key="frame" x="-10" y="151.5" width="285.5" height="373.5"/>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="VLy-ds-3T0" secondAttribute="trailing" constant="33" id="1sq-dc-3LG"/>
+                    <constraint firstItem="D3U-t9-2d9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="-10" id="2Ob-Z6-FP6"/>
+                    <constraint firstItem="OKa-VN-jnA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="4g4-kd-sLe"/>
+                    <constraint firstItem="D3U-t9-2d9" firstAttribute="bottom" secondItem="rMP-ug-2VQ" secondAttribute="bottom" constant="60" id="8IK-HG-RUx"/>
+                    <constraint firstItem="D3U-t9-2d9" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.673111" id="C9P-aJ-zPt"/>
+                    <constraint firstAttribute="bottom" secondItem="rMP-ug-2VQ" secondAttribute="bottom" constant="90" id="QEO-cL-66i"/>
+                    <constraint firstItem="Kdg-oT-sNl" firstAttribute="leading" secondItem="D3U-t9-2d9" secondAttribute="leading" constant="30" id="eyd-Jm-Djz"/>
+                    <constraint firstItem="Kdg-oT-sNl" firstAttribute="width" secondItem="D3U-t9-2d9" secondAttribute="width" multiplier="0.85" id="gcp-HV-iLR"/>
+                    <constraint firstAttribute="trailing" secondItem="3qi-0C-x3b" secondAttribute="trailing" constant="25" id="hCM-C0-1yn"/>
+                    <constraint firstItem="Kdg-oT-sNl" firstAttribute="height" secondItem="D3U-t9-2d9" secondAttribute="height" multiplier="0.85" id="iIv-pz-A3c"/>
+                    <constraint firstItem="OKa-VN-jnA" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.3207" id="iwS-9W-hqr"/>
+                    <constraint firstItem="OKa-VN-jnA" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.112478" id="j18-DB-VnL"/>
+                    <constraint firstItem="OKa-VN-jnA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="jzl-FR-sLO"/>
+                    <constraint firstItem="Kdg-oT-sNl" firstAttribute="bottom" secondItem="D3U-t9-2d9" secondAttribute="bottom" constant="-30" id="pVT-OR-sds"/>
+                    <constraint firstItem="VLy-ds-3T0" firstAttribute="top" secondItem="3qi-0C-x3b" secondAttribute="bottom" constant="15" id="uMc-f7-FMc"/>
+                    <constraint firstItem="3qi-0C-x3b" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="uWe-oR-nkV"/>
+                    <constraint firstItem="D3U-t9-2d9" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.801749" id="xOh-Fm-pco"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="totalFriends" destination="DPR-ib-Gtw" id="8Cg-Tw-0AH"/>
+                <outlet property="totalGroups" destination="jgv-Ss-Xtb" id="PWW-mN-XhU"/>
+                <outlet property="totalKilos" destination="Eg8-a7-Kk8" id="lgo-n3-0x1"/>
+                <outlet property="userName" destination="EFh-Wd-hOH" id="A2D-Vq-xMp"/>
+            </connections>
+            <point key="canvasLocation" x="162.31884057971016" y="240.06696428571428"/>
+        </tableViewCell>
+    </objects>
+    <designables>
+        <designable name="DPR-ib-Gtw">
+            <size key="intrinsicContentSize" width="73" height="98.5"/>
+        </designable>
+        <designable name="Eg8-a7-Kk8">
+            <size key="intrinsicContentSize" width="109.5" height="98.5"/>
+        </designable>
+        <designable name="jgv-Ss-Xtb">
+            <size key="intrinsicContentSize" width="36.5" height="98.5"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="Logo_stack" width="178.78999328613281" height="61.419998168945312"/>
+        <image name="Man" width="322" height="421"/>
+        <image name="Woman" width="319" height="542"/>
+        <namedColor name="B1">
+            <color red="0.098039209842681885" green="0.76470589637756348" blue="0.85490196943283081" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
