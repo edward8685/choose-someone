@@ -17,6 +17,8 @@ class ProfileView: UIView {
             
             editNameTextField.textColor = isEditting ? .black : .B1
             
+            editNameTextField.backgroundColor = isEditting ? .systemGray6 : .white
+            
             editNameTextField.isEnabled = isEditting ? true : false
 
         }
@@ -32,20 +34,15 @@ class ProfileView: UIView {
     
     func setUpProfileView(userInfo: UserInfo) {
         
-//        DispatchQueue.main.async { [self] in
-            
             editNameTextField.text = userInfo.userName
-//            print(userInfo)
-            
+
             userImage.loadImage(userInfo.pictureRef)
             
             editNameTextField.textColor = .black
             
-            editNameTextField.font = UIFont.regular(size: 14)
+            editNameTextField.font = UIFont.regular(size: 24)
             
             editNameTextField.setLeftPaddingPoints(5)
-        
-//        }
     }
     
     override func layoutSubviews() {
@@ -53,6 +50,5 @@ class ProfileView: UIView {
         super.layoutSubviews()
         
         userImage.layer.cornerRadius = userImage.frame.height / 2
-        
     }
 }

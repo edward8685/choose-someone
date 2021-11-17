@@ -182,7 +182,6 @@ class ChooseGroupViewController: BaseViewController {
                 
                 var filtedRequests = [Request]()
                 
-                
                 for request in requests where self.userInfo.blockList?.contains(request.requestId) == false {
                     
                     filtedRequests.append(request)

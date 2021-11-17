@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -43,26 +42,22 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N8u-SM-JtR">
-                        <rect key="frame" x="30" y="20" width="56" height="56"/>
+                        <rect key="frame" x="30" y="20" width="67" height="56"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backpack" translatesAutoresizingMaskIntoConstraints="NO" id="uRK-sJ-KjZ">
-                                <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="uRK-sJ-KjZ" secondAttribute="height" multiplier="1:1" id="Zxe-Jh-HCU"/>
-                                </constraints>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon_edit" translatesAutoresizingMaskIntoConstraints="NO" id="uRK-sJ-KjZ">
+                                <rect key="frame" x="0.0" y="0.0" width="67" height="56"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" name="G1"/>
                         <constraints>
-                            <constraint firstItem="uRK-sJ-KjZ" firstAttribute="centerX" secondItem="N8u-SM-JtR" secondAttribute="centerXWithinMargins" id="2I7-ow-Y6i"/>
-                            <constraint firstItem="uRK-sJ-KjZ" firstAttribute="width" secondItem="N8u-SM-JtR" secondAttribute="width" id="7eH-AW-mzx"/>
-                            <constraint firstItem="uRK-sJ-KjZ" firstAttribute="centerY" secondItem="N8u-SM-JtR" secondAttribute="centerYWithinMargins" id="Pjh-IB-mOp"/>
-                            <constraint firstItem="uRK-sJ-KjZ" firstAttribute="height" secondItem="N8u-SM-JtR" secondAttribute="height" id="cpx-Kb-sXG"/>
-                            <constraint firstAttribute="width" secondItem="N8u-SM-JtR" secondAttribute="height" multiplier="1:1" id="eCc-K2-fmE"/>
+                            <constraint firstAttribute="trailing" secondItem="uRK-sJ-KjZ" secondAttribute="trailing" id="3Rh-So-L2k"/>
+                            <constraint firstAttribute="bottom" secondItem="uRK-sJ-KjZ" secondAttribute="bottom" id="5Za-KE-yJt"/>
+                            <constraint firstItem="uRK-sJ-KjZ" firstAttribute="top" secondItem="N8u-SM-JtR" secondAttribute="top" id="ZTT-Np-qyx"/>
+                            <constraint firstAttribute="width" secondItem="N8u-SM-JtR" secondAttribute="height" multiplier="1.2:1" id="eCc-K2-fmE"/>
+                            <constraint firstItem="uRK-sJ-KjZ" firstAttribute="leading" secondItem="N8u-SM-JtR" secondAttribute="leading" id="jPX-YV-Pmu"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d11-BC-rTk">
-                        <rect key="frame" x="106" y="33.5" width="51.5" height="29"/>
+                        <rect key="frame" x="117" y="33.5" width="51.5" height="29"/>
                         <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -91,10 +86,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="backpack" width="900" height="900"/>
-        <namedColor name="G1">
-            <color red="0.097999997437000275" green="0.76499998569488525" blue="0.85500001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
+        <image name="Icon_edit" width="206.66999816894531" height="172.58999633789062"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

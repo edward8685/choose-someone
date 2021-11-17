@@ -83,6 +83,8 @@
 		74608D47271EC727002BD125 /* GroupRoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D46271EC727002BD125 /* GroupRoomManager.swift */; };
 		748EF102273BAC8E00B97EE0 /* GroupStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EF101273BAC8E00B97EE0 /* GroupStatus.swift */; };
 		748EF106273CAB4D00B97EE0 /* UIViewController+NotificationExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EF105273CAB4D00B97EE0 /* UIViewController+NotificationExtenstion.swift */; };
+		74AF8A3D27441300003A4132 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AF8A3C27441300003A4132 /* PrivacyPolicyViewController.swift */; };
+		74AF8A3F274416C5003A4132 /* PrivacyPolicy.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74AF8A3E274416C5003A4132 /* PrivacyPolicy.storyboard */; };
 		74E5735B27268E3E00F490BF /* TrialInfoScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5735A27268E3E00F490BF /* TrialInfoScrollView.swift */; };
 		74E5735F2726D6A500F490BF /* KingFisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5735E2726D6A500F490BF /* KingFisherWrapper.swift */; };
 		74E5736327279A2800F490BF /* JourneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5736227279A2800F490BF /* JourneyViewController.swift */; };
@@ -188,6 +190,8 @@
 		74608D46271EC727002BD125 /* GroupRoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRoomManager.swift; sourceTree = "<group>"; };
 		748EF101273BAC8E00B97EE0 /* GroupStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupStatus.swift; sourceTree = "<group>"; };
 		748EF105273CAB4D00B97EE0 /* UIViewController+NotificationExtenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+NotificationExtenstion.swift"; sourceTree = "<group>"; };
+		74AF8A3C27441300003A4132 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		74AF8A3E274416C5003A4132 /* PrivacyPolicy.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PrivacyPolicy.storyboard; sourceTree = "<group>"; };
 		74E5735A27268E3E00F490BF /* TrialInfoScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialInfoScrollView.swift; sourceTree = "<group>"; };
 		74E5735E2726D6A500F490BF /* KingFisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingFisherWrapper.swift; sourceTree = "<group>"; };
 		74E5736227279A2800F490BF /* JourneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyViewController.swift; sourceTree = "<group>"; };
@@ -311,6 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				74234939273415AB001EC7A1 /* Login.storyboard */,
+				74AF8A3E274416C5003A4132 /* PrivacyPolicy.storyboard */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -367,6 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				7441B7C227323B4B00614D9B /* LoginViewController.swift */,
+				74AF8A3C27441300003A4132 /* PrivacyPolicyViewController.swift */,
 				74F10299274135060097AC6F /* Home */,
 				747A1DB4273FE60200D08A37 /* Group */,
 				749CF7482742B7B6008BAC76 /* Journey */,
@@ -592,6 +598,7 @@
 				7423493A273415AB001EC7A1 /* Login.storyboard in Resources */,
 				74608D38271DD2F2002BD125 /* MemberCell.xib in Resources */,
 				7441B7B127313F3E00614D9B /* NotoSansTC-Bold.otf in Resources */,
+				74AF8A3F274416C5003A4132 /* PrivacyPolicy.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,6 +677,7 @@
 				74608D41271E97DC002BD125 /* Trail.swift in Sources */,
 				740E98AC2734DF79006163B8 /* ProfileCell.swift in Sources */,
 				744934A1272562C8002D8FE3 /* TrailManager.swift in Sources */,
+				74AF8A3D27441300003A4132 /* PrivacyPolicyViewController.swift in Sources */,
 				740FC391271D17160071459A /* ChooseGroupViewController.swift in Sources */,
 				74E573D427292CE300F490BF /* DistanceLabel.swift in Sources */,
 				742516FB272197A30011166B /* UILabelExtension.swift in Sources */,

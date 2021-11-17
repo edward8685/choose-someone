@@ -7,7 +7,6 @@
 
 import UIKit
 import Firebase
-import AVFoundation
 
 enum ActionSheet: String{
     
@@ -41,6 +40,9 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var profileView: ProfileView!
     
+    
+    // MARK: - View Life Cycle
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -51,6 +53,19 @@ class ProfileViewController: UIViewController {
         
         tableView.registerCellWithNib(identifier: ProfileCell.identifier, bundle: nil)
         
+        setUpProfileView()
+    
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        navigationController?.isNavigationBarHidden = true
+    }
+    
+    // MARK: - Action
+    
+    func setUpProfileView() {
+        
         profileView.setUpProfileView(userInfo: userInfo)
         
         profileView.editImageButton.delegate = self
@@ -60,12 +75,6 @@ class ProfileViewController: UIViewController {
         profileView.editNameTextField.delegate = self
         
         profileView.editNameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-        navigationController?.isNavigationBarHidden = true
     }
     
     @IBAction func editName(_ sender: UIButton) {
@@ -85,7 +94,6 @@ class ProfileViewController: UIViewController {
             }
             
             profileView.isEditting.toggle()
-            
         }
     }
     
@@ -144,16 +152,27 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.height / CGFloat((items.count))
+        return tableView.frame.height / CGFloat((items.count + 1))
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.row == 0 {
+        switch indexPath.row {
+            
+        case 0:
             
             let segueId = ProfileSegue.allCases[indexPath.row].rawValue
             
             performSegue(withIdentifier: segueId, sender: nil)
+        
+        case 2:
+            
+            guard let policyVC = UIStoryboard.policy.instantiateViewController(identifier: PrivacyPolicyViewController.identifier) as? PrivacyPolicyViewController else { return }
+
+            present(policyVC, animated: true, completion: nil)
+            
+        default:
+            return
         }
     }
 }
@@ -197,7 +216,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         
         imagePickerController.allowsEditing = true
         
-        let actionSheet = UIAlertController(title: "Choose a source", message: nil, preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(title: "Profile Photo", message: "Please choose a file", preferredStyle: .actionSheet)
         
         actionSheet.addAction(UIAlertAction(title: ActionSheet.camera.rawValue, style: .default, handler:{ (UIAlertAction) in
             

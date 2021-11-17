@@ -14,7 +14,27 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
     
     fileprivate var currentNonce: String?
     
-    private let button = ASAuthorizationAppleIDButton()
+    lazy var loginButton = ASAuthorizationAppleIDButton(type: .signIn, style: .whiteOutline)
+    
+    lazy var policyButton: UIButton = {
+        let button = UIButton()
+        
+        button.setTitle("隱私權政策", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.titleLabel!.font = UIFont.regular(size: 16)
+        button.titleLabel!.textColor = .gray
+        button.addTarget(self, action: #selector(presentPrivacyPolicy), for: .touchUpInside)
+        button.alpha = 0.0
+        return button
+    }()
+    
+    @objc func presentPrivacyPolicy() {
+        
+        guard let policyVC = UIStoryboard.policy.instantiateViewController(identifier: PrivacyPolicyViewController.identifier) as? PrivacyPolicyViewController else { return }
+
+        present(policyVC, animated: true, completion: nil)
+    }
+    
     
     @IBOutlet weak var appLogo: UIImageView!
     
@@ -30,32 +50,55 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
     
         setUpSignInButton()
         
-        buttonComeout ()
+        setUpPolicyButton()
+        
+        loginButtonComeout()
+        
     }
     
     func setUpSignInButton() {
         
-        view.addSubview(button)
+        view.addSubview(loginButton)
         
-        button.translatesAutoresizingMaskIntoConstraints = false
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
         
-        button.addTarget(self, action: #selector(handleSignInWithAppleTapped), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(handleSignInWithAppleTapped), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             
-            button.heightAnchor.constraint(equalToConstant: 36),
+            loginButton.heightAnchor.constraint(equalToConstant: 36),
             
-            button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            loginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             
-            button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            loginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             
-            button.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: 80)
+            loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: 80)
         ])
         
-        button.alpha = 0.0
+        loginButton.alpha = 0.0
     }
     
-    func buttonComeout () {
+    func setUpPolicyButton() {
+        
+        view.addSubview(policyButton)
+        
+        policyButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        policyButton.addTarget(self, action: #selector(handleSignInWithAppleTapped), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            
+            policyButton.heightAnchor.constraint(equalToConstant: 28),
+            
+            policyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            
+            policyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            
+            policyButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor,constant: 20)
+        ])
+    }
+    
+    func loginButtonComeout () {
         
         appLogo.translatesAutoresizingMaskIntoConstraints = false
         
@@ -67,7 +110,8 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
 
         UIView.animate(withDuration: 0.5, delay: 1.5) {
             
-            self.button.alpha = 1.0
+            self.loginButton.alpha = 1.0
+            self.policyButton.alpha = 1.0
         }
     }
     

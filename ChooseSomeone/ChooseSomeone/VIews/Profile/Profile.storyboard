@@ -64,15 +64,18 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OUt-ZC-IdO">
-                                        <rect key="frame" x="160" y="65" width="60" height="20"/>
+                                        <rect key="frame" x="160" y="55" width="60" height="40"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Ed" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="lxS-Pz-cHV">
-                                                <rect key="frame" x="0.0" y="0.0" width="32" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="32" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="Oek-2S-Rgy"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="26"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k6A-7I-BAE">
-                                                <rect key="frame" x="40" y="0.0" width="20" height="20"/>
+                                                <rect key="frame" x="40" y="0.0" width="20" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="BsJ-Kq-kpT"/>
                                                     <constraint firstAttribute="width" constant="20" id="Xnq-29-eDl"/>

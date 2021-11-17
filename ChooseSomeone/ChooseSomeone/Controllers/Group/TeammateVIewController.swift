@@ -48,7 +48,7 @@ class TeammateViewController: BaseViewController {
     
     func setNavigationBar() {
         
-        self.title = "\(groupInfo?.groupName ?? "揪團成員") - 成員"
+        self.title = "\(groupInfo?.groupName ?? "揪團") - 成員"
         
         UINavigationBar.appearance().backgroundColor = .B1
         
@@ -90,11 +90,8 @@ class TeammateViewController: BaseViewController {
     
 }
 
-extension TeammateViewController: UITableViewDelegate {
+extension TeammateViewController: UITableViewDelegate, UITableViewDataSource {
     
-}
-
-extension TeammateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         guard let num =  groupInfo?.userIds.count else { fatalError() }
@@ -112,8 +109,6 @@ extension TeammateViewController: UITableViewDataSource {
             
             cell.setUpCell(group: group, userInfo: userInfo)
             
-            cell.acceptButton.tag = indexPath.row
-            
             cell.rejectButton.addTarget(self, action: #selector(blockUser), for: .touchUpInside)
             
             cell.rejectButton.tag = indexPath.row
@@ -124,15 +119,28 @@ extension TeammateViewController: UITableViewDataSource {
     
     @objc func blockUser (_ sender: UIButton) {
         
-        if let blockUserId = groupInfo?.userIds[sender.tag] {
-            
-            UserManager.shared.blockUser(blockUserId: blockUserId)
-            
-            UserManager.shared.userInfo.blockList?.append(blockUserId)
-            
-        }
-        sender.isEnabled = false
+        let controller = UIAlertController(title: "要封鎖該用戶", message: "你將看不到該使用者的訊息及揪團" , preferredStyle: .alert)
         
-        sender.alpha = 0.5
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        
+        let blockAction = UIAlertAction(title: "封鎖", style: .destructive) { _ in
+            
+            if let blockUserId = self.groupInfo?.userIds[sender.tag] {
+                
+                UserManager.shared.blockUser(blockUserId: blockUserId)
+                
+                UserManager.shared.userInfo.blockList?.append(blockUserId)
+            }
+            
+            sender.isEnabled = false
+            
+            sender.alpha = 0.5
+        }
+        
+        controller.addAction(cancelAction)
+        
+        controller.addAction(blockAction)
+        
+        self.present(controller, animated: true, completion: nil)
     }
 }

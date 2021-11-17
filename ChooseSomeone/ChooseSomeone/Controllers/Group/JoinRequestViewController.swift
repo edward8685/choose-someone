@@ -40,7 +40,6 @@ class JoinRequestViewController: BaseViewController {
     
     lazy var dimmingView = UIView()
     
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -56,7 +55,6 @@ class JoinRequestViewController: BaseViewController {
         tableView.backgroundColor = .clear
         
         setUpButton()
-        
     }
     
     func setUpDimmingView() {
@@ -219,7 +217,8 @@ extension JoinRequestViewController: UITableViewDataSource {
                 
                 print("accept succesfully")
                 self.requests.remove(at: sender.tag)
-                self.tableView.reloadData()
+                self.tableView.deleteRows(at: [IndexPath(row: sender.tag, section: 0)],
+                                          with: .automatic)
                 
                 
             case .failure(let error):
