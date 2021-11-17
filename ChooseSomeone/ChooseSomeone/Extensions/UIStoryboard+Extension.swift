@@ -19,6 +19,8 @@ private struct StoryboardCategory {
 
     static let profile = "Profile"
     
+    static let policy = "PrivacyPolicy"
+    
     static let main = "Main"
 }
 
@@ -30,9 +32,11 @@ extension UIStoryboard {
     
     static var login: UIStoryboard { return storyboard(name: StoryboardCategory.login) }
 
-    static var product: UIStoryboard { return storyboard(name: StoryboardCategory.journey) }
+    static var journey: UIStoryboard { return storyboard(name: StoryboardCategory.journey) }
 
     static var profile: UIStoryboard { return storyboard(name: StoryboardCategory.profile) }
+    
+    static var policy: UIStoryboard { return storyboard(name: StoryboardCategory.policy) }
     
     static var main: UIStoryboard { return storyboard(name: StoryboardCategory.main) }
 

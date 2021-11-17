@@ -17,7 +17,11 @@ class MemberCell: UITableViewCell {
     
     @IBOutlet weak var acceptButton: UIButton!
     
-    @IBOutlet weak var rejectButton: UIButton!
+    @IBOutlet weak var rejectButton: UIButton! {
+        didSet {
+            
+        }
+    }
     
     @IBOutlet weak var viewOfBackground: UIView!
     
@@ -39,23 +43,28 @@ class MemberCell: UITableViewCell {
         
     }
     
-    //Check Teammate
+    // Check Teammate
     
     func setUpCell(group: Group, userInfo: UserInfo) {
         
         requestLabel.isHidden = true
         acceptButton.isHidden = true
         groupNameLabel.isHidden = true
-        let image = UIImage(named: "exclamationmark.square")
+        
+//        let image = UIImage.asset(.block)
+        let image = UIImage(systemName: "person.fill.xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 14, weight: .medium))
+        
         rejectButton.setImage(image, for: .normal)
-        rejectButton.layer.cornerRadius = 0
-        rejectButton.layer.masksToBounds = true
+        
+        rejectButton.tintColor = .white
         
         if userInfo.uid == UserManager.shared.userId {
             rejectButton.isHidden = true
         }
         
         requestNameLabel.text = userInfo.userName
+        
+        userImage.loadImage(userInfo.pictureRef)
         
     }
     
@@ -66,6 +75,7 @@ class MemberCell: UITableViewCell {
         viewOfBackground.layer.cornerRadius = 10
         viewOfBackground.layer.masksToBounds = true
         selectionStyle = .none
+        
     }
     
     override func layoutSubviews() {
@@ -73,11 +83,9 @@ class MemberCell: UITableViewCell {
         acceptButton.layer.cornerRadius = acceptButton.frame.height / 2
         acceptButton.layer.masksToBounds = true
         
-        rejectButton.layer.cornerRadius = acceptButton.frame.height / 2
+        rejectButton.layer.cornerRadius = rejectButton.frame.height / 2
         rejectButton.layer.masksToBounds = true
         
-        userImage.cornerRadius = acceptButton.frame.height / 2
-        
+        userImage.cornerRadius = userImage.frame.height / 2
     }
-    
 }

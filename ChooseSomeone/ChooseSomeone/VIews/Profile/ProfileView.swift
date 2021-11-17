@@ -9,17 +9,23 @@ import UIKit
 
 class ProfileView: UIView {
     
-    var isEditing: Bool = false {
-        didSet{
-        userName.isHidden = isEditing ? true : false
-        editNameTextField.isHidden = isEditing ? false : true
+    var isEditting: Bool = false {
+        
+        didSet {
+            
+            editNameTextField.isEnabled = isEditting ? true : false
+            
+            editNameTextField.textColor = isEditting ? .black : .B1
+            
+            editNameTextField.backgroundColor = isEditting ? .systemGray6 : .clear
+            
+            editNameTextField.isEnabled = isEditting ? true : false
+
         }
     }
     
     @IBOutlet weak var userImage: UIImageView!
-    
-    @IBOutlet weak var userName: UILabel!
-    
+
     @IBOutlet weak var editImageButton: ImagePickerButton!
     
     @IBOutlet weak var editNameButton: UIButton!
@@ -28,15 +34,23 @@ class ProfileView: UIView {
     
     func setUpProfileView(userInfo: UserInfo) {
         
-        userName.text = userInfo.userName
+            editNameTextField.text = userInfo.userName
+
+            userImage.loadImage(userInfo.pictureRef)
+            
+            editNameTextField.textColor = .black
+            
+            editNameTextField.font = UIFont.regular(size: 24)
+            
+            editNameTextField.setLeftPaddingPoints(8)
         
-        editNameTextField.text = userInfo.userName
-        
+            editNameTextField.setRightPaddingPoints(8)
     }
     
     override func layoutSubviews() {
+        
         super.layoutSubviews()
+        
         userImage.layer.cornerRadius = userImage.frame.height / 2
     }
-    
 }

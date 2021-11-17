@@ -20,11 +20,10 @@ enum ProfileSegue: String, CaseIterable {
     
     case record = "toRecord"
     
-    case notice = "toNotice"
-    
     case account = "toAccount"
     
-    }
+    case privacy = "privacy"
+}
 
 struct ProfileGroup {
     
@@ -39,23 +38,20 @@ enum ProfileFeat: ProfileItem, CaseIterable {
     
     case record
     
-    case notice
-    
     case account
     
-    case share
+    case privacy
     
     var image: UIImage? {
         
         switch self {
             
-        case .record: return UIImage(named: "edit")
+        case .record: return UIImage.asset(.Icon_edit)
             
-        case .notice: return UIImage(named: "backpack")
+        case .account: return UIImage.asset(.Icon_gear)
             
-        case .account: return UIImage(named: "gear")
+        case .privacy: return UIImage.asset(.Icon_notice)
             
-        case .share: return UIImage(named: "hourglass")
         }
     }
     
@@ -65,12 +61,9 @@ enum ProfileFeat: ProfileItem, CaseIterable {
             
         case .record: return "我的紀錄"
             
-        case .notice: return "登山須知"
-            
         case .account: return "帳號設定"
             
-        case .share: return "敬請期待"
-            
+        case .privacy: return "隱私權聲明"
         }
     }
     
@@ -78,16 +71,11 @@ enum ProfileFeat: ProfileItem, CaseIterable {
         
         switch self {
             
-        case .record: return UIColor.U1
+        case .record: return UIColor.clear
             
-        case .notice: return UIColor.U3
+        case .account: return UIColor.clear
             
-        case .account: return UIColor.B1
-            
-        case .share: return UIColor.B2
-            
+        case .privacy: return UIColor.clear
         }
-        
     }
-    
 }

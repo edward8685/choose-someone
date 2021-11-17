@@ -36,19 +36,19 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TrailName" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQT-4a-8aV">
-                                <rect key="frame" x="12" y="16" width="186" height="30.5"/>
+                                <rect key="frame" x="12" y="16" width="186" height="24.5"/>
                                 <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="21"/>
                                 <color key="textColor" red="0.098039215686274508" green="0.76470588235294112" blue="0.85490196078431369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Area" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rqw-9O-eJS">
-                                <rect key="frame" x="10" y="58.5" width="190" height="17.5"/>
+                                <rect key="frame" x="10" y="52.5" width="190" height="14"/>
                                 <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="12"/>
                                 <color key="textColor" red="0.098039215686274508" green="0.76470588235294112" blue="0.85490196078431369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RzY-si-dN8">
-                                <rect key="frame" x="0.0" y="86" width="210" height="1"/>
+                                <rect key="frame" x="0.0" y="76.5" width="210" height="1"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bgD-gN-Idt">
                                         <rect key="frame" x="0.0" y="0.0" width="10" height="1"/>
@@ -76,16 +76,16 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="0HO-7W-Lf8">
-                                <rect key="frame" x="0.0" y="122" width="196" height="89"/>
+                                <rect key="frame" x="0.0" y="112.5" width="196" height="98.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="5.50" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rG-ql-q3W">
-                                        <rect key="frame" x="0.0" y="0.0" width="148.5" height="67"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="54"/>
                                         <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="46"/>
                                         <color key="textColor" red="0.098039215686274508" green="0.76470588235294112" blue="0.85490196078431369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Km" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dga-yd-lGC">
-                                        <rect key="frame" x="148.5" y="0.0" width="47.5" height="43.5"/>
+                                        <rect key="frame" x="150" y="0.0" width="46" height="35"/>
                                         <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="30"/>
                                         <color key="textColor" red="0.098039215686274508" green="0.76470588235294112" blue="0.85490196078431369" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -134,7 +134,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Awr-9E-Efu">
-                                <rect key="frame" x="170" y="92" width="30" height="40"/>
+                                <rect key="frame" x="170" y="82.5" width="30" height="40"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mountain" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ryq-Bq-R1G">
                                         <rect key="frame" x="0.0" y="0.0" width="30" height="40"/>
@@ -205,7 +205,7 @@
     </objects>
     <designables>
         <designable name="uZY-fj-Q6t">
-            <size key="intrinsicContentSize" width="56" height="33"/>
+            <size key="intrinsicContentSize" width="56" height="29"/>
         </designable>
     </designables>
     <resources>

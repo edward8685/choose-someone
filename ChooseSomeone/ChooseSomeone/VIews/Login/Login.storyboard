@@ -32,6 +32,7 @@
                     </view>
                     <connections>
                         <outlet property="appLogo" destination="taY-hn-koQ" id="f8l-pb-BzA"/>
+                        <outlet property="logoTopConstrain" destination="vTz-oC-Scc" id="7ZK-Wk-8fl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HHx-qz-D9N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

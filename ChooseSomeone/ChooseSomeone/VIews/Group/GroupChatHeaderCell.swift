@@ -19,7 +19,11 @@ class GroupChatHeaderCell: UITableViewCell {
     
     @IBOutlet weak var numOfPeople: UITextField!
     
-    @IBOutlet weak var note: RSKPlaceholderTextView!
+    @IBOutlet weak var note: RSKPlaceholderTextView!{
+        didSet {
+            note.isScrollEnabled = false
+        }
+    }
     
     @IBOutlet weak var travelDate: UILabel!
     
@@ -82,6 +86,8 @@ class GroupChatHeaderCell: UITableViewCell {
                 travelDate.text = TimeFormater.dateStyle.timeFormat(time: groupInfo.date)
                 
                 travelTime.text = TimeFormater.timeStyle.timeFormat(time: groupInfo.date)
+                
+                note.text =  groupInfo.note
                 
                 let upperLimit = groupInfo.upperLimit
                 

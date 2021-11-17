@@ -48,7 +48,7 @@ class TeammateViewController: BaseViewController {
     
     func setNavigationBar() {
         
-        self.title = "\(groupInfo?.groupName ?? "揪團成員") - 成員"
+        self.title = "\(groupInfo?.groupName ?? "揪團") - 成員"
         
         UINavigationBar.appearance().backgroundColor = .B1
         
@@ -78,23 +78,15 @@ class TeammateViewController: BaseViewController {
         
         button.backgroundColor = .white
         
-        button.addTarget(self, action: #selector(backToPreviousVC), for: .touchUpInside)
+        button.addTarget(self, action: #selector(popToPreviousPage(_:)), for: .touchUpInside)
         
         self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: button), animated: true)
         
     }
-    
-    @objc func backToPreviousVC() {
-        navigationController?.popViewController(animated: true)
-    }
-    
 }
 
-extension TeammateViewController: UITableViewDelegate {
+extension TeammateViewController: UITableViewDelegate, UITableViewDataSource {
     
-}
-
-extension TeammateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         guard let num =  groupInfo?.userIds.count else { fatalError() }
@@ -112,8 +104,6 @@ extension TeammateViewController: UITableViewDataSource {
             
             cell.setUpCell(group: group, userInfo: userInfo)
             
-            cell.acceptButton.tag = indexPath.row
-            
             cell.rejectButton.addTarget(self, action: #selector(blockUser), for: .touchUpInside)
             
             cell.rejectButton.tag = indexPath.row
@@ -124,15 +114,9 @@ extension TeammateViewController: UITableViewDataSource {
     
     @objc func blockUser (_ sender: UIButton) {
         
-        if let blockUserId = groupInfo?.userIds[sender.tag] {
+        if let blockUserId = self.groupInfo?.userIds[sender.tag] {
             
-            UserManager.shared.blockUser(blockUserId: blockUserId)
-            
-            UserManager.shared.userInfo.blockList?.append(blockUserId)
-            
+            showBlockAlertAction(uid: blockUserId)
         }
-        sender.isEnabled = false
-        
-        sender.alpha = 0.5
     }
 }

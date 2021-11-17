@@ -18,9 +18,11 @@ class ChooseGroupViewController: BaseViewController {
     private var userInfo = UserManager.shared.userInfo
     
     private lazy var groups = [Group]() {
+        
         didSet {
-            tableView.reloadData()
             myGroups = groups.filter { $0.userIds.contains(userId) }
+            
+            tableView.reloadData()
         }
     }
     
@@ -105,7 +107,11 @@ class ChooseGroupViewController: BaseViewController {
         
         fetchGroupData()
         
+        self.tabBarController?.selectedIndex = 1
+        
         navigationController?.isNavigationBarHidden = true
+        
+        self.tabBarController?.tabBar.isHidden = false
         
     }
     
@@ -177,7 +183,6 @@ class ChooseGroupViewController: BaseViewController {
             case .success(let requests):
                 
                 var filtedRequests = [Request]()
-                
                 
                 for request in requests where self.userInfo.blockList?.contains(request.requestId) == false {
                     
@@ -344,13 +349,56 @@ extension ChooseGroupViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        performSegue(withIdentifier: "toGroupChatVC", sender: groups[indexPath.row])
         
+        if searching {
+            
+            performSegue(withIdentifier: "toGroupChatVC", sender: searchGroups[indexPath.row])
+            
+        } else {
+            
+            if onlyUserGroup {
+                
+                performSegue(withIdentifier: "toGroupChatVC", sender: myGroups[indexPath.row])
+                
+            } else {
+                
+                performSegue(withIdentifier: "toGroupChatVC", sender: groups[indexPath.row])
+            }
+        }
     }
     
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        let index = indexPath.row
+        let userId = groups[index].hostId
+        let identifier = "\(index)" as NSString
+        
+        if userId != self.userId {
+            
+            return UIContextMenuConfiguration(
+                identifier: identifier, previewProvider: nil) { _ in
+                    
+                    let blockAction = UIAction(title: "封鎖使用者",
+                                               image: UIImage(systemName: "person.fill.xmark"),
+                                               attributes: .destructive) { _ in
+                        
+                        self.showBlockAlertAction(uid: userId)
+                    }
+                    
+                    return UIMenu(title: "",
+                                  image: nil,
+                                  children: [blockAction])
+                }
+            
+        } else {
+            
+            return nil
+        }
+    }
 }
 
 extension ChooseGroupViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if searching {

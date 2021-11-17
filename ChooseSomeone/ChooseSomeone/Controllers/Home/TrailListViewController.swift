@@ -86,7 +86,7 @@ class TrailListViewController: BaseViewController {
     
     func setUpLabel() {
         
-        if let label = trails.first?.trailLevel{
+        if let label = trails.first?.trailLevel {
             
             switch label {
                 

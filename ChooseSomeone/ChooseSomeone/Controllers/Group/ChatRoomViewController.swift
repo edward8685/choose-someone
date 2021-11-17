@@ -87,6 +87,8 @@ class ChatRoomViewController: BaseViewController {
         
         super.viewDidLoad()
         
+        checkUserStatus()
+        
         tableView = UITableView()
         
         tableView.registerCellWithNib(identifier: GroupChatCell.identifier, bundle: nil)
@@ -99,6 +101,7 @@ class ChatRoomViewController: BaseViewController {
         
         setNavigationBar()
         
+        setUpStatusBarView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,16 +109,28 @@ class ChatRoomViewController: BaseViewController {
         checkUserStatus()
         
         navigationController?.isNavigationBarHidden = false
+        
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillLayoutSubviews() {
         
         textView.layer.cornerRadius = textView.frame.height / 2
         textView.layer.masksToBounds = true
-        
     }
     
     // MARK: - Action
+    
+    func setUpStatusBarView() {
+        
+        let statusBarFrame = UIApplication.shared.statusBarFrame
+        
+        let statusBarView = UIView(frame: statusBarFrame)
+        
+        self.view.addSubview(statusBarView)
+        
+        statusBarView.backgroundColor = .white
+    }
     
     func checkUserStatus() {
         
@@ -125,12 +140,14 @@ class ChatRoomViewController: BaseViewController {
             
             userStatus = .ishost
             
+            isInGroup = true
+            
         } else {
             
             guard let userId = userId else { fatalError() }
             
             userStatus = groupInfo.userIds.contains(userId) ? .isInGroup : .notInGroup
-            
+            isInGroup = groupInfo.userIds.contains(userId) ? true : false
         }
     }
     
@@ -156,6 +173,32 @@ class ChatRoomViewController: BaseViewController {
                         
                         return
                     }
+                }
+                
+                self.messages = filtedmessages
+                
+            case .failure(let error):
+                
+                print("fetchData.failure: \(error)")
+            }
+        }
+    }
+    
+    func fetchMessages() {
+        
+        guard let groupInfo = groupInfo else { return }
+        
+        GroupRoomManager.shared.fetchMessages(groupId: groupInfo.groupId) { result in
+            
+            switch result {
+                
+            case .success(let messages):
+                
+                var filtedmessages = [Message]()
+                
+                for message in messages where self.userInfo.blockList?.contains(message.userId) == false {
+                    
+                    filtedmessages.append(message)
                 }
                 
                 self.messages = filtedmessages
@@ -213,12 +256,9 @@ class ChatRoomViewController: BaseViewController {
                 headerView?.requestButton.setTitle("編輯資訊", for: .normal)
                 
                 if let group = headerView?.groupInfo {
-
-                editGroupInfo(groupInfo: group)
                     
+                    editGroupInfo(groupInfo: group)
                 }
-                
-                tableView.reloadData()
             }
         }
     }
@@ -242,10 +282,7 @@ class ChatRoomViewController: BaseViewController {
                 
                 let controller = UIAlertController(title: "成功申請囉", message: nil, preferredStyle: .alert)
                 
-                let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-                    
-                    self.dismiss(animated: true, completion: nil)
-                }
+                let okAction = UIAlertAction(title: "OK", style: .cancel)
                 
                 controller.addAction(okAction)
                 
@@ -260,32 +297,40 @@ class ChatRoomViewController: BaseViewController {
     
     func leaveGroup() {
         
-        guard let groupInfo = groupInfo else { return }
+        let controller = UIAlertController(title: "確定要退出嗎", message: nil, preferredStyle: .alert)
         
-        GroupRoomManager.shared.leaveGroup(groupId: groupInfo.groupId) { result in
+        let leaveAction = UIAlertAction(title: "退出", style: .destructive) { _ in
             
-            switch result {
+            guard let groupInfo = self.groupInfo else { return }
+            
+            GroupRoomManager.shared.leaveGroup(groupId: groupInfo.groupId) { result in
                 
-            case .success:
-                
-                print("User leave group Successfully")
-                
-                let controller = UIAlertController(title: "已退出揪團QQ", message: nil, preferredStyle: .alert)
-                
-                let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+                switch result {
+                    
+                case .success:
+                    
+                    print("User leave group Successfully")
                     
                     self.navigationController?.popViewController(animated: true)
+                    
+                case .failure(let error):
+                    
+                    print("leave group failure: \(error)")
                 }
-                
-                controller.addAction(okAction)
-                
-                self.present(controller, animated: true, completion: nil)
-                
-            case .failure(let error):
-                
-                print("leave group failure: \(error)")
             }
         }
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .default) { _ in
+            
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        controller.addAction(cancelAction)
+        
+        controller.addAction(leaveAction)
+        
+        self.present(controller, animated: true, completion: nil)
+        
     }
     
     func editGroupInfo(groupInfo: Group) {
@@ -295,7 +340,7 @@ class ChatRoomViewController: BaseViewController {
             switch result {
                 
             case .success:
-
+                
                 let controller = UIAlertController(title: "編輯成功", message: nil, preferredStyle: .alert)
                 
                 let okAction = UIAlertAction(title: "OK", style: .default)
@@ -338,6 +383,10 @@ class ChatRoomViewController: BaseViewController {
                 
                 self.textView.text = ""
                 
+                if messages.count != 0 {
+                    tableView.scrollToRow(at: IndexPath(row: messages.count - 1, section: 0), at: .bottom, animated: true)
+                }
+                
             case .failure(let error):
                 
                 print("send message failure: \(error)")
@@ -362,7 +411,7 @@ class ChatRoomViewController: BaseViewController {
         
         let leftButton = UIButton()
         
-        leftButton.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        leftButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         
         let chevroImage = UIImage(systemName: "chevron.left")
         
@@ -382,7 +431,7 @@ class ChatRoomViewController: BaseViewController {
         
         let rightButton = UIButton()
         
-        rightButton.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        rightButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         
         let infoImage = UIImage(systemName: "info")
         
@@ -422,6 +471,12 @@ class ChatRoomViewController: BaseViewController {
     func setUpTableView() {
         
         view.addSubview(tableView)
+        
+        if #available(iOS 15.0, *) {
+            
+            tableView.sectionHeaderTopPadding = 0
+            
+        }
         
         tableView.backgroundColor = .white
         
@@ -503,12 +558,15 @@ class ChatRoomViewController: BaseViewController {
         let image = UIImage(systemName: "paperplane")
         
         sendButton.setBackgroundImage(image, for: .normal)
-        sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
-        sendButton.tintColor = .white
         
+        sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
+        
+        sendButton.tintColor = .white
     }
     
 }
+
+// MARK: - UITableViewDelegate
 
 extension ChatRoomViewController: UITableViewDelegate {
     
@@ -527,12 +585,9 @@ extension ChatRoomViewController: UITableViewDelegate {
             
             headerView.setUpCell(group: groupInfo, cache: userInfo, userStatus: userStatus)
         }
-        headerView.hostBadgeButton.addTarget(self, action: #selector(foldHeaderView), for: .touchUpInside)
+        //        headerView.hostBadgeButton.addTarget(self, action: #selector(foldHeaderView), for: .touchUpInside)
         
-        return headerView
-    }
-    
-    @objc func foldHeaderView() {
+        return headerView.contentView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -543,7 +598,6 @@ extension ChatRoomViewController: UITableViewDelegate {
         220
     }
     
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension
     }
@@ -551,7 +605,37 @@ extension ChatRoomViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         80
     }
+    
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        let index = indexPath.row
+        let userId = messages[index].userId
+        let identifier = "\(index)" as NSString
+        
+        if userId != self.userId {
+            
+            return UIContextMenuConfiguration(
+                identifier: identifier, previewProvider: nil) { _ in
+                    
+                    let blockAction = UIAction(title: "封鎖使用者",
+                                               image: UIImage(systemName: "person.fill.xmark"),
+                                               attributes: .destructive) { _ in
+                        
+                        self.showBlockAlertAction(uid: userId)
+                    }
+                    
+                    return UIMenu(title: "",
+                                  image: nil,
+                                  children: [blockAction])
+                }
+            
+        } else {
+            
+            return nil
+        }
+    }
 }
+
 
 extension ChatRoomViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

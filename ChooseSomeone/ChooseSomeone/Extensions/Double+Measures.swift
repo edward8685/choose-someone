@@ -7,14 +7,14 @@
 
 import Foundation
 
-let kMetersPerKilometer = 1000.0
+let metersPerKilometer = 1000.0
 
-let kKilometersPerHourInOneMeterPerSecond = 3.6
+let kilometersPerHourInOneMeterPerSecond = 3.6
 
 extension Double {
     
     func toKilometers() -> Double {
-        return self/kMetersPerKilometer
+        return self/metersPerKilometer
     }
     
     func toKilometers() -> String {
@@ -26,11 +26,11 @@ extension Double {
     }
     
     func toDistance() -> String {
-        return self > kMetersPerKilometer ? toKilometers() as String : toMeters() as String
+        return self > metersPerKilometer ? toKilometers() as String : toMeters() as String
     }
     
     func toKilometersPerHour() -> Double {
-        return self * kKilometersPerHourInOneMeterPerSecond
+        return self * kilometersPerHourInOneMeterPerSecond
     }
     
     func toKilometersPerHour() -> String {
@@ -52,21 +52,25 @@ extension Double {
     func tohmsTimeFormat () -> String {
         
         let seconds = Int(self)
-        print(seconds)
+        
         let hour = (seconds % 3600) % 60
+        
         let minute = (seconds % 3600) / 60
+        
         let second = seconds / 3600
         
         var timeString = ""
+        
         timeString += second.description
+        
         timeString += ":"
+        
         timeString += minute.description
+        
         timeString += ":"
+        
         timeString += hour.description
         
-      return timeString
-        
+        return timeString
     }
-    
-    
 }

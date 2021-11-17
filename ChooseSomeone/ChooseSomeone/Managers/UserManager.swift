@@ -13,9 +13,7 @@ import FirebaseAuth
 
 class UserManager {
     
-//    let userId = Auth.auth().currentUser?.uid
-    
-    let userId :String? = "5s5d5a4s5s5s5s5s5ss"
+    let userId = Auth.auth().currentUser?.uid
     
     var userInfo = UserInfo() {
         didSet {

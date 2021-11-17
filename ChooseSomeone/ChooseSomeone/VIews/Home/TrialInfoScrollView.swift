@@ -30,14 +30,14 @@ class TrialInfoView: UIView {
     func setUpLayout(trail: Trail) {
         
         trailName.text = trail.trailName
-        
-        trailInfo.text = trail.trailInfo
+    
+        trailInfo.text? = trail.trailInfo.replacingOccurrences(of: "\\r\\n", with: "\n")
         
         trailLength.text = "\(trail.trailLength) 公里"
         
         trailLevel.text = "\(trail.trailLevel) 星"
         
-        trafficInfo.text = trail.trailTraffic
+        trafficInfo.text = trail.trailTraffic.replacingOccurrences(of: "\\r\\n", with: "\n")
         
         TrailManager.shared.fetchTrailMap(tralId: trail.trailId) {result in
             

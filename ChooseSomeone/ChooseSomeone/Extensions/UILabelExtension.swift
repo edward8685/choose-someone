@@ -8,6 +8,7 @@
 import UIKit
 
 @IBDesignable
+
 class PaddingLabel: UILabel {
     var textEdgeInsets = UIEdgeInsets.zero {
         didSet { invalidateIntrinsicContentSize() }

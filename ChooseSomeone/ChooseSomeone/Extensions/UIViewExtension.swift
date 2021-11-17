@@ -104,6 +104,8 @@ extension UIView {
             
         }
         
+        /// caution: removeAll is not available for UIStoryBoard VC
+        self.layer.sublayers?.removeAll()
         self.layer.addSublayer(gradientLayer)
     }
     

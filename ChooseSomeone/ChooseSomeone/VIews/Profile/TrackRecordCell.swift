@@ -24,7 +24,9 @@ class TrackRecordCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        selectionStyle = .none
+        self.backgroundColor = .clear
+        self.contentView.backgroundColor = .clear
+
     }
-    
 }
