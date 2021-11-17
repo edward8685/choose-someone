@@ -138,6 +138,5 @@ fastlane/test_output
 
 ### Google API plist file ###
 **/GoogleService-Info.plist
-**/*.entitlements
 
 # End of https://www.gitignore.io/api/xcode,macos,swift,cocoapods
