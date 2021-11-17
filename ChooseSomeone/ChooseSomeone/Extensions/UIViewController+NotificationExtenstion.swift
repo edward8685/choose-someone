@@ -48,6 +48,33 @@ class BaseViewController: UIViewController {
         self.setNeedsStatusBarAppearanceUpdate()
         
     }
+    
+    @objc func popToPreviousPage(_ sender: UIButton) {
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func showBlockAlertAction(uid: String) {
+        
+        let controller = UIAlertController(title: "封鎖該用戶", message: "將看不到該使用者的訊息及揪團" , preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        
+        let blockAction = UIAlertAction(title: "封鎖", style: .destructive) { _ in
+            
+            UserManager.shared.blockUser(blockUserId: uid)
+            
+            UserManager.shared.userInfo.blockList?.append(uid)
+
+        }
+        
+        controller.addAction(cancelAction)
+        
+        controller.addAction(blockAction)
+        
+        self.present(controller, animated: true, completion: nil)
+    }
+    
 }
 
 extension Notification.Name {

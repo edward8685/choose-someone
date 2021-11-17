@@ -50,6 +50,8 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         
         navigationController?.isNavigationBarHidden = true
         
+        self.tabBarController?.tabBar.isHidden = true
+        
         setUpButton()
         
         parseGPXFile()

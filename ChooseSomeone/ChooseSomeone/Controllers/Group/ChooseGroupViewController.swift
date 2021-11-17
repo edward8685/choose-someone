@@ -107,6 +107,8 @@ class ChooseGroupViewController: BaseViewController {
         
         fetchGroupData()
         
+        self.tabBarController?.selectedIndex = 1
+        
         navigationController?.isNavigationBarHidden = true
         
         self.tabBarController?.tabBar.isHidden = false
@@ -347,6 +349,7 @@ extension ChooseGroupViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        
         if searching {
             
             performSegue(withIdentifier: "toGroupChatVC", sender: searchGroups[indexPath.row])
@@ -363,9 +366,39 @@ extension ChooseGroupViewController: UITableViewDelegate {
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        let index = indexPath.row
+        let userId = groups[index].hostId
+        let identifier = "\(index)" as NSString
+        
+        if userId != self.userId {
+            
+            return UIContextMenuConfiguration(
+                identifier: identifier, previewProvider: nil) { _ in
+                    
+                    let blockAction = UIAction(title: "封鎖使用者",
+                                               image: UIImage(systemName: "person.fill.xmark"),
+                                               attributes: .destructive) { _ in
+                        
+                        self.showBlockAlertAction(uid: userId)
+                    }
+                    
+                    return UIMenu(title: "",
+                                  image: nil,
+                                  children: [blockAction])
+                }
+            
+        } else {
+            
+            return nil
+        }
+    }
 }
 
 extension ChooseGroupViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if searching {

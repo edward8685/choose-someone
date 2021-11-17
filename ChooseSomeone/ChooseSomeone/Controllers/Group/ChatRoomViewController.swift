@@ -282,10 +282,7 @@ class ChatRoomViewController: BaseViewController {
                 
                 let controller = UIAlertController(title: "成功申請囉", message: nil, preferredStyle: .alert)
                 
-                let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-                    
-                    self.dismiss(animated: true, completion: nil)
-                }
+                let okAction = UIAlertAction(title: "OK", style: .cancel)
                 
                 controller.addAction(okAction)
                 
@@ -343,7 +340,7 @@ class ChatRoomViewController: BaseViewController {
             switch result {
                 
             case .success:
- 
+                
                 let controller = UIAlertController(title: "編輯成功", message: nil, preferredStyle: .alert)
                 
                 let okAction = UIAlertAction(title: "OK", style: .default)
@@ -387,7 +384,7 @@ class ChatRoomViewController: BaseViewController {
                 self.textView.text = ""
                 
                 if messages.count != 0 {
-                tableView.scrollToRow(at: IndexPath(row: messages.count - 1, section: 0), at:.bottom, animated: true)
+                    tableView.scrollToRow(at: IndexPath(row: messages.count - 1, section: 0), at: .bottom, animated: true)
                 }
                 
             case .failure(let error):
@@ -569,6 +566,8 @@ class ChatRoomViewController: BaseViewController {
     
 }
 
+// MARK: - UITableViewDelegate
+
 extension ChatRoomViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -586,12 +585,9 @@ extension ChatRoomViewController: UITableViewDelegate {
             
             headerView.setUpCell(group: groupInfo, cache: userInfo, userStatus: userStatus)
         }
-        headerView.hostBadgeButton.addTarget(self, action: #selector(foldHeaderView), for: .touchUpInside)
+        //        headerView.hostBadgeButton.addTarget(self, action: #selector(foldHeaderView), for: .touchUpInside)
         
         return headerView.contentView
-    }
-    
-    @objc func foldHeaderView() {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -602,7 +598,6 @@ extension ChatRoomViewController: UITableViewDelegate {
         220
     }
     
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension
     }
@@ -610,7 +605,37 @@ extension ChatRoomViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         80
     }
+    
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        let index = indexPath.row
+        let userId = messages[index].userId
+        let identifier = "\(index)" as NSString
+        
+        if userId != self.userId {
+            
+            return UIContextMenuConfiguration(
+                identifier: identifier, previewProvider: nil) { _ in
+                    
+                    let blockAction = UIAction(title: "封鎖使用者",
+                                               image: UIImage(systemName: "person.fill.xmark"),
+                                               attributes: .destructive) { _ in
+                        
+                        self.showBlockAlertAction(uid: userId)
+                    }
+                    
+                    return UIMenu(title: "",
+                                  image: nil,
+                                  children: [blockAction])
+                }
+            
+        } else {
+            
+            return nil
+        }
+    }
 }
+
 
 extension ChatRoomViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

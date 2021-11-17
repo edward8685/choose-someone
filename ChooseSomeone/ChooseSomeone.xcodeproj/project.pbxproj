@@ -28,6 +28,7 @@
 		740FC394271D17160071459A /* ChooseGroup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740FC392271D17160071459A /* ChooseGroup.storyboard */; };
 		740FC396271D17180071459A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 740FC395271D17180071459A /* Assets.xcassets */; };
 		740FC399271D17180071459A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740FC397271D17180071459A /* LaunchScreen.storyboard */; };
+		7417858B274528B500231383 /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7417858A274528B500231383 /* TabbarController.swift */; };
 		7419126C273A5AAF006750EA /* TeammateVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7419126B273A5AAF006750EA /* TeammateVIewController.swift */; };
 		7419126E273A9AAE006750EA /* ChevronButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7419126D273A9AAE006750EA /* ChevronButton.swift */; };
 		742349352732B032001EC7A1 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742349342732B032001EC7A1 /* UserManager.swift */; };
@@ -134,6 +135,7 @@
 		740FC395271D17180071459A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		740FC398271D17180071459A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		740FC39A271D17180071459A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7417858A274528B500231383 /* TabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarController.swift; sourceTree = "<group>"; };
 		7419126B273A5AAF006750EA /* TeammateVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeammateVIewController.swift; sourceTree = "<group>"; };
 		7419126D273A9AAE006750EA /* ChevronButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChevronButton.swift; sourceTree = "<group>"; };
 		742349332732662E001EC7A1 /* ChooseSomeone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChooseSomeone.entitlements; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				7441B7C227323B4B00614D9B /* LoginViewController.swift */,
+				7417858A274528B500231383 /* TabbarController.swift */,
 				74AF8A3C27441300003A4132 /* PrivacyPolicyViewController.swift */,
 				74F10299274135060097AC6F /* Home */,
 				747A1DB4273FE60200D08A37 /* Group */,
@@ -681,6 +684,7 @@
 				740FC391271D17160071459A /* ChooseGroupViewController.swift in Sources */,
 				74E573D427292CE300F490BF /* DistanceLabel.swift in Sources */,
 				742516FB272197A30011166B /* UILabelExtension.swift in Sources */,
+				7417858B274528B500231383 /* TabbarController.swift in Sources */,
 				7419126C273A5AAF006750EA /* TeammateVIewController.swift in Sources */,
 				74E573722728241F00F490BF /* GPXExtentCoordinates.swift in Sources */,
 				745A6F0E272E4B57006064C4 /* UserRecordViewController.swift in Sources */,

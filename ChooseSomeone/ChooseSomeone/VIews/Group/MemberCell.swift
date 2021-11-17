@@ -17,7 +17,11 @@ class MemberCell: UITableViewCell {
     
     @IBOutlet weak var acceptButton: UIButton!
     
-    @IBOutlet weak var rejectButton: UIButton!
+    @IBOutlet weak var rejectButton: UIButton! {
+        didSet {
+            
+        }
+    }
     
     @IBOutlet weak var viewOfBackground: UIView!
     
@@ -72,8 +76,6 @@ class MemberCell: UITableViewCell {
         viewOfBackground.layer.masksToBounds = true
         selectionStyle = .none
         
-        rejectButton.imageView?.contentMode = .scaleAspectFit
-        rejectButton.clipsToBounds = true
     }
     
     override func layoutSubviews() {
@@ -85,7 +87,5 @@ class MemberCell: UITableViewCell {
         rejectButton.layer.masksToBounds = true
         
         userImage.cornerRadius = userImage.frame.height / 2
-        
     }
-    
 }

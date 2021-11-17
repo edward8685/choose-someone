@@ -32,7 +32,7 @@ extension UIStoryboard {
     
     static var login: UIStoryboard { return storyboard(name: StoryboardCategory.login) }
 
-    static var product: UIStoryboard { return storyboard(name: StoryboardCategory.journey) }
+    static var journey: UIStoryboard { return storyboard(name: StoryboardCategory.journey) }
 
     static var profile: UIStoryboard { return storyboard(name: StoryboardCategory.profile) }
     

@@ -55,6 +55,8 @@ class TrackRecordsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         navigationController?.isNavigationBarHidden = false
+        
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     func setNavigationBar() {
@@ -101,13 +103,17 @@ class TrackRecordsViewController: UIViewController {
     
     func setUpTableView() {
         
-        tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView = UITableView(frame: .zero, style: .plain)
         
         tableView.registerCellWithNib(identifier: TrackRecordCell.identifier, bundle: nil)
         
         view.stickSubView(tableView)
         
         tableView.backgroundColor = .clear
+        
+        tableView.separatorStyle = .none
+        
+//        tableView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: -10, right: 20)
         
     }
     

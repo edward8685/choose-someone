@@ -78,16 +78,11 @@ class TeammateViewController: BaseViewController {
         
         button.backgroundColor = .white
         
-        button.addTarget(self, action: #selector(backToPreviousVC), for: .touchUpInside)
+        button.addTarget(self, action: #selector(popToPreviousPage(_:)), for: .touchUpInside)
         
         self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: button), animated: true)
         
     }
-    
-    @objc func backToPreviousVC() {
-        navigationController?.popViewController(animated: true)
-    }
-    
 }
 
 extension TeammateViewController: UITableViewDelegate, UITableViewDataSource {
@@ -119,28 +114,9 @@ extension TeammateViewController: UITableViewDelegate, UITableViewDataSource {
     
     @objc func blockUser (_ sender: UIButton) {
         
-        let controller = UIAlertController(title: "要封鎖該用戶", message: "你將看不到該使用者的訊息及揪團" , preferredStyle: .alert)
-        
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
-        
-        let blockAction = UIAlertAction(title: "封鎖", style: .destructive) { _ in
+        if let blockUserId = self.groupInfo?.userIds[sender.tag] {
             
-            if let blockUserId = self.groupInfo?.userIds[sender.tag] {
-                
-                UserManager.shared.blockUser(blockUserId: blockUserId)
-                
-                UserManager.shared.userInfo.blockList?.append(blockUserId)
-            }
-            
-            sender.isEnabled = false
-            
-            sender.alpha = 0.5
+            showBlockAlertAction(uid: blockUserId)
         }
-        
-        controller.addAction(cancelAction)
-        
-        controller.addAction(blockAction)
-        
-        self.present(controller, animated: true, completion: nil)
     }
 }

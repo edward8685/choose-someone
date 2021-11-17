@@ -37,17 +37,12 @@ class GroupChatCell: UITableViewCell {
             
             userMessage.sizeToFit()
             
-            memberMessage.sizeToFit()
-//            if userMessage.layer.sublayers == nil &&  memberMessage.layer.sublayers == nil {
-//
-//
                 DispatchQueue.main.async {
                     
                     self.userMessage.applyGradient(colors: [.C3, .C4], locations: [0.0, 1.0], direction: .topToBottom)
                     
                     self.memberMessage.applyGradient(colors: [.C1, .C2], locations: [0.0, 1.0], direction: .topToBottom)
                 }
-//            }
             
             isSentFromUser = true
             
@@ -58,6 +53,13 @@ class GroupChatCell: UITableViewCell {
             memberName.text = memberInfo.userName
             
             memberMessage.text = message.body
+            
+            memberMessage.sizeToFit()
+            
+            DispatchQueue.main.async {
+                
+                self.memberMessage.applyGradient(colors: [.C1, .C2], locations: [0.0, 1.0], direction: .topToBottom)
+            }
             
             guard let ref = memberInfo.pictureRef else { return }
             
