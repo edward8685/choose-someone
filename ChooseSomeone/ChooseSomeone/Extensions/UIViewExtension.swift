@@ -88,8 +88,6 @@ extension UIView {
     
     func applyGradient(colors: [UIColor?], locations: [NSNumber]? = [0.0, 1.0], direction: Direction = .topToBottom) {
         
-//        if self.layer.sublayers == nil {
-        
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.bounds
         gradientLayer.colors = colors.map{ $0?.cgColor as Any }
@@ -106,8 +104,9 @@ extension UIView {
             
         }
         
+        /// caution: removeAll is not available for UIStoryBoard VC
+        self.layer.sublayers?.removeAll()
         self.layer.addSublayer(gradientLayer)
-//        }
     }
     
     func roundCornersTop(cornerRadius: Double) {

@@ -26,9 +26,9 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
     
     private let mapViewDelegate = MapViewDelegate()
     
-    var record = Record()
+    lazy var record = Record()
     
-    var trackInfo = TrackInfo()
+    lazy var trackInfo = TrackInfo()
     
     lazy var elevation: [Double] = []
     

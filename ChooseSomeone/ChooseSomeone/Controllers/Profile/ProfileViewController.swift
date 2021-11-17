@@ -17,6 +17,12 @@ enum ActionSheet: String{
 
 class ProfileViewController: UIViewController {
     
+    @IBOutlet weak var gradientView: UIView! {
+        didSet {
+            gradientView.applyGradient(colors: [.white, .U2], locations: [0.0, 1.0], direction: .leftSkewed)
+        }
+    }
+    
     var textInTextfield: String = ""
     
     let userInfo = UserManager.shared.userInfo
@@ -46,11 +52,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        self.view.applyGradient(colors: [.white, .U2], locations: [0.0, 1.0], direction: .leftSkewed)
-        
-        view.bringSubviewToFront(profileView)
-        
+
         tableView.registerCellWithNib(identifier: ProfileCell.identifier, bundle: nil)
         
         setUpProfileView()
@@ -119,7 +121,6 @@ class ProfileViewController: UIViewController {
             
             present(loginVC, animated: true, completion: nil)
         }
-        
     }
     
     func updateUserInfo(imageData: Data) {

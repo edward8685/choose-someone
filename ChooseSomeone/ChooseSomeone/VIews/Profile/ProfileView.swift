@@ -17,7 +17,7 @@ class ProfileView: UIView {
             
             editNameTextField.textColor = isEditting ? .black : .B1
             
-            editNameTextField.backgroundColor = isEditting ? .systemGray6 : .white
+            editNameTextField.backgroundColor = isEditting ? .systemGray6 : .clear
             
             editNameTextField.isEnabled = isEditting ? true : false
 
@@ -42,7 +42,9 @@ class ProfileView: UIView {
             
             editNameTextField.font = UIFont.regular(size: 24)
             
-            editNameTextField.setLeftPaddingPoints(5)
+            editNameTextField.setLeftPaddingPoints(8)
+        
+            editNameTextField.setRightPaddingPoints(8)
     }
     
     override func layoutSubviews() {

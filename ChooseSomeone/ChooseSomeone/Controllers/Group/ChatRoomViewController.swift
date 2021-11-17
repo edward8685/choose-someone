@@ -100,6 +100,8 @@ class ChatRoomViewController: BaseViewController {
         addMessageListener()
         
         setNavigationBar()
+        
+        setUpStatusBarView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,6 +120,17 @@ class ChatRoomViewController: BaseViewController {
     }
     
     // MARK: - Action
+    
+    func setUpStatusBarView() {
+        
+        let statusBarFrame = UIApplication.shared.statusBarFrame
+        
+        let statusBarView = UIView(frame: statusBarFrame)
+        
+        self.view.addSubview(statusBarView)
+        
+        statusBarView.backgroundColor = .white
+    }
     
     func checkUserStatus() {
         
@@ -373,7 +386,9 @@ class ChatRoomViewController: BaseViewController {
                 
                 self.textView.text = ""
                 
+                if messages.count != 0 {
                 tableView.scrollToRow(at: IndexPath(row: messages.count - 1, section: 0), at:.bottom, animated: true)
+                }
                 
             case .failure(let error):
                 
