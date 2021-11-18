@@ -8,10 +8,38 @@
 import UIKit
 import WebKit
 
+protocol policy {
+    
+    var url: String { get }
+}
+
+enum PolicyType: String, policy {
+    
+    case privacy
+    
+    case eula
+    
+    var url: String {
+        
+        switch self {
+            
+        case .privacy: return "https://www.privacypolicies.com/live/f869d812-3028-4bdf-bf0d-e842ec6c2c30"
+            
+        case .eula: return "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
+        }
+    }
+}
+
 class PrivacyPolicyViewController: BaseViewController {
     
     // MARK: - properties
-     
+    
+    var policyType: PolicyType? {
+        didSet {
+            print(policyType)
+        }
+    }
+    
     private lazy var webView: WKWebView = {
         
         let web = WKWebView()
@@ -23,11 +51,9 @@ class PrivacyPolicyViewController: BaseViewController {
     
     // MARK: - methods
     
-    private func loadURL() {
+    private func loadURL(type: PolicyType) {
         
-        let privacyPolicyURL = "https://www.privacypolicies.com/live/f869d812-3028-4bdf-bf0d-e842ec6c2c30"
-        
-        if let url = URL(string: privacyPolicyURL) {
+        if let url = URL(string: type.url) {
             
             let request = URLRequest(url: url)
             
@@ -42,7 +68,9 @@ class PrivacyPolicyViewController: BaseViewController {
         
         setWebView()
         
-        loadURL()
+        if let policyType = policyType {
+            loadURL(type: policyType)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
