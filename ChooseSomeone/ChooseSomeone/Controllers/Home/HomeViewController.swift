@@ -11,8 +11,6 @@ import FirebaseAuth
 
 class HomeViewController: BaseViewController {
     
-    private var uid = UserManager.shared.userInfo.uid
-    
     private var userInfo = UserManager.shared.userInfo
     
     private let themes = ["愜意的走", "想流點汗", "百岳挑戰"]
@@ -20,6 +18,12 @@ class HomeViewController: BaseViewController {
     private let images = [UIImage.asset(.scene_1),
                           UIImage.asset(.scene_2),
                           UIImage.asset(.scene_3)]
+    
+    var startValue: Double = 0.0
+    
+    var isHeaderViewCreated: Bool = false
+    
+    lazy var endValue = UserManager.shared.userInfo.totalLength
     
     private var trails = [Trail]() {
         
@@ -64,16 +68,18 @@ class HomeViewController: BaseViewController {
         
     }
     
-    @objc func updateUserInfo(notification: NSNotification) {
-        DispatchQueue.main.async {
+    @objc func updateUserInfo(notification: Notification) {
             
-            if let userInfo = notification.userInfo?[self.uid] as? UserInfo {
-                
-                self.headerView?.updateUserInfo(user: userInfo)
-                
+        if let userInfo = notification.userInfo as? [String: UserInfo] {
+            
+            if let userInfo = userInfo[self.userInfo.uid] {
+                self.userInfo = userInfo
+            }
+
+            self.headerView?.updateUserInfo(user: self.userInfo)
+  
         }
             self.tableView.reloadData()
-        }
     }
     
     func setUpTableView() {
@@ -138,9 +144,30 @@ extension HomeViewController: UITableViewDelegate {
         
         self.headerView = headerView
         
+//        if isHeaderViewCreated == false {
+        
         headerView.updateUserInfo(user: userInfo)
+            
+//        }
+        
+        let displayLink = CADisplayLink(target: self, selector: #selector(handleUpdate))
+        
+//        headerView.totalKilos
+        
+        isHeaderViewCreated = true
         
         return self.headerView
+    }
+    
+    @objc func handleUpdate() {
+        
+        self.headerView?.totalKilos.text = "\(startValue)"
+        
+        startValue += 0.1
+        
+        if startValue > endValue {
+            startValue = endValue
+    }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

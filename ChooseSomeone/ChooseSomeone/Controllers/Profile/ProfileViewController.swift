@@ -141,7 +141,7 @@ class ProfileViewController: UIViewController {
     }
     
     func updateUserInfo(name: String) {
-        
+
         UserManager.shared.updateUserName(name: name)
     }
 }

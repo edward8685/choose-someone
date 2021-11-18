@@ -17,7 +17,7 @@ class UserManager {
     
     var userInfo = UserInfo() {
         didSet {
-            NotificationCenter.default.post(name: NSNotification.userInfoDidChanged, object: nil,userInfo: [userId : [userInfo]] )
+            NotificationCenter.default.post(name: NSNotification.userInfoDidChanged, object: nil, userInfo: [userId: userInfo] )
         }
     }
     
@@ -132,6 +132,8 @@ class UserManager {
     
     func updateUserName(name: String) {
         
+        userInfo.userName = name
+        
         let userId = userInfo.uid
 
         let post = [UserInfo.CodingKeys.userName.rawValue: name]
@@ -152,6 +154,8 @@ class UserManager {
     }
     
     func blockUser(blockUserId: String) {
+        
+        userInfo.blockList?.append(blockUserId)
         
         let userId = userInfo.uid
         

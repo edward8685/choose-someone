@@ -13,14 +13,12 @@ import FirebaseAuth
 
 class ChooseGroupViewController: BaseViewController {
     
-    private var userId = UserManager.shared.userInfo.uid
-    
     private var userInfo = UserManager.shared.userInfo
     
     private lazy var groups = [Group]() {
         
         didSet {
-            myGroups = groups.filter { $0.userIds.contains(userId) }
+            myGroups = groups.filter { $0.userIds.contains(userInfo.uid) }
             
             tableView.reloadData()
         }
@@ -83,7 +81,7 @@ class ChooseGroupViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        fetchGroupData()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUserInfo), name: NSNotification.userInfoDidChanged, object: nil)
         
         self.view.applyGradient(colors: [.B2, .B6], locations: [0.0, 1.0], direction: .leftSkewed)
         
@@ -100,6 +98,7 @@ class ChooseGroupViewController: BaseViewController {
         addRequestListener()
         
         header.setRefreshingTarget(self, refreshingAction: #selector(self.headerRefresh))
+        
         self.tableView.mj_header = header
     }
     
@@ -112,10 +111,19 @@ class ChooseGroupViewController: BaseViewController {
         navigationController?.isNavigationBarHidden = true
         
         self.tabBarController?.tabBar.isHidden = false
-        
     }
     
     // MARK: - Action
+    
+    @objc func updateUserInfo(notification: Notification) {
+            
+        if let userInfo = notification.userInfo as? [String: UserInfo] {
+            
+            if let userInfo = userInfo[self.userInfo.uid] {
+                self.userInfo = userInfo
+            }
+        }
+    }
     
     func fetchUserData(uid: String) {
         
