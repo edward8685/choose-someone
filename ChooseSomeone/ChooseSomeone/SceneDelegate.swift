@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        if Auth.auth().currentUser != nil {
+//        if Auth.auth().currentUser != nil {
             
             if let uid = Auth.auth().currentUser?.uid {
                 
@@ -44,13 +44,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
             }
             
-        } else {
-            
-            guard let loginVC = UIStoryboard.login.instantiateViewController(identifier:LoginViewController.identifier) as? LoginViewController else { return }
-            
-            self.window?.rootViewController = loginVC
-            
-        }
+//        } else {
+//
+//            guard let loginVC = UIStoryboard.login.instantiateViewController(identifier:LoginViewController.identifier) as? LoginViewController else { return }
+//
+//            self.window?.rootViewController = loginVC
+//
+//        }
         
     }
     

@@ -98,13 +98,13 @@ class HomeViewController: BaseViewController {
     
     func fetchTrailData() {
         
-        TrailManager.shared.fetchTrails { [weak self] result in
+        TrailManager.shared.fetchTrails { result in
             
             switch result {
                 
             case .success(let trails):
                 
-                self?.trails = trails
+                self.trails = trails
                 
             case .failure(let error):
                 

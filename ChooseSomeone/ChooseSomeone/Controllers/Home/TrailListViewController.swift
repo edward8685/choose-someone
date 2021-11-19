@@ -221,18 +221,12 @@ extension TrailListViewController {
     }
     
     @objc func toGroupPage(_ sender: UIButton) {
-        
-        let chooseGroupVC = UIStoryboard.group.instantiateViewController(withIdentifier:
-                                                                            String(describing: ChooseGroupViewController.self)
-        )
+                self.tabBarController?.selectedIndex = 1
         
         guard let groupVC = UIStoryboard.group.instantiateViewController(identifier: ChooseGroupViewController.identifier) as? ChooseGroupViewController else { return }
         
-        
- 
-//        groupVC.searchText = trails[sender.tag].trailName
-        
-        show(groupVC, sender: nil)
+        groupVC.searchText = trails[sender.tag].trailName
+        groupVC.headerView?.groupSearchBar.text = trails[sender.tag].trailName
     
     }
     

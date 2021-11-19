@@ -19,12 +19,10 @@ class ChooseGroupViewController: BaseViewController {
         
         didSet {
             myGroups = groups.filter { $0.userIds.contains(userInfo.uid) }
-            
-            tableView.reloadData()
         }
     }
     
-    private var headerView: GroupHeaderCell?
+    var headerView: GroupHeaderCell?
     
     private lazy var myGroups = [Group]()
     
@@ -32,16 +30,7 @@ class ChooseGroupViewController: BaseViewController {
         
         didSet {
             
-            guard let headerView = headerView else { return }
-            
-            if requests.count == 0 {
-                
-                headerView.badgeView.isHidden = true
-                
-            } else {
-                
-                headerView.badgeView.isHidden = false
-            }
+            checkRequestsNum()
         }
     }
     
@@ -56,7 +45,6 @@ class ChooseGroupViewController: BaseViewController {
     var searchText: String = "" {
         
         didSet {
-            
             searching = true
         }
     }
@@ -64,6 +52,7 @@ class ChooseGroupViewController: BaseViewController {
     let header = MJRefreshNormalHeader()
     
     private var tableView: UITableView! {
+        
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
@@ -104,9 +93,7 @@ class ChooseGroupViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        fetchGroupData()
-        
-        self.tabBarController?.selectedIndex = 1
+//        fetchGroupData()
         
         navigationController?.isNavigationBarHidden = true
         
@@ -114,6 +101,26 @@ class ChooseGroupViewController: BaseViewController {
     }
     
     // MARK: - Action
+    
+    func checkRequestsNum() {
+        
+        guard let headerView = headerView else { return }
+        
+        if requests.count == 0 {
+            
+            headerView.badgeView.isHidden = true
+            
+        } else {
+            
+            headerView.badgeView.isHidden = false
+        }
+        
+    }
+    
+    @objc func checkRequestList(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: "toRequestList", sender: requests)
+    }
     
     @objc func updateUserInfo(notification: Notification) {
             
@@ -159,17 +166,11 @@ class ChooseGroupViewController: BaseViewController {
                 
                 self.groups = filtedGroups
                 
-                var num = 0
-                
                 self.groups.forEach { group in
                     
                     guard self.cache[group.hostId] != nil else {
                         
                         self.fetchUserData(uid: group.hostId)
-                        
-                        num += 1
-                        
-                        print("=============\(num)================")
                         
                         return
                     }
@@ -222,6 +223,8 @@ class ChooseGroupViewController: BaseViewController {
         
         tableView.backgroundColor = .clear
         
+        tableView.separatorStyle = .none
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -234,9 +237,6 @@ class ChooseGroupViewController: BaseViewController {
             
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        
-        tableView.separatorStyle = .none
-        
     }
     
     func setUpHeaderView() {
@@ -245,6 +245,8 @@ class ChooseGroupViewController: BaseViewController {
         else {fatalError("Could not create HeaderView")}
         
         self.headerView = headerView
+        
+        headerView.groupSearchBar.searchTextField.text = searchText
         
         view.addSubview(headerView)
         
@@ -284,11 +286,6 @@ class ChooseGroupViewController: BaseViewController {
         tableView.reloadData()
     }
     
-    @objc func checkRequestList(_ sender: UIButton) {
-        
-        performSegue(withIdentifier: "toRequestList", sender: requests)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "toGroupChatVC" {
@@ -324,9 +321,9 @@ class ChooseGroupViewController: BaseViewController {
         
         buildTeamButton.frame = CGRect(x: width * 0.8, y: height * 0.8, width: width * 0.18, height: width * 0.18)
         
-        let plusImage = UIImage(named: "choose_button")
+        let image = UIImage.asset(.choose)
         
-        buildTeamButton.setImage(plusImage, for: .normal)
+        buildTeamButton.setImage(image, for: .normal)
         
         buildTeamButton.tintColor = .white
         
@@ -381,7 +378,7 @@ extension ChooseGroupViewController: UITableViewDelegate {
         let userId = groups[index].hostId
         let identifier = "\(index)" as NSString
         
-        if userId != self.userId {
+        if userId != self.userInfo.uid {
             
             return UIContextMenuConfiguration(
                 identifier: identifier, previewProvider: nil) { _ in

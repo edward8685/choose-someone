@@ -86,7 +86,7 @@ class GroupRoomManager {
     
     func fetchGroups(completion: @escaping (Result<[Group], Error>) -> Void) {
         let collection = dataBase.collection("Groups")
-        collection.order(by: "date", descending: false).getDocuments() {(querySnapshot,error) in
+        collection.order(by: "date", descending: false).getDocuments() {(querySnapshot, error) in
             
             guard let querySnapshot = querySnapshot else { return }
             
@@ -102,7 +102,10 @@ class GroupRoomManager {
                     
                     do {
                         
-                        if let group = try document.data(as: Group.self, decoder: Firestore.Decoder()) {
+                        if var group = try document.data(as: Group.self, decoder: Firestore.Decoder()) {
+                            
+                            group.isExpired = group.date.checkIsExpired()
+                            
                             groups.append(group)
                         }
                         
@@ -291,5 +294,4 @@ class GroupRoomManager {
             }
             }
         }
-    
 }

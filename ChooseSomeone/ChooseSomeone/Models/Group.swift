@@ -17,6 +17,7 @@ struct Group: Codable {
     var trailName: String
     var note: String
     var userIds: [String]
+    var isExpired: Bool
     
     enum CodingKeys: String, CodingKey {
         case groupId = "group_id"
@@ -27,6 +28,7 @@ struct Group: Codable {
         case trailName = "trail_name"
         case note
         case userIds = "user_ids"
+        case isExpired = "is_expired"
     }
     
     init() {
@@ -38,5 +40,6 @@ struct Group: Codable {
         self.trailName = ""
         self.note = ""
         self.userIds = []
+        self.isExpired = false
     }
 }
