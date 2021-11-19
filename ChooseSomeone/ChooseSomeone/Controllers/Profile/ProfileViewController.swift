@@ -10,9 +10,9 @@ import Firebase
 
 enum ActionSheet: String{
     
-    case camera = "Camera"
-    case library = "Library"
-    case cancel = "Cancel"
+    case camera = "相機"
+    case library = "圖庫"
+    case cancel = "取消"
 }
 
 class ProfileViewController: UIViewController {
@@ -217,7 +217,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         
         imagePickerController.allowsEditing = true
         
-        let actionSheet = UIAlertController(title: "Profile Photo", message: "Please choose a file", preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(title: "選擇照片來源", message: nil, preferredStyle: .actionSheet)
         
         actionSheet.addAction(UIAlertAction(title: ActionSheet.camera.rawValue, style: .default, handler:{ (UIAlertAction) in
             
