@@ -62,10 +62,18 @@ class GroupInfoCell: UITableViewCell {
                 chevronView.isHidden = false
             }
         }
-        if group.isExpired {
-            viewOfCell.backgroundColor = .systemGray5
+        
+        if group.isExpired == true  {
+            
+            isOverLabel.isHidden = false
+            viewOfCell.backgroundColor = .systemGray4
+            
         } else {
+            
             isOverLabel.isHidden = true
+            viewOfCell.backgroundColor = .white
+
+           
         }
     }
     

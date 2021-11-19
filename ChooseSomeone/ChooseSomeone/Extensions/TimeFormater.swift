@@ -41,8 +41,10 @@ extension Timestamp {
         if localTime.seconds > self.seconds {
             
             return true
-        }
+            
+        } else {
         
         return false
     }
+}
 }

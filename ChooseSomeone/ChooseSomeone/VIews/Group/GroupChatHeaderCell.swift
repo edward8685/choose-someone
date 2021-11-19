@@ -130,7 +130,7 @@ class GroupChatHeaderCell: UITableViewCell {
         
         note.text = group.note
         
-        if group.isExpired {
+        if group.isExpired == true {
             
             requestButton.isHidden = true
         }

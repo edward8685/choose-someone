@@ -362,6 +362,9 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="lkCornerRadius">
                                         <real key="value" value="40"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </scrollView>
                         </subviews>

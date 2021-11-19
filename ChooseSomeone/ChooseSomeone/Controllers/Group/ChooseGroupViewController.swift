@@ -10,21 +10,22 @@ import Firebase
 import MJRefresh
 import MASegmentedControl
 import FirebaseAuth
+import FirebaseFirestore
 
 class ChooseGroupViewController: BaseViewController {
     
     private var userInfo = UserManager.shared.userInfo
-    
-    private lazy var groups = [Group]() {
-        
-        didSet {
-            myGroups = groups.filter { $0.userIds.contains(userInfo.uid) }
-        }
-    }
-    
+
     var headerView: GroupHeaderCell?
     
-    private lazy var myGroups = [Group]()
+    private lazy var inActiveGroups = [Group]()
+    
+    private lazy var myGroups = [Group]() {
+        
+        didSet {
+        updateUserHistory()
+        }
+    }
     
     private lazy var requests = [Request]() {
         
@@ -101,6 +102,46 @@ class ChooseGroupViewController: BaseViewController {
     }
     
     // MARK: - Action
+    func manageMyGroup(groups: [Group]) {
+        
+        var expiredGroup = [Group]()
+        var unexpiredGroup = [Group]()
+        
+        for group in groups {
+            
+            if group.isExpired == true {
+                
+                expiredGroup.append(group)
+                
+            } else {
+                
+                unexpiredGroup.append(group)
+            }
+        }
+        expiredGroup.sort { $0.date.seconds < $1.date.seconds }
+        
+        unexpiredGroup.sort { $0.date.seconds < $1.date.seconds }
+        
+        myGroups =  unexpiredGroup + expiredGroup
+    }
+    
+    func updateUserHistory() {
+        
+        var numOfGroups = 0
+        
+        var numOfPartners = 0
+        
+        myGroups.forEach { group in
+            
+            if group.isExpired == true {
+                
+                numOfGroups += 1
+                
+                numOfPartners += (group.userIds.count - 1)
+            }
+        }
+        UserManager.shared.updateUserGroupRecords(numOfGroups: numOfGroups, numOfPartners: numOfPartners)
+    }
     
     func checkRequestsNum() {
         
@@ -164,9 +205,13 @@ class ChooseGroupViewController: BaseViewController {
                     filtedGroups.append(group)
                 }
                 
-                self.groups = filtedGroups
+                self.myGroups = filtedGroups.filter { $0.userIds.contains(self.userInfo.uid) }
                 
-                self.groups.forEach { group in
+                self.inActiveGroups = filtedGroups.filter { $0.isExpired == false }
+                
+                self.manageMyGroup(groups: self.myGroups)
+                
+                filtedGroups.forEach { group in
                     
                     guard self.cache[group.hostId] != nil else {
                         
@@ -175,6 +220,7 @@ class ChooseGroupViewController: BaseViewController {
                         return
                     }
                 }
+
                 
             case .failure(let error):
                 
@@ -367,7 +413,7 @@ extension ChooseGroupViewController: UITableViewDelegate {
                 
             } else {
                 
-                performSegue(withIdentifier: "toGroupChatVC", sender: groups[indexPath.row])
+                performSegue(withIdentifier: "toGroupChatVC", sender: inActiveGroups[indexPath.row])
             }
         }
     }
@@ -375,7 +421,25 @@ extension ChooseGroupViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         
         let index = indexPath.row
-        let userId = groups[index].hostId
+        
+        var userId = ""
+        
+        if searching {
+            
+            userId = searchGroups[index].hostId
+            
+        } else {
+            
+            if onlyUserGroup {
+
+                userId = myGroups[index].hostId
+                
+            } else {
+                
+                userId = inActiveGroups[index].hostId
+            }
+        }
+        
         let identifier = "\(index)" as NSString
         
         if userId != self.userInfo.uid {
@@ -418,7 +482,7 @@ extension ChooseGroupViewController: UITableViewDataSource {
                 
             } else {
                 
-                return groups.count
+                return inActiveGroups.count
             }
         }
     }
@@ -443,7 +507,7 @@ extension ChooseGroupViewController: UITableViewDataSource {
                 
             } else {
                 
-                let group = groups[indexPath.row]
+                let group = inActiveGroups[indexPath.row]
                 
                 cell.setUpCell(group: group, hostname: cache[group.hostId]?.userName ?? "使用者")
             }
@@ -461,7 +525,7 @@ extension ChooseGroupViewController: UISearchBarDelegate {
             searchGroups = myGroups.filter {
                 $0.trailName.lowercased().prefix(searchText.count) == searchText.lowercased() }
         } else {
-            searchGroups = groups.filter {
+            searchGroups = inActiveGroups.filter {
                 $0.trailName.lowercased().prefix(searchText.count) == searchText.lowercased() }
         }
         

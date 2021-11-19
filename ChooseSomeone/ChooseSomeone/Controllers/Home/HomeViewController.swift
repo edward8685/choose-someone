@@ -13,17 +13,9 @@ class HomeViewController: BaseViewController {
     
     private var userInfo = UserManager.shared.userInfo
     
-    private let themes = ["愜意的走", "想流點汗", "百岳挑戰"]
-    
-    private let images = [UIImage.asset(.scene_1),
-                          UIImage.asset(.scene_2),
-                          UIImage.asset(.scene_3)]
-    
     var startValue: Double = 0.0
     
     var isHeaderViewCreated: Bool = false
-    
-    lazy var endValue = UserManager.shared.userInfo.totalLength
     
     private var trails = [Trail]() {
         
@@ -65,21 +57,20 @@ class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         navigationController?.isNavigationBarHidden = true
-        
     }
     
     @objc func updateUserInfo(notification: Notification) {
-            
+        
         if let userInfo = notification.userInfo as? [String: UserInfo] {
             
             if let userInfo = userInfo[self.userInfo.uid] {
                 self.userInfo = userInfo
             }
-
+            
             self.headerView?.updateUserInfo(user: self.userInfo)
-  
+            
         }
-            self.tableView.reloadData()
+        self.tableView.reloadData()
     }
     
     func setUpTableView() {
@@ -93,7 +84,7 @@ class HomeViewController: BaseViewController {
         tableView.backgroundColor = .clear
         
         tableView.separatorStyle = .none
-    
+        
     }
     
     func fetchTrailData() {
@@ -144,15 +135,10 @@ extension HomeViewController: UITableViewDelegate {
         
         self.headerView = headerView
         
-//        if isHeaderViewCreated == false {
-        
         headerView.updateUserInfo(user: userInfo)
-            
-//        }
         
         let displayLink = CADisplayLink(target: self, selector: #selector(handleUpdate))
         
-//        headerView.totalKilos
         
         isHeaderViewCreated = true
         
@@ -161,13 +147,13 @@ extension HomeViewController: UITableViewDelegate {
     
     @objc func handleUpdate() {
         
-        self.headerView?.totalKilos.text = "\(startValue)"
-        
-        startValue += 0.1
-        
-        if startValue > endValue {
-            startValue = endValue
-    }
+        //        self.headerView?.totalKilos.text = "\(startValue)"
+        //
+        //        startValue += 0.1
+        //
+        //        if startValue > endValue {
+        //            startValue = endValue
+        //    }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -190,7 +176,6 @@ extension HomeViewController: UITableViewDelegate {
             
             return
         }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -201,8 +186,6 @@ extension HomeViewController: UITableViewDelegate {
                     
                     trailListVC.trails = trails
                 }
-                
-                trailListVC.themes = themes
             }
         }
     }
@@ -211,7 +194,7 @@ extension HomeViewController: UITableViewDelegate {
 extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        themes.count
+        TrailThemes.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -220,12 +203,12 @@ extension HomeViewController: UITableViewDataSource {
                 
         else {fatalError("Could not create Cell")}
         
-        cell.setUpCell(theme: themes[indexPath.row], image: images[indexPath.row])
+        cell.setUpCell(theme: TrailThemes.allCases[indexPath.row].rawValue, image: TrailThemes.allCases[indexPath.row].image)
         
         if indexPath.row % 2 == 1 {
             cell.themeLabel.textColor = .black
         }
-
+        
         return cell
     }
 }

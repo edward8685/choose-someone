@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		471C164F4EB6DE16AC7F7423 /* Pods_ChooseSomeone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED384022C302A500A96722DB /* Pods_ChooseSomeone.framework */; };
 		7406D9302740D242003FBFD6 /* UIImageExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7406D92F2740D242003FBFD6 /* UIImageExtenstion.swift */; };
+		740A93F62747822E00DE9A76 /* TrailTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740A93F52747822E00DE9A76 /* TrailTheme.swift */; };
 		740B1B822723F41D00A1CD3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740B1B812723F41D00A1CD3B /* Main.storyboard */; };
 		740B1B842723FECC00A1CD3B /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740B1B832723FECB00A1CD3B /* Home.storyboard */; };
 		740B1B862723FF2500A1CD3B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740B1B852723FF2500A1CD3B /* HomeViewController.swift */; };
@@ -114,6 +115,7 @@
 /* Begin PBXFileReference section */
 		715A0A3D1C233AFC5A6955E0 /* Pods-ChooseSomeone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChooseSomeone.release.xcconfig"; path = "Target Support Files/Pods-ChooseSomeone/Pods-ChooseSomeone.release.xcconfig"; sourceTree = "<group>"; };
 		7406D92F2740D242003FBFD6 /* UIImageExtenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtenstion.swift; sourceTree = "<group>"; };
+		740A93F52747822E00DE9A76 /* TrailTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailTheme.swift; sourceTree = "<group>"; };
 		740B1B812723F41D00A1CD3B /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		740B1B832723FECB00A1CD3B /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		740B1B852723FF2500A1CD3B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 			children = (
 				745A6F0F272E8A62006064C4 /* GPX */,
 				74608D40271E97DC002BD125 /* Trail.swift */,
+				740A93F52747822E00DE9A76 /* TrailTheme.swift */,
 				748EF101273BAC8E00B97EE0 /* GroupStatus.swift */,
 				74608D42271E9C67002BD125 /* Group.swift */,
 				7457A1CF271EECEF00A947AE /* Message.swift */,
@@ -728,6 +731,7 @@
 				74608D43271E9C67002BD125 /* Group.swift in Sources */,
 				74E5736327279A2800F490BF /* JourneyViewController.swift in Sources */,
 				7457A1D0271EECEF00A947AE /* Message.swift in Sources */,
+				740A93F62747822E00DE9A76 /* TrailTheme.swift in Sources */,
 				74E5737F2728E92500F490BF /* GPXSession.swift in Sources */,
 				74608D25271D20B0002BD125 /* GroupHeaderCell.swift in Sources */,
 				74377466273962DD006AA44E /* ShadowTextfield.swift in Sources */,

@@ -18,12 +18,7 @@ class TrailListViewController: BaseViewController {
             collectionView.delegate = self
         }
     }
-    
-    var themes = ["", "", ""] {
-        didSet{
-            setUpLabel()
-        }
-    }
+
     private var themeLabel = ""
     private var dataSource: DataSource!
     private var snapshot = DataSourceSnapshot()
@@ -32,7 +27,11 @@ class TrailListViewController: BaseViewController {
         case section
     }
     
-    var trails = [Trail]()
+    var trails = [Trail]() {
+        didSet {
+        setUpLabel()
+        }
+    }
     
     override func viewDidLoad() {
         
@@ -92,15 +91,15 @@ class TrailListViewController: BaseViewController {
                 
             case 1:
                 
-                themeLabel = themes[0]
+                themeLabel = TrailThemes.easy.rawValue
                 
             case 2...3:
                 
-                themeLabel = themes[1]
+                themeLabel = TrailThemes.medium.rawValue
                 
             case 4...5:
                 
-                themeLabel = themes[2]
+                themeLabel = TrailThemes.hard.rawValue
                 
             default:
                 

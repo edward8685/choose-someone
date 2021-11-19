@@ -24,9 +24,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="569" height="156"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cdk-ME-c3N">
+                    <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cdk-ME-c3N">
                         <rect key="frame" x="10" y="10" width="549" height="136"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemGray4Color"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="lkCornerRadius">
                                 <real key="value" value="10"/>
@@ -49,8 +49,8 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="揪團已結束" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4rr-48-KGk">
-                        <rect key="frame" x="146.5" y="20.5" width="80" height="23.5"/>
-                        <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="16"/>
+                        <rect key="frame" x="428" y="22" width="70" height="20.5"/>
+                        <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="14"/>
                         <color key="textColor" name="U3"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -166,7 +166,7 @@
                         </constraints>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="badge" translatesAutoresizingMaskIntoConstraints="NO" id="2mf-4B-nnL">
-                        <rect key="frame" x="497" y="5" width="36" height="43"/>
+                        <rect key="frame" x="508" y="5" width="36" height="43"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="43" id="NRZ-9h-kyA"/>
                             <constraint firstAttribute="width" constant="36" id="h9h-zy-cqC"/>
@@ -181,18 +181,18 @@
                     <constraint firstItem="3ab-ou-FXT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="5za-K2-Pef"/>
                     <constraint firstItem="4rr-48-KGk" firstAttribute="centerY" secondItem="LEe-rr-Mk7" secondAttribute="centerY" id="63V-df-pKi"/>
                     <constraint firstItem="IFX-00-YVL" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="B1S-TM-FAj"/>
-                    <constraint firstAttribute="trailing" secondItem="2mf-4B-nnL" secondAttribute="trailing" constant="36" id="DOe-3h-vh6"/>
+                    <constraint firstAttribute="trailing" secondItem="2mf-4B-nnL" secondAttribute="trailing" constant="25" id="DOe-3h-vh6"/>
                     <constraint firstItem="LEe-rr-Mk7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="Dsk-qS-ibD"/>
                     <constraint firstItem="2mf-4B-nnL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="V4o-ta-m5M"/>
                     <constraint firstAttribute="trailing" secondItem="Cdk-ME-c3N" secondAttribute="trailing" constant="10" id="aNK-sJ-7CT"/>
                     <constraint firstItem="Cdk-ME-c3N" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="cNl-3z-Sct"/>
                     <constraint firstItem="3ab-ou-FXT" firstAttribute="top" secondItem="LEe-rr-Mk7" secondAttribute="bottom" constant="5" id="dE1-hP-ps2"/>
-                    <constraint firstItem="4rr-48-KGk" firstAttribute="leading" secondItem="LEe-rr-Mk7" secondAttribute="trailing" constant="8" id="ebe-wv-NYn"/>
                     <constraint firstAttribute="trailing" secondItem="3ab-ou-FXT" secondAttribute="trailing" constant="25" id="hIP-3w-Qjx"/>
                     <constraint firstAttribute="bottom" secondItem="tLq-UF-4vv" secondAttribute="bottom" constant="20" id="mcm-kp-pRl"/>
                     <constraint firstAttribute="bottom" secondItem="b6x-ZZ-rbT" secondAttribute="bottom" constant="20" id="oWH-nO-WPK"/>
                     <constraint firstItem="LEe-rr-Mk7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="qPJ-Ks-CG7"/>
                     <constraint firstAttribute="trailing" secondItem="IFX-00-YVL" secondAttribute="trailing" constant="30" id="qZL-fj-JoR"/>
+                    <constraint firstItem="2mf-4B-nnL" firstAttribute="leading" secondItem="4rr-48-KGk" secondAttribute="trailing" constant="10" id="qzc-e2-osN"/>
                     <constraint firstItem="HfP-KF-fWz" firstAttribute="centerX" secondItem="Cdk-ME-c3N" secondAttribute="centerX" id="rOj-3c-SNS"/>
                     <constraint firstItem="Cdk-ME-c3N" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="tV4-ET-4Vb"/>
                 </constraints>
@@ -224,6 +224,9 @@
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

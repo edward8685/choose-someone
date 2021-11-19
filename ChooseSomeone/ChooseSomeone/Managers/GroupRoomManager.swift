@@ -98,23 +98,17 @@ class GroupRoomManager {
                 
                 var groups = [Group]()
                 
-                var numOfGroups = 0
-                
-                var numOfPartners = 0
-                
                 for document in querySnapshot.documents {
                     
                     do {
                         
                         if var group = try document.data(as: Group.self, decoder: Firestore.Decoder()) {
                             
-                            group.isExpired = group.date.checkIsExpired()
-                            
-                            if group.isExpired {
+                            if group.date.checkIsExpired() {
                                 
-                                numOfGroups += 1
-                                
-                                numOfPartners += (group.userIds.count - 1)
+                                group.isExpired = true
+                            } else {
+                                group.isExpired = false
                             }
                                 
                             groups.append(group)
@@ -125,10 +119,8 @@ class GroupRoomManager {
                         completion(.failure(error))
                     }
                 }
-                UserManager.shared.updateUserGroupRecords(numOfGroups: numOfGroups, numOfPartners: numOfPartners)
-                
+
                 completion(.success(groups))
-                
             }
         }
     }
