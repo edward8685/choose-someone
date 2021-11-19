@@ -15,7 +15,7 @@ import FirebaseFirestore
 class ChooseGroupViewController: BaseViewController {
     
     private var userInfo = UserManager.shared.userInfo
-
+    
     var headerView: GroupHeaderCell?
     
     private lazy var inActiveGroups = [Group]()
@@ -23,7 +23,7 @@ class ChooseGroupViewController: BaseViewController {
     private lazy var myGroups = [Group]() {
         
         didSet {
-        updateUserHistory()
+            updateUserHistory()
         }
     }
     
@@ -72,6 +72,8 @@ class ChooseGroupViewController: BaseViewController {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateUserInfo), name: NSNotification.userInfoDidChanged, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(changeSearchText), name: NSNotification.checkGroupDidTaped, object: nil)
         
         self.view.applyGradient(colors: [.B2, .B6], locations: [0.0, 1.0], direction: .leftSkewed)
         
@@ -125,6 +127,24 @@ class ChooseGroupViewController: BaseViewController {
         myGroups =  unexpiredGroup + expiredGroup
     }
     
+    @objc func changeSearchText(notification: Notification) {
+        
+        inActiveGroups.removeAll()
+        myGroups.removeAll()
+        
+        if let trailName = notification.userInfo as? [String: String] {
+            
+            if let trailName = trailName["trailName"] {
+                
+                fetchGroupData()
+                self.searchText = trailName
+                self.searching = true
+                headerView?.groupSearchBar.text = trailName
+            }
+        }
+        tableView.reloadData()
+    }
+    
     func updateUserHistory() {
         
         var numOfGroups = 0
@@ -164,7 +184,7 @@ class ChooseGroupViewController: BaseViewController {
     }
     
     @objc func updateUserInfo(notification: Notification) {
-            
+        
         if let userInfo = notification.userInfo as? [String: UserInfo] {
             
             if let userInfo = userInfo[self.userInfo.uid] {
@@ -220,7 +240,6 @@ class ChooseGroupViewController: BaseViewController {
                         return
                     }
                 }
-
                 
             case .failure(let error):
                 
@@ -245,7 +264,6 @@ class ChooseGroupViewController: BaseViewController {
                 }
                 
                 self.requests = filtedRequests
-                self.tableView.reloadData()
                 
             case .failure(let error):
                 
@@ -314,6 +332,7 @@ class ChooseGroupViewController: BaseViewController {
         headerView.textSegmentedControl.addTarget(self, action: #selector(segmentValueChanged(_:)), for: .valueChanged)
         
         headerView.groupSearchBar.delegate = self
+        headerView.groupSearchBar.searchTextField.text = searchText
         
     }
     
@@ -390,6 +409,18 @@ class ChooseGroupViewController: BaseViewController {
 
 extension ChooseGroupViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        cell.alpha = 0
+        
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0.03 * Double(indexPath.row),
+            animations: {
+                cell.alpha = 1
+            })
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension
     }
@@ -431,7 +462,7 @@ extension ChooseGroupViewController: UITableViewDelegate {
         } else {
             
             if onlyUserGroup {
-
+                
                 userId = myGroups[index].hostId
                 
             } else {
@@ -532,9 +563,12 @@ extension ChooseGroupViewController: UISearchBarDelegate {
         searching = true
         
         tableView.reloadData()
+        
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        
+        searching = false
         
         resignFirstResponder()
     }

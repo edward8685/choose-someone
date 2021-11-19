@@ -85,6 +85,8 @@ extension Notification.Name {
     static let userInfoDidChanged = Notification.Name("userInfoDidChanged")
     
     static let requestNumDidChanged = Notification.Name("requestNumDidChanged")
+    
+    static let checkGroupDidTaped = Notification.Name("checkGroupDidTaped")
 }
 
 extension NSNotification {
@@ -92,4 +94,6 @@ extension NSNotification {
     public static let userInfoDidChanged = Notification.Name.userInfoDidChanged
     
     public static let requestNumDidChanged = Notification.Name.requestNumDidChanged
+    
+    public static let checkGroupDidTaped = Notification.Name.checkGroupDidTaped
 }

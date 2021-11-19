@@ -222,11 +222,7 @@ extension TrailListViewController {
     @objc func toGroupPage(_ sender: UIButton) {
                 self.tabBarController?.selectedIndex = 1
         
-        guard let groupVC = UIStoryboard.group.instantiateViewController(identifier: ChooseGroupViewController.identifier) as? ChooseGroupViewController else { return }
-        
-        groupVC.searchText = trails[sender.tag].trailName
-        groupVC.headerView?.groupSearchBar.searchTextField.text = trails[sender.tag].trailName
-    
+        NotificationCenter.default.post(name: NSNotification.checkGroupDidTaped, object: nil, userInfo: ["trailName": self.trails[sender.tag].trailName] )
     }
     
     func configureSnapshot() {
