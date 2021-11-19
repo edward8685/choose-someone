@@ -226,7 +226,7 @@ extension TrailListViewController {
         guard let groupVC = UIStoryboard.group.instantiateViewController(identifier: ChooseGroupViewController.identifier) as? ChooseGroupViewController else { return }
         
         groupVC.searchText = trails[sender.tag].trailName
-        groupVC.headerView?.groupSearchBar.text = trails[sender.tag].trailName
+        groupVC.headerView?.groupSearchBar.searchTextField.text = trails[sender.tag].trailName
     
     }
     

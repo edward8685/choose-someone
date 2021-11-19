@@ -26,7 +26,6 @@ class TrialInfoView: UIView {
     
     @IBOutlet weak var dimmingView: UIView!
     
-    
     func setUpLayout(trail: Trail) {
         
         trailName.text = trail.trailName

@@ -61,7 +61,7 @@ class BaseViewController: UIViewController {
     
     func showBlockAlertAction(uid: String) {
         
-        let controller = UIAlertController(title: "封鎖該用戶", message: "將看不到該使用者的訊息及揪團", preferredStyle: .alert)
+        let controller = UIAlertController(title: "封鎖用戶", message: "您將無法看見該用戶的訊息及揪團", preferredStyle: .alert)
         
         let cancelAction = UIAlertAction(title: "取消", style: .cancel)
         

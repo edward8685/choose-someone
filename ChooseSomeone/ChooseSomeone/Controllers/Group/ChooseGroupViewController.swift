@@ -78,6 +78,8 @@ class ChooseGroupViewController: BaseViewController {
         
         tableView.registerCellWithNib(identifier: GroupInfoCell.identifier, bundle: nil)
         
+        fetchGroupData()
+        
         setUpHeaderView()
         
         setUpTableView()
@@ -92,8 +94,6 @@ class ChooseGroupViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-//        fetchGroupData()
         
         navigationController?.isNavigationBarHidden = true
         

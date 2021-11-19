@@ -121,6 +121,11 @@ class GroupChatHeaderCell: UITableViewCell {
         
         note.text = group.note
         
+        if group.isExpired {
+            
+            requestButton.isHidden = true
+        }
+        
         switch userStatus {
             
         case .ishost:
@@ -218,7 +223,7 @@ class GroupChatHeaderCell: UITableViewCell {
     }
 }
 
-extension GroupChatHeaderCell: UITextFieldDelegate,UITextViewDelegate {
+extension GroupChatHeaderCell: UITextFieldDelegate, UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         

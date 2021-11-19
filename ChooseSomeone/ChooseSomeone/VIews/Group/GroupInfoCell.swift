@@ -63,7 +63,7 @@ class GroupInfoCell: UITableViewCell {
             }
         }
         if group.isExpired {
-            viewOfCell.backgroundColor = .systemGray
+            viewOfCell.backgroundColor = .systemGray5
         } else {
             isOverLabel.isHidden = true
         }
