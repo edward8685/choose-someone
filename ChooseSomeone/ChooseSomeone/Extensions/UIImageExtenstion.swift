@@ -25,6 +25,7 @@ enum ImageAsset: String {
     case Icon_notice
     
     case badge
+    case choose
     case block
     case mountain
     case placeholder

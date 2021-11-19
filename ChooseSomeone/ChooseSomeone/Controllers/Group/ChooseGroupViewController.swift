@@ -10,40 +10,28 @@ import Firebase
 import MJRefresh
 import MASegmentedControl
 import FirebaseAuth
+import FirebaseFirestore
 
 class ChooseGroupViewController: BaseViewController {
     
-    private var userId = UserManager.shared.userInfo.uid
-    
     private var userInfo = UserManager.shared.userInfo
     
-    private lazy var groups = [Group]() {
+    var headerView: GroupHeaderCell?
+    
+    private lazy var inActiveGroups = [Group]()
+    
+    private lazy var myGroups = [Group]() {
         
         didSet {
-            myGroups = groups.filter { $0.userIds.contains(userId) }
-            
-            tableView.reloadData()
+            updateUserHistory()
         }
     }
-    
-    private var headerView: GroupHeaderCell?
-    
-    private lazy var myGroups = [Group]()
     
     private lazy var requests = [Request]() {
         
         didSet {
             
-            guard let headerView = headerView else { return }
-            
-            if requests.count == 0 {
-                
-                headerView.badgeView.isHidden = true
-                
-            } else {
-                
-                headerView.badgeView.isHidden = false
-            }
+            checkRequestsNum()
         }
     }
     
@@ -58,7 +46,6 @@ class ChooseGroupViewController: BaseViewController {
     var searchText: String = "" {
         
         didSet {
-            
             searching = true
         }
     }
@@ -66,6 +53,7 @@ class ChooseGroupViewController: BaseViewController {
     let header = MJRefreshNormalHeader()
     
     private var tableView: UITableView! {
+        
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
@@ -83,13 +71,17 @@ class ChooseGroupViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        fetchGroupData()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUserInfo), name: NSNotification.userInfoDidChanged, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(changeSearchText), name: NSNotification.checkGroupDidTaped, object: nil)
         
         self.view.applyGradient(colors: [.B2, .B6], locations: [0.0, 1.0], direction: .leftSkewed)
         
         tableView = UITableView()
         
         tableView.registerCellWithNib(identifier: GroupInfoCell.identifier, bundle: nil)
+        
+        fetchGroupData()
         
         setUpHeaderView()
         
@@ -100,22 +92,106 @@ class ChooseGroupViewController: BaseViewController {
         addRequestListener()
         
         header.setRefreshingTarget(self, refreshingAction: #selector(self.headerRefresh))
+        
         self.tableView.mj_header = header
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
-        fetchGroupData()
-        
-        self.tabBarController?.selectedIndex = 1
-        
         navigationController?.isNavigationBarHidden = true
         
         self.tabBarController?.tabBar.isHidden = false
-        
     }
     
     // MARK: - Action
+    func manageMyGroup(groups: [Group]) {
+        
+        var expiredGroup = [Group]()
+        var unexpiredGroup = [Group]()
+        
+        for group in groups {
+            
+            if group.isExpired == true {
+                
+                expiredGroup.append(group)
+                
+            } else {
+                
+                unexpiredGroup.append(group)
+            }
+        }
+        expiredGroup.sort { $0.date.seconds < $1.date.seconds }
+        
+        unexpiredGroup.sort { $0.date.seconds < $1.date.seconds }
+        
+        myGroups =  unexpiredGroup + expiredGroup
+    }
+    
+    @objc func changeSearchText(notification: Notification) {
+        
+        inActiveGroups.removeAll()
+        myGroups.removeAll()
+        
+        if let trailName = notification.userInfo as? [String: String] {
+            
+            if let trailName = trailName["trailName"] {
+                
+                fetchGroupData()
+                self.searchText = trailName
+                self.searching = true
+                headerView?.groupSearchBar.text = trailName
+            }
+        }
+        tableView.reloadData()
+    }
+    
+    func updateUserHistory() {
+        
+        var numOfGroups = 0
+        
+        var numOfPartners = 0
+        
+        myGroups.forEach { group in
+            
+            if group.isExpired == true {
+                
+                numOfGroups += 1
+                
+                numOfPartners += (group.userIds.count - 1)
+            }
+        }
+        UserManager.shared.updateUserGroupRecords(numOfGroups: numOfGroups, numOfPartners: numOfPartners)
+    }
+    
+    func checkRequestsNum() {
+        
+        guard let headerView = headerView else { return }
+        
+        if requests.count == 0 {
+            
+            headerView.badgeView.isHidden = true
+            
+        } else {
+            
+            headerView.badgeView.isHidden = false
+        }
+        
+    }
+    
+    @objc func checkRequestList(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: "toRequestList", sender: requests)
+    }
+    
+    @objc func updateUserInfo(notification: Notification) {
+        
+        if let userInfo = notification.userInfo as? [String: UserInfo] {
+            
+            if let userInfo = userInfo[self.userInfo.uid] {
+                self.userInfo = userInfo
+            }
+        }
+    }
     
     func fetchUserData(uid: String) {
         
@@ -149,19 +225,17 @@ class ChooseGroupViewController: BaseViewController {
                     filtedGroups.append(group)
                 }
                 
-                self.groups = filtedGroups
+                self.myGroups = filtedGroups.filter { $0.userIds.contains(self.userInfo.uid) }
                 
-                var num = 0
+                self.inActiveGroups = filtedGroups.filter { $0.isExpired == false }
                 
-                self.groups.forEach { group in
+                self.manageMyGroup(groups: self.myGroups)
+                
+                filtedGroups.forEach { group in
                     
                     guard self.cache[group.hostId] != nil else {
                         
                         self.fetchUserData(uid: group.hostId)
-                        
-                        num += 1
-                        
-                        print("=============\(num)================")
                         
                         return
                     }
@@ -190,7 +264,6 @@ class ChooseGroupViewController: BaseViewController {
                 }
                 
                 self.requests = filtedRequests
-                self.tableView.reloadData()
                 
             case .failure(let error):
                 
@@ -214,6 +287,8 @@ class ChooseGroupViewController: BaseViewController {
         
         tableView.backgroundColor = .clear
         
+        tableView.separatorStyle = .none
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -226,9 +301,6 @@ class ChooseGroupViewController: BaseViewController {
             
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        
-        tableView.separatorStyle = .none
-        
     }
     
     func setUpHeaderView() {
@@ -237,6 +309,8 @@ class ChooseGroupViewController: BaseViewController {
         else {fatalError("Could not create HeaderView")}
         
         self.headerView = headerView
+        
+        headerView.groupSearchBar.searchTextField.text = searchText
         
         view.addSubview(headerView)
         
@@ -258,6 +332,7 @@ class ChooseGroupViewController: BaseViewController {
         headerView.textSegmentedControl.addTarget(self, action: #selector(segmentValueChanged(_:)), for: .valueChanged)
         
         headerView.groupSearchBar.delegate = self
+        headerView.groupSearchBar.searchTextField.text = searchText
         
     }
     
@@ -274,11 +349,6 @@ class ChooseGroupViewController: BaseViewController {
             return
         }
         tableView.reloadData()
-    }
-    
-    @objc func checkRequestList(_ sender: UIButton) {
-        
-        performSegue(withIdentifier: "toRequestList", sender: requests)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -316,9 +386,9 @@ class ChooseGroupViewController: BaseViewController {
         
         buildTeamButton.frame = CGRect(x: width * 0.8, y: height * 0.8, width: width * 0.18, height: width * 0.18)
         
-        let plusImage = UIImage(named: "choose_button")
+        let image = UIImage.asset(.choose)
         
-        buildTeamButton.setImage(plusImage, for: .normal)
+        buildTeamButton.setImage(image, for: .normal)
         
         buildTeamButton.tintColor = .white
         
@@ -338,6 +408,18 @@ class ChooseGroupViewController: BaseViewController {
 }
 
 extension ChooseGroupViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        cell.alpha = 0
+        
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0.03 * Double(indexPath.row),
+            animations: {
+                cell.alpha = 1
+            })
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         UITableView.automaticDimension
@@ -362,7 +444,7 @@ extension ChooseGroupViewController: UITableViewDelegate {
                 
             } else {
                 
-                performSegue(withIdentifier: "toGroupChatVC", sender: groups[indexPath.row])
+                performSegue(withIdentifier: "toGroupChatVC", sender: inActiveGroups[indexPath.row])
             }
         }
     }
@@ -370,10 +452,28 @@ extension ChooseGroupViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         
         let index = indexPath.row
-        let userId = groups[index].hostId
+        
+        var userId = ""
+        
+        if searching {
+            
+            userId = searchGroups[index].hostId
+            
+        } else {
+            
+            if onlyUserGroup {
+                
+                userId = myGroups[index].hostId
+                
+            } else {
+                
+                userId = inActiveGroups[index].hostId
+            }
+        }
+        
         let identifier = "\(index)" as NSString
         
-        if userId != self.userId {
+        if userId != self.userInfo.uid {
             
             return UIContextMenuConfiguration(
                 identifier: identifier, previewProvider: nil) { _ in
@@ -413,7 +513,7 @@ extension ChooseGroupViewController: UITableViewDataSource {
                 
             } else {
                 
-                return groups.count
+                return inActiveGroups.count
             }
         }
     }
@@ -438,7 +538,7 @@ extension ChooseGroupViewController: UITableViewDataSource {
                 
             } else {
                 
-                let group = groups[indexPath.row]
+                let group = inActiveGroups[indexPath.row]
                 
                 cell.setUpCell(group: group, hostname: cache[group.hostId]?.userName ?? "使用者")
             }
@@ -456,16 +556,19 @@ extension ChooseGroupViewController: UISearchBarDelegate {
             searchGroups = myGroups.filter {
                 $0.trailName.lowercased().prefix(searchText.count) == searchText.lowercased() }
         } else {
-            searchGroups = groups.filter {
+            searchGroups = inActiveGroups.filter {
                 $0.trailName.lowercased().prefix(searchText.count) == searchText.lowercased() }
         }
         
         searching = true
         
         tableView.reloadData()
+        
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        
+        searching = false
         
         resignFirstResponder()
     }

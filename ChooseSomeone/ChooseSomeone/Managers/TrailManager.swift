@@ -9,7 +9,6 @@ import Foundation
 import FirebaseFirestore
 import FirebaseStorage
 import FirebaseFirestoreSwift
-import SwiftUI
 
 class TrailManager {
     

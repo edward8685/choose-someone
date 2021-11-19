@@ -89,13 +89,10 @@ class GroupChatCell: UITableViewCell {
         
         self.backgroundColor = .clear
         
-        userMessage.layer.cornerRadius = 5
+        userMessage.roundCornersWhithoutRightTop(cornerRadius: 8)
         
-        userMessage.layer.masksToBounds = true
+        memberMessage.roundCornersWhithoutLeftTop(cornerRadius: 8)
         
-        memberMessage.layer.cornerRadius = 5
-        
-        memberMessage.layer.masksToBounds = true
     }
     
     override func layoutSubviews() {

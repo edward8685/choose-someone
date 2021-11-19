@@ -17,7 +17,7 @@ class UserManager {
     
     var userInfo = UserInfo() {
         didSet {
-            NotificationCenter.default.post(name: NSNotification.userInfoDidChanged, object: nil,userInfo: [userId : [userInfo]] )
+            NotificationCenter.default.post(name: NSNotification.userInfoDidChanged, object: nil, userInfo: [userId: userInfo] )
         }
     }
     
@@ -132,6 +132,8 @@ class UserManager {
     
     func updateUserName(name: String) {
         
+        userInfo.userName = name
+        
         let userId = userInfo.uid
 
         let post = [UserInfo.CodingKeys.userName.rawValue: name]
@@ -151,7 +153,35 @@ class UserManager {
         }
     }
     
+    func updateUserGroupRecords(numOfGroups:Int, numOfPartners:Int) {
+        
+        userInfo.totalGroups = numOfGroups
+        userInfo.totalFriends = numOfPartners
+        
+        let userId = userInfo.uid
+
+        let post = [UserInfo.CodingKeys.totalGroups.rawValue: numOfGroups,
+                    UserInfo.CodingKeys.totalFriends.rawValue: numOfPartners
+        ]
+        
+        let docRef = dataBase.collection("Users").document(userId)
+        
+        docRef.updateData(post) { error in
+            
+            if let error = error {
+                
+                print("Error updating document: \(error)")
+                
+            } else {
+                
+                print("User name successfully updated")
+            }
+        }
+    }
+    
     func blockUser(blockUserId: String) {
+        
+        userInfo.blockList?.append(blockUserId)
         
         let userId = userInfo.uid
         

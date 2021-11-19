@@ -12,8 +12,6 @@ import FirebaseAuth
 
 class ChatRoomViewController: BaseViewController {
     
-    private let userId = UserManager.shared.userId
-    
     private var userInfo = UserManager.shared.userInfo
     
     var groupInfo: Group?
@@ -42,8 +40,6 @@ class ChatRoomViewController: BaseViewController {
             tableView.reloadData()
         }
     }
-    
-    private var newMessage = Message()
     
     var cache = [String: UserInfo]()
     
@@ -84,8 +80,9 @@ class ChatRoomViewController: BaseViewController {
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUserInfo), name: NSNotification.userInfoDidChanged, object: nil)
         
         checkUserStatus()
         
@@ -121,6 +118,16 @@ class ChatRoomViewController: BaseViewController {
     
     // MARK: - Action
     
+    @objc func updateUserInfo(notification: Notification) {
+            
+        if let userInfo = notification.userInfo as? [String: UserInfo] {
+            
+            if let userInfo = userInfo[self.userInfo.uid] {
+                self.userInfo = userInfo
+            }
+        }
+    }
+    
     func setUpStatusBarView() {
         
         let statusBarFrame = UIApplication.shared.statusBarFrame
@@ -136,7 +143,7 @@ class ChatRoomViewController: BaseViewController {
         
         guard let groupInfo = groupInfo else { return }
         
-        if groupInfo.hostId == userId {
+        if groupInfo.hostId == userInfo.uid {
             
             userStatus = .ishost
             
@@ -144,10 +151,8 @@ class ChatRoomViewController: BaseViewController {
             
         } else {
             
-            guard let userId = userId else { fatalError() }
-            
-            userStatus = groupInfo.userIds.contains(userId) ? .isInGroup : .notInGroup
-            isInGroup = groupInfo.userIds.contains(userId) ? true : false
+            userStatus = groupInfo.userIds.contains(userInfo.uid) ? .isInGroup : .notInGroup
+            isInGroup = groupInfo.userIds.contains(userInfo.uid) ? true : false
         }
     }
     
@@ -265,13 +270,12 @@ class ChatRoomViewController: BaseViewController {
     
     func sendJoinRequest() {
         
-        guard let groupInfo = groupInfo,
-              let userId = userId else { return }
+        guard let groupInfo = groupInfo else { return }
         
         let joinRequest = Request(groupId: groupInfo.groupId,
                                   groupName: groupInfo.groupName,
                                   hostId: groupInfo.hostId,
-                                  requestId: userId,
+                                  requestId: userInfo.uid,
                                   createdTime: Timestamp())
         
         GroupRoomManager.shared.sendRequest(request: joinRequest) { result in
@@ -362,16 +366,12 @@ class ChatRoomViewController: BaseViewController {
         
         guard let text = textView.text,
               text.count != 0,
-              let groupInfo = groupInfo,
-              let userId = userId else { return }
+              let groupInfo = groupInfo else { return }
         
-        newMessage.body = text
-        
-        newMessage.groupId = groupInfo.groupId
-        
-        newMessage.userId = userId
-        
-        newMessage.createdTime = Timestamp()
+        let newMessage = Message(groupId: groupInfo.groupId,
+                                 userId: userInfo.uid,
+                                 body: text,
+                                 createdTime: Timestamp())
         
         GroupRoomManager.shared.sendMessage(groupId: newMessage.groupId, message: newMessage) { result in
             
@@ -609,10 +609,12 @@ extension ChatRoomViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         
         let index = indexPath.row
+        
         let userId = messages[index].userId
+        
         let identifier = "\(index)" as NSString
         
-        if userId != self.userId {
+        if userId != self.userInfo.uid {
             
             return UIContextMenuConfiguration(
                 identifier: identifier, previewProvider: nil) { _ in
@@ -639,9 +641,8 @@ extension ChatRoomViewController: UITableViewDelegate {
 
 extension ChatRoomViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let userId = userId else { fatalError() }
-        
-        if groupInfo?.userIds.contains(userId) == true {
+
+        if groupInfo?.userIds.contains(userInfo.uid) == true {
             
             isInGroup = true
             

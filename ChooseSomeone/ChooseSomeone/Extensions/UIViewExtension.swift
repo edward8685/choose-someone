@@ -119,6 +119,43 @@ extension UIView {
         
     }
     
+    func roundCornersWhithoutLeftTop(cornerRadius: Double) {
+
+        self.layer.cornerRadius = CGFloat(cornerRadius)
+
+        self.clipsToBounds = true
+
+        self.layer.maskedCorners = [
+                                  .layerMaxXMinYCorner,
+            .layerMinXMaxYCorner, .layerMaxXMaxYCorner
+        ]
+    }
+    
+    func roundCornersWhithoutRightTop(cornerRadius: Double) {
+
+        self.layer.cornerRadius = CGFloat(cornerRadius)
+
+        self.clipsToBounds = true
+
+        self.layer.maskedCorners = [
+            .layerMinXMinYCorner,
+            .layerMinXMaxYCorner, .layerMaxXMaxYCorner
+        ]
+    }
+    
+    func roundCorners(cornerRadius: Double) {
+
+        self.layer.cornerRadius = CGFloat(cornerRadius)
+
+        self.clipsToBounds = true
+
+        self.layer.maskedCorners = [
+            .layerMinXMinYCorner, .layerMaxXMinYCorner,
+            .layerMinXMaxYCorner, .layerMaxXMaxYCorner
+        ]
+
+    }
+    
     func stickSubView(_ objectView: UIView) {
         
         objectView.removeFromSuperview()

@@ -10,6 +10,10 @@ import FirebaseFirestore
 
 class GroupInfoCell: UITableViewCell {
     
+    @IBOutlet weak var viewOfCell: UIView!
+    
+    @IBOutlet weak var isOverLabel: UILabel!
+    
     @IBOutlet weak var groupName: UILabel!
     
     @IBOutlet weak var trailName: UILabel!
@@ -58,6 +62,19 @@ class GroupInfoCell: UITableViewCell {
                 chevronView.isHidden = false
             }
         }
+        
+        if group.isExpired == true  {
+            
+            isOverLabel.isHidden = false
+            viewOfCell.backgroundColor = .systemGray4
+            
+        } else {
+            
+            isOverLabel.isHidden = true
+            viewOfCell.backgroundColor = .white
+
+           
+        }
     }
     
     override func awakeFromNib() {
@@ -67,9 +84,4 @@ class GroupInfoCell: UITableViewCell {
         self.backgroundColor = .clear
         
     }
-    
-    override func layoutSubviews() {
-//        chevronView.layer.cornerRadius = chevronView.frame.height / 2
-    }
-    
 }
