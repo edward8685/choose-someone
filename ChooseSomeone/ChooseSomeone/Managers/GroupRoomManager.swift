@@ -98,6 +98,10 @@ class GroupRoomManager {
                 
                 var groups = [Group]()
                 
+                var numOfGroups = 0
+                
+                var numOfPartners = 0
+                
                 for document in querySnapshot.documents {
                     
                     do {
@@ -106,6 +110,13 @@ class GroupRoomManager {
                             
                             group.isExpired = group.date.checkIsExpired()
                             
+                            if group.isExpired {
+                                
+                                numOfGroups += 1
+                                
+                                numOfPartners += (group.userIds.count - 1)
+                            }
+                                
                             groups.append(group)
                         }
                         
@@ -114,8 +125,10 @@ class GroupRoomManager {
                         completion(.failure(error))
                     }
                 }
+                UserManager.shared.updateUserGroupRecords(numOfGroups: numOfGroups, numOfPartners: numOfPartners)
                 
                 completion(.success(groups))
+                
             }
         }
     }

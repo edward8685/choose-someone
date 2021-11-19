@@ -118,7 +118,7 @@ class BuildTeamViewController: BaseViewController {
         
         noteTextView.layer.cornerRadius = 10
         
-        noteTextView.textContainer.maximumNumberOfLines = 2
+        noteTextView.textContainer.maximumNumberOfLines = 3
         
         noteTextView.textContainer.lineBreakMode = .byWordWrapping
     }

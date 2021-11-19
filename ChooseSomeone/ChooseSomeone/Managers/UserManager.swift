@@ -153,6 +153,32 @@ class UserManager {
         }
     }
     
+    func updateUserGroupRecords(numOfGroups:Int, numOfPartners:Int) {
+        
+        userInfo.totalGroups = numOfGroups
+        userInfo.totalFriends = numOfPartners
+        
+        let userId = userInfo.uid
+
+        let post = [UserInfo.CodingKeys.totalGroups.rawValue: numOfGroups,
+                    UserInfo.CodingKeys.totalFriends.rawValue: numOfPartners
+        ]
+        
+        let docRef = dataBase.collection("Users").document(userId)
+        
+        docRef.updateData(post) { error in
+            
+            if let error = error {
+                
+                print("Error updating document: \(error)")
+                
+            } else {
+                
+                print("User name successfully updated")
+            }
+        }
+    }
+    
     func blockUser(blockUserId: String) {
         
         userInfo.blockList?.append(blockUserId)

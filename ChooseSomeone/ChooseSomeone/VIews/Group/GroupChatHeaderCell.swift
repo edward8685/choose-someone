@@ -15,13 +15,22 @@ class GroupChatHeaderCell: UITableViewCell {
     
     @IBOutlet weak var hostBadgeButton: UIButton!
     
-    @IBOutlet weak var trailName: UITextField!
+    @IBOutlet weak var trailName: UITextField! {
+        didSet {
+            trailName.delegate = self
+        }
+    }
     
-    @IBOutlet weak var numOfPeople: UITextField!
+    @IBOutlet weak var numOfPeople: UITextField! {
+        didSet {
+            numOfPeople.delegate = self
+        }
+    }
     
     @IBOutlet weak var note: RSKPlaceholderTextView!{
         didSet {
             note.isScrollEnabled = false
+            note.delegate = self
         }
     }
     
@@ -164,12 +173,6 @@ class GroupChatHeaderCell: UITableViewCell {
         setUpTextView()
         
         setUpTextField()
-        
-        trailName.delegate = self
-        
-        numOfPeople.delegate = self
-        
-        note.delegate = self
         
         trailName.isEnabled = false
         
