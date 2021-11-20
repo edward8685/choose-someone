@@ -47,6 +47,7 @@ class ChooseGroupViewController: BaseViewController {
         
         didSet {
             searching = true
+            headerView?.groupSearchBar.delegate = self
         }
     }
     
@@ -129,16 +130,20 @@ class ChooseGroupViewController: BaseViewController {
     
     @objc func changeSearchText(notification: Notification) {
         
-        inActiveGroups.removeAll()
-        myGroups.removeAll()
-        
         if let trailName = notification.userInfo as? [String: String] {
             
             if let trailName = trailName["trailName"] {
                 
-                fetchGroupData()
                 self.searchText = trailName
-                self.searching = true
+                
+                if onlyUserGroup {
+                    searchGroups = myGroups.filter {
+                        $0.trailName.lowercased().prefix(searchText.count) == searchText.lowercased() }
+                } else {
+                    searchGroups = inActiveGroups.filter {
+                        $0.trailName.lowercased().prefix(searchText.count) == searchText.lowercased() }
+                }
+            
                 headerView?.groupSearchBar.text = trailName
             }
         }
@@ -331,7 +336,7 @@ class ChooseGroupViewController: BaseViewController {
         
         headerView.textSegmentedControl.addTarget(self, action: #selector(segmentValueChanged(_:)), for: .valueChanged)
         
-        headerView.groupSearchBar.delegate = self
+
         headerView.groupSearchBar.searchTextField.text = searchText
         
     }
@@ -562,6 +567,8 @@ extension ChooseGroupViewController: UISearchBarDelegate {
         
         searching = true
         
+        
+        
         tableView.reloadData()
         
     }
@@ -570,7 +577,7 @@ extension ChooseGroupViewController: UISearchBarDelegate {
         
         searching = false
         
-        resignFirstResponder()
+        searchBar.resignFirstResponder()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -581,6 +588,6 @@ extension ChooseGroupViewController: UISearchBarDelegate {
         
         tableView.reloadData()
         
-        resignFirstResponder()
+        searchBar.resignFirstResponder()
     }
 }

@@ -84,10 +84,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" image="home_bg" translatesAutoresizingMaskIntoConstraints="NO" id="W3s-s0-FYV">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="30" width="414" height="866"/>
                             </imageView>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4XU-l9-5Je">
-                                <rect key="frame" x="-33" y="696" width="680" height="680"/>
+                                <rect key="frame" x="-33" y="696" width="680" height="657"/>
                                 <color key="backgroundColor" name="C1"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -96,7 +96,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1OQ-uV-d8A">
-                                <rect key="frame" x="294" y="423" width="150" height="150"/>
+                                <rect key="frame" x="294" y="438" width="150" height="150"/>
                                 <color key="backgroundColor" name="C1"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="Th4-p8-0Gb"/>
@@ -109,7 +109,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TmS-Nq-4s3">
-                                <rect key="frame" x="0.0" y="88" width="414" height="695"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kW2-Bb-jQp">
                                     <size key="itemSize" width="128" height="128"/>

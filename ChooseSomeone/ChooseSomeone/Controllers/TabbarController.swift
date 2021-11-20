@@ -33,8 +33,44 @@ private enum Tab {
 
         }
 
+        controller.tabBarItem = tabBarItem()
+
         return controller
     }
+    
+    func tabBarItem() -> UITabBarItem {
+        
+    switch self {
+
+    case .home:
+        return UITabBarItem(
+            title: "Home",
+            image: UIImage.asset(.route),
+            selectedImage: UIImage.asset(.route_fill)
+        )
+
+    case .group:
+        return UITabBarItem(
+            title: "Group",
+            image: UIImage.asset(.search),
+            selectedImage: UIImage.asset(.search_fill)
+        )
+
+    case .journey:
+        return UITabBarItem(
+            title: "Journey",
+            image: UIImage.asset(.track),
+            selectedImage: UIImage.asset(.track_fill)
+        )
+
+    case .profile:
+        return UITabBarItem(
+            title: "Profile",
+            image: UIImage.asset(.profile),
+            selectedImage: UIImage.asset(.profile_fill)
+        )
+    }
+}
 }
 
 class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
@@ -44,6 +80,16 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        delegate = self
+        viewControllers = tabs.map({ $0.controller() })
+        
+        self.delegate = self
+        
+        self.tabBar.layer.masksToBounds = true
+        
+        self.tabBar.isTranslucent = true
+        
+        self.tabBar.layer.cornerRadius = 15
+        
+        self.tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
 }
