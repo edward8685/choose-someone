@@ -74,7 +74,7 @@ class GPXFileManager {
                 
             case .success:
                 
-                print("save to Firebase successfully")\
+                print("save to Firebase successfully")
                 
                 GPXFileManager.removeFileFromURL(fileURL)
                 

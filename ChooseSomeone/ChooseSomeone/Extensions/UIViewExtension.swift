@@ -90,7 +90,7 @@ extension UIView {
         
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.bounds
-        gradientLayer.colors = colors.map{ $0?.cgColor as Any }
+        gradientLayer.colors = colors.map { $0?.cgColor as Any }
         gradientLayer.locations = locations
         
         switch direction {
