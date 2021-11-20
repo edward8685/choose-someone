@@ -10,6 +10,8 @@ import MapKit
 import CoreGPX
 import CoreLocation
 import Firebase
+import Lottie
+import GoogleDataTransport
 
 class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     
@@ -73,6 +75,18 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var followUserButton = UIButton()
     
+    lazy var waveLottieView: AnimationView = {
+        let view = AnimationView(name: "wave")
+        view.loopMode = .loop
+        view.frame = CGRect(x: 0, y: 0, width: 130, height: 130)
+        view.center = buttonStackView.center
+        view.contentMode = .scaleAspectFit
+        view.play()
+        self.view.addSubview(view)
+        self.view.bringSubviewToFront(buttonStackView)
+        return view
+    }()
+
     var lastLocation: CLLocation?
     
     lazy var buttonStackView: UIStackView = {
@@ -240,6 +254,17 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         followUserButton.addTarget(self, action: #selector(followButtonTroggler), for: .touchUpInside)
     }
     
+    func lottieAnimation() {
+        let view = AnimationView(name: "wave")
+        view.frame = CGRect(x: 0, y: 0, width: 130, height: 130)
+        view.center = buttonStackView.center
+        view.contentMode = .scaleAspectFit
+        self.view.addSubview(view)
+        view.play()
+        view.loopMode = .loop
+        self.view.bringSubviewToFront(buttonStackView)
+    }
+    
     func setUpLabels() {
         
         map.addSubview(coordsLabel)
@@ -291,9 +316,9 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
                 
                 trackerButton.setTitle("開始",
                                        for: .normal)
-                trackerButton.alpha = 1.0
              
                 stopWatch.reset()
+                waveLottieView.isHidden = true
                 
                 timeLabel.text = stopWatch.elapsedTimeString
                 
@@ -308,11 +333,13 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
                 trackerButton.setTitle("暫停", for: .normal)
                 
                 self.stopWatch.start()
+                waveLottieView.isHidden = false
                 
             case .paused:
                 self.trackerButton.setTitle("繼續", for: .normal)
                 
                 self.stopWatch.stop()
+                waveLottieView.isHidden = true
                 
                 self.map.startNewTrackSegment()
             }
@@ -329,6 +356,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
                 self.saveButton.alpha = 1.0
                 self.resetButton.alpha = 1.0
             }
+
             
             gpxTrackingStatus = .tracking
             
@@ -339,6 +367,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         case .paused:
             
             gpxTrackingStatus = .tracking
+
         }
     }
     
