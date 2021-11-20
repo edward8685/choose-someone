@@ -51,9 +51,9 @@ private enum Tab {
 
     case .group:
         return UITabBarItem(
-            title: "Group",
-            image: UIImage.asset(.search),
-            selectedImage: UIImage.asset(.search_fill)
+            title: "Groups",
+            image: UIImage.asset(.group),
+            selectedImage: UIImage.asset(.group_fill)
         )
 
     case .journey:
@@ -88,7 +88,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         
         self.tabBar.isTranslucent = true
         
-        self.tabBar.layer.cornerRadius = 15
+        self.tabBar.layer.cornerRadius = 10
         
         self.tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }

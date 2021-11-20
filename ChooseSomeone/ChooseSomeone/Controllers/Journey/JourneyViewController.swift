@@ -51,7 +51,11 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var map: GPXMapView!
     
-    var stopWatch = StopWatch()
+    var stopWatch = StopWatch() {
+        didSet {
+            stopWatch.delegate = self
+        }
+    }
     
     var trackerButton = UIButton()
     
@@ -84,7 +88,8 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        stopWatch.delegate = self
+//        stopWatch.delegate = self
+        RecordManager.shared.detectDeviceAndUpload()
         
         map.delegate = mapViewDelegate
         map.showsUserLocation = true
@@ -108,7 +113,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         navigationController?.isNavigationBarHidden = true
         
     }
-
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         updatePolylineColor()
     }
@@ -231,7 +236,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
                 currentSegmentDistanceLabel.distance = (map.session.currentSegmentDistance)
                 
             case .tracking:
-
+                
                 trackerButton.setTitle("Pause", for: UIControl.State())
                 self.stopWatch.start()
                 
@@ -257,7 +262,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @objc func saveButtonTapped(withReset: Bool = false) {
-
+        
         if (gpxTrackingStatus == .notStarted) {
             return
         }
@@ -276,7 +281,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
             textField.clearButtonMode = .always
             textField.text =  defaultFileName
         })
-
+        
         let saveAction = UIAlertAction(title: "Save",
                                        style: .default) { _ in
             
@@ -285,7 +290,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
             let fileName = alertController.textFields?[0].text
             
             if let fileName = fileName {
-            GPXFileManager.save(filename: fileName, gpxContents: gpxString)
+                GPXFileManager.save(filename: fileName, gpxContents: gpxString)
             }
             
             if withReset {
@@ -429,7 +434,7 @@ extension JourneyViewController: CLLocationManagerDelegate {
         let newLocation = locations.first!
         let hAcc = newLocation.horizontalAccuracy
         let vAcc = newLocation.verticalAccuracy
-//        print("didUpdateLocation: received \(newLocation.coordinate) hAcc: \(hAcc) vAcc: \(vAcc) floor: \(newLocation.floor?.description ?? "''")")
+        //        print("didUpdateLocation: received \(newLocation.coordinate) hAcc: \(hAcc) vAcc: \(vAcc) floor: \(newLocation.floor?.description ?? "''")")
         //Update coordsLabel
         let latFormat = String(format: "%.6f", newLocation.coordinate.latitude)
         let lonFormat = String(format: "%.6f", newLocation.coordinate.longitude)
@@ -442,7 +447,7 @@ extension JourneyViewController: CLLocationManagerDelegate {
             map.setCenter(newLocation.coordinate, animated: true)
         }
         if gpxTrackingStatus == .tracking {
-//            print("didUpdateLocation: adding point to track (\(newLocation.coordinate.latitude),\(newLocation.coordinate.longitude))")
+            //            print("didUpdateLocation: adding point to track (\(newLocation.coordinate.latitude),\(newLocation.coordinate.longitude))")
             map.addPointToCurrentTrackSegmentAtLocation(newLocation)
             totalTrackedDistanceLabel.distance = map.session.totalTrackedDistance
             currentSegmentDistanceLabel.distance = map.session.currentSegmentDistance
@@ -451,7 +456,7 @@ extension JourneyViewController: CLLocationManagerDelegate {
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-
+        
         map.heading = newHeading
         
         map.updateHeading()
