@@ -52,7 +52,6 @@
 		744934A1272562C8002D8FE3 /* TrailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744934A0272562C8002D8FE3 /* TrailManager.swift */; };
 		7451EEE3274965CE00438D94 /* wave.json in Resources */ = {isa = PBXBuildFile; fileRef = 7451EEE2274965CE00438D94 /* wave.json */; };
 		7451EEE5274965D600438D94 /* sunset.json in Resources */ = {isa = PBXBuildFile; fileRef = 7451EEE4274965D600438D94 /* sunset.json */; };
-		7451EEE72749698700438D94 /* 82892-wave.json in Resources */ = {isa = PBXBuildFile; fileRef = 7451EEE62749698700438D94 /* 82892-wave.json */; };
 		7457A1D0271EECEF00A947AE /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457A1CF271EECEF00A947AE /* Message.swift */; };
 		7457A1D2271EEEDC00A947AE /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457A1D1271EEEDC00A947AE /* Request.swift */; };
 		745A6EFC272BA417006064C4 /* GPXFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6EFB272BA417006064C4 /* GPXFileManager.swift */; };
@@ -164,7 +163,6 @@
 		744934A0272562C8002D8FE3 /* TrailManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailManager.swift; sourceTree = "<group>"; };
 		7451EEE2274965CE00438D94 /* wave.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wave.json; sourceTree = "<group>"; };
 		7451EEE4274965D600438D94 /* sunset.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sunset.json; sourceTree = "<group>"; };
-		7451EEE62749698700438D94 /* 82892-wave.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "82892-wave.json"; sourceTree = "<group>"; };
 		7457A1CF271EECEF00A947AE /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		7457A1D1271EEEDC00A947AE /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		745A6EFB272BA417006064C4 /* GPXFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPXFileManager.swift; sourceTree = "<group>"; };
@@ -514,7 +512,6 @@
 			children = (
 				74E5735E2726D6A500F490BF /* KingFisherWrapper.swift */,
 				7451EEE2274965CE00438D94 /* wave.json */,
-				7451EEE62749698700438D94 /* 82892-wave.json */,
 				7451EEE4274965D600438D94 /* sunset.json */,
 			);
 			path = "Third Party Wrapper";
@@ -600,7 +597,6 @@
 				74608D3E271E7A63002BD125 /* GoogleService-Info.plist in Resources */,
 				740E98AD2734DF79006163B8 /* ProfileCell.xib in Resources */,
 				7451EEE3274965CE00438D94 /* wave.json in Resources */,
-				7451EEE72749698700438D94 /* 82892-wave.json in Resources */,
 				740B1B8C2724161600A1CD3B /* HomeHeaderCell.xib in Resources */,
 				740FC396271D17180071459A /* Assets.xcassets in Resources */,
 				7441B7B327313F3E00614D9B /* NotoSansTC-Light.otf in Resources */,

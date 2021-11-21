@@ -42,7 +42,7 @@ extension Double {
     }
     
     func toAltitude() -> String {
-        toMeters() as String
+        return String(format: "%.1fm", self)
     }
     
     func toAccuracy(useImperial: Bool = false) -> String {

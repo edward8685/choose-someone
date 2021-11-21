@@ -109,6 +109,23 @@ extension UIView {
         self.layer.addSublayer(gradientLayer)
     }
     
+    func shake() {
+            let animation = CABasicAnimation(keyPath: "position")
+        
+            animation.duration = 0.08
+        
+            animation.repeatCount = 2
+        
+            animation.autoreverses = true
+        
+            animation.fromValue = NSValue(cgPoint: CGPoint(x: self.center.x - 10, y: self.center.y))
+        
+            animation.toValue = NSValue(cgPoint: CGPoint(x: self.center.x + 10, y: self.center.y))
+        
+            self.layer.add(animation, forKey: "position")
+        }
+    
+    
     func roundCornersTop(cornerRadius: Double) {
         
         self.layer.cornerRadius = CGFloat(cornerRadius)
@@ -120,23 +137,23 @@ extension UIView {
     }
     
     func roundCornersWhithoutLeftTop(cornerRadius: Double) {
-
+        
         self.layer.cornerRadius = CGFloat(cornerRadius)
-
+        
         self.clipsToBounds = true
-
+        
         self.layer.maskedCorners = [
-                                  .layerMaxXMinYCorner,
+            .layerMaxXMinYCorner,
             .layerMinXMaxYCorner, .layerMaxXMaxYCorner
         ]
     }
     
     func roundCornersWhithoutRightTop(cornerRadius: Double) {
-
+        
         self.layer.cornerRadius = CGFloat(cornerRadius)
-
+        
         self.clipsToBounds = true
-
+        
         self.layer.maskedCorners = [
             .layerMinXMinYCorner,
             .layerMinXMaxYCorner, .layerMaxXMaxYCorner
@@ -144,16 +161,16 @@ extension UIView {
     }
     
     func roundCorners(cornerRadius: Double) {
-
+        
         self.layer.cornerRadius = CGFloat(cornerRadius)
-
+        
         self.clipsToBounds = true
-
+        
         self.layer.maskedCorners = [
             .layerMinXMinYCorner, .layerMaxXMinYCorner,
             .layerMinXMaxYCorner, .layerMaxXMaxYCorner
         ]
-
+        
     }
     
     func stickSubView(_ objectView: UIView) {

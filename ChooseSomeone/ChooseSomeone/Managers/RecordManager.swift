@@ -9,7 +9,6 @@ import Foundation
 import FirebaseStorage
 import FirebaseFirestoreSwift
 import FirebaseFirestore
-import CloudKit
 
 class RecordManager {
     
@@ -49,6 +48,8 @@ class RecordManager {
                             
                             self.uploadRecordToDb(fileName: fileName, fileURL: url)
                             
+                            GPXFileManager.parseGPXFile(fileURL: url)
+                            
                         case .failure(let error):
                             
                             completion(.failure(error))
@@ -63,7 +64,7 @@ class RecordManager {
             
         } catch {
             
-            print("Unable to load data")
+            print("Unable to upload data")
             
         }
     }

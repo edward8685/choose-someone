@@ -18,7 +18,10 @@ class HomeHeaderCell: UITableViewCell {
     @IBOutlet weak var userName: UILabel!
     
     func updateUserInfo(user: UserInfo) {
-        totalKilos.text = user.totalLength.description
+        
+        let length = String(format: "%.1f", user.totalLength / 1000)
+        
+        totalKilos.text = length
         totalFriends.text = user.totalFriends.description
         totalGroups.text = user.totalGroups.description
         userName.text = user.userName

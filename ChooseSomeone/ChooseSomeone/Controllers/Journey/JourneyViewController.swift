@@ -11,7 +11,6 @@ import CoreGPX
 import CoreLocation
 import Firebase
 import Lottie
-import GoogleDataTransport
 
 class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     
@@ -145,7 +144,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     override func viewWillLayoutSubviews() {
-//
+
         let trakerRadius = trackerButton.frame.height / 2
         
         let otherRadius = saveButton.frame.height / 2
@@ -254,17 +253,6 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         followUserButton.addTarget(self, action: #selector(followButtonTroggler), for: .touchUpInside)
     }
     
-    func lottieAnimation() {
-        let view = AnimationView(name: "wave")
-        view.frame = CGRect(x: 0, y: 0, width: 130, height: 130)
-        view.center = buttonStackView.center
-        view.contentMode = .scaleAspectFit
-        self.view.addSubview(view)
-        view.play()
-        view.loopMode = .loop
-        self.view.bringSubviewToFront(buttonStackView)
-    }
-    
     func setUpLabels() {
         
         map.addSubview(coordsLabel)
@@ -334,6 +322,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
                 
                 self.stopWatch.start()
                 waveLottieView.isHidden = false
+                waveLottieView.play()
                 
             case .paused:
                 self.trackerButton.setTitle("繼續", for: .normal)
@@ -357,7 +346,6 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
                 self.resetButton.alpha = 1.0
             }
 
-            
             gpxTrackingStatus = .tracking
             
         case .tracking:

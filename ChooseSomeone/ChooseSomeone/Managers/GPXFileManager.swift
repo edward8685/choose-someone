@@ -11,12 +11,12 @@ class GPXFileManager {
     
     class var GPXFilesFolderURL: URL {
         
-        let fileManager = FileManager.default
+         let documentsUrl =  FileManager.default.urls(
+            for: .documentDirectory,
+            in: .userDomainMask)[0] as URL
         
-        let documentsURL =  fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0] as URL
-        
-        return documentsURL
-    }
+         return documentsUrl
+     }
     
     class func URLForFilename(_ filename: String) -> URL {
         
@@ -31,7 +31,7 @@ class GPXFileManager {
         
         do {
             
-            try gpxContents.write(toFile: fileURL.path, atomically: true, encoding: .utf8)
+            try gpxContents.write(toFile: fileURL.path, atomically: true, encoding: String.Encoding.utf8)
             
         } catch {
             
@@ -68,11 +68,15 @@ class GPXFileManager {
         
         let fileURL: URL = self.URLForFilename(filename)
         
+        GPXFileManager.saveToURL(fileURL: fileURL, gpxContents: gpxContents)
+        
         RecordManager.shared.uploadRecord(fileName: filename, fileURL: fileURL) { result in
             
             switch result {
                 
             case .success:
+                
+                parseGPXFile(fileURL: fileURL)
                 
                 print("save to Firebase successfully")
                 
@@ -82,11 +86,32 @@ class GPXFileManager {
                 
                 print("save to Firebase failure: \(error)")
                 
-                GPXFileManager.saveToURL(fileURL: fileURL, gpxContents: gpxContents)
-                
             }
         }
     }
+    
+    class func parseGPXFile(fileURL: URL) {
+        
+        var distanceFromOrigin: [Double] = []
+        
+        let inputURL = fileURL
+        
+            guard let gpx = GPXParser(withURL: inputURL)?.parsedData() else { return }
+            
+            for track in gpx.tracks {
+                
+                for segment in track.segments {
+                    
+                    distanceFromOrigin = segment.distanceFromOrigin()
+                }
+            }
+        
+        let length = distanceFromOrigin.last ?? 0
+        
+        UserManager.shared.updateUserTrailRecord(length: length)
+
+    }
+    
     
     class func removeFileFromURL(_ fileURL: URL) {
         

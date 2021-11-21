@@ -185,7 +185,14 @@ class ChooseGroupViewController: BaseViewController {
     
     @objc func checkRequestList(_ sender: UIButton) {
         
+        if requests.count == 0 {
+            
+            headerView?.badgeView.shake()
+            
+        } else {
+        
         performSegue(withIdentifier: "toRequestList", sender: requests)
+        }
     }
     
     @objc func updateUserInfo(notification: Notification) {
@@ -419,7 +426,7 @@ extension ChooseGroupViewController: UITableViewDelegate {
         cell.alpha = 0
         
         UIView.animate(
-            withDuration: 0.5,
+            withDuration: 0.4,
             delay: 0.03 * Double(indexPath.row),
             animations: {
                 cell.alpha = 1
@@ -567,17 +574,14 @@ extension ChooseGroupViewController: UISearchBarDelegate {
         
         searching = true
         
-        
-        
         tableView.reloadData()
-        
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         
         searching = false
         
-        searchBar.resignFirstResponder()
+        resignFirstResponder()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -588,6 +592,6 @@ extension ChooseGroupViewController: UISearchBarDelegate {
         
         tableView.reloadData()
         
-        searchBar.resignFirstResponder()
+        resignFirstResponder()
     }
 }
