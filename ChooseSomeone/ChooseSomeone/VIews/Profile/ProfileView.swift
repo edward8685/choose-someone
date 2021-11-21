@@ -12,15 +12,18 @@ class ProfileView: UIView {
     var isEditting: Bool = false {
         
         didSet {
-            
-            editNameTextField.isEnabled = isEditting ? true : false
-            
-            editNameTextField.textColor = isEditting ? .black : .B1
-            
-            editNameTextField.backgroundColor = isEditting ? .systemGray6 : .clear
-            
-            editNameTextField.isEnabled = isEditting ? true : false
-
+                
+            UIView.animate(withDuration: 0.2) {
+                
+                self.editNameTextField.backgroundColor = self.isEditting ? .systemGray6 : .clear
+            } completion: { [self] _ in
+                
+                editNameTextField.isEnabled = isEditting ? true : false
+                
+                editNameTextField.isEnabled = isEditting ? true : false
+                
+                editNameTextField.textColor = isEditting ? .black : .B1
+            }
         }
     }
     
@@ -52,5 +55,7 @@ class ProfileView: UIView {
         super.layoutSubviews()
         
         userImage.layer.cornerRadius = userImage.frame.height / 2
+        
+        editNameTextField.roundCorners(cornerRadius: 8)
     }
 }

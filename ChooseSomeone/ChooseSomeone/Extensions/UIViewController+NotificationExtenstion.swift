@@ -8,7 +8,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-class BaseViewController: UIViewController {
+class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
     
     static var identifier: String {
         
@@ -28,6 +28,19 @@ class BaseViewController: UIViewController {
     var isEnableIQKeyboard: Bool {
         
         return true
+    }
+    
+//    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+//
+//        if gestureRecognizer == self.navigationController?.interactivePopGestureRecognizer {
+//            return false
+//        }
+//        return true
+//    }
+    
+    override func viewDidLoad() {
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -241,7 +241,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                     
                     tabbarVC.modalPresentationStyle = .fullScreen
                     
-                    self.present(tabbarVC, animated: false, completion: nil)
+                    self.present(tabbarVC, animated: true, completion: nil)
                     
                 case .failure(let error):
                     

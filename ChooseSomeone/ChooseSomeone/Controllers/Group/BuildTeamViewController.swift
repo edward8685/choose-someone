@@ -158,6 +158,8 @@ class BuildTeamViewController: BaseViewController {
         
         if group.date.checkIsExpired() {
             
+            buildTeamView.shake()
+            
             let controller = UIAlertController(title: "揪團時間錯誤", message: "請更改日期", preferredStyle: .alert)
             
             let okAction = UIAlertAction(title: "ok", style: .cancel)

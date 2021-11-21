@@ -32,6 +32,7 @@ class ChooseGroupViewController: BaseViewController {
         didSet {
             
             checkRequestsNum()
+            
         }
     }
     
@@ -178,6 +179,8 @@ class ChooseGroupViewController: BaseViewController {
             
         } else {
             
+            headerView.requestListButton.shake()
+            
             headerView.badgeView.isHidden = false
         }
         
@@ -185,14 +188,10 @@ class ChooseGroupViewController: BaseViewController {
     
     @objc func checkRequestList(_ sender: UIButton) {
         
-        if requests.count == 0 {
+        if requests.count != 0 {
             
-            headerView?.badgeView.shake()
-            
-        } else {
-        
-        performSegue(withIdentifier: "toRequestList", sender: requests)
-        }
+            performSegue(withIdentifier: "toRequestList", sender: requests)
+    }
     }
     
     @objc func updateUserInfo(notification: Notification) {
