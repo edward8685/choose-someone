@@ -81,7 +81,7 @@ class HomeHeaderCell: UITableViewCell {
         //        friendsStartValue += friendsDiff / Int(animationDuration)
         //        groupsStartValue += groupsDiff / Int(animationDuration)
         
-        lengthStartValue += 0.1
+        lengthStartValue += 0.2
         friendsStartValue += 1
         groupsStartValue += 1
         

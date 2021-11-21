@@ -191,7 +191,9 @@ class ChooseGroupViewController: BaseViewController {
         if requests.count != 0 {
             
             performSegue(withIdentifier: "toRequestList", sender: requests)
-    }
+        } else {
+            headerView?.requestListButton.shake()
+        }
     }
     
     @objc func updateUserInfo(notification: Notification) {

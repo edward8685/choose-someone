@@ -156,6 +156,24 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         saveButton.roundCorners(cornerRadius: otherRadius)
 
         resetButton.roundCorners(cornerRadius: otherRadius)
+        
+        trackerButton.applyButtonGradient(
+            colors: [UIColor.hexStringToUIColor(hex: "#C4E0E5"),
+                     .B1],
+            locations: [0.0, 1.0],
+            direction: .leftSkewed)
+        
+        saveButton.applyButtonGradient(
+            colors: [UIColor.hexStringToUIColor(hex: "#F3F9A7"),
+                     UIColor.hexStringToUIColor(hex: "#45B649")],
+            locations: [0.0, 1.0],
+            direction: .leftSkewed)
+        
+        resetButton.applyButtonGradient(
+            colors: [UIColor.hexStringToUIColor(hex: "#e1eec3"),
+                     UIColor.hexStringToUIColor(hex: "#f05053")],
+            locations: [0.0, 1.0],
+            direction: .leftSkewed)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -195,19 +213,17 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         
         
         trackerButton.translatesAutoresizingMaskIntoConstraints = false
-        trackerButton.setTitle("紀錄", for: UIControl.State())
-        trackerButton.backgroundColor = .B1
-        trackerButton.titleLabel?.font = UIFont.regular(size: 21)
+        trackerButton.setTitle("Start", for: .normal)
+        trackerButton.titleLabel?.font = UIFont.regular(size: 18)
         trackerButton.titleLabel?.textAlignment = .center
         
-        saveButton.setTitle("儲存", for: UIControl.State())
-        saveButton.backgroundColor = UIColor.hexStringToUIColor(hex: "96c93d")
+        saveButton.setTitle("Save", for: .normal)
+
         saveButton.titleLabel?.font = UIFont.regular(size: 16)
         saveButton.titleLabel?.textAlignment = .center
         saveButton.alpha = 0.5
        
-        resetButton.setTitle("重置", for: UIControl.State())
-        resetButton.backgroundColor = UIColor.hexStringToUIColor(hex: "FC466B")
+        resetButton.setTitle("Reset", for: .normal)
         resetButton.titleLabel?.font = UIFont.regular(size: 16)
         resetButton.titleLabel?.textAlignment = .center
         resetButton.alpha = 0.5
@@ -302,7 +318,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
                 
             case .notStarted:
                 
-                trackerButton.setTitle("開始",
+                trackerButton.setTitle("Start",
                                        for: .normal)
              
                 stopWatch.reset()
@@ -318,14 +334,14 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
                 
             case .tracking:
                 
-                trackerButton.setTitle("暫停", for: .normal)
+                trackerButton.setTitle("Pause", for: .normal)
                 
                 self.stopWatch.start()
                 waveLottieView.isHidden = false
                 waveLottieView.play()
                 
             case .paused:
-                self.trackerButton.setTitle("繼續", for: .normal)
+                self.trackerButton.setTitle("Resume", for: .normal)
                 
                 self.stopWatch.stop()
                 waveLottieView.isHidden = true
@@ -541,7 +557,7 @@ extension JourneyViewController: CLLocationManagerDelegate {
         let latFormat = String(format: "%.5f", newLocation.coordinate.latitude)
         let lonFormat = String(format: "%.5f", newLocation.coordinate.longitude)
         let altitude = newLocation.altitude.toAltitude()
-        var text = "緯度: \(latFormat) \r經度: \(lonFormat) \r海拔: \(altitude)"
+        var text = "latitude: \(latFormat) \rlontitude: \(lonFormat) \raltitude: \(altitude)"
         
         coordsLabel.text = text
         

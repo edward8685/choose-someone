@@ -16,6 +16,15 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
     
     lazy var loginButton = ASAuthorizationAppleIDButton(type: .signIn, style: .whiteOutline)
     
+    @IBOutlet weak var gradientView: UIView!{
+        didSet {
+            gradientView.applyGradient(
+                colors: [.B2, .C4],
+                locations: [0.0, 1.0], direction: .leftSkewed)
+            gradientView.alpha = 0.85
+        }
+    }
+    
     @IBOutlet weak var agreementStackView: UIStackView!
    
     @IBAction func goToPrivacyPage(_ sender: UIButton) {
@@ -51,6 +60,8 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
         setUpSignInButton()
         
         stuffComeout()
+        
+        
         
     }
     

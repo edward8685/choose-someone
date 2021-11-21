@@ -18,7 +18,7 @@ extension Double {
     }
     
     func toKilometers() -> String {
-        return String(format: "%.2fkm", toKilometers() as Double)
+        return String(format: "%.1fkm", toKilometers() as Double)
     }
     
     func toMeters() -> String {
@@ -34,7 +34,7 @@ extension Double {
     }
     
     func toKilometersPerHour() -> String {
-        return String(format: "%.2fkm/h", toKilometersPerHour() as Double)
+        return String(format: "%.1fkm/h", toKilometersPerHour() as Double)
     }
     
     func toSpeed() -> String {

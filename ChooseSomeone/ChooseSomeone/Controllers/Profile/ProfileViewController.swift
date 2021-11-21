@@ -20,10 +20,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var gradientView: UIView! {
         didSet {
             gradientView.applyGradient(
-                colors: [.B2,
-                         UIColor.hexStringToUIColor(hex: "93F9B9")],
+                colors: [.B2, .C4],
                 locations: [0.0, 1.0], direction: .leftSkewed)
-            gradientView.alpha = 0.85
         }
     }
     

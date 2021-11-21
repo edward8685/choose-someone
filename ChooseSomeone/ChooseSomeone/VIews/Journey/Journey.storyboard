@@ -18,13 +18,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="jxk-RE-Bka" customClass="GPXMapView" customModule="ChooseSomeone" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="823"/>
                             </mapView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="jxk-RE-Bka" secondAttribute="bottom" id="7iU-FU-zHt"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="jxk-RE-Bka" secondAttribute="bottom" constant="-10" id="7iU-FU-zHt"/>
                             <constraint firstItem="jxk-RE-Bka" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="FER-WI-c6Z"/>
                             <constraint firstItem="jxk-RE-Bka" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="byJ-eb-eb3"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="jxk-RE-Bka" secondAttribute="trailing" id="gE9-Hw-7xi"/>
