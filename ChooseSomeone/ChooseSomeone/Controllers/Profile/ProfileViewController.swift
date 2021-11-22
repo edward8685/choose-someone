@@ -19,7 +19,9 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var gradientView: UIView! {
         didSet {
-            gradientView.applyGradient(colors: [.white, .U2], locations: [0.0, 1.0], direction: .leftSkewed)
+            gradientView.applyGradient(
+                colors: [.B2, .C4],
+                locations: [0.0, 1.0], direction: .leftSkewed)
         }
     }
     
@@ -169,6 +171,8 @@ extension ProfileViewController: UITableViewDelegate {
         case 2:
             
             guard let policyVC = UIStoryboard.policy.instantiateViewController(identifier: PrivacyPolicyViewController.identifier) as? PrivacyPolicyViewController else { return }
+            
+            policyVC.policyType = .privacy
 
             present(policyVC, animated: true, completion: nil)
             
@@ -247,7 +251,9 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         
         guard let imageData = image.jpegData(compressionQuality: 0.1) else { return }
         
-        profileView.userImage.image = image
+        UIView.animate(withDuration: 0.2) {
+            self.profileView.userImage.image = image
+        }
         
         updateUserInfo(imageData: imageData)
         

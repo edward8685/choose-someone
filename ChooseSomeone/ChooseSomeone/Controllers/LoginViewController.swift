@@ -16,6 +16,14 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
     
     lazy var loginButton = ASAuthorizationAppleIDButton(type: .signIn, style: .whiteOutline)
     
+    @IBOutlet weak var gradientView: UIView! {
+        didSet {
+            gradientView.applyGradient(
+                colors: [.B2, .C4],
+                locations: [0.0, 1.0], direction: .leftSkewed)
+        }
+    }
+    
     @IBOutlet weak var agreementStackView: UIStackView!
    
     @IBAction func goToPrivacyPage(_ sender: UIButton) {
@@ -51,7 +59,7 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
         setUpSignInButton()
         
         stuffComeout()
-        
+
     }
     
     func setUpSignInButton() {
@@ -70,12 +78,11 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
             
             loginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             
-            loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: 80)
+            loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 80)
         ])
         
         loginButton.alpha = 0.0
     }
-    
     
     func stuffComeout () {
         
@@ -83,7 +90,6 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
         self.agreementStackView.alpha = 0.0
         
         appLogo.translatesAutoresizingMaskIntoConstraints = false
-        
         
         UIView.animate(withDuration: 0.5, delay: 1) {
             
@@ -241,7 +247,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                     
                     tabbarVC.modalPresentationStyle = .fullScreen
                     
-                    self.present(tabbarVC, animated: false, completion: nil)
+                    self.present(tabbarVC, animated: true, completion: nil)
                     
                 case .failure(let error):
                     

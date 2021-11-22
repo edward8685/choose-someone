@@ -10,6 +10,7 @@ import MapKit
 import CoreGPX
 import CoreLocation
 import Firebase
+import Lottie
 
 class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     
@@ -18,32 +19,44 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     var isDisplayingLocationServicesDenied: Bool = false
     
     var followUser: Bool = true {
+        
         didSet {
+            
             if followUser {
+                
                 let image = UIImage(systemName: "location.fill",
                                     withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .medium))
-                followUserButton.setImage(image, for: UIControl.State())
+                
+                followUserButton.setImage(image, for: .normal)
+                
                 map.setCenter((map.userLocation.coordinate), animated: true)
                 
             } else {
+                
                 let image = UIImage(systemName: "location",
                                     withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .medium))
-                followUserButton.setImage(image, for: UIControl.State())
+                
+                followUserButton.setImage(image, for: .normal)
             }
         }
     }
     
-    let recordManager = RecordManager()
-    
     let locationManager: CLLocationManager = {
+        
         let manager = CLLocationManager()
         
         manager.requestAlwaysAuthorization()
+        
         manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.distanceFilter = 2 //meters
-        manager.headingFilter = 3 //degrees
+        
+        manager.distanceFilter = 2 // meters
+        
+        manager.headingFilter = 3 // degrees
+        
         manager.pausesLocationUpdatesAutomatically = false
+        
         manager.allowsBackgroundLocationUpdates = true
+        
         return manager
     }()
     
@@ -61,16 +74,29 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var followUserButton = UIButton()
     
+    lazy var waveLottieView: AnimationView = {
+        let view = AnimationView(name: "wave")
+        view.loopMode = .loop
+        view.frame = CGRect(x: 0, y: 0, width: 130, height: 130)
+        view.center = buttonStackView.center
+        view.contentMode = .scaleAspectFit
+        view.play()
+        self.view.addSubview(view)
+        self.view.bringSubviewToFront(buttonStackView)
+        return view
+    }()
+
     var lastLocation: CLLocation?
     
     lazy var buttonStackView: UIStackView = {
+        
         let view = UIStackView(arrangedSubviews: [followUserButton, trackerButton, saveButton, resetButton])
         
         view.translatesAutoresizingMaskIntoConstraints = false
         view.axis = .horizontal
-        view.spacing = 10
-        view.distribution = .fillEqually
-        
+        view.spacing = 8
+        view.distribution = .equalSpacing
+        view.alignment = .bottom
         return view
     }()
     
@@ -83,10 +109,15 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     let coordsLabel = UILabel()
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
         stopWatch.delegate = self
         
+        RecordManager.shared.detectDeviceAndUpload()
+        
         map.delegate = mapViewDelegate
+        
         map.showsUserLocation = true
         
         locationManager.delegate = self
@@ -100,68 +131,132 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         CLLocationCoordinate2D(latitude: 25.042393, longitude: 121.56496)
         let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
         let region = MKCoordinateRegion(center: center, span: span)
+
         map.setRegion(region, animated: true)
         self.view.addSubview(map)
         
         setUpButtons()
+        
         setUpLabels()
+        
         navigationController?.isNavigationBarHidden = true
         
     }
+    
+    override func viewWillLayoutSubviews() {
 
+        let trakerRadius = trackerButton.frame.height / 2
+        
+        let otherRadius = saveButton.frame.height / 2
+
+        followUserButton.roundCorners(cornerRadius: otherRadius)
+
+        trackerButton.roundCorners(cornerRadius: trakerRadius)
+
+        saveButton.roundCorners(cornerRadius: otherRadius)
+
+        resetButton.roundCorners(cornerRadius: otherRadius)
+        
+        trackerButton.applyButtonGradient(
+            colors: [UIColor.hexStringToUIColor(hex: "#C4E0F8"),
+                     .B1],
+            locations: [0.0, 1.0],
+            direction: .leftSkewed)
+        
+        saveButton.applyButtonGradient(
+            colors: [UIColor.hexStringToUIColor(hex: "#F3F9A7"),
+                     UIColor.hexStringToUIColor(hex: "#45B649")],
+            locations: [0.0, 1.0],
+            direction: .leftSkewed)
+        
+        resetButton.applyButtonGradient(
+            colors: [UIColor.hexStringToUIColor(hex: "#e1eec3"),
+                     UIColor.hexStringToUIColor(hex: "#f05053")],
+            locations: [0.0, 1.0],
+            direction: .leftSkewed)
+    }
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        
         updatePolylineColor()
     }
     
     func updatePolylineColor() {
+        
         for overlay in map.overlays where overlay is MKPolyline {
+            
             map.removeOverlay(overlay)
+            
             map.addOverlay(overlay)
         }
     }
     
     func setUpButtons() {
+        
         view.addSubview(buttonStackView)
         
         NSLayoutConstraint.activate([
             
-            buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            buttonStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            buttonStackView.widthAnchor.constraint(equalToConstant: UIScreen.width * 0.85),
             
-            buttonStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -UIScreen.height * 0.13),
+            buttonStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -18),
             
-            buttonStackView.heightAnchor.constraint(equalToConstant: UIScreen.height * 0.06)
-            
+            buttonStackView.heightAnchor.constraint(equalToConstant: 80)
         ])
         
-        followUserButton.layer.cornerRadius = 24
         followUserButton.backgroundColor = .clear
         let image = UIImage(systemName: "location.fill",
                             withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .medium))
         followUserButton.setImage(image, for: UIControl.State())
         
-        trackerButton.layer.cornerRadius = 20
-        trackerButton.setTitle("Tracking", for: UIControl.State())
-        trackerButton.backgroundColor = UIColor.hexStringToUIColor(hex: "7CCA5F")
-        trackerButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        trackerButton.titleLabel?.numberOfLines = 2
+        trackerButton.translatesAutoresizingMaskIntoConstraints = false
+        trackerButton.setTitle("Start", for: .normal)
+        trackerButton.titleLabel?.font = UIFont.regular(size: 18)
         trackerButton.titleLabel?.textAlignment = .center
         
-        saveButton.layer.cornerRadius = 20
-        saveButton.setTitle("Save", for: UIControl.State())
-        saveButton.backgroundColor = UIColor.hexStringToUIColor(hex: "007AFF")
+        saveButton.setTitle("Save", for: .normal)
+
+        saveButton.titleLabel?.font = UIFont.regular(size: 16)
         saveButton.titleLabel?.textAlignment = .center
-        
-        resetButton.layer.cornerRadius = 20
-        resetButton.setTitle("Reset", for: UIControl.State())
-        resetButton.backgroundColor = UIColor.hexStringToUIColor(hex: "E31C00")
+        saveButton.alpha = 0.5
+       
+        resetButton.setTitle("Reset", for: .normal)
+        resetButton.titleLabel?.font = UIFont.regular(size: 16)
         resetButton.titleLabel?.textAlignment = .center
+        resetButton.alpha = 0.5
         
+        let button = UIButton()
+       
         buttonStackView.addArrangedSubview(followUserButton)
+        buttonStackView.addArrangedSubview(button)
         buttonStackView.addArrangedSubview(trackerButton)
         buttonStackView.addArrangedSubview(saveButton)
         buttonStackView.addArrangedSubview(resetButton)
+        
+        NSLayoutConstraint.activate([
+            
+            followUserButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            followUserButton.widthAnchor.constraint(equalToConstant: 50),
+            
+            button.heightAnchor.constraint(equalToConstant: 50),
+            
+            button.widthAnchor.constraint(equalToConstant: 50),
+            
+            trackerButton.heightAnchor.constraint(equalToConstant: 80),
+            
+            trackerButton.widthAnchor.constraint(equalToConstant: 80),
+            
+            saveButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            saveButton.widthAnchor.constraint(equalToConstant: 50),
+            
+            resetButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            resetButton.widthAnchor.constraint(equalToConstant: 50)
+        ])
         
         trackerButton.addTarget(self, action: #selector(trackerButtonTapped), for: .touchUpInside)
         
@@ -176,29 +271,29 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         
         map.addSubview(coordsLabel)
         coordsLabel.numberOfLines = 0
-        coordsLabel.frame = CGRect(x: 15, y: 30, width: 200, height: 100)
+        coordsLabel.frame = CGRect(x: 10, y: 30, width: 200, height: 100)
         coordsLabel.textAlignment = .left
-        coordsLabel.font = .systemFont(ofSize: 14)
+        coordsLabel.font = UIFont.regular(size: 14)
         coordsLabel.textColor = UIColor.black
         
         map.addSubview(timeLabel)
         timeLabel.frame = CGRect(x: UIScreen.width - 100, y: 40, width: 80, height: 30)
         timeLabel.textAlignment = .right
-        timeLabel.font = .systemFont(ofSize: 26)
+        timeLabel.font = UIFont.regular(size: 26)
         timeLabel.textColor = UIColor.black
         timeLabel.text = "00:00"
         
         map.addSubview(totalTrackedDistanceLabel)
         totalTrackedDistanceLabel.frame = CGRect(x: UIScreen.width - 100, y: 70, width: 80, height: 30)
         totalTrackedDistanceLabel.textAlignment = .right
-        totalTrackedDistanceLabel.font = .systemFont(ofSize: 26)
+        totalTrackedDistanceLabel.font = UIFont.regular(size: 26)
         totalTrackedDistanceLabel.textColor = UIColor.black
         totalTrackedDistanceLabel.distance = 0.00
         
         map.addSubview(currentSegmentDistanceLabel)
         currentSegmentDistanceLabel.frame = CGRect(x: UIScreen.width - 100, y: 100, width: 80, height: 30)
         currentSegmentDistanceLabel.textAlignment = .right
-        currentSegmentDistanceLabel.font = .systemFont(ofSize: 18)
+        currentSegmentDistanceLabel.font = UIFont.regular(size: 18)
         currentSegmentDistanceLabel.textColor = UIColor.black
         currentSegmentDistanceLabel.distance = 0.00
         
@@ -214,31 +309,41 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     var gpxTrackingStatus: GpxTrackingStatus = GpxTrackingStatus.notStarted {
+        
         didSet {
+            
             switch gpxTrackingStatus {
+                
             case .notStarted:
-                print("switched to non started")
-                trackerButton.setTitle("Tracking",
-                                       for: UIControl.State())
-                trackerButton.alpha = 1.0
-                saveButton.alpha = 1.0
-                resetButton.alpha = 1.0
+                
+                trackerButton.setTitle("Start",
+                                       for: .normal)
+             
                 stopWatch.reset()
+                waveLottieView.isHidden = true
+                
                 timeLabel.text = stopWatch.elapsedTimeString
                 
                 map.clearMap()
+                
                 totalTrackedDistanceLabel.distance = (map.session.totalTrackedDistance)
+                
                 currentSegmentDistanceLabel.distance = (map.session.currentSegmentDistance)
                 
             case .tracking:
-
-                trackerButton.setTitle("Pause", for: UIControl.State())
+                
+                trackerButton.setTitle("Pause", for: .normal)
+                
                 self.stopWatch.start()
+                waveLottieView.isHidden = false
+                waveLottieView.play()
                 
             case .paused:
-                self.trackerButton.setTitle("Resume", for: UIControl.State())
+                self.trackerButton.setTitle("Resume", for: .normal)
                 
                 self.stopWatch.stop()
+                waveLottieView.isHidden = true
+                
                 self.map.startNewTrackSegment()
             }
         }
@@ -247,18 +352,30 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     @objc func trackerButtonTapped() {
         
         switch gpxTrackingStatus {
+            
         case .notStarted:
+            
+            UIView.animate(withDuration: 0.3) {
+                self.saveButton.alpha = 1.0
+                self.resetButton.alpha = 1.0
+            }
+
             gpxTrackingStatus = .tracking
+            
         case .tracking:
+            
             gpxTrackingStatus = .paused
+            
         case .paused:
+            
             gpxTrackingStatus = .tracking
+
         }
     }
     
     @objc func saveButtonTapped(withReset: Bool = false) {
-
-        if (gpxTrackingStatus == .notStarted) {
+        
+        if gpxTrackingStatus == .notStarted {
             return
         }
         
@@ -268,16 +385,16 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         let time = dateFormatter.string(from: date as Date)
         let defaultFileName = "\(time)"
         
-        let alertController = UIAlertController(title: "Save Data",
-                                                message: "Enter Record Name",
+        let alertController = UIAlertController(title: "儲存至裝置",
+                                                message: "請輸入檔案名稱",
                                                 preferredStyle: .alert)
         
         alertController.addTextField(configurationHandler: { (textField) in
             textField.clearButtonMode = .always
             textField.text =  defaultFileName
         })
-
-        let saveAction = UIAlertAction(title: "Save",
+        
+        let saveAction = UIAlertAction(title: "儲存",
                                        style: .default) { _ in
             
             let gpxString = self.map.exportToGPXString()
@@ -285,7 +402,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
             let fileName = alertController.textFields?[0].text
             
             if let fileName = fileName {
-            GPXFileManager.save(filename: fileName, gpxContents: gpxString)
+                GPXFileManager.save(filename: fileName, gpxContents: gpxString)
             }
             
             if withReset {
@@ -293,7 +410,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
             }
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
         
         alertController.addAction(saveAction)
         alertController.addAction(cancelAction)
@@ -304,18 +421,22 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         
         let sheet = UIAlertController()
         
-        let cancelOption = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+        let cancelOption = UIAlertAction(title: "取消", style: .cancel) { _ in
         }
         
-        let deleteOption = UIAlertAction(title: "Reset", style: .destructive) { _ in
+        let deleteOption = UIAlertAction(title: "重置", style: .destructive) { _ in
             self.gpxTrackingStatus = .notStarted
+            
+            UIView.animate(withDuration: 0.3) {
+                self.saveButton.alpha = 0.5
+                self.resetButton.alpha = 0.5
+            }
         }
         
         sheet.addAction(cancelOption)
         sheet.addAction(deleteOption)
         
         self.present(sheet, animated: true) {
-            print("Loaded actionSheet")
         }
     }
     
@@ -429,12 +550,12 @@ extension JourneyViewController: CLLocationManagerDelegate {
         let newLocation = locations.first!
         let hAcc = newLocation.horizontalAccuracy
         let vAcc = newLocation.verticalAccuracy
-//        print("didUpdateLocation: received \(newLocation.coordinate) hAcc: \(hAcc) vAcc: \(vAcc) floor: \(newLocation.floor?.description ?? "''")")
+        //        print("didUpdateLocation: received \(newLocation.coordinate) hAcc: \(hAcc) vAcc: \(vAcc) floor: \(newLocation.floor?.description ?? "''")")
         //Update coordsLabel
-        let latFormat = String(format: "%.6f", newLocation.coordinate.latitude)
-        let lonFormat = String(format: "%.6f", newLocation.coordinate.longitude)
+        let latFormat = String(format: "%.5f", newLocation.coordinate.latitude)
+        let lonFormat = String(format: "%.5f", newLocation.coordinate.longitude)
         let altitude = newLocation.altitude.toAltitude()
-        var text = "latitude:\(latFormat) \rlongtitude: \(lonFormat) \raltitude:\(altitude)"
+        var text = "latitude: \(latFormat) \rlontitude: \(lonFormat) \raltitude: \(altitude)"
         
         coordsLabel.text = text
         
@@ -442,16 +563,18 @@ extension JourneyViewController: CLLocationManagerDelegate {
             map.setCenter(newLocation.coordinate, animated: true)
         }
         if gpxTrackingStatus == .tracking {
-//            print("didUpdateLocation: adding point to track (\(newLocation.coordinate.latitude),\(newLocation.coordinate.longitude))")
+
             map.addPointToCurrentTrackSegmentAtLocation(newLocation)
+            
             totalTrackedDistanceLabel.distance = map.session.totalTrackedDistance
+            
             currentSegmentDistanceLabel.distance = map.session.currentSegmentDistance
         }
     }
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-
+        
         map.heading = newHeading
         
         map.updateHeading()

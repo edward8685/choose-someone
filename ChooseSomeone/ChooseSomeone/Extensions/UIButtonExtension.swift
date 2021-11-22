@@ -142,3 +142,25 @@ private extension GradientButton {
         gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
     }
 }
+
+extension UIButton
+{
+    func applyButtonGradient(colors: [UIColor?], locations: [NSNumber]? = [0.0, 1.0], direction: Direction = .topToBottom) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = colors.map { $0?.cgColor as Any }
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        gradientLayer.frame = self.bounds
+        
+        switch direction {
+        case .topToBottom:
+            gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
+            gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+            
+        case .leftSkewed:
+            gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+            gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        }
+        self.layer.insertSublayer(gradientLayer, at: 0)
+    }
+}

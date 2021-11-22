@@ -50,6 +50,8 @@
 		7449349C272548BC002D8FE3 /* TrailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7449349B272548BC002D8FE3 /* TrailInfoViewController.swift */; };
 		7449349F27255A0B002D8FE3 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7449349E27255A0B002D8FE3 /* UIStoryboard+Extension.swift */; };
 		744934A1272562C8002D8FE3 /* TrailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744934A0272562C8002D8FE3 /* TrailManager.swift */; };
+		7451EEE3274965CE00438D94 /* wave.json in Resources */ = {isa = PBXBuildFile; fileRef = 7451EEE2274965CE00438D94 /* wave.json */; };
+		7451EEE92749FC6400438D94 /* sunset.json in Resources */ = {isa = PBXBuildFile; fileRef = 7451EEE82749FC6400438D94 /* sunset.json */; };
 		7457A1D0271EECEF00A947AE /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457A1CF271EECEF00A947AE /* Message.swift */; };
 		7457A1D2271EEEDC00A947AE /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457A1D1271EEEDC00A947AE /* Request.swift */; };
 		745A6EFC272BA417006064C4 /* GPXFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6EFB272BA417006064C4 /* GPXFileManager.swift */; };
@@ -159,6 +161,8 @@
 		7449349B272548BC002D8FE3 /* TrailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailInfoViewController.swift; sourceTree = "<group>"; };
 		7449349E27255A0B002D8FE3 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		744934A0272562C8002D8FE3 /* TrailManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailManager.swift; sourceTree = "<group>"; };
+		7451EEE2274965CE00438D94 /* wave.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wave.json; sourceTree = "<group>"; };
+		7451EEE82749FC6400438D94 /* sunset.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sunset.json; sourceTree = "<group>"; };
 		7457A1CF271EECEF00A947AE /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		7457A1D1271EEEDC00A947AE /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		745A6EFB272BA417006064C4 /* GPXFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPXFileManager.swift; sourceTree = "<group>"; };
@@ -507,6 +511,8 @@
 			isa = PBXGroup;
 			children = (
 				74E5735E2726D6A500F490BF /* KingFisherWrapper.swift */,
+				7451EEE2274965CE00438D94 /* wave.json */,
+				7451EEE82749FC6400438D94 /* sunset.json */,
 			);
 			path = "Third Party Wrapper";
 			sourceTree = "<group>";
@@ -532,7 +538,7 @@
 				740FC387271D17160071459A /* Resources */,
 				74608D14271D1895002BD125 /* ShellScript */,
 				744159FE2746565A00ABC360 /* ShellScript */,
-				F74F85B9DA2762F2712294C3 /* [CP] Embed Pods Frameworks */,
+				EE90945132059A3495905340 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -586,9 +592,11 @@
 				74608D26271D20B0002BD125 /* GroupHeaderCell.xib in Resources */,
 				740B1B842723FECC00A1CD3B /* Home.storyboard in Resources */,
 				740B1B822723F41D00A1CD3B /* Main.storyboard in Resources */,
+				7451EEE92749FC6400438D94 /* sunset.json in Resources */,
 				740FC399271D17180071459A /* LaunchScreen.storyboard in Resources */,
 				74608D3E271E7A63002BD125 /* GoogleService-Info.plist in Resources */,
 				740E98AD2734DF79006163B8 /* ProfileCell.xib in Resources */,
+				7451EEE3274965CE00438D94 /* wave.json in Resources */,
 				740B1B8C2724161600A1CD3B /* HomeHeaderCell.xib in Resources */,
 				740FC396271D17180071459A /* Assets.xcassets in Resources */,
 				7441B7B327313F3E00614D9B /* NotoSansTC-Light.otf in Resources */,
@@ -672,7 +680,7 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
-		F74F85B9DA2762F2712294C3 /* [CP] Embed Pods Frameworks */ = {
+		EE90945132059A3495905340 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

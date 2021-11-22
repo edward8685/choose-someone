@@ -36,6 +36,19 @@ enum ImageAsset: String {
     case Logo_flap
     case Logo_regular
     case Logo_stack
+    
+    case hiking
+    case hiking_fill
+    case route
+    case route_fill
+    case group
+    case group_fill
+    case search
+    case search_fill
+    case track
+    case track_fill
+    case profile
+    case profile_fill
 }
 
 // swiftlint:enable identifier_name

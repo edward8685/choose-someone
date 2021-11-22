@@ -8,12 +8,11 @@
 import UIKit
 import FirebaseFirestore
 import FirebaseAuth
+import Lottie
 
 class HomeViewController: BaseViewController {
     
     private var userInfo = UserManager.shared.userInfo
-    
-    var startValue: Double = 0.0
     
     var isHeaderViewCreated: Bool = false
     
@@ -46,7 +45,7 @@ class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(updateUserInfo), name: NSNotification.userInfoDidChanged, object: nil)
         
         setUpTableView()
@@ -62,15 +61,15 @@ class HomeViewController: BaseViewController {
     @objc func updateUserInfo(notification: Notification) {
         
         if let userInfo = notification.userInfo as? [String: UserInfo] {
-            
+
             if let userInfo = userInfo[self.userInfo.uid] {
                 self.userInfo = userInfo
             }
+            guard let headerView = headerView else { return }
             
-            self.headerView?.updateUserInfo(user: self.userInfo)
-            
+            headerView.updateUserInfo(user: self.userInfo)
+
         }
-        self.tableView.reloadData()
     }
     
     func setUpTableView() {
@@ -137,24 +136,11 @@ extension HomeViewController: UITableViewDelegate {
         
         headerView.updateUserInfo(user: userInfo)
         
-        let displayLink = CADisplayLink(target: self, selector: #selector(handleUpdate))
-        
-        
         isHeaderViewCreated = true
         
         return self.headerView
     }
     
-    @objc func handleUpdate() {
-        
-        //        self.headerView?.totalKilos.text = "\(startValue)"
-        //
-        //        startValue += 0.1
-        //
-        //        if startValue > endValue {
-        //            startValue = endValue
-        //    }
-    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         

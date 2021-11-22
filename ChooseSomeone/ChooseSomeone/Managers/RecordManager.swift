@@ -9,7 +9,6 @@ import Foundation
 import FirebaseStorage
 import FirebaseFirestoreSwift
 import FirebaseFirestore
-import CloudKit
 
 class RecordManager {
     
@@ -49,6 +48,8 @@ class RecordManager {
                             
                             self.uploadRecordToDb(fileName: fileName, fileURL: url)
                             
+                            GPXFileManager.parseGPXFile(fileURL: url)
+                            
                         case .failure(let error):
                             
                             completion(.failure(error))
@@ -63,10 +64,9 @@ class RecordManager {
             
         } catch {
             
-            print("Unable to load data")
+            print("Unable to upload data")
             
         }
-        
     }
     
     func uploadRecordToDb(fileName: String, fileURL: URL) {
@@ -142,7 +142,7 @@ class RecordManager {
             
             if let error = error {
                 
-                print ("\(error)")
+                print("\(error)")
                 
                 completion(.failure(error))
                 
@@ -155,7 +155,7 @@ class RecordManager {
         }
     }
     
-    func deleteDbRecords(fileName:String) {
+    func deleteDbRecords(fileName: String) {
         
         let collection = dataBase.collection("Records").whereField("record_name", isEqualTo: fileName)
         
@@ -172,6 +172,35 @@ class RecordManager {
                 for document in querySnapshot.documents {
                     
                     document.reference.delete()
+                }
+            }
+        }
+    }
+    
+    func detectDeviceAndUpload() {
+        
+        let files = GPXFileManager.gpxFilesInDevice
+        
+        if files.count != 0 {
+            
+            for file in files {
+                
+                let fileName = (file.absoluteString as NSString).lastPathComponent
+                
+                uploadRecord(fileName: fileName, fileURL: file) { result in
+                    
+                    switch result {
+                        
+                    case .success:
+                        
+                        print("save to Firebase successfully")
+                        
+                        GPXFileManager.removeFileFromURL(file)
+                        
+                    case .failure(let error):
+                        
+                        print("save to Firebase failure: \(error)")
+                    }
                 }
             }
         }

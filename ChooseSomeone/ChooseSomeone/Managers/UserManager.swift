@@ -153,7 +153,7 @@ class UserManager {
         }
     }
     
-    func updateUserGroupRecords(numOfGroups:Int, numOfPartners:Int) {
+    func updateUserGroupRecords(numOfGroups: Int, numOfPartners: Int) {
         
         userInfo.totalGroups = numOfGroups
         userInfo.totalFriends = numOfPartners
@@ -163,6 +163,29 @@ class UserManager {
         let post = [UserInfo.CodingKeys.totalGroups.rawValue: numOfGroups,
                     UserInfo.CodingKeys.totalFriends.rawValue: numOfPartners
         ]
+        
+        let docRef = dataBase.collection("Users").document(userId)
+        
+        docRef.updateData(post) { error in
+            
+            if let error = error {
+                
+                print("Error updating document: \(error)")
+                
+            } else {
+                
+                print("User name successfully updated")
+            }
+        }
+    }
+    
+    func updateUserTrailRecord(length: Double) {
+        
+        userInfo.totalLength += length
+        
+        let userId = userInfo.uid
+
+        let post = [UserInfo.CodingKeys.totalLength.rawValue: userInfo.totalLength]
         
         let docRef = dataBase.collection("Users").document(userId)
         

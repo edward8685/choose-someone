@@ -32,6 +32,7 @@ class ChooseGroupViewController: BaseViewController {
         didSet {
             
             checkRequestsNum()
+            
         }
     }
     
@@ -47,6 +48,7 @@ class ChooseGroupViewController: BaseViewController {
         
         didSet {
             searching = true
+            headerView?.groupSearchBar.delegate = self
         }
     }
     
@@ -129,16 +131,20 @@ class ChooseGroupViewController: BaseViewController {
     
     @objc func changeSearchText(notification: Notification) {
         
-        inActiveGroups.removeAll()
-        myGroups.removeAll()
-        
         if let trailName = notification.userInfo as? [String: String] {
             
             if let trailName = trailName["trailName"] {
                 
-                fetchGroupData()
                 self.searchText = trailName
-                self.searching = true
+                
+                if onlyUserGroup {
+                    searchGroups = myGroups.filter {
+                        $0.trailName.lowercased().prefix(searchText.count) == searchText.lowercased() }
+                } else {
+                    searchGroups = inActiveGroups.filter {
+                        $0.trailName.lowercased().prefix(searchText.count) == searchText.lowercased() }
+                }
+            
                 headerView?.groupSearchBar.text = trailName
             }
         }
@@ -173,6 +179,8 @@ class ChooseGroupViewController: BaseViewController {
             
         } else {
             
+            headerView.requestListButton.shake()
+            
             headerView.badgeView.isHidden = false
         }
         
@@ -180,7 +188,12 @@ class ChooseGroupViewController: BaseViewController {
     
     @objc func checkRequestList(_ sender: UIButton) {
         
-        performSegue(withIdentifier: "toRequestList", sender: requests)
+        if requests.count != 0 {
+            
+            performSegue(withIdentifier: "toRequestList", sender: requests)
+        } else {
+            headerView?.requestListButton.shake()
+        }
     }
     
     @objc func updateUserInfo(notification: Notification) {
@@ -331,7 +344,7 @@ class ChooseGroupViewController: BaseViewController {
         
         headerView.textSegmentedControl.addTarget(self, action: #selector(segmentValueChanged(_:)), for: .valueChanged)
         
-        headerView.groupSearchBar.delegate = self
+
         headerView.groupSearchBar.searchTextField.text = searchText
         
     }
@@ -414,7 +427,7 @@ extension ChooseGroupViewController: UITableViewDelegate {
         cell.alpha = 0
         
         UIView.animate(
-            withDuration: 0.5,
+            withDuration: 0.4,
             delay: 0.03 * Double(indexPath.row),
             animations: {
                 cell.alpha = 1
@@ -563,7 +576,6 @@ extension ChooseGroupViewController: UISearchBarDelegate {
         searching = true
         
         tableView.reloadData()
-        
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
