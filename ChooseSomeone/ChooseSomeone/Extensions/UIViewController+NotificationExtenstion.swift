@@ -30,14 +30,6 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
         return true
     }
     
-//    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-//
-//        if gestureRecognizer == self.navigationController?.interactivePopGestureRecognizer {
-//            return false
-//        }
-//        return true
-//    }
-    
     override func viewDidLoad() {
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
             self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true

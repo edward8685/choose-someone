@@ -173,7 +173,6 @@ extension TrackRecordsViewController: UITableViewDelegate {
         }
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         performSegue(withIdentifier: "toUserRecord", sender: records[indexPath.row])

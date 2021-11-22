@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-struct Message: Codable {
+struct Message: Hashable, Codable {
     var groupId: String
     var userId: String
     var body: String

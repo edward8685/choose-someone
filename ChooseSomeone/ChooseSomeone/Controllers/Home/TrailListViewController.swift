@@ -11,25 +11,33 @@ class TrailListViewController: BaseViewController {
     
     // MARK: - DataSource & DataSourceSnapshot typelias -
     typealias DataSource = UICollectionViewDiffableDataSource<Section, Trail>
+    
     typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Trail>
     
     @IBOutlet weak var collectionView: UICollectionView! {
+        
         didSet {
+            
             collectionView.delegate = self
         }
     }
-
+    
     private var themeLabel = ""
+    
     private var dataSource: DataSource!
+    
     private var snapshot = DataSourceSnapshot()
     
     enum Section {
+        
         case section
     }
     
     var trails = [Trail]() {
+        
         didSet {
-        setUpLabel()
+            
+            setUpLabel()
         }
     }
     
@@ -44,7 +52,6 @@ class TrailListViewController: BaseViewController {
         setUpThemeTag()
         
         navigationController?.isNavigationBarHidden = true
-        
     }
     
     private func setupCollectionView() {
@@ -52,9 +59,11 @@ class TrailListViewController: BaseViewController {
         collectionView.registerCellWithNib(reuseIdentifier: TrailCell.reuseIdentifier, bundle: nil)
         
         collectionView.backgroundColor = .clear
+        
         collectionView.collectionViewLayout = configureCollectionViewLayout()
         
         configureDataSource()
+        
         configureSnapshot()
     }
     
@@ -137,7 +146,6 @@ class TrailListViewController: BaseViewController {
         
         collectionView.addSubview(label)
     }
-    
 }
 
 extension TrailListViewController: UICollectionViewDelegate {
@@ -168,10 +176,14 @@ func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
     
     return UICollectionViewCompositionalLayout { (sectionIndex, env) -> NSCollectionLayoutSection? in
         
+        let inset  = 5
+        
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0))
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
+//        item.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
+//        
         let height: CGFloat = 300
         
         let groupLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(height))
@@ -191,7 +203,6 @@ func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
                 NSCollectionLayoutGroupCustomItem(frame: CGRect(x: spacing, y: height / 2, width: itemWidth, height: height * 0.9))
             ]
         }
-        //        group.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
         
         let section = NSCollectionLayoutSection(group: group)
         
@@ -220,7 +231,7 @@ extension TrailListViewController {
     }
     
     @objc func toGroupPage(_ sender: UIButton) {
-                self.tabBarController?.selectedIndex = 1
+        self.tabBarController?.selectedIndex = 1
         
         NotificationCenter.default.post(name: NSNotification.checkGroupDidTaped, object: nil, userInfo: ["trailName": self.trails[sender.tag].trailName] )
     }

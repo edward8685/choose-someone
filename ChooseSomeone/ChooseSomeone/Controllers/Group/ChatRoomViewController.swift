@@ -12,6 +12,17 @@ import FirebaseAuth
 
 class ChatRoomViewController: BaseViewController {
     
+    enum Section {
+        case message
+    }
+    
+    // MARK: - DataSource & DataSourceSnapshot typelias -
+    typealias DataSource = UITableViewDiffableDataSource<Section, Message>
+    
+    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Message>
+    
+    private var dataSource: DataSource!
+    
     private var userInfo = UserManager.shared.userInfo
     
     var groupInfo: Group?
@@ -48,8 +59,6 @@ class ChatRoomViewController: BaseViewController {
         didSet {
             
             tableView.delegate = self
-            
-            tableView.dataSource = self
         }
     }
     
@@ -99,6 +108,9 @@ class ChatRoomViewController: BaseViewController {
         setNavigationBar()
         
         setUpStatusBarView()
+        
+        configureDataSource()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,7 +131,7 @@ class ChatRoomViewController: BaseViewController {
     // MARK: - Action
     
     @objc func updateUserInfo(notification: Notification) {
-            
+        
         if let userInfo = notification.userInfo as? [String: UserInfo] {
             
             if let userInfo = userInfo[self.userInfo.uid] {
@@ -159,7 +171,7 @@ class ChatRoomViewController: BaseViewController {
     func addMessageListener() {
         
         guard let groupInfo = groupInfo else { fatalError() }
-        
+ 
         GroupRoomManager.shared.addSnapshotListener(groupId: groupInfo.groupId) { result in
             
             switch result {
@@ -180,33 +192,14 @@ class ChatRoomViewController: BaseViewController {
                     }
                 }
                 
+                
+                if groupInfo.userIds.contains(self.userInfo.uid) == true {
+
                 self.messages = filtedmessages
-                
-            case .failure(let error):
-                
-                print("fetchData.failure: \(error)")
-            }
-        }
-    }
-    
-    func fetchMessages() {
-        
-        guard let groupInfo = groupInfo else { return }
-        
-        GroupRoomManager.shared.fetchMessages(groupId: groupInfo.groupId) { result in
-            
-            switch result {
-                
-            case .success(let messages):
-                
-                var filtedmessages = [Message]()
-                
-                for message in messages where self.userInfo.blockList?.contains(message.userId) == false {
                     
-                    filtedmessages.append(message)
                 }
-                
-                self.messages = filtedmessages
+
+                self.configureSnapshot()
                 
             case .failure(let error):
                 
@@ -448,7 +441,6 @@ class ChatRoomViewController: BaseViewController {
         rightButton.addTarget(self, action: #selector(showMembers), for: .touchUpInside)
         
         self.navigationItem.setRightBarButton(UIBarButtonItem(customView: rightButton), animated: true)
-        
     }
     
     @objc func backToPreviousVC() {
@@ -637,36 +629,34 @@ extension ChatRoomViewController: UITableViewDelegate {
     }
 }
 
-extension ChatRoomViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        if groupInfo?.userIds.contains(userInfo.uid) == true {
+extension ChatRoomViewController {
+    
+    func configureDataSource() {
+        
+        dataSource = DataSource(tableView: tableView, cellProvider: { (tableView, indexPath, model) -> UITableViewCell? in
             
-            isInGroup = true
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: GroupChatCell.identifier, for: indexPath) as? GroupChatCell else {
+                fatalError("Cannot create new cell")
+            }
             
-            return messages.count
-            
-        } else {
-            
-            isInGroup = false
-            
-            return 0
-        }
+            if let memberInfo = self.cache[model.userId] {
+                
+                cell.setUpCell(message: model, memberInfo: memberInfo)
+                
+            }
+            return cell
+        })
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: GroupChatCell.identifier, for: indexPath) as? GroupChatCell
-                
-        else { fatalError("Could not create Cell") }
+    func configureSnapshot() {
         
-        let message = messages[indexPath.row]
+        var snapshot = DataSourceSnapshot()
         
-        if let memberInfo = cache[message.userId] {
-            
-            cell.setUpCell(message: message, memberInfo: memberInfo)
-            
-        }
-        return cell
+        snapshot.appendSections([.message])
+        
+        snapshot.appendItems(messages, toSection: .message)
+        
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
 }
 
