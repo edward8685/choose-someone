@@ -12,17 +12,26 @@ class ProfileView: UIView {
     var isEditting: Bool = false {
         
         didSet {
+            
+            if isEditting {
+                editNameButton.setImage(UIImage(systemName: "arrow.down.square"), for: .normal)
                 
-            UIView.animate(withDuration: 0.2) {
+            } else {
+                editNameButton.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
+            }
+                
+            UIView.animate(withDuration: 0.1) {
                 
                 self.editNameTextField.backgroundColor = self.isEditting ? .systemGray6 : .clear
+                
+                self.editNameTextField.textColor = self.isEditting ? .black : .B1
+                
             } completion: { [self] _ in
                 
                 editNameTextField.isEnabled = isEditting ? true : false
                 
                 editNameTextField.isEnabled = isEditting ? true : false
                 
-                editNameTextField.textColor = isEditting ? .black : .B1
             }
         }
     }

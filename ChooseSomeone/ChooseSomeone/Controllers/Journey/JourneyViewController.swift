@@ -158,7 +158,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         resetButton.roundCorners(cornerRadius: otherRadius)
         
         trackerButton.applyButtonGradient(
-            colors: [UIColor.hexStringToUIColor(hex: "#C4E0E5"),
+            colors: [UIColor.hexStringToUIColor(hex: "#C4E0F8"),
                      .B1],
             locations: [0.0, 1.0],
             direction: .leftSkewed)
@@ -211,7 +211,6 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
                             withConfiguration: UIImage.SymbolConfiguration(pointSize: 30, weight: .medium))
         followUserButton.setImage(image, for: UIControl.State())
         
-        
         trackerButton.translatesAutoresizingMaskIntoConstraints = false
         trackerButton.setTitle("Start", for: .normal)
         trackerButton.titleLabel?.font = UIFont.regular(size: 18)
@@ -258,7 +257,6 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
             
             resetButton.widthAnchor.constraint(equalToConstant: 50)
         ])
-        
         
         trackerButton.addTarget(self, action: #selector(trackerButtonTapped), for: .touchUpInside)
         

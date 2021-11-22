@@ -284,7 +284,7 @@ class ChatRoomViewController: BaseViewController {
                 
             case .success:
                 
-                let controller = UIAlertController(title: "成功申請囉", message: nil, preferredStyle: .alert)
+                let controller = UIAlertController(title: "成功申請", message: nil, preferredStyle: .alert)
                 
                 let okAction = UIAlertAction(title: "OK", style: .cancel)
                 
@@ -301,7 +301,7 @@ class ChatRoomViewController: BaseViewController {
     
     func leaveGroup() {
         
-        let controller = UIAlertController(title: "確定要退出嗎", message: nil, preferredStyle: .alert)
+        let controller = UIAlertController(title: "確認退出", message: nil, preferredStyle: .alert)
         
         let leaveAction = UIAlertAction(title: "退出", style: .destructive) { _ in
             
@@ -577,7 +577,6 @@ extension ChatRoomViewController: UITableViewDelegate {
         
         self.headerView = headerView
         
-        
         headerView.requestButton.addTarget(self, action: #selector(didTappedButton), for: .touchUpInside)
         
         if let groupInfo = groupInfo,
@@ -637,7 +636,6 @@ extension ChatRoomViewController: UITableViewDelegate {
         }
     }
 }
-
 
 extension ChatRoomViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

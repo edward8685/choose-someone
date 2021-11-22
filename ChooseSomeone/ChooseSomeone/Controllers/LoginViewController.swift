@@ -16,12 +16,11 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
     
     lazy var loginButton = ASAuthorizationAppleIDButton(type: .signIn, style: .whiteOutline)
     
-    @IBOutlet weak var gradientView: UIView!{
+    @IBOutlet weak var gradientView: UIView! {
         didSet {
             gradientView.applyGradient(
                 colors: [.B2, .C4],
                 locations: [0.0, 1.0], direction: .leftSkewed)
-            gradientView.alpha = 0.85
         }
     }
     
@@ -60,9 +59,7 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
         setUpSignInButton()
         
         stuffComeout()
-        
-        
-        
+
     }
     
     func setUpSignInButton() {
@@ -81,12 +78,11 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
             
             loginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             
-            loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: 80)
+            loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 80)
         ])
         
         loginButton.alpha = 0.0
     }
-    
     
     func stuffComeout () {
         
@@ -94,7 +90,6 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
         self.agreementStackView.alpha = 0.0
         
         appLogo.translatesAutoresizingMaskIntoConstraints = false
-        
         
         UIView.animate(withDuration: 0.5, delay: 1) {
             
