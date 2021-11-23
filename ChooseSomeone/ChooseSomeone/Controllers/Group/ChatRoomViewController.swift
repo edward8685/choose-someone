@@ -44,13 +44,7 @@ class ChatRoomViewController: BaseViewController {
         }
     }
     
-    private var messages = [Message]() {
-        
-        didSet {
-            
-            tableView.reloadData()
-        }
-    }
+    private var messages = [Message]()
     
     var cache = [String: UserInfo]()
     
@@ -171,7 +165,7 @@ class ChatRoomViewController: BaseViewController {
     func addMessageListener() {
         
         guard let groupInfo = groupInfo else { fatalError() }
- 
+        
         GroupRoomManager.shared.addSnapshotListener(groupId: groupInfo.groupId) { result in
             
             switch result {
@@ -192,13 +186,12 @@ class ChatRoomViewController: BaseViewController {
                     }
                 }
                 
-                
                 if groupInfo.userIds.contains(self.userInfo.uid) == true {
-
-                self.messages = filtedmessages
+                    
+                    self.messages = filtedmessages
                     
                 }
-
+                
                 self.configureSnapshot()
                 
             case .failure(let error):
@@ -576,7 +569,6 @@ extension ChatRoomViewController: UITableViewDelegate {
             
             headerView.setUpCell(group: groupInfo, cache: userInfo, userStatus: userStatus)
         }
-        //        headerView.hostBadgeButton.addTarget(self, action: #selector(foldHeaderView), for: .touchUpInside)
         
         return headerView.contentView
     }
@@ -656,7 +648,7 @@ extension ChatRoomViewController {
         
         snapshot.appendItems(messages, toSection: .message)
         
-        dataSource.apply(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
 

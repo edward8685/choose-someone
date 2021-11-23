@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-struct Request: Codable {
+struct Request: Codable, Hashable {
     var groupId: String
     var groupName: String
     var hostId: String
@@ -22,14 +22,4 @@ struct Request: Codable {
         case hostId = "host_id"
         case createdTime = "created_time"
     }
-//    
-//    init() {
-//        self.groupId = ""
-//        self.groupName = ""
-//        self.hostId = ""
-//        self.requestId = ""
-//        self.requestName = ""
-//        self.createdTime = Timestamp()
-//    }
 }
-

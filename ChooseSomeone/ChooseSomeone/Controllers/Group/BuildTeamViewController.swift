@@ -21,7 +21,6 @@ class BuildTeamViewController: BaseViewController {
             
             dimmingView.addGestureRecognizer(recognizer)
         }
-        
     }
     
     private var group = Group()

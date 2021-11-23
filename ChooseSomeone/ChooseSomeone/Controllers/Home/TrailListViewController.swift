@@ -186,7 +186,9 @@ func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
 //        
         let height: CGFloat = 300
         
-        let groupLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(height))
+        let groupLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(450))
+        
+        
         
         let group = NSCollectionLayoutGroup.custom(layoutSize: groupLayoutSize) { (env) -> [NSCollectionLayoutGroupCustomItem] in
             
@@ -205,6 +207,8 @@ func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
         }
         
         let section = NSCollectionLayoutSection(group: group)
+        
+        section.interGroupSpacing = -150
         
         return section
     }

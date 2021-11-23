@@ -20,10 +20,4 @@ struct Message: Hashable, Codable {
         case body
         case createdTime = "created_time"
     }
-//    init() {
-//        self.groupId = ""
-//        self.userId = ""
-//        self.body = ""
-//        self.createdTime = Timestamp()
-//    }
 }

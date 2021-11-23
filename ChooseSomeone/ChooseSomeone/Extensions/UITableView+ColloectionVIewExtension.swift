@@ -15,7 +15,6 @@ extension UITableView {
         
         register(nib, forCellReuseIdentifier: identifier)
     }
-    
 }
 
 extension UITableViewCell {
@@ -34,7 +33,6 @@ extension UICollectionView {
         
         register(nib, forCellWithReuseIdentifier: reuseIdentifier)
     }
-    
 }
 
 extension UICollectionViewCell {

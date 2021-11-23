@@ -32,7 +32,6 @@ class ChooseGroupViewController: BaseViewController {
         didSet {
             
             checkRequestsNum()
-            
         }
     }
     
@@ -582,6 +581,8 @@ extension ChooseGroupViewController: UISearchBarDelegate {
         
         searching = false
         
+        searchBar.endEditing(true)
+        
         resignFirstResponder()
     }
     
@@ -590,6 +591,8 @@ extension ChooseGroupViewController: UISearchBarDelegate {
         searching = false
         
         searchBar.text = ""
+        
+        searchBar.endEditing(true)
         
         tableView.reloadData()
         

@@ -23,6 +23,4 @@ class GPXFileInfo: NSObject {
         self.fileURL = fileURL
         super.init()
     }
-    
 }
-

@@ -49,7 +49,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="揪團已結束" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4rr-48-KGk">
-                        <rect key="frame" x="428" y="22" width="70" height="20.5"/>
+                        <rect key="frame" x="428" y="58.5" width="70" height="20.5"/>
                         <fontDescription key="fontDescription" name="NotoSansTC-Regular" family="Noto Sans TC" pointSize="14"/>
                         <color key="textColor" name="U3"/>
                         <nil key="highlightedColor"/>
@@ -177,9 +177,9 @@
                 <constraints>
                     <constraint firstItem="tLq-UF-4vv" firstAttribute="top" secondItem="3ab-ou-FXT" secondAttribute="bottom" constant="8" id="0BO-SS-ltW"/>
                     <constraint firstItem="tLq-UF-4vv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="1RV-Dd-Xll"/>
+                    <constraint firstItem="4rr-48-KGk" firstAttribute="centerY" secondItem="dBI-wo-zjo" secondAttribute="centerY" id="1zE-34-f19"/>
                     <constraint firstAttribute="bottom" secondItem="Cdk-ME-c3N" secondAttribute="bottom" constant="10" id="5DP-g4-Oui"/>
                     <constraint firstItem="3ab-ou-FXT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="5za-K2-Pef"/>
-                    <constraint firstItem="4rr-48-KGk" firstAttribute="centerY" secondItem="LEe-rr-Mk7" secondAttribute="centerY" id="63V-df-pKi"/>
                     <constraint firstItem="IFX-00-YVL" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="B1S-TM-FAj"/>
                     <constraint firstAttribute="trailing" secondItem="2mf-4B-nnL" secondAttribute="trailing" constant="25" id="DOe-3h-vh6"/>
                     <constraint firstItem="LEe-rr-Mk7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="Dsk-qS-ibD"/>

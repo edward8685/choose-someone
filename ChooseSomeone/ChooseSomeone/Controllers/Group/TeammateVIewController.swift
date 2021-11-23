@@ -35,13 +35,11 @@ class TeammateViewController: BaseViewController {
         setNavigationBar()
         
         view.stickSubView(tableView)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         navigationController?.isNavigationBarHidden = false
-        
     }
     
     // MARK: - Action

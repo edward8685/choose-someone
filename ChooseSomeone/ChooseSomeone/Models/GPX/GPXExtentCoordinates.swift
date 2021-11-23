@@ -51,6 +51,5 @@ class GPXExtentCoordinates: NSObject {
             bottomRightCoordinate.longitude = newValue.center.longitude - newValue.span.longitudeDelta/2
             
         }
-        
     }
 }
