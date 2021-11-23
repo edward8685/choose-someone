@@ -10,16 +10,18 @@ import Firebase
 
 enum ActionSheet: String{
     
-    case camera = "Camera"
-    case library = "Library"
-    case cancel = "Cancel"
+    case camera = "相機"
+    case library = "圖庫"
+    case cancel = "取消"
 }
 
 class ProfileViewController: UIViewController {
     
     @IBOutlet weak var gradientView: UIView! {
         didSet {
-            gradientView.applyGradient(colors: [.white, .U2], locations: [0.0, 1.0], direction: .leftSkewed)
+            gradientView.applyGradient(
+                colors: [.B2, .C4],
+                locations: [0.0, 1.0], direction: .leftSkewed)
         }
     }
     
@@ -141,7 +143,7 @@ class ProfileViewController: UIViewController {
     }
     
     func updateUserInfo(name: String) {
-        
+
         UserManager.shared.updateUserName(name: name)
     }
 }
@@ -169,6 +171,8 @@ extension ProfileViewController: UITableViewDelegate {
         case 2:
             
             guard let policyVC = UIStoryboard.policy.instantiateViewController(identifier: PrivacyPolicyViewController.identifier) as? PrivacyPolicyViewController else { return }
+            
+            policyVC.policyType = .privacy
 
             present(policyVC, animated: true, completion: nil)
             
@@ -217,7 +221,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         
         imagePickerController.allowsEditing = true
         
-        let actionSheet = UIAlertController(title: "Profile Photo", message: "Please choose a file", preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(title: "選擇照片來源", message: nil, preferredStyle: .actionSheet)
         
         actionSheet.addAction(UIAlertAction(title: ActionSheet.camera.rawValue, style: .default, handler:{ (UIAlertAction) in
             
@@ -247,7 +251,9 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         
         guard let imageData = image.jpegData(compressionQuality: 0.1) else { return }
         
-        profileView.userImage.image = image
+        UIView.animate(withDuration: 0.2) {
+            self.profileView.userImage.image = image
+        }
         
         updateUserInfo(imageData: imageData)
         

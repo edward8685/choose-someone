@@ -7,49 +7,61 @@
 
 import CoreGPX
 
-let kFileExt = ["gpx", "GPX"]
-
 class GPXFileManager {
     
     class var GPXFilesFolderURL: URL {
-        let documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] as URL
-        return documentsUrl
-    }
+        
+         let documentsUrl =  FileManager.default.urls(
+            for: .documentDirectory,
+            in: .userDomainMask)[0] as URL
+        
+         return documentsUrl
+     }
     
     class func URLForFilename(_ filename: String) -> URL {
         
         var fullURL = self.GPXFilesFolderURL.appendingPathComponent(filename)
-//        if  !(kFileExt.contains(fullURL.pathExtension)) {
-            fullURL = fullURL.appendingPathExtension("gpx")
-//        }
+        
+        fullURL = fullURL.appendingPathExtension("gpx")
+        
         return fullURL
     }
     
     class func saveToURL(fileURL: URL, gpxContents: String) {
-
-        var writeError: NSError?
-        
-        let saved: Bool
         
         do {
             
             try gpxContents.write(toFile: fileURL.path, atomically: true, encoding: String.Encoding.utf8)
-            saved = true
             
-        } catch let error as NSError {
+        } catch {
             
-            writeError = error
-            saved = false
+            print("can not save to URL")
             
         }
-        if !saved {
+    }
+    
+    class var gpxFilesInDevice: [URL] {
+        
+        var files: [URL] = []
+        
+        let fileManager = FileManager.default
+        
+        let documentsURL =  fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0] as URL
+        
+        do {
             
-            if let error = writeError {
-                print("\(error.localizedDescription)")
+            if let directoryURLs = try? fileManager.contentsOfDirectory(
+                at: documentsURL,
+                includingPropertiesForKeys:[.attributeModificationDateKey, .fileSizeKey],
+                options: .skipsSubdirectoryDescendants) {
                 
+                for url in directoryURLs {
+                    files.append(url)
+                }
             }
         }
-
+        
+        return files
     }
     
     class func save(filename: String, gpxContents: String) {
@@ -64,12 +76,59 @@ class GPXFileManager {
                 
             case .success:
                 
+                parseGPXFile(fileURL: fileURL)
+                
                 print("save to Firebase successfully")
+                
+                GPXFileManager.removeFileFromURL(fileURL)
                 
             case .failure(let error):
                 
                 print("save to Firebase failure: \(error)")
+                
             }
         }
+    }
+    
+    class func parseGPXFile(fileURL: URL) {
+        
+        var distanceFromOrigin: [Double] = []
+        
+        let inputURL = fileURL
+        
+            guard let gpx = GPXParser(withURL: inputURL)?.parsedData() else { return }
+            
+            for track in gpx.tracks {
+                
+                for segment in track.segments {
+                    
+                    distanceFromOrigin = segment.distanceFromOrigin()
+                }
+            }
+        
+        let length = distanceFromOrigin.last ?? 0
+        
+        UserManager.shared.updateUserTrailRecord(length: length)
+
+    }
+    
+    
+    class func removeFileFromURL(_ fileURL: URL) {
+        
+        let defaultManager = FileManager.default
+        
+        do {
+            try defaultManager.removeItem(atPath: fileURL.path)
+            
+        } catch {
+            print("can not remove file")
+        }
+    }
+    
+    class func removeFile(_ filename: String) {
+        
+        let fileURL: URL = self.URLForFilename(filename)
+        
+        GPXFileManager.removeFileFromURL(fileURL)
     }
 }

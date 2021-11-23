@@ -10,6 +10,10 @@ import FirebaseFirestore
 
 class GroupInfoCell: UITableViewCell {
     
+    @IBOutlet weak var viewOfCell: UIView!
+    
+    @IBOutlet weak var isOverLabel: UILabel!
+    
     @IBOutlet weak var groupName: UILabel!
     
     @IBOutlet weak var trailName: UILabel!
@@ -46,17 +50,33 @@ class GroupInfoCell: UITableViewCell {
         numOfPeople.text = "\(counts) / \(upperLimit)"
         
         if group.hostId == userInfo.uid {
+            
             flagImage.isHidden = false
+            
         } else {
+            
             flagImage.isHidden = true
         }
         
-        for userInGroup in group.userIds {
-            if userInGroup != userInfo.uid {
-                chevronView.isHidden = true
+        if group.userIds.contains(userInfo.uid) {
+            
+            chevronView.isHidden = false
+            
             } else {
-                chevronView.isHidden = false
+                
+                chevronView.isHidden = true
             }
+        
+        if group.isExpired == true {
+            
+            isOverLabel.isHidden = false
+            viewOfCell.backgroundColor = .systemGray4
+            
+        } else {
+            
+            isOverLabel.isHidden = true
+            viewOfCell.backgroundColor = .white
+
         }
     }
     
@@ -67,9 +87,4 @@ class GroupInfoCell: UITableViewCell {
         self.backgroundColor = .clear
         
     }
-    
-    override func layoutSubviews() {
-//        chevronView.layer.cornerRadius = chevronView.frame.height / 2
-    }
-    
 }

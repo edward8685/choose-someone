@@ -17,10 +17,9 @@ extension GPXWaypoint: MKAnnotation {
         let timeFormat = DateFormatter()
         timeFormat.dateStyle = DateFormatter.Style.none
         timeFormat.timeStyle = DateFormatter.Style.medium
-        //timeFormat.setLocalizedDateFormatFromTemplate("HH:mm:ss")
         
         let subtitleFormat = DateFormatter()
-        //dateFormat.setLocalizedDateFormatFromTemplate("MMM dd, yyyy")
+
         subtitleFormat.dateStyle = DateFormatter.Style.medium
         subtitleFormat.timeStyle = DateFormatter.Style.medium
         
@@ -34,9 +33,7 @@ extension GPXWaypoint: MKAnnotation {
         self.init(coordinate: coordinate)
         self.elevation = altitude
     }
-    
-    /// Title displayed on the annotation bubble.
-    /// Is the attribute name of the waypoint.
+
     public var title: String? {
         set {
             self.name = newValue
@@ -46,8 +43,6 @@ extension GPXWaypoint: MKAnnotation {
         }
     }
     
-    /// Subtitle displayed on the annotation bubble
-    /// Description of the GPXWaypoint.
     public var subtitle: String? {
         set {
             self.desc = newValue
@@ -56,8 +51,7 @@ extension GPXWaypoint: MKAnnotation {
             return self.desc
         }
     }
-    
-    ///Annotation coordinates. Returns/Sets the waypoint latitude and longitudes.
+
     public var coordinate: CLLocationCoordinate2D {
         set {
             self.latitude = newValue.latitude

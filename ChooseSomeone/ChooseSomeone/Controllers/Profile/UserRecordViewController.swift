@@ -209,6 +209,8 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         
         var totalDrop: Double = 0.0
         
+        if elevation.count != 0 {
+        
         for index in 0..<elevation.count - 1 {
             
             let diff = elevation[index + 1] - elevation[index]
@@ -221,6 +223,7 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
                 
                 totalClimp += diff
             }
+        }
         }
         
         totalDrop = abs(totalDrop)

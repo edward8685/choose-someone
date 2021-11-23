@@ -17,11 +17,7 @@ class MemberCell: UITableViewCell {
     
     @IBOutlet weak var acceptButton: UIButton!
     
-    @IBOutlet weak var rejectButton: UIButton! {
-        didSet {
-            
-        }
-    }
+    @IBOutlet weak var rejectButton: UIButton!
     
     @IBOutlet weak var viewOfBackground: UIView!
     
@@ -29,13 +25,13 @@ class MemberCell: UITableViewCell {
     
     //Join Request
     
-    func setUpCell(request: Request, userInfo: UserInfo) {
+    func setUpCell(model: Request, userInfo: UserInfo) {
         
         requestNameLabel.text = userInfo.userName
         
         requestLabel.text = "want to join your group"
         
-        groupNameLabel.text = "\(request.groupName)"
+        groupNameLabel.text = "\(model.groupName)"
         
         guard let ref = userInfo.pictureRef else { return }
         
@@ -51,14 +47,14 @@ class MemberCell: UITableViewCell {
         acceptButton.isHidden = true
         groupNameLabel.isHidden = true
         
-//        let image = UIImage.asset(.block)
-        let image = UIImage(systemName: "person.fill.xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 14, weight: .medium))
-        
+        let image = UIImage.asset(.block)
+
         rejectButton.setImage(image, for: .normal)
         
-        rejectButton.tintColor = .white
+        rejectButton.backgroundColor = .white
         
         if userInfo.uid == UserManager.shared.userId {
+            
             rejectButton.isHidden = true
         }
         

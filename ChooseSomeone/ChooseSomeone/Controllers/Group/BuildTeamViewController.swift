@@ -21,7 +21,6 @@ class BuildTeamViewController: BaseViewController {
             
             dimmingView.addGestureRecognizer(recognizer)
         }
-        
     }
     
     private var group = Group()
@@ -118,7 +117,7 @@ class BuildTeamViewController: BaseViewController {
         
         noteTextView.layer.cornerRadius = 10
         
-        noteTextView.textContainer.maximumNumberOfLines = 2
+        noteTextView.textContainer.maximumNumberOfLines = 3
         
         noteTextView.textContainer.lineBreakMode = .byWordWrapping
     }
@@ -128,7 +127,7 @@ class BuildTeamViewController: BaseViewController {
         let textfields = [ groupNameTextField, trailNameTextField, numOfPeopleTextfield]
         
         if noteTextView.text != nil {
-        textsWerefilled = textfields.allSatisfy{ $0?.text?.isEmpty  == false }
+            textsWerefilled = textfields.allSatisfy { $0?.text?.isEmpty  == false }
         }
     }
     
@@ -156,33 +155,61 @@ class BuildTeamViewController: BaseViewController {
         
         group.userIds = [hostId]
         
-        GroupRoomManager.shared.buildTeam(group: &group) { result in
+        if group.date.checkIsExpired() {
             
-            switch result {
+            buildTeamView.shake()
+            
+            let controller = UIAlertController(title: "揪團時間錯誤", message: "請更改日期", preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "ok", style: .cancel)
+            
+            controller.addAction(okAction)
+            
+            self.present(controller, animated: true, completion: nil)
+            
+        } else {
+            
+            GroupRoomManager.shared.buildTeam(group: &group) { result in
                 
-            case .success:
-                
-                print("build team success")
-                
-                let controller = UIAlertController(title: "開啟揪團囉", message: nil, preferredStyle: .alert)
-                
-                let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+                switch result {
                     
-                    self.dismiss(animated: true, completion: nil)
+                case .success:
+                    
+                    print("build team success")
+                    
+                    let controller = UIAlertController(title: "開啟揪團囉", message: nil, preferredStyle: .alert)
+                    
+                    let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+                        
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                    
+                    controller.addAction(okAction)
+                    
+                    self.present(controller, animated: true, completion: nil)
+                    
+                case .failure(let error):
+                    
+                    print("build team failure: \(error)")
                 }
-                controller.addAction(okAction)
-                
-                self.present(controller, animated: true, completion: nil)
-                
-            case .failure(let error):
-                
-                print("build team failure: \(error)")
             }
         }
     }
 }
 
 extension BuildTeamViewController: UITextFieldDelegate, UITextViewDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        var maxLength = 12
+        
+        if textField == numOfPeopleTextfield {
+            maxLength = 2
+        }
+        let currentString: NSString = (textField.text ?? "") as NSString
+        let newString: NSString =
+            currentString.replacingCharacters(in: range, with: string) as NSString
+        return newString.length <= maxLength
+    }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         

@@ -25,15 +25,6 @@ enum ProfileSegue: String, CaseIterable {
     case privacy = "privacy"
 }
 
-struct ProfileGroup {
-    
-    let title: String
-    
-    let action: ProfileSegue?
-    
-    let items: [ProfileItem]
-}
-
 enum ProfileFeat: ProfileItem, CaseIterable {
     
     case record

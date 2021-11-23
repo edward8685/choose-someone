@@ -44,7 +44,7 @@ class GroupRoomManager {
                         
                     }
                 }
-                messages.sort{ $0.createdTime.seconds < $1.createdTime.seconds }
+                messages.sort { $0.createdTime.seconds < $1.createdTime.seconds }
                 
                 completion(.success(messages))
             }
@@ -53,7 +53,7 @@ class GroupRoomManager {
     
     func fetchMessages(groupId: String, completion: @escaping (Result<[Message], Error>) -> Void) {
         let collection = dataBase.collection("Messages")
-        collection.getDocuments() {(querySnapshot,error) in
+        collection.getDocuments() {(querySnapshot, error) in
             
             guard let querySnapshot = querySnapshot else { return }
             
@@ -86,7 +86,7 @@ class GroupRoomManager {
     
     func fetchGroups(completion: @escaping (Result<[Group], Error>) -> Void) {
         let collection = dataBase.collection("Groups")
-        collection.order(by: "date", descending: false).getDocuments() {(querySnapshot,error) in
+        collection.order(by: "date", descending: false).getDocuments() {(querySnapshot, error) in
             
             guard let querySnapshot = querySnapshot else { return }
             
@@ -102,7 +102,15 @@ class GroupRoomManager {
                     
                     do {
                         
-                        if let group = try document.data(as: Group.self, decoder: Firestore.Decoder()) {
+                        if var group = try document.data(as: Group.self, decoder: Firestore.Decoder()) {
+                            
+                            if group.date.checkIsExpired() {
+                                
+                                group.isExpired = true
+                            } else {
+                                group.isExpired = false
+                            }
+                                
                             groups.append(group)
                         }
                         
@@ -111,7 +119,7 @@ class GroupRoomManager {
                         completion(.failure(error))
                     }
                 }
-                
+
                 completion(.success(groups))
             }
         }
@@ -291,5 +299,4 @@ class GroupRoomManager {
             }
             }
         }
-    
 }

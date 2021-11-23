@@ -9,6 +9,13 @@ import UIKit
 
 class JoinRequestViewController: BaseViewController {
     
+    // MARK: - DataSource & DataSourceSnapshot typelias -
+    typealias DataSource = UITableViewDiffableDataSource<Section, Request>
+    
+    typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Request>
+    
+    private var dataSource: DataSource!
+    
     lazy var requests = [Request]() {
         
         didSet {
@@ -34,7 +41,6 @@ class JoinRequestViewController: BaseViewController {
             
             tableView.delegate = self
             
-            tableView.dataSource = self
         }
     }
     
@@ -44,17 +50,15 @@ class JoinRequestViewController: BaseViewController {
         
         super.viewDidLoad()
         
-        tableView = UITableView()
-        
-        tableView.registerCellWithNib(identifier: MemberCell.identifier, bundle: nil)
-        
         setUpDimmingView()
         
         setUpTableView()
         
-        tableView.backgroundColor = .clear
-        
         setUpButton()
+        
+        configureDataSource()
+        
+        configureSnapshot()
     }
     
     func setUpDimmingView() {
@@ -64,7 +68,7 @@ class JoinRequestViewController: BaseViewController {
         dimmingView.translatesAutoresizingMaskIntoConstraints = false
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
-            dimmingView.addGestureRecognizer(recognizer)
+        dimmingView.addGestureRecognizer(recognizer)
         
     }
     
@@ -83,7 +87,7 @@ class JoinRequestViewController: BaseViewController {
                 
                 self.requests = requests
                 
-                self.tableView.reloadData()
+                self.configureSnapshot()
                 
             case .failure(let error):
                 
@@ -108,10 +112,16 @@ class JoinRequestViewController: BaseViewController {
             }
         })
     }
-
+    
     func setUpTableView() {
         
+        tableView = UITableView()
+        
+        tableView.registerCellWithNib(identifier: MemberCell.identifier, bundle: nil)
+        
         view.addSubview(tableView)
+        
+        tableView.backgroundColor = .clear
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -160,34 +170,6 @@ class JoinRequestViewController: BaseViewController {
 
 extension JoinRequestViewController: UITableViewDelegate {
     
-}
-
-extension JoinRequestViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        requests.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberCell.identifier, for: indexPath) as? MemberCell
-                
-        else {fatalError("Could not create Cell")}
-        
-        if let user = cache[requests[indexPath.row].requestId] {
-            
-            cell.setUpCell(request: requests[indexPath.row], userInfo: user)
-        }
-        
-        cell.acceptButton.addTarget(self, action: #selector(acceptRequest), for: .touchUpInside)
-        
-        cell.acceptButton.tag = indexPath.row
-        
-        cell.rejectButton.addTarget(self, action: #selector(rejectRequest), for: .touchUpInside)
-        
-        cell.rejectButton.tag = indexPath.row
-        
-        return cell
-    }
-    
     @objc func acceptRequest(_ sender: UIButton) {
         
         GroupRoomManager.shared.addUserToGroup(
@@ -217,9 +199,8 @@ extension JoinRequestViewController: UITableViewDataSource {
                 
                 print("accept succesfully")
                 self.requests.remove(at: sender.tag)
-                self.tableView.deleteRows(at: [IndexPath(row: sender.tag, section: 0)],
-                                          with: .automatic)
                 
+                self.configureSnapshot()
                 
             case .failure(let error):
                 
@@ -243,12 +224,51 @@ extension JoinRequestViewController: UITableViewDataSource {
                 print("reject succesfully")
                 
                 self.requests.remove(at: sender.tag)
-                self.tableView.reloadData()
+                self.configureSnapshot()
                 
             case .failure(let error):
                 
                 print("reject failure: \(error)")
             }
         }
+    }
+}
+
+extension JoinRequestViewController {
+    
+    func configureDataSource() {
+        dataSource = DataSource(tableView: tableView) { (tableView, indexPath, model) ->UITableViewCell? in
+            
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberCell.identifier, for: indexPath) as? MemberCell else {
+                fatalError("Cannot create new cell")
+            }
+            
+            if let user = self.cache[self.requests[indexPath.row].requestId] {
+                
+                cell.setUpCell(model: model, userInfo: user)
+                
+            }
+            
+            cell.acceptButton.addTarget(self, action: #selector(self.acceptRequest), for: .touchUpInside)
+            
+            cell.acceptButton.tag = indexPath.row
+            
+            cell.rejectButton.addTarget(self, action: #selector(self.rejectRequest), for: .touchUpInside)
+            
+            cell.rejectButton.tag = indexPath.row
+            
+            return cell
+        }
+    }
+    
+    func configureSnapshot() {
+        
+        var snapshot = DataSourceSnapshot()
+        
+        snapshot.appendSections([.section])
+        
+        snapshot.appendItems(requests, toSection: .section)
+        
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
 }

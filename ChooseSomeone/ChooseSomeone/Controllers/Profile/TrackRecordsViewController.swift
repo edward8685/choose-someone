@@ -30,6 +30,15 @@ class TrackRecordsViewController: UIViewController {
 //
 //        private var snapshot = DataSourceSnapshot()
     
+    @IBOutlet weak var gradientView: UIView! {
+        didSet {
+            gradientView.applyGradient(
+                colors: [.B2, .C4],
+                locations: [0.0, 1.0], direction: .leftSkewed)
+            gradientView.alpha = 0.85
+        }
+    }
+    
     var records = [Record]()
     
     private var tableView: UITableView! {
@@ -42,8 +51,7 @@ class TrackRecordsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.applyGradient(colors: [.white, .U2], locations: [0.0, 1.0], direction: .leftSkewed)
+//        self.view.applyGradient(colors: [.white, .U2], locations: [0.0, 1.0], direction: .leftSkewed)
         
         fetchRecords()
         
@@ -113,8 +121,6 @@ class TrackRecordsViewController: UIViewController {
         
         tableView.separatorStyle = .none
         
-//        tableView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: -10, right: 20)
-        
     }
     
     func fetchRecords() {
@@ -166,7 +172,6 @@ extension TrackRecordsViewController: UITableViewDelegate {
             }
         }
     }
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         

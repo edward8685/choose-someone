@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-struct Message: Codable {
+struct Message: Hashable, Codable {
     var groupId: String
     var userId: String
     var body: String
@@ -19,11 +19,5 @@ struct Message: Codable {
         case userId = "user_id"
         case body
         case createdTime = "created_time"
-    }
-    init() {
-        self.groupId = ""
-        self.userId = ""
-        self.body = ""
-        self.createdTime = Timestamp()
     }
 }

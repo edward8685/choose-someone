@@ -90,7 +90,7 @@ extension UIView {
         
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.bounds
-        gradientLayer.colors = colors.map{ $0?.cgColor as Any }
+        gradientLayer.colors = colors.map { $0?.cgColor as Any }
         gradientLayer.locations = locations
         
         switch direction {
@@ -109,6 +109,22 @@ extension UIView {
         self.layer.addSublayer(gradientLayer)
     }
     
+    func shake() {
+            let animation = CABasicAnimation(keyPath: "position")
+        
+            animation.duration = 0.15
+        
+            animation.repeatCount = 2
+        
+            animation.autoreverses = true
+        
+            animation.fromValue = NSValue(cgPoint: CGPoint(x: self.center.x - 5, y: self.center.y))
+        
+            animation.toValue = NSValue(cgPoint: CGPoint(x: self.center.x + 5, y: self.center.y))
+        
+            self.layer.add(animation, forKey: "position")
+        }
+    
     func roundCornersTop(cornerRadius: Double) {
         
         self.layer.cornerRadius = CGFloat(cornerRadius)
@@ -116,7 +132,42 @@ extension UIView {
         self.clipsToBounds = true
         
         self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+    }
+    
+    func roundCornersWhithoutLeftTop(cornerRadius: Double) {
         
+        self.layer.cornerRadius = CGFloat(cornerRadius)
+        
+        self.clipsToBounds = true
+        
+        self.layer.maskedCorners = [
+            .layerMaxXMinYCorner,
+            .layerMinXMaxYCorner, .layerMaxXMaxYCorner
+        ]
+    }
+    
+    func roundCornersWhithoutRightTop(cornerRadius: Double) {
+        
+        self.layer.cornerRadius = CGFloat(cornerRadius)
+        
+        self.clipsToBounds = true
+        
+        self.layer.maskedCorners = [
+            .layerMinXMinYCorner,
+            .layerMinXMaxYCorner, .layerMaxXMaxYCorner
+        ]
+    }
+    
+    func roundCorners(cornerRadius: Double) {
+        
+        self.layer.cornerRadius = CGFloat(cornerRadius)
+        
+        self.clipsToBounds = true
+        
+        self.layer.maskedCorners = [
+            .layerMinXMinYCorner, .layerMaxXMinYCorner,
+            .layerMinXMaxYCorner, .layerMaxXMaxYCorner
+        ]
     }
     
     func stickSubView(_ objectView: UIView) {

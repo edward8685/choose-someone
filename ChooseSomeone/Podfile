@@ -21,4 +21,6 @@ target 'ChooseSomeone' do
   pod 'CoreGPX'
   pod 'Charts'
   pod 'RSKPlaceholderTextView'
+  pod 'Firebase/Crashlytics'
+  pod 'lottie-ios'
 end

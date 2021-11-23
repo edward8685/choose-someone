@@ -31,3 +31,20 @@ enum TimeFormater: String {
         return formatTime
     }
 }
+
+extension Timestamp {
+    
+    func checkIsExpired() -> Bool {
+        
+        let localTime = Timestamp()
+        
+        if localTime.seconds > self.seconds {
+            
+            return true
+            
+        } else {
+        
+        return false
+    }
+}
+}

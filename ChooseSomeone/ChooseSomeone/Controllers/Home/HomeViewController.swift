@@ -8,18 +8,13 @@
 import UIKit
 import FirebaseFirestore
 import FirebaseAuth
+import Lottie
 
 class HomeViewController: BaseViewController {
     
-    private var uid = UserManager.shared.userInfo.uid
-    
     private var userInfo = UserManager.shared.userInfo
     
-    private let themes = ["愜意的走", "想流點汗", "百岳挑戰"]
-    
-    private let images = [UIImage.asset(.scene_1),
-                          UIImage.asset(.scene_2),
-                          UIImage.asset(.scene_3)]
+    var isHeaderViewCreated: Bool = false
     
     private var trails = [Trail]() {
         
@@ -50,7 +45,7 @@ class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(updateUserInfo), name: NSNotification.userInfoDidChanged, object: nil)
         
         setUpTableView()
@@ -61,18 +56,19 @@ class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         navigationController?.isNavigationBarHidden = true
-        
     }
     
-    @objc func updateUserInfo(notification: NSNotification) {
-        DispatchQueue.main.async {
+    @objc func updateUserInfo(notification: Notification) {
+        
+        if let userInfo = notification.userInfo as? [String: UserInfo] {
+
+            if let userInfo = userInfo[self.userInfo.uid] {
+                self.userInfo = userInfo
+            }
+            guard let headerView = headerView else { return }
             
-            if let userInfo = notification.userInfo?[self.uid] as? UserInfo {
-                
-                self.headerView?.updateUserInfo(user: userInfo)
-                
-        }
-            self.tableView.reloadData()
+            headerView.updateUserInfo(user: self.userInfo)
+
         }
     }
     
@@ -87,18 +83,18 @@ class HomeViewController: BaseViewController {
         tableView.backgroundColor = .clear
         
         tableView.separatorStyle = .none
-    
+        
     }
     
     func fetchTrailData() {
         
-        TrailManager.shared.fetchTrails { [weak self] result in
+        TrailManager.shared.fetchTrails { result in
             
             switch result {
                 
             case .success(let trails):
                 
-                self?.trails = trails
+                self.trails = trails
                 
             case .failure(let error):
                 
@@ -140,8 +136,11 @@ extension HomeViewController: UITableViewDelegate {
         
         headerView.updateUserInfo(user: userInfo)
         
+        isHeaderViewCreated = true
+        
         return self.headerView
     }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -163,7 +162,6 @@ extension HomeViewController: UITableViewDelegate {
             
             return
         }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -174,8 +172,6 @@ extension HomeViewController: UITableViewDelegate {
                     
                     trailListVC.trails = trails
                 }
-                
-                trailListVC.themes = themes
             }
         }
     }
@@ -184,7 +180,7 @@ extension HomeViewController: UITableViewDelegate {
 extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        themes.count
+        TrailThemes.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -193,12 +189,12 @@ extension HomeViewController: UITableViewDataSource {
                 
         else {fatalError("Could not create Cell")}
         
-        cell.setUpCell(theme: themes[indexPath.row], image: images[indexPath.row])
+        cell.setUpCell(theme: TrailThemes.allCases[indexPath.row].rawValue, image: TrailThemes.allCases[indexPath.row].image)
         
         if indexPath.row % 2 == 1 {
             cell.themeLabel.textColor = .black
         }
-
+        
         return cell
     }
 }
