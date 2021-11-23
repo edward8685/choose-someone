@@ -45,7 +45,6 @@ class GPXSession {
             self.totalTrackedDistance += distance
             
             self.currentSegmentDistance += distance
-        
         }
     }
     
@@ -58,7 +57,6 @@ class GPXSession {
             self.currentSegment = GPXTrackSegment()
             
             self.currentSegmentDistance = 0.00
-            
         }
     }
     
@@ -75,7 +73,6 @@ class GPXSession {
         self.currentTrackDistance = 0.00
         
         self.currentSegmentDistance = 0.00
-        
     }
     
     func exportToGPXString() -> String {
@@ -91,7 +88,6 @@ class GPXSession {
         if self.currentSegment.points.count > 0 {
             
             track.add(trackSegment: self.currentSegment)
-            
         }
 
         gpx.add(tracks: self.tracks)
@@ -99,7 +95,6 @@ class GPXSession {
         gpx.add(track: track)
         
         return gpx.gpx()
-        
     }
     
     func continueFromGPXRoot(_ gpx: GPXRoot) {
@@ -113,7 +108,5 @@ class GPXSession {
         self.trackSegments = lastTrack.segments
         
         self.tracks.removeLast()
-        
     }
-    
 }

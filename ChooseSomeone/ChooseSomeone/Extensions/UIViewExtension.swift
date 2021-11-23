@@ -125,7 +125,6 @@ extension UIView {
             self.layer.add(animation, forKey: "position")
         }
     
-    
     func roundCornersTop(cornerRadius: Double) {
         
         self.layer.cornerRadius = CGFloat(cornerRadius)
@@ -133,7 +132,6 @@ extension UIView {
         self.clipsToBounds = true
         
         self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        
     }
     
     func roundCornersWhithoutLeftTop(cornerRadius: Double) {

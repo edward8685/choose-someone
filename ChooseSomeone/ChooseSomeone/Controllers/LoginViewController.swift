@@ -14,7 +14,7 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
     
     fileprivate var currentNonce: String?
     
-    lazy var loginButton = ASAuthorizationAppleIDButton(type: .signIn, style: .whiteOutline)
+    lazy var loginButton = ASAuthorizationAppleIDButton(type: .signIn, style: .white)
     
     @IBOutlet weak var gradientView: UIView! {
         didSet {
@@ -74,11 +74,11 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
             
             loginButton.heightAnchor.constraint(equalToConstant: 36),
             
-            loginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            loginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             
-            loginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            loginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
             
-            loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 80)
+            loginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 200)
         ])
         
         loginButton.alpha = 0.0
