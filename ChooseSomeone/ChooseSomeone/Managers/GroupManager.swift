@@ -19,40 +19,44 @@ class GroupManager {
     
     func addSnapshotListener(groupId: String, completion: @escaping (Result<[Message], Error>) -> Void) {
         
-        dataBase.collection("Messages").whereField("group_id", isEqualTo: groupId).addSnapshotListener { (snapshot, error) in
-            
-            if let error = error {
+        dataBase.collection("Messages")
+            .whereField("group_id", isEqualTo: groupId)
+            .addSnapshotListener { (snapshot, error) in
                 
-                completion(.failure(error))
-                
-            } else {
-                
-                var messages = [Message]()
-                
-                for document in snapshot!.documents {
+                if let error = error {
                     
-                    do {
-                        if let message = try document.data(as: Message.self, decoder: Firestore.Decoder()) {
+                    completion(.failure(error))
+                    
+                } else {
+                    
+                    var messages = [Message]()
+                    
+                    for document in snapshot!.documents {
+                        
+                        do {
+                            if let message = try document.data(as: Message.self, decoder: Firestore.Decoder()) {
+                                
+                                messages.append(message)
+                                
+                            }
                             
-                            messages.append(message)
+                        } catch {
+                            
+                            completion(.failure(error))
                             
                         }
-                        
-                    } catch {
-                        
-                        completion(.failure(error))
-                        
                     }
+                    messages.sort { $0.createdTime.seconds < $1.createdTime.seconds }
+                    
+                    completion(.success(messages))
                 }
-                messages.sort { $0.createdTime.seconds < $1.createdTime.seconds }
-                
-                completion(.success(messages))
             }
-        }
     }
     
     func fetchMessages(groupId: String, completion: @escaping (Result<[Message], Error>) -> Void) {
+        
         let collection = dataBase.collection("Messages")
+        
         collection.getDocuments() {(querySnapshot, error) in
             
             guard let querySnapshot = querySnapshot else { return }
@@ -85,7 +89,9 @@ class GroupManager {
     }
     
     func fetchGroups(completion: @escaping (Result<[Group], Error>) -> Void) {
+        
         let collection = dataBase.collection("Groups")
+        
         collection.order(by: "date", descending: false).getDocuments() {(querySnapshot, error) in
             
             guard let querySnapshot = querySnapshot else { return }
@@ -110,7 +116,7 @@ class GroupManager {
                             } else {
                                 group.isExpired = false
                             }
-                                
+                            
                             groups.append(group)
                         }
                         
@@ -119,7 +125,7 @@ class GroupManager {
                         completion(.failure(error))
                     }
                 }
-
+                
                 completion(.success(groups))
             }
         }
@@ -127,41 +133,40 @@ class GroupManager {
     
     func fetchRequest(completion: @escaping (Result<[Request], Error>) -> Void) {
         
-        dataBase.collection("Requests").whereField("host_id", isEqualTo: userId).addSnapshotListener { (querySnapshot, error) in
-            
-            guard let querySnapshot = querySnapshot else { return }
-            
-            if let error = error {
+        dataBase.collection("Requests")
+            .whereField("host_id", isEqualTo: userId)
+            .addSnapshotListener { (querySnapshot, error) in
                 
-                completion(.failure(error))
+                guard let querySnapshot = querySnapshot else { return }
                 
-            } else {
-                
-                var requests = [Request]()
-                
-                for document in querySnapshot.documents {
+                if let error = error {
                     
-                    do {
+                    completion(.failure(error))
+                    
+                } else {
+                    
+                    var requests = [Request]()
+                    
+                    for document in querySnapshot.documents {
                         
-                        if let request = try document.data(as: Request.self, decoder: Firestore.Decoder()) {
+                        do {
                             
-                            requests.append(request)
+                            if let request = try document.data(as: Request.self, decoder: Firestore.Decoder()) {
+                                
+                                requests.append(request)
+                            }
                             
+                        } catch {
+                            
+                            completion(.failure(error))
                         }
-                        
-                    } catch {
-                        
-                        completion(.failure(error))
-                        
                     }
+                    
+                    requests.sort{ $0.createdTime.seconds > $1.createdTime.seconds }
+                    
+                    completion(.success(requests))
                 }
-                
-                requests.sort{ $0.createdTime.seconds > $1.createdTime.seconds }
-                
-                completion(.success(requests))
-                
             }
-        }
     }
     
     func buildTeam(group: inout Group, completion: (Result<String, Error>) -> Void) {
@@ -238,24 +243,24 @@ class GroupManager {
     func addUserToGroup(groupId: String, userId: String, completion: @escaping (Result<String, Error>) -> Void) {
         
         let docRef = dataBase.collection("Groups").document(groupId)
-   
-                docRef.updateData([
-                            "user_ids": FieldValue.arrayUnion([userId])
-                        ]) { error in
-                            if let error = error {
-                                
-                                print("Error updating document: \(error)")
-                                
-                                completion(.failure(error))
-                                
-                            } else {
-                                
-                                print("User leave group successfully")
-                                
-                                completion(.success("Success"))
-                    }
-                }
+        
+        docRef.updateData([
+            "user_ids": FieldValue.arrayUnion([userId])
+        ]) { error in
+            if let error = error {
+                
+                print("Error updating document: \(error)")
+                
+                completion(.failure(error))
+                
+            } else {
+                
+                print("User leave group successfully")
+                
+                completion(.success("Success"))
             }
+        }
+    }
     
     func removeRequest(groupId: String, userId: String, completion: @escaping (Result<String, Error>) -> Void) {
         
@@ -297,6 +302,6 @@ class GroupManager {
                 
                 print("User leave group successfully")
             }
-            }
         }
+    }
 }

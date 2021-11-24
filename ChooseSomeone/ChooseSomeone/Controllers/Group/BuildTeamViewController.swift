@@ -159,13 +159,7 @@ class BuildTeamViewController: BaseViewController {
             
             buildTeamView.shake()
             
-            let controller = UIAlertController(title: "揪團時間錯誤", message: "請更改日期", preferredStyle: .alert)
-            
-            let okAction = UIAlertAction(title: "ok", style: .cancel)
-            
-            controller.addAction(okAction)
-            
-            self.present(controller, animated: true, completion: nil)
+            showAlertAction(title: "揪團時間錯誤", message: "請更改日期")
             
         } else {
             
@@ -174,8 +168,6 @@ class BuildTeamViewController: BaseViewController {
                 switch result {
                     
                 case .success:
-                    
-                    print("build team success")
                     
                     let controller = UIAlertController(title: "開啟揪團囉", message: nil, preferredStyle: .alert)
                     

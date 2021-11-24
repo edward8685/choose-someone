@@ -84,7 +84,7 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
         self.present(controller, animated: true, completion: nil)
     }
     
-    func showAlertAction(title: String, message: String) {
+    func showAlertAction(title: String, message: String? = "") {
         
         let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
         

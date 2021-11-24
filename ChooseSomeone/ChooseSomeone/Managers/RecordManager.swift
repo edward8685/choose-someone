@@ -48,7 +48,7 @@ class RecordManager {
                             
                             self.uploadRecordToDb(fileName: fileName, fileURL: url)
                             
-                            GPXFileManager.parseGPXFile(fileURL: url)
+                            GPXFileManager.uploadTrackLengthToDb(fileURL: url)
                             
                         case .failure(let error):
                             

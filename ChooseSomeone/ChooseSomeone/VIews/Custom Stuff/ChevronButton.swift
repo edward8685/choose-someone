@@ -38,5 +38,4 @@ class ChevronButton: UIButton {
         self.layer.masksToBounds = true
         
     }
-    
 }

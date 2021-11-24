@@ -179,7 +179,7 @@ class UserManager {
         }
     }
     
-    func updateUserTrailRecord(length: Double) {
+    func updateUserTrackLength(length: Double) {
         
         userInfo.totalLength += length
         

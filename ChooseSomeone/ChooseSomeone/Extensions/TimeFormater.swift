@@ -16,6 +16,8 @@ enum TimeFormater: String {
     
     case preciseTime = "yyyy/MM/dd  HH:mm"
     
+    case preciseTimeForFilename = "yyyy-MM-dd_HH-mm"
+    
     func timestampToString(time: Timestamp) -> String {
         
         let timeInterval = time
@@ -27,6 +29,17 @@ enum TimeFormater: String {
         dateFormatter.dateFormat = self.rawValue
         
         let formatTime = dateFormatter.string(from: date as Date)
+        
+        return formatTime
+    }
+    
+    func dateToString(time: Date) -> String {
+        
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = self.rawValue
+        
+        let formatTime = dateFormatter.string(from: time as Date)
         
         return formatTime
     }

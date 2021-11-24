@@ -19,7 +19,9 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var recordInfoView: RecordInfoView!
     
     @IBOutlet weak var chartView: LineChartView! {
+        
         didSet {
+            
             chartView.delegate = self
         }
     }
@@ -56,10 +58,9 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         
         parseGPXFile()
         
-        setChart(distance: distanceFromOrigin, values: elevation)
-        
         recordInfoView.updateTrackInfo(data: trackInfo)
         
+        setChart(distance: distanceFromOrigin, values: elevation)
     }
     
     func setChart(distance: [Double], values: [Double]) {
@@ -102,11 +103,10 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         chartView.legend.enabled = false
         
         setUpChartLayout()
-
     }
     
     func setUpChartLayout() {
- 
+        
         let xAxis = chartView.xAxis
         xAxis.labelPosition = .bottom
         xAxis.setLabelCount(10, force: false)
@@ -163,10 +163,14 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
             
             didLoadGPXFile(gpxRoot: gpx)
             
+            var temArray: [Double] = []
+            
             for track in gpx.tracks {
                 
+                var lastLength: Double = 0.0
+                
                 for segment in track.segments {
-                   
+                    
                     for trackPoints in segment.points {
                         
                         if let ele = trackPoints.elevation,
@@ -176,10 +180,16 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
                             trackTime.append(Double(time))
                         }
                     }
+                    //coordinate add constant of the last segment endpoint
+                    let segmentLength = segment.distanceFromOrigin().map{ $0 + lastLength }
                     
-                    distanceFromOrigin = segment.distanceFromOrigin()
+                    lastLength = segment.distanceFromOrigin().last ?? 0
+                    
+                    temArray += segmentLength
                 }
             }
+            distanceFromOrigin = temArray
+            
             trackTime = trackTime.map { $0 - self.trackTime[0]}
             
             trackInfo.distance = distanceFromOrigin.last ?? 0
@@ -210,20 +220,20 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         var totalDrop: Double = 0.0
         
         if elevation.count != 0 {
-        
-        for index in 0..<elevation.count - 1 {
             
-            let diff = elevation[index + 1] - elevation[index]
-            
-            if diff < 0 {
+            for index in 0..<elevation.count - 1 {
                 
-                totalDrop += diff
+                let diff = elevation[index + 1] - elevation[index]
                 
-            } else {
-                
-                totalClimp += diff
+                if diff < 0 {
+                    
+                    totalDrop += diff
+                    
+                } else {
+                    
+                    totalClimp += diff
+                }
             }
-        }
         }
         
         totalDrop = abs(totalDrop)

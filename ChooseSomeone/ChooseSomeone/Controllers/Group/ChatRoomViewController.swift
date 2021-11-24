@@ -270,13 +270,7 @@ class ChatRoomViewController: BaseViewController {
                 
             case .success:
                 
-                let controller = UIAlertController(title: "成功申請", message: nil, preferredStyle: .alert)
-                
-                let okAction = UIAlertAction(title: "OK", style: .cancel)
-                
-                controller.addAction(okAction)
-                
-                self.present(controller, animated: true, completion: nil)
+                showAlertAction(title: "已送出申請")
                 
             case .failure(let error):
                 
@@ -331,13 +325,7 @@ class ChatRoomViewController: BaseViewController {
                 
             case .success:
                 
-                let controller = UIAlertController(title: "編輯成功", message: nil, preferredStyle: .alert)
-                
-                let okAction = UIAlertAction(title: "OK", style: .default)
-                
-                controller.addAction(okAction)
-                
-                self.present(controller, animated: true, completion: nil)
+                showAlertAction(title: "編輯成功")
                 
             case .failure(let error):
                 
