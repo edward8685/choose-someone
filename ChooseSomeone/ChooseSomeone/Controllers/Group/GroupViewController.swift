@@ -12,7 +12,7 @@ import MASegmentedControl
 import FirebaseAuth
 import FirebaseFirestore
 
-class ChooseGroupViewController: BaseViewController {
+class GroupViewController: BaseViewController {
     
     private var userInfo = UserManager.shared.userInfo
     
@@ -224,7 +224,7 @@ class ChooseGroupViewController: BaseViewController {
     
     func fetchGroupData() {
         
-        GroupRoomManager.shared.fetchGroups { result in
+        GroupManager.shared.fetchGroups { result in
             
             switch result {
                 
@@ -262,7 +262,7 @@ class ChooseGroupViewController: BaseViewController {
     
     func addRequestListener() {
         
-        GroupRoomManager.shared.fetchRequest { result in
+        GroupManager.shared.fetchRequest { result in
             
             switch result {
                 
@@ -419,7 +419,7 @@ class ChooseGroupViewController: BaseViewController {
     
 }
 
-extension ChooseGroupViewController: UITableViewDelegate {
+extension GroupViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
@@ -509,7 +509,7 @@ extension ChooseGroupViewController: UITableViewDelegate {
     }
 }
 
-extension ChooseGroupViewController: UITableViewDataSource {
+extension GroupViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -560,7 +560,7 @@ extension ChooseGroupViewController: UITableViewDataSource {
     }
 }
 
-extension ChooseGroupViewController: UISearchBarDelegate {
+extension GroupViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         

@@ -9,11 +9,11 @@ import Foundation
 import FirebaseFirestoreSwift
 import FirebaseFirestore
 
-class GroupRoomManager {
+class GroupManager {
     
     let userId = UserManager.shared.userInfo.uid
     
-    static let shared = GroupRoomManager()
+    static let shared = GroupManager()
     
     lazy var dataBase = Firestore.firestore()
     

@@ -25,8 +25,8 @@
 		740E98B327362D3A006163B8 /* ImagePickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740E98B227362D3A006163B8 /* ImagePickerButton.swift */; };
 		740FC38D271D17160071459A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740FC38C271D17160071459A /* AppDelegate.swift */; };
 		740FC38F271D17160071459A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740FC38E271D17160071459A /* SceneDelegate.swift */; };
-		740FC391271D17160071459A /* ChooseGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740FC390271D17160071459A /* ChooseGroupViewController.swift */; };
-		740FC394271D17160071459A /* ChooseGroup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740FC392271D17160071459A /* ChooseGroup.storyboard */; };
+		740FC391271D17160071459A /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740FC390271D17160071459A /* GroupViewController.swift */; };
+		740FC394271D17160071459A /* Group.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740FC392271D17160071459A /* Group.storyboard */; };
 		740FC396271D17180071459A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 740FC395271D17180071459A /* Assets.xcassets */; };
 		740FC399271D17180071459A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740FC397271D17180071459A /* LaunchScreen.storyboard */; };
 		7417858B274528B500231383 /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7417858A274528B500231383 /* TabbarController.swift */; };
@@ -51,7 +51,6 @@
 		7449349F27255A0B002D8FE3 /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7449349E27255A0B002D8FE3 /* UIStoryboard+Extension.swift */; };
 		744934A1272562C8002D8FE3 /* TrailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744934A0272562C8002D8FE3 /* TrailManager.swift */; };
 		7451EEE3274965CE00438D94 /* wave.json in Resources */ = {isa = PBXBuildFile; fileRef = 7451EEE2274965CE00438D94 /* wave.json */; };
-		7451EEE92749FC6400438D94 /* sunset.json in Resources */ = {isa = PBXBuildFile; fileRef = 7451EEE82749FC6400438D94 /* sunset.json */; };
 		7457A1D0271EECEF00A947AE /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457A1CF271EECEF00A947AE /* Message.swift */; };
 		7457A1D2271EEEDC00A947AE /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457A1D1271EEEDC00A947AE /* Request.swift */; };
 		745A6EFC272BA417006064C4 /* GPXFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745A6EFB272BA417006064C4 /* GPXFileManager.swift */; };
@@ -84,7 +83,7 @@
 		74608D41271E97DC002BD125 /* Trail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D40271E97DC002BD125 /* Trail.swift */; };
 		74608D43271E9C67002BD125 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D42271E9C67002BD125 /* Group.swift */; };
 		74608D45271EA5E1002BD125 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D44271EA5E1002BD125 /* UserInfo.swift */; };
-		74608D47271EC727002BD125 /* GroupRoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D46271EC727002BD125 /* GroupRoomManager.swift */; };
+		74608D47271EC727002BD125 /* GroupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D46271EC727002BD125 /* GroupManager.swift */; };
 		748EF102273BAC8E00B97EE0 /* GroupStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EF101273BAC8E00B97EE0 /* GroupStatus.swift */; };
 		748EF106273CAB4D00B97EE0 /* UIViewController+NotificationExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EF105273CAB4D00B97EE0 /* UIViewController+NotificationExtenstion.swift */; };
 		74AF8A3D27441300003A4132 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AF8A3C27441300003A4132 /* PrivacyPolicyViewController.swift */; };
@@ -134,8 +133,8 @@
 		740FC389271D17160071459A /* ChooseSomeone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChooseSomeone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		740FC38C271D17160071459A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		740FC38E271D17160071459A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		740FC390271D17160071459A /* ChooseGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseGroupViewController.swift; sourceTree = "<group>"; };
-		740FC393271D17160071459A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ChooseGroup.storyboard; sourceTree = "<group>"; };
+		740FC390271D17160071459A /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
+		740FC393271D17160071459A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Group.storyboard; sourceTree = "<group>"; };
 		740FC395271D17180071459A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		740FC398271D17180071459A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		740FC39A271D17180071459A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -162,7 +161,6 @@
 		7449349E27255A0B002D8FE3 /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		744934A0272562C8002D8FE3 /* TrailManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailManager.swift; sourceTree = "<group>"; };
 		7451EEE2274965CE00438D94 /* wave.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wave.json; sourceTree = "<group>"; };
-		7451EEE82749FC6400438D94 /* sunset.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sunset.json; sourceTree = "<group>"; };
 		7457A1CF271EECEF00A947AE /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		7457A1D1271EEEDC00A947AE /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		745A6EFB272BA417006064C4 /* GPXFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPXFileManager.swift; sourceTree = "<group>"; };
@@ -195,7 +193,7 @@
 		74608D40271E97DC002BD125 /* Trail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trail.swift; sourceTree = "<group>"; };
 		74608D42271E9C67002BD125 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		74608D44271EA5E1002BD125 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
-		74608D46271EC727002BD125 /* GroupRoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRoomManager.swift; sourceTree = "<group>"; };
+		74608D46271EC727002BD125 /* GroupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManager.swift; sourceTree = "<group>"; };
 		74678B4E2747F994005CA415 /* ChooseSomeoneRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChooseSomeoneRelease.entitlements; sourceTree = "<group>"; };
 		748EF101273BAC8E00B97EE0 /* GroupStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupStatus.swift; sourceTree = "<group>"; };
 		748EF105273CAB4D00B97EE0 /* UIViewController+NotificationExtenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+NotificationExtenstion.swift"; sourceTree = "<group>"; };
@@ -252,7 +250,7 @@
 		740B1B872724008E00A1CD3B /* Group */ = {
 			isa = PBXGroup;
 			children = (
-				740FC392271D17160071459A /* ChooseGroup.storyboard */,
+				740FC392271D17160071459A /* Group.storyboard */,
 				74608D2D271D54C7002BD125 /* GroupChatHeaderCell.swift */,
 				74608D2E271D54C7002BD125 /* GroupChatHeaderCell.xib */,
 				74608D27271D4A80002BD125 /* GroupChatCell.swift */,
@@ -313,9 +311,8 @@
 				74608D19271D1CA4002BD125 /* Models */,
 				74608D18271D1C95002BD125 /* Controllers */,
 				74608D17271D1C8E002BD125 /* VIews */,
-				740FC395271D17180071459A /* Assets.xcassets */,
+				74614644274DCFE30075FE7F /* Resource */,
 				740FC39A271D17180071459A /* Info.plist */,
-				7441B7A827313F3D00614D9B /* Noto_Sans_TC */,
 				74608D3D271E7A63002BD125 /* GoogleService-Info.plist */,
 			);
 			path = ChooseSomeone;
@@ -364,9 +361,7 @@
 		74608D17271D1C8E002BD125 /* VIews */ = {
 			isa = PBXGroup;
 			children = (
-				7419126D273A9AAE006750EA /* ChevronButton.swift */,
-				74377465273962DC006AA44E /* ShadowTextfield.swift */,
-				740E98B227362D3A006163B8 /* ImagePickerButton.swift */,
+				74614645274DD0860075FE7F /* Custom Stuff */,
 				7423493627341589001EC7A1 /* Login */,
 				74F9650A2725392100B77DC5 /* Journey */,
 				74F965092725391500B77DC5 /* Profile */,
@@ -433,7 +428,7 @@
 		74608D3F271E9201002BD125 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				74608D46271EC727002BD125 /* GroupRoomManager.swift */,
+				74608D46271EC727002BD125 /* GroupManager.swift */,
 				744934A0272562C8002D8FE3 /* TrailManager.swift */,
 				745A6EFB272BA417006064C4 /* GPXFileManager.swift */,
 				745A6EFF272C0104006064C4 /* RecordManager.swift */,
@@ -442,10 +437,30 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		74614644274DCFE30075FE7F /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				7451EEE2274965CE00438D94 /* wave.json */,
+				740FC395271D17180071459A /* Assets.xcassets */,
+				7441B7A827313F3D00614D9B /* Noto_Sans_TC */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		74614645274DD0860075FE7F /* Custom Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				7419126D273A9AAE006750EA /* ChevronButton.swift */,
+				74377465273962DC006AA44E /* ShadowTextfield.swift */,
+				740E98B227362D3A006163B8 /* ImagePickerButton.swift */,
+			);
+			path = "Custom Stuff";
+			sourceTree = "<group>";
+		};
 		747A1DB4273FE60200D08A37 /* Group */ = {
 			isa = PBXGroup;
 			children = (
-				740FC390271D17160071459A /* ChooseGroupViewController.swift */,
+				740FC390271D17160071459A /* GroupViewController.swift */,
 				74608D2B271D51F6002BD125 /* ChatRoomViewController.swift */,
 				7419126B273A5AAF006750EA /* TeammateVIewController.swift */,
 				74608D31271D7253002BD125 /* BuildTeamViewController.swift */,
@@ -511,8 +526,6 @@
 			isa = PBXGroup;
 			children = (
 				74E5735E2726D6A500F490BF /* KingFisherWrapper.swift */,
-				7451EEE2274965CE00438D94 /* wave.json */,
-				7451EEE82749FC6400438D94 /* sunset.json */,
 			);
 			path = "Third Party Wrapper";
 			sourceTree = "<group>";
@@ -592,7 +605,6 @@
 				74608D26271D20B0002BD125 /* GroupHeaderCell.xib in Resources */,
 				740B1B842723FECC00A1CD3B /* Home.storyboard in Resources */,
 				740B1B822723F41D00A1CD3B /* Main.storyboard in Resources */,
-				7451EEE92749FC6400438D94 /* sunset.json in Resources */,
 				740FC399271D17180071459A /* LaunchScreen.storyboard in Resources */,
 				74608D3E271E7A63002BD125 /* GoogleService-Info.plist in Resources */,
 				740E98AD2734DF79006163B8 /* ProfileCell.xib in Resources */,
@@ -605,7 +617,7 @@
 				7441B7B227313F3E00614D9B /* NotoSansTC-Thin.otf in Resources */,
 				7441B7B427313F3E00614D9B /* OFL.txt in Resources */,
 				74F9650F2725394F00B77DC5 /* Profile.storyboard in Resources */,
-				740FC394271D17160071459A /* ChooseGroup.storyboard in Resources */,
+				740FC394271D17160071459A /* Group.storyboard in Resources */,
 				7441B7B027313F3E00614D9B /* NotoSansTC-Regular.otf in Resources */,
 				745A6F0A272D7B08006064C4 /* TrackRecordCell.xib in Resources */,
 				74608D22271D1DE1002BD125 /* GroupInfoCell.xib in Resources */,
@@ -714,7 +726,7 @@
 				740E98AC2734DF79006163B8 /* ProfileCell.swift in Sources */,
 				744934A1272562C8002D8FE3 /* TrailManager.swift in Sources */,
 				74AF8A3D27441300003A4132 /* PrivacyPolicyViewController.swift in Sources */,
-				740FC391271D17160071459A /* ChooseGroupViewController.swift in Sources */,
+				740FC391271D17160071459A /* GroupViewController.swift in Sources */,
 				74E573D427292CE300F490BF /* DistanceLabel.swift in Sources */,
 				742516FB272197A30011166B /* UILabelExtension.swift in Sources */,
 				7417858B274528B500231383 /* TabbarController.swift in Sources */,
@@ -760,7 +772,7 @@
 				74608D45271EA5E1002BD125 /* UserInfo.swift in Sources */,
 				74E5735B27268E3E00F490BF /* TrialInfoScrollView.swift in Sources */,
 				7457A1D2271EEEDC00A947AE /* Request.swift in Sources */,
-				74608D47271EC727002BD125 /* GroupRoomManager.swift in Sources */,
+				74608D47271EC727002BD125 /* GroupManager.swift in Sources */,
 				740FC38D271D17160071459A /* AppDelegate.swift in Sources */,
 				74F965072724830900B77DC5 /* TrailCell.swift in Sources */,
 				74E573872728F45700F490BF /* GPXWaypoint+MKAnnotation.swift in Sources */,
@@ -785,12 +797,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		740FC392271D17160071459A /* ChooseGroup.storyboard */ = {
+		740FC392271D17160071459A /* Group.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				740FC393271D17160071459A /* Base */,
 			);
-			name = ChooseGroup.storyboard;
+			name = Group.storyboard;
 			sourceTree = "<group>";
 		};
 		740FC397271D17180071459A /* LaunchScreen.storyboard */ = {

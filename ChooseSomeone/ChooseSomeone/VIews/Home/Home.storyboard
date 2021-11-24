@@ -160,10 +160,10 @@
             </objects>
             <point key="canvasLocation" x="1815.9420289855075" y="47.544642857142854"/>
         </scene>
-        <!--ChooseGroup-->
+        <!--Group-->
         <scene sceneID="mep-M4-tvZ">
             <objects>
-                <viewControllerPlaceholder storyboardName="ChooseGroup" id="zXb-xO-zKt" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Group" id="zXb-xO-zKt" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="VM6-fa-c6I"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Jx-zA-QNM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

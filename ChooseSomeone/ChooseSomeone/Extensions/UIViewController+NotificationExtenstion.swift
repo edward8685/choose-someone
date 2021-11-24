@@ -83,6 +83,17 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
         
         self.present(controller, animated: true, completion: nil)
     }
+    
+    func showAlertAction(title: String, message: String) {
+        
+        let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Ok", style: .cancel)
+        
+        controller.addAction(okAction)
+        
+        self.present(controller, animated: true, completion: nil)
+    }
 }
 
 extension Notification.Name {

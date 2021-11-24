@@ -169,7 +169,7 @@ class BuildTeamViewController: BaseViewController {
             
         } else {
             
-            GroupRoomManager.shared.buildTeam(group: &group) { result in
+            GroupManager.shared.buildTeam(group: &group) { result in
                 
                 switch result {
                     

@@ -27,10 +27,10 @@
             </objects>
             <point key="canvasLocation" x="-583" y="603"/>
         </scene>
-        <!--ChooseGroup-->
+        <!--Group-->
         <scene sceneID="bnR-zh-5Xf">
             <objects>
-                <viewControllerPlaceholder storyboardName="ChooseGroup" id="Kg6-vX-Axf" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Group" id="Kg6-vX-Axf" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="JUT-QO-w0q"/>
                     <navigationItem key="navigationItem" id="6BV-cZ-kvF"/>
                 </viewControllerPlaceholder>

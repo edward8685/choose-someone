@@ -166,7 +166,7 @@ class ChatRoomViewController: BaseViewController {
         
         guard let groupInfo = groupInfo else { fatalError() }
         
-        GroupRoomManager.shared.addSnapshotListener(groupId: groupInfo.groupId) { result in
+        GroupManager.shared.addSnapshotListener(groupId: groupInfo.groupId) { result in
             
             switch result {
                 
@@ -264,7 +264,7 @@ class ChatRoomViewController: BaseViewController {
                                   requestId: userInfo.uid,
                                   createdTime: Timestamp())
         
-        GroupRoomManager.shared.sendRequest(request: joinRequest) { result in
+        GroupManager.shared.sendRequest(request: joinRequest) { result in
             
             switch result {
                 
@@ -293,7 +293,7 @@ class ChatRoomViewController: BaseViewController {
             
             guard let groupInfo = self.groupInfo else { return }
             
-            GroupRoomManager.shared.leaveGroup(groupId: groupInfo.groupId) { result in
+            GroupManager.shared.leaveGroup(groupId: groupInfo.groupId) { result in
                 
                 switch result {
                     
@@ -325,7 +325,7 @@ class ChatRoomViewController: BaseViewController {
     
     func editGroupInfo(groupInfo: Group) {
         
-        GroupRoomManager.shared.updateTeam(group: groupInfo, completion: { result in
+        GroupManager.shared.updateTeam(group: groupInfo, completion: { result in
             
             switch result {
                 
@@ -359,7 +359,7 @@ class ChatRoomViewController: BaseViewController {
                                  body: text,
                                  createdTime: Timestamp())
         
-        GroupRoomManager.shared.sendMessage(groupId: newMessage.groupId, message: newMessage) { result in
+        GroupManager.shared.sendMessage(groupId: newMessage.groupId, message: newMessage) { result in
             
             switch result {
                 

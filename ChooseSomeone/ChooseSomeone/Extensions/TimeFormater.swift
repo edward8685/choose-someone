@@ -16,7 +16,7 @@ enum TimeFormater: String {
     
     case preciseTime = "yyyy/MM/dd  HH:mm"
     
-    func timeFormat(time: Timestamp) -> String {
+    func timestampToString(time: Timestamp) -> String {
         
         let timeInterval = time
         
@@ -38,13 +38,6 @@ extension Timestamp {
         
         let localTime = Timestamp()
         
-        if localTime.seconds > self.seconds {
-            
-            return true
-            
-        } else {
-        
-        return false
+        return localTime.seconds > self.seconds ? true : false
     }
-}
 }

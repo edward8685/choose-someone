@@ -185,7 +185,7 @@ class RecordManager {
             
             for file in files {
                 
-                let fileName = (file.absoluteString as NSString).lastPathComponent
+                let fileName = (file.absoluteString as NSString).lastPathComponent.removeFileSuffix()
                 
                 uploadRecord(fileName: fileName, fileURL: file) { result in
                     

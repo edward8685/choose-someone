@@ -53,15 +53,15 @@ extension Double {
         
         let seconds = Int(self)
         
-        let hour = (seconds % 3600) % 60
+        let hour = seconds / 3600
         
         let minute = (seconds % 3600) / 60
         
-        let second = seconds / 3600
+        let second = (seconds % 3600) % 60
         
         var timeString = ""
         
-        timeString += second.description
+        timeString += hour.description
         
         timeString += ":"
         
@@ -69,8 +69,27 @@ extension Double {
         
         timeString += ":"
         
-        timeString += hour.description
+        timeString += second.description
         
         return timeString
+    }
+}
+
+extension String {
+
+    func removeFileSuffix() -> String {
+        
+        var components = self.components(separatedBy: ".")
+        
+        if components.count > 1 {
+            
+          components.removeLast()
+            
+          return components.joined(separator: ".")
+            
+        } else {
+            
+          return self
+        }
     }
 }

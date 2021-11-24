@@ -79,7 +79,7 @@ class JoinRequestViewController: BaseViewController {
     
     func addRequestListener() {
         
-        GroupRoomManager.shared.fetchRequest { result in
+        GroupManager.shared.fetchRequest { result in
             
             switch result {
                 
@@ -172,7 +172,7 @@ extension JoinRequestViewController: UITableViewDelegate {
     
     @objc func acceptRequest(_ sender: UIButton) {
         
-        GroupRoomManager.shared.addUserToGroup(
+        GroupManager.shared.addUserToGroup(
             groupId: requests[sender.tag].groupId,
             userId: requests[sender.tag].requestId
         ) { result in
@@ -189,7 +189,7 @@ extension JoinRequestViewController: UITableViewDelegate {
             }
         }
         
-        GroupRoomManager.shared.removeRequest(
+        GroupManager.shared.removeRequest(
             groupId: requests[sender.tag].groupId,
             userId: requests[sender.tag].requestId
         ) { result in
@@ -212,7 +212,7 @@ extension JoinRequestViewController: UITableViewDelegate {
     
     @objc func rejectRequest(_ sender: UIButton) {
         
-        GroupRoomManager.shared.removeRequest(
+        GroupManager.shared.removeRequest(
             groupId: requests[sender.tag].groupId,
             userId: requests[sender.tag].requestId
         ) { result in
