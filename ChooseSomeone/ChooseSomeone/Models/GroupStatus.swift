@@ -14,6 +14,4 @@ enum GroupStatus: String {
     case notInGroup
     
     case isInGroup
-
 }
-

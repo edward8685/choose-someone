@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TrackRecordsViewController: UIViewController {
+class TrackRecordsViewController: BaseViewController {
     
     @IBOutlet weak var gradientView: UIView! {
         didSet {
@@ -60,31 +60,17 @@ class TrackRecordsViewController: UIViewController {
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-        let leftButton = UIButton()
+        let leftButton = PreviousPageButton()
         
         leftButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         
-        let chevroImage = UIImage(systemName: "chevron.left")
+        let image = UIImage(systemName: "chevron.left")
         
-        leftButton.setImage(chevroImage, for: .normal)
+        leftButton.setImage(image, for: .normal)
         
-        leftButton.layer.cornerRadius = leftButton.frame.height / 2
-        
-        leftButton.layer.masksToBounds = true
-        
-        leftButton.tintColor = .B1
-        
-        leftButton.backgroundColor = .white
-        
-        leftButton.addTarget(self, action: #selector(backToPreviousVC), for: .touchUpInside)
+        leftButton.addTarget(self, action: #selector(popToPreviousPage), for: .touchUpInside)
         
         self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: leftButton), animated: true)
-        
-    }
-    
-    @objc func backToPreviousVC() {
-        
-        navigationController?.popViewController(animated: true)
     }
     
     func setUpTableView() {
@@ -98,7 +84,6 @@ class TrackRecordsViewController: UIViewController {
         tableView.backgroundColor = .clear
         
         tableView.separatorStyle = .none
-        
     }
     
     func fetchRecords() {

@@ -16,7 +16,7 @@ class GroupViewController: BaseViewController {
     
     private var userInfo = UserManager.shared.userInfo
     
-    var headerView: GroupHeaderCell?
+    private var headerView: GroupHeaderCell?
     
     private lazy var inActiveGroups = [Group]()
     
@@ -27,31 +27,30 @@ class GroupViewController: BaseViewController {
         }
     }
     
+    private var searchGroups = [Group]()
+    
     private lazy var requests = [Request]() {
         
         didSet {
-            
             checkRequestsNum()
         }
     }
     
-    lazy var cache = [String: UserInfo]() {
+    private lazy var cache = [String: UserInfo]() {
         
         didSet {
-            
             tableView.reloadData()
         }
     }
     
-    var searchText: String = "" {
+    private var searchText: String = "" {
         
         didSet {
             searching = true
-            headerView?.groupSearchBar.delegate = self
         }
     }
     
-    let header = MJRefreshNormalHeader()
+    private let header = MJRefreshNormalHeader()
     
     private var tableView: UITableView! {
         
@@ -64,10 +63,10 @@ class GroupViewController: BaseViewController {
     private var onlyUserGroup = false
     
     private var searching = false
-    
-    private var searchGroups = [Group]()
-    
+
     // MARK: - View Life Cycle
+    
+    override var isHideNavigationBar: Bool { return true }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,11 +77,9 @@ class GroupViewController: BaseViewController {
         
         self.view.applyGradient(colors: [.B2, .B6], locations: [0.0, 1.0], direction: .leftSkewed)
         
-        tableView = UITableView()
-        
-        tableView.registerCellWithNib(identifier: GroupInfoCell.identifier, bundle: nil)
-        
         fetchGroupData()
+        
+        addRequestListener()
         
         setUpHeaderView()
         
@@ -90,11 +87,9 @@ class GroupViewController: BaseViewController {
         
         setBuildTeamButton()
         
-        addRequestListener()
-        
         header.setRefreshingTarget(self, refreshingAction: #selector(self.headerRefresh))
         
-        self.tableView.mj_header = header
+        tableView.mj_header = header
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,8 +99,13 @@ class GroupViewController: BaseViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        headerView?.groupSearchBar.endEditing(true)
+    }
+    
     // MARK: - Action
-    func manageMyGroup(groups: [Group]) {
+    func rearrangeMyGroup(groups: [Group]) {
         
         var expiredGroup = [Group]()
         var unexpiredGroup = [Group]()
@@ -128,6 +128,53 @@ class GroupViewController: BaseViewController {
         myGroups =  unexpiredGroup + expiredGroup
     }
     
+    func updateUserHistory() {
+        
+        var numOfGroups = 0
+        
+        var numOfPartners = 0
+        
+        myGroups.forEach { group in
+            
+            if group.isExpired == true {
+                
+                numOfGroups += 1
+                
+                numOfPartners += (group.userIds.count - 1) // -1 for self
+            }
+        }
+        
+        UserManager.shared.updateUserGroupRecords(numOfGroups: numOfGroups, numOfPartners: numOfPartners)
+    }
+    
+    func checkRequestsNum() {
+        
+        guard let headerView = headerView else { return }
+        
+        if requests.count == 0 {
+            
+            headerView.badgeView.isHidden = true
+            
+        } else {
+            
+            headerView.requestListButton.shake()
+            
+            headerView.badgeView.isHidden = false
+        }
+    }
+    
+    @objc func checkRequestList(_ sender: UIButton) {
+        
+        if requests.count != 0 {
+            
+            performSegue(withIdentifier: "toRequestList", sender: requests)
+            
+        } else {
+            
+            headerView?.requestListButton.shake()
+        }
+    }
+    
     @objc func changeSearchText(notification: Notification) {
         
         if let trailName = notification.userInfo as? [String: String] {
@@ -147,52 +194,15 @@ class GroupViewController: BaseViewController {
                 headerView?.groupSearchBar.text = trailName
             }
         }
+        
         tableView.reloadData()
     }
     
-    func updateUserHistory() {
+    func filtGroupBySearchName(groups: [Group]) -> [Group] {
         
-        var numOfGroups = 0
+        let fitledGroups = groups.filter { $0.trailName.lowercased().prefix(searchText.count) == searchText.lowercased() }
         
-        var numOfPartners = 0
-        
-        myGroups.forEach { group in
-            
-            if group.isExpired == true {
-                
-                numOfGroups += 1
-                
-                numOfPartners += (group.userIds.count - 1)
-            }
-        }
-        UserManager.shared.updateUserGroupRecords(numOfGroups: numOfGroups, numOfPartners: numOfPartners)
-    }
-    
-    func checkRequestsNum() {
-        
-        guard let headerView = headerView else { return }
-        
-        if requests.count == 0 {
-            
-            headerView.badgeView.isHidden = true
-            
-        } else {
-            
-            headerView.requestListButton.shake()
-            
-            headerView.badgeView.isHidden = false
-        }
-        
-    }
-    
-    @objc func checkRequestList(_ sender: UIButton) {
-        
-        if requests.count != 0 {
-            
-            performSegue(withIdentifier: "toRequestList", sender: requests)
-        } else {
-            headerView?.requestListButton.shake()
-        }
+        return fitledGroups
     }
     
     @objc func updateUserInfo(notification: Notification) {
@@ -241,7 +251,7 @@ class GroupViewController: BaseViewController {
                 
                 self.inActiveGroups = filtedGroups.filter { $0.isExpired == false }
                 
-                self.manageMyGroup(groups: self.myGroups)
+                self.rearrangeMyGroup(groups: self.myGroups)
                 
                 filtedGroups.forEach { group in
                     
@@ -295,6 +305,10 @@ class GroupViewController: BaseViewController {
     
     func setUpTableView() {
         
+        tableView = UITableView()
+        
+        tableView.registerCellWithNib(identifier: GroupInfoCell.identifier, bundle: nil)
+        
         view.addSubview(tableView)
         
         tableView.backgroundColor = .clear
@@ -322,6 +336,8 @@ class GroupViewController: BaseViewController {
         
         self.headerView = headerView
         
+        headerView.groupSearchBar.delegate = self
+        
         headerView.groupSearchBar.searchTextField.text = searchText
         
         view.addSubview(headerView)
@@ -343,14 +359,13 @@ class GroupViewController: BaseViewController {
         
         headerView.textSegmentedControl.addTarget(self, action: #selector(segmentValueChanged(_:)), for: .valueChanged)
         
-
         headerView.groupSearchBar.searchTextField.text = searchText
-        
     }
     
     @objc func segmentValueChanged(_ sender: MASegmentedControl) {
         
         switch sender.selectedSegmentIndex {
+            
         case 0:
             onlyUserGroup = false
             
@@ -393,30 +408,14 @@ class GroupViewController: BaseViewController {
         
         let buildTeamButton = UIButton()
         
-        let width = view.frame.size.width
-        let height = view.frame.size.height
-        
-        buildTeamButton.frame = CGRect(x: width * 0.8, y: height * 0.8, width: width * 0.18, height: width * 0.18)
-        
-        let image = UIImage.asset(.choose)
-        
-        buildTeamButton.setImage(image, for: .normal)
-        
-        buildTeamButton.tintColor = .white
-        
-        buildTeamButton.layer.cornerRadius = width * 0.09
-        
-        buildTeamButton.layer.masksToBounds = true
-        
         buildTeamButton.addTarget(self, action: #selector(buildNewTeam), for: .touchUpInside)
-        
+    
         view.addSubview(buildTeamButton)
     }
     
     @objc func buildNewTeam() {
         performSegue(withIdentifier: "toBuildTeamVC", sender: nil)
     }
-    
 }
 
 extension GroupViewController: UITableViewDelegate {
@@ -442,7 +441,6 @@ extension GroupViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         
         if searching {
             
@@ -531,31 +529,29 @@ extension GroupViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: GroupInfoCell.identifier, for: indexPath) as? GroupInfoCell
-                
         else {fatalError("Could not create Cell")}
         
+        var group = Group()
+        
         if searching {
-            let group = searchGroups[indexPath.row]
             
-            cell.setUpCell(group: group, hostname: cache[group.hostId]?.userName ?? "使用者")
+            group = searchGroups[indexPath.row]
             
         } else {
             
             if onlyUserGroup {
                 
-                let group = myGroups[indexPath.row]
-                
-                cell.setUpCell(group: group, hostname: cache[group.hostId]?.userName ?? "使用者")
+                group = myGroups[indexPath.row]
                 
             } else {
                 
-                let group = inActiveGroups[indexPath.row]
-                
-                cell.setUpCell(group: group, hostname: cache[group.hostId]?.userName ?? "使用者")
+                group = inActiveGroups[indexPath.row]
             }
         }
         
+        cell.setUpCell(group: group, hostname: cache[group.hostId]?.userName ?? "使用者")
         return cell
     }
 }
@@ -583,19 +579,11 @@ extension GroupViewController: UISearchBarDelegate {
         
         searchBar.endEditing(true)
         
-        resignFirstResponder()
+        searchBar.resignFirstResponder()
     }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)  {
         
-        searching = false
-        
-        searchBar.text = ""
-        
-        searchBar.endEditing(true)
-        
-        tableView.reloadData()
-        
-        resignFirstResponder()
+        searchBar.resignFirstResponder()
     }
 }

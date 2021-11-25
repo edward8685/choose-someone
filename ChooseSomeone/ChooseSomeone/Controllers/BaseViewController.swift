@@ -32,10 +32,6 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         
-        if isHideNavigationBar {
-            navigationItem.hidesBackButton = true
-        }
-        
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
@@ -67,6 +63,33 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         self.setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if isHideNavigationBar {
+            
+            navigationController?.setNavigationBarHidden(false, animated: true)
+        }
+
+        if !isEnableIQKeyboard {
+            
+            IQKeyboardManager.shared.enable = true
+            
+        } else {
+            
+            IQKeyboardManager.shared.enable = false
+        }
+
+        if !isEnableResignOnTouchOutside {
+            
+            IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+            
+        } else {
+            
+            IQKeyboardManager.shared.shouldResignOnTouchOutside = false
+        }
     }
     
     @objc func popToPreviousPage(_ sender: UIButton) {
@@ -104,22 +127,4 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
         
         self.present(controller, animated: true, completion: nil)
     }
-}
-
-extension Notification.Name {
-    
-    static let userInfoDidChanged = Notification.Name("userInfoDidChanged")
-    
-    static let requestNumDidChanged = Notification.Name("requestNumDidChanged")
-    
-    static let checkGroupDidTaped = Notification.Name("checkGroupDidTaped")
-}
-
-extension NSNotification {
-    
-    public static let userInfoDidChanged = Notification.Name.userInfoDidChanged
-    
-    public static let requestNumDidChanged = Notification.Name.requestNumDidChanged
-    
-    public static let checkGroupDidTaped = Notification.Name.checkGroupDidTaped
 }

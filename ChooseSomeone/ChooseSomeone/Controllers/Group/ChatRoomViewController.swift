@@ -104,7 +104,6 @@ class ChatRoomViewController: BaseViewController {
         setUpStatusBarView()
         
         configureDataSource()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,6 +118,7 @@ class ChatRoomViewController: BaseViewController {
     override func viewWillLayoutSubviews() {
         
         textView.layer.cornerRadius = textView.frame.height / 2
+        
         textView.layer.masksToBounds = true
     }
     
@@ -383,27 +383,19 @@ class ChatRoomViewController: BaseViewController {
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-        let leftButton = UIButton()
+        let leftButton = PreviousPageButton()
         
         leftButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         
-        let chevroImage = UIImage(systemName: "chevron.left")
+        let image = UIImage(systemName: "chevron.left")
         
-        leftButton.setImage(chevroImage, for: .normal)
+        leftButton.setImage(image, for: .normal)
         
-        leftButton.layer.cornerRadius = leftButton.frame.height / 2
-        
-        leftButton.layer.masksToBounds = true
-        
-        leftButton.tintColor = .B1
-        
-        leftButton.backgroundColor = .white
-        
-        leftButton.addTarget(self, action: #selector(backToPreviousVC), for: .touchUpInside)
+        leftButton.addTarget(self, action: #selector(popToPreviousPage), for: .touchUpInside)
         
         self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: leftButton), animated: true)
         
-        let rightButton = UIButton()
+        let rightButton = PreviousPageButton()
         
         rightButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         
@@ -411,21 +403,9 @@ class ChatRoomViewController: BaseViewController {
         
         rightButton.setImage(infoImage, for: .normal)
         
-        rightButton.layer.cornerRadius = rightButton.frame.height / 2
-        
-        rightButton.layer.masksToBounds = true
-        
-        rightButton.tintColor = .B1
-        
-        rightButton.backgroundColor = .white
-        
         rightButton.addTarget(self, action: #selector(showMembers), for: .touchUpInside)
         
         self.navigationItem.setRightBarButton(UIBarButtonItem(customView: rightButton), animated: true)
-    }
-    
-    @objc func backToPreviousVC() {
-        navigationController?.popViewController(animated: true)
     }
     
     @objc func showMembers() {
@@ -437,7 +417,6 @@ class ChatRoomViewController: BaseViewController {
             teammateVC.cache = cache
             
             navigationController?.pushViewController(teammateVC, animated: true)
-            
         }
     }
     
@@ -448,7 +427,6 @@ class ChatRoomViewController: BaseViewController {
         if #available(iOS 15.0, *) {
             
             tableView.sectionHeaderTopPadding = 0
-            
         }
         
         tableView.backgroundColor = .white
@@ -536,7 +514,6 @@ class ChatRoomViewController: BaseViewController {
         
         sendButton.tintColor = .white
     }
-    
 }
 
 // MARK: - UITableViewDelegate

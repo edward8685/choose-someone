@@ -85,9 +85,11 @@
 		74608D45271EA5E1002BD125 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D44271EA5E1002BD125 /* UserInfo.swift */; };
 		74608D47271EC727002BD125 /* GroupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D46271EC727002BD125 /* GroupManager.swift */; };
 		748EF102273BAC8E00B97EE0 /* GroupStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EF101273BAC8E00B97EE0 /* GroupStatus.swift */; };
-		748EF106273CAB4D00B97EE0 /* UIViewController+NotificationExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EF105273CAB4D00B97EE0 /* UIViewController+NotificationExtenstion.swift */; };
+		748EF106273CAB4D00B97EE0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EF105273CAB4D00B97EE0 /* BaseViewController.swift */; };
 		74AF8A3D27441300003A4132 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AF8A3C27441300003A4132 /* PrivacyPolicyViewController.swift */; };
 		74AF8A3F274416C5003A4132 /* PrivacyPolicy.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74AF8A3E274416C5003A4132 /* PrivacyPolicy.storyboard */; };
+		74BDD709274F447900E349A0 /* NotificationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BDD708274F447900E349A0 /* NotificationExtension.swift */; };
+		74BDD70B274F5F7E00E349A0 /* BuildTeamButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BDD70A274F5F7E00E349A0 /* BuildTeamButton.swift */; };
 		74E5735B27268E3E00F490BF /* TrialInfoScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5735A27268E3E00F490BF /* TrialInfoScrollView.swift */; };
 		74E5735F2726D6A500F490BF /* KingFisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5735E2726D6A500F490BF /* KingFisherWrapper.swift */; };
 		74E5736327279A2800F490BF /* JourneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E5736227279A2800F490BF /* JourneyViewController.swift */; };
@@ -196,9 +198,11 @@
 		74608D46271EC727002BD125 /* GroupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManager.swift; sourceTree = "<group>"; };
 		74678B4E2747F994005CA415 /* ChooseSomeoneRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChooseSomeoneRelease.entitlements; sourceTree = "<group>"; };
 		748EF101273BAC8E00B97EE0 /* GroupStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupStatus.swift; sourceTree = "<group>"; };
-		748EF105273CAB4D00B97EE0 /* UIViewController+NotificationExtenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+NotificationExtenstion.swift"; sourceTree = "<group>"; };
+		748EF105273CAB4D00B97EE0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		74AF8A3C27441300003A4132 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		74AF8A3E274416C5003A4132 /* PrivacyPolicy.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PrivacyPolicy.storyboard; sourceTree = "<group>"; };
+		74BDD708274F447900E349A0 /* NotificationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtension.swift; sourceTree = "<group>"; };
+		74BDD70A274F5F7E00E349A0 /* BuildTeamButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildTeamButton.swift; sourceTree = "<group>"; };
 		74E5735A27268E3E00F490BF /* TrialInfoScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialInfoScrollView.swift; sourceTree = "<group>"; };
 		74E5735E2726D6A500F490BF /* KingFisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingFisherWrapper.swift; sourceTree = "<group>"; };
 		74E5736227279A2800F490BF /* JourneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyViewController.swift; sourceTree = "<group>"; };
@@ -377,6 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				7441B7C227323B4B00614D9B /* LoginViewController.swift */,
+				748EF105273CAB4D00B97EE0 /* BaseViewController.swift */,
 				7417858A274528B500231383 /* TabbarController.swift */,
 				74AF8A3C27441300003A4132 /* PrivacyPolicyViewController.swift */,
 				74F10299274135060097AC6F /* Home */,
@@ -390,9 +395,9 @@
 		74608D19271D1CA4002BD125 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				74BDD707274F3D2100E349A0 /* Group */,
+				74BDD706274F3CFB00E349A0 /* Home */,
 				745A6F0F272E8A62006064C4 /* GPX */,
-				74608D40271E97DC002BD125 /* Trail.swift */,
-				740A93F52747822E00DE9A76 /* TrailTheme.swift */,
 				748EF101273BAC8E00B97EE0 /* GroupStatus.swift */,
 				74608D42271E9C67002BD125 /* Group.swift */,
 				7457A1CF271EECEF00A947AE /* Message.swift */,
@@ -409,7 +414,6 @@
 			isa = PBXGroup;
 			children = (
 				74608D1B271D1CEC002BD125 /* UIScreen+Extension.swift */,
-				748EF105273CAB4D00B97EE0 /* UIViewController+NotificationExtenstion.swift */,
 				74608D33271D7AE1002BD125 /* UIButtonExtension.swift */,
 				74608D1C271D1CEC002BD125 /* UIViewExtension.swift */,
 				742516F827218A520011166B /* UIColor+Extension.swift */,
@@ -421,6 +425,7 @@
 				7441B7A627313E1C00614D9B /* UIFontExtension.swift */,
 				745A6F0B272DAE9C006064C4 /* TimeFormater.swift */,
 				7406D92F2740D242003FBFD6 /* UIImageExtenstion.swift */,
+				74BDD708274F447900E349A0 /* NotificationExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -451,6 +456,7 @@
 			isa = PBXGroup;
 			children = (
 				7419126D273A9AAE006750EA /* PreviousPageButton.swift */,
+				74BDD70A274F5F7E00E349A0 /* BuildTeamButton.swift */,
 				74377465273962DC006AA44E /* ShadowTextfield.swift */,
 				740E98B227362D3A006163B8 /* ImagePickerButton.swift */,
 			);
@@ -486,6 +492,22 @@
 				74E5736227279A2800F490BF /* JourneyViewController.swift */,
 			);
 			path = Journey;
+			sourceTree = "<group>";
+		};
+		74BDD706274F3CFB00E349A0 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				740A93F52747822E00DE9A76 /* TrailTheme.swift */,
+				74608D40271E97DC002BD125 /* Trail.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		74BDD707274F3D2100E349A0 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Group;
 			sourceTree = "<group>";
 		};
 		74F10299274135060097AC6F /* Home */ = {
@@ -717,11 +739,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				740B1B862723FF2500A1CD3B /* HomeViewController.swift in Sources */,
+				74BDD70B274F5F7E00E349A0 /* BuildTeamButton.swift in Sources */,
 				745A6F11272E9D0A006064C4 /* RecordInfoView.swift in Sources */,
 				74E5738B2728F61C00F490BF /* GPXMapView.swift in Sources */,
 				7449349F27255A0B002D8FE3 /* UIStoryboard+Extension.swift in Sources */,
 				7406D9302740D242003FBFD6 /* UIImageExtenstion.swift in Sources */,
 				74608D32271D7253002BD125 /* BuildTeamViewController.swift in Sources */,
+				74BDD709274F447900E349A0 /* NotificationExtension.swift in Sources */,
 				74608D41271E97DC002BD125 /* Trail.swift in Sources */,
 				740E98AC2734DF79006163B8 /* ProfileCell.swift in Sources */,
 				744934A1272562C8002D8FE3 /* TrailManager.swift in Sources */,
@@ -768,7 +792,7 @@
 				74E573852728EBEE00F490BF /* GPXTrackPoint+MapKit.swift in Sources */,
 				745A6F09272D7B08006064C4 /* TrackRecordCell.swift in Sources */,
 				74E573842728EBEE00F490BF /* GPXTrackSegment+MapKit.swift in Sources */,
-				748EF106273CAB4D00B97EE0 /* UIViewController+NotificationExtenstion.swift in Sources */,
+				748EF106273CAB4D00B97EE0 /* BaseViewController.swift in Sources */,
 				74608D45271EA5E1002BD125 /* UserInfo.swift in Sources */,
 				74E5735B27268E3E00F490BF /* TrialInfoScrollView.swift in Sources */,
 				7457A1D2271EEEDC00A947AE /* Request.swift in Sources */,
