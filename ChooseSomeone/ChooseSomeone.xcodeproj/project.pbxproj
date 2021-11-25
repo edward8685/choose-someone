@@ -31,7 +31,7 @@
 		740FC399271D17180071459A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740FC397271D17180071459A /* LaunchScreen.storyboard */; };
 		7417858B274528B500231383 /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7417858A274528B500231383 /* TabbarController.swift */; };
 		7419126C273A5AAF006750EA /* TeammateVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7419126B273A5AAF006750EA /* TeammateVIewController.swift */; };
-		7419126E273A9AAE006750EA /* ChevronButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7419126D273A9AAE006750EA /* ChevronButton.swift */; };
+		7419126E273A9AAE006750EA /* PreviousPageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7419126D273A9AAE006750EA /* PreviousPageButton.swift */; };
 		742349352732B032001EC7A1 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742349342732B032001EC7A1 /* UserManager.swift */; };
 		7423493A273415AB001EC7A1 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74234939273415AB001EC7A1 /* Login.storyboard */; };
 		742516F927218A520011166B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742516F827218A520011166B /* UIColor+Extension.swift */; };
@@ -140,7 +140,7 @@
 		740FC39A271D17180071459A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7417858A274528B500231383 /* TabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarController.swift; sourceTree = "<group>"; };
 		7419126B273A5AAF006750EA /* TeammateVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeammateVIewController.swift; sourceTree = "<group>"; };
-		7419126D273A9AAE006750EA /* ChevronButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChevronButton.swift; sourceTree = "<group>"; };
+		7419126D273A9AAE006750EA /* PreviousPageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousPageButton.swift; sourceTree = "<group>"; };
 		742349332732662E001EC7A1 /* ChooseSomeone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChooseSomeone.entitlements; sourceTree = "<group>"; };
 		742349342732B032001EC7A1 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		74234939273415AB001EC7A1 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
@@ -450,7 +450,7 @@
 		74614645274DD0860075FE7F /* Custom Stuff */ = {
 			isa = PBXGroup;
 			children = (
-				7419126D273A9AAE006750EA /* ChevronButton.swift */,
+				7419126D273A9AAE006750EA /* PreviousPageButton.swift */,
 				74377465273962DC006AA44E /* ShadowTextfield.swift */,
 				740E98B227362D3A006163B8 /* ImagePickerButton.swift */,
 			);
@@ -745,7 +745,7 @@
 				74608D37271DD2F2002BD125 /* MemberCell.swift in Sources */,
 				740B1B8B2724161600A1CD3B /* HomeHeaderCell.swift in Sources */,
 				7441B7A5273052C000614D9B /* TrackInfo.swift in Sources */,
-				7419126E273A9AAE006750EA /* ChevronButton.swift in Sources */,
+				7419126E273A9AAE006750EA /* PreviousPageButton.swift in Sources */,
 				740E98AF2734E2D7006163B8 /* ProfileItem.swift in Sources */,
 				74FDD92A2722C5670014D2B2 /* UITextFieldExtexsion.swift in Sources */,
 				740E98B127352589006163B8 /* ProfileView.swift in Sources */,

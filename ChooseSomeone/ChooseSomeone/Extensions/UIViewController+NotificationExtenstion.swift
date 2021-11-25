@@ -31,12 +31,22 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     override func viewDidLoad() {
+        
+        if isHideNavigationBar {
+            navigationItem.hidesBackButton = true
+        }
+        
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
-            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if isHideNavigationBar {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+        }
         
         if !isEnableIQKeyboard {
             

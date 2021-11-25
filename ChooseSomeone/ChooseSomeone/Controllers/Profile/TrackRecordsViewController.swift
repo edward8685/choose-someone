@@ -7,28 +7,7 @@
 
 import UIKit
 
-enum Section {
-    case section
-}
-
-//class customDataSource: UITableViewDiffableDataSource<Section, Record> {
-//
-//    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
-//
-//}
-
 class TrackRecordsViewController: UIViewController {
-    
-    // MARK: - DataSource & DataSourceSnapshot typelias -
-//        typealias DataSource = UITableViewDiffableDataSource<Section, Record>
-//
-//        typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Record>
-//
-//        private var dataSource: customDataSource!
-//
-//        private var snapshot = DataSourceSnapshot()
     
     @IBOutlet weak var gradientView: UIView! {
         didSet {
@@ -51,8 +30,7 @@ class TrackRecordsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.view.applyGradient(colors: [.white, .U2], locations: [0.0, 1.0], direction: .leftSkewed)
-        
+
         fetchRecords()
         
         setUpTableView()
@@ -132,9 +110,6 @@ class TrackRecordsViewController: UIViewController {
                 
                 self?.records = records
                 
-//                self?.configureDataSource()
-//                self?.configureSnapshot()
-                
                 self?.tableView.reloadData()
                 
             case .failure(let error):
@@ -206,52 +181,4 @@ extension TrackRecordsViewController: UITableViewDataSource {
         
         return cell
     }
-    
-    
-    
-//
-//
-//   func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-//        return .delete
-//   }
-//
-//   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (contextualAction, view, completionHandler) in
-//
-//            self.records.remove(at: indexPath.row)
-//
-//            completionHandler(true)
-//        }
-//
-//        return UISwipeActionsConfiguration(actions: [deleteAction])
-//    }
 }
-
-//extension TrackRecordsViewController {
-//
-//    func configureDataSource() {
-//
-//        dataSource = DataSource(tableView: tableView, cellProvider: { (tableView, indexPath, model) -> UITableViewCell? in
-//
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: TrackRecordCell.identifier, for: indexPath) as? TrackRecordCell else {
-//                fatalError("Cannot create new cell")
-//            }
-//
-//            cell.setUpCell(model: self.records[indexPath.row])
-//
-//            cell.backgroundColor = .green
-//
-//            return cell
-//        })
-//        tableView.dataSource = dataSource
-//    }
-//
-//    func configureSnapshot() {
-//
-//        snapshot.appendSections([.section])
-//
-//        snapshot.appendItems(records, toSection: .section)
-//
-//        dataSource.apply(snapshot, animatingDifferences: false)
-//    }
-//}

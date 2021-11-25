@@ -10,9 +10,12 @@ import UIKit
 class TrailListViewController: BaseViewController {
     
     // MARK: - DataSource & DataSourceSnapshot typelias -
+    
     typealias DataSource = UICollectionViewDiffableDataSource<Section, Trail>
     
     typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Trail>
+    
+    // MARK: - Class Properties -
     
     @IBOutlet weak var collectionView: UICollectionView! {
         
@@ -28,6 +31,8 @@ class TrailListViewController: BaseViewController {
     
     private var snapshot = DataSourceSnapshot()
     
+    lazy var toPreviousPageButton = PreviousPageButton()
+    
     enum Section {
         
         case section
@@ -41,6 +46,8 @@ class TrailListViewController: BaseViewController {
         }
     }
     
+    // MARK: - View Life Cycle
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -53,6 +60,8 @@ class TrailListViewController: BaseViewController {
         
         navigationController?.isNavigationBarHidden = true
     }
+    
+    // MARK: - UI Layout -
     
     private func setupCollectionView() {
         
@@ -69,27 +78,13 @@ class TrailListViewController: BaseViewController {
     
     func setUpButton() {
         
-        let returnButton = UIButton()
-        
         let radius = UIScreen.width * 13 / 107
         
-        returnButton.frame = CGRect(x: 40, y: 40, width: radius, height: radius)
+        toPreviousPageButton.frame = CGRect(x: 40, y: 40, width: radius, height: radius)
         
-        returnButton.backgroundColor = .white
+        toPreviousPageButton.addTarget(self, action: #selector(popToPreviousPage), for: .touchUpInside)
         
-        let image = UIImage(systemName: "chevron.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .medium))
-        
-        returnButton.setImage(image, for: .normal)
-        
-        returnButton.tintColor = .B1
-        
-        returnButton.layer.cornerRadius = radius / 2
-        
-        returnButton.layer.masksToBounds = true
-        
-        returnButton.addTarget(self, action: #selector(returnToPreviousPage), for: .touchUpInside)
-        
-        self.view.addSubview(returnButton)
+        view.addSubview(toPreviousPageButton)
     }
     
     func setUpLabel() {
@@ -115,11 +110,6 @@ class TrailListViewController: BaseViewController {
                 return
             }
         }
-    }
-    
-    @objc func returnToPreviousPage() {
-        
-        navigationController?.popViewController(animated: true)
     }
     
     func setUpThemeTag() {
@@ -148,6 +138,8 @@ class TrailListViewController: BaseViewController {
     }
 }
 
+// MARK: - CollectionView Delegate -
+
 extension TrailListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -170,7 +162,7 @@ extension TrailListViewController: UICollectionViewDelegate {
     }
 }
 
-// MARK: - Collection View -
+// MARK: - CollectionView CompositionalLayout -
 
 func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
     

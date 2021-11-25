@@ -75,7 +75,7 @@ class TeammateViewController: BaseViewController {
         button.tintColor = .B1
         
         button.backgroundColor = .white
-        
+
         button.addTarget(self, action: #selector(popToPreviousPage(_:)), for: .touchUpInside)
         
         self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: button), animated: true)

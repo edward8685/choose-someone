@@ -12,7 +12,9 @@ import CoreLocation
 import Firebase
 import Charts
 
-class UserRecordViewController: UIViewController, ChartViewDelegate {
+class UserRecordViewController: BaseViewController, ChartViewDelegate {
+    
+    // MARK: - Class Properties -
     
     @IBOutlet weak var map: GPXMapView!
     
@@ -21,7 +23,6 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var chartView: LineChartView! {
         
         didSet {
-            
             chartView.delegate = self
         }
     }
@@ -32,15 +33,11 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
     
     lazy var trackInfo = TrackInfo()
     
-    lazy var elevation: [Double] = []
+    lazy var trackChartData = TrackChartData()
     
-    lazy var trackTime: [Double] = []
+    lazy var toPreviousPageButton = PreviousPageButton()
     
-    lazy var distanceFromOrigin: [Double] = []
-    
-    private let timeLabel = UILabel()
-    
-    private let totalTrackedDistanceLabel = DistanceLabel()
+    // MARK: - View Life Cycle -
     
     override func viewDidLoad() {
         
@@ -60,20 +57,22 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         
         recordInfoView.updateTrackInfo(data: trackInfo)
         
-        setChart(distance: distanceFromOrigin, values: elevation)
+        setChart(xValues: trackChartData.distance, yValues: trackChartData.elevation)
     }
     
-    func setChart(distance: [Double], values: [Double]) {
+    // MARK: - Method -
+    
+    func setChart(xValues: [Double], yValues: [Double]) {
         
         var dataEntries: [ChartDataEntry] = []
         
         chartView.noDataText = "Can not get track record!"
         
-        for index in 0..<elevation.count {
+        for index in 0..<trackChartData.elevation.count {
             
-            let xvalue = distance[index] / 1000
+            let xvalue = xValues[index] / 1000 // m -> km
             
-            let yvalue = values[index]
+            let yvalue = yValues[index]
             
             let dataEntry = ChartDataEntry(x: xvalue, y: yvalue)
             
@@ -83,78 +82,26 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         let dataSet = LineChartDataSet(entries: dataEntries, label: "")
         
         dataSet.colors = [.U1 ?? .systemGray]
-        
         dataSet.drawFilledEnabled = true
-        
         dataSet.drawCirclesEnabled = false
-        
         dataSet.drawValuesEnabled = false
-        
         dataSet.lineWidth = 2
-        
         dataSet.fillAlpha = 0.8
-        
         dataSet.fillColor = .U2 ?? .lightGray
         
         chartView.data = LineChartData(dataSets: [dataSet])
         
-        chartView.xAxis.setLabelCount(values.count, force: true)
+        chartView.xAxis.setLabelCount(yValues.count, force: true)
         
         chartView.legend.enabled = false
         
         setUpChartLayout()
     }
     
-    func setUpChartLayout() {
-        
-        let xAxis = chartView.xAxis
-        xAxis.labelPosition = .bottom
-        xAxis.setLabelCount(10, force: false)
-        xAxis.drawGridLinesEnabled = true
-        xAxis.granularityEnabled = true
-        
-        let yAxis = chartView.leftAxis
-        yAxis.axisMinimum = 0
-        yAxis.setLabelCount(10, force: false)
-        yAxis.labelPosition = .outsideChart
-        yAxis.drawGridLinesEnabled = true
-        yAxis.granularityEnabled = true
-        
-        chartView.rightAxis.enabled = false
-        
-        chartView.animate(xAxisDuration: 2.0)
-    }
-    
-    func setUpButton() {
-        
-        let returnButton = UIButton()
-        
-        let radius = UIScreen.width * 13 / 107
-        
-        returnButton.frame = CGRect(x: 20, y: 40, width: radius, height: radius)
-        
-        returnButton.backgroundColor = .white
-        
-        let image = UIImage(systemName: "chevron.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .medium))
-        
-        returnButton.setImage(image, for: .normal)
-        
-        returnButton.tintColor = .B1
-        
-        returnButton.layer.cornerRadius = radius / 2
-        
-        returnButton.layer.masksToBounds = true
-        
-        returnButton.addTarget(self, action: #selector(returnToPreviousPage), for: .touchUpInside)
-        
-        view.addSubview(returnButton)
-    }
-    
-    @objc func returnToPreviousPage() {
-        navigationController?.popViewController(animated: true)
-    }
+    // MARK: - Parse GPX File and Process Track Data -
     
     func parseGPXFile() {
+        
         let inputURL = URL(string: record.recordRef)
         
         if let inputURL = inputURL {
@@ -162,6 +109,11 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
             guard let gpx = GPXParser(withURL: inputURL)?.parsedData() else { return }
             
             didLoadGPXFile(gpxRoot: gpx)
+            
+            processTrackData(gpx: gpx)
+        }
+        
+        func processTrackData(gpx: GPXRoot) {
             
             var temArray: [Double] = []
             
@@ -176,33 +128,34 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
                         if let ele = trackPoints.elevation,
                            
                             let time = trackPoints.time?.timeIntervalSinceReferenceDate {
-                            elevation.append(ele)
-                            trackTime.append(Double(time))
+                            trackChartData.elevation.append(ele)
+                            trackChartData.time.append(Double(time))
                         }
                     }
-                    //coordinate add constant of the last segment endpoint
-                    let segmentLength = segment.distanceFromOrigin().map{ $0 + lastLength }
+                    // coordinate add constant of the last segment endpoint
+                    let segmentLength = segment.distanceFromOrigin().map { $0 + lastLength }
                     
-                    lastLength = segment.distanceFromOrigin().last ?? 0
+                    lastLength = segmentLength.last ?? 0
                     
                     temArray += segmentLength
                 }
             }
-            distanceFromOrigin = temArray
             
-            trackTime = trackTime.map { $0 - self.trackTime[0]}
+            trackChartData.distance = temArray
             
-            trackInfo.distance = distanceFromOrigin.last ?? 0
+            trackChartData.time = trackChartData.time.map { $0 - self.trackChartData.time[0]}
             
-            trackInfo.spentTime = trackTime.last ?? 0
+            trackInfo.distance = trackChartData.distance.last ?? 0
             
-            if let maxValue = elevation.max(),
-               let minValue = elevation.min() {
+            trackInfo.spentTime = trackChartData.time.last ?? 0
+            
+            if let maxValue = trackChartData.elevation.max(),
+               let minValue = trackChartData.elevation.min() {
                 
                 trackInfo.elevationDiff = maxValue - minValue
             }
             
-            calculateElevation(elevation: elevation)
+            processDiffOfElevation(elevation: trackChartData.elevation)
         }
     }
     
@@ -213,7 +166,7 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         map.regionToGPXExtent()
     }
     
-    func calculateElevation(elevation: [Double]) {
+    func processDiffOfElevation(elevation: [Double]) {
         
         var totalClimp: Double = 0.0
         
@@ -242,6 +195,41 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         
         trackInfo.totalDrop = totalDrop
     }
+    
+    // MARK: - UI Layout -
+    
+    func setUpChartLayout() {
+        
+        let xAxis = chartView.xAxis
+        xAxis.labelPosition = .bottom
+        xAxis.setLabelCount(10, force: false)
+        xAxis.drawGridLinesEnabled = true
+        xAxis.granularityEnabled = true
+        
+        let yAxis = chartView.leftAxis
+        yAxis.axisMinimum = 0
+        yAxis.setLabelCount(10, force: false)
+        yAxis.labelPosition = .outsideChart
+        yAxis.drawGridLinesEnabled = true
+        yAxis.granularityEnabled = true
+        
+        chartView.rightAxis.enabled = false
+        
+        chartView.animate(xAxisDuration: 2.0)
+    }
+    
+    func setUpButton() {
+        
+        let radius = UIScreen.width * 13 / 107
+        
+        toPreviousPageButton.frame = CGRect(x: 20, y: 40, width: radius, height: radius)
+        
+        toPreviousPageButton.addTarget(self, action: #selector(popToPreviousPage), for: .touchUpInside)
+        
+        view.addSubview(toPreviousPageButton)
+    }
+    
+    // MARK: - Polyline -
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         

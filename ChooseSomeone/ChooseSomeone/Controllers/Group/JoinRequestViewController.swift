@@ -14,6 +14,10 @@ class JoinRequestViewController: BaseViewController {
     
     typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Request>
     
+    enum Section {
+        case section
+    }
+    
     private var dataSource: DataSource!
     
     lazy var requests = [Request]() {
