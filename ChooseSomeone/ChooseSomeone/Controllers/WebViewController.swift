@@ -30,7 +30,7 @@ enum PolicyType: String, policy {
     }
 }
 
-class PrivacyPolicyViewController: BaseViewController {
+class WebViewController: BaseViewController {
     
     // MARK: - properties
     
@@ -89,7 +89,7 @@ class PrivacyPolicyViewController: BaseViewController {
 
 // MARK: - WKNavigationDelegate
 
-extension PrivacyPolicyViewController: WKNavigationDelegate {
+extension WebViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         print(error.localizedDescription)
@@ -105,7 +105,7 @@ extension PrivacyPolicyViewController: WKNavigationDelegate {
     
 }
 
-extension PrivacyPolicyViewController {
+extension WebViewController {
     
     private func setWebView() {
         
