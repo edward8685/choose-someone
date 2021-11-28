@@ -175,7 +175,7 @@ extension ProfileViewController: UITableViewDelegate {
         case 2:
             
             guard let policyVC = UIStoryboard.policy.instantiateViewController(
-                identifier: WebViewController.identifier) as? WebViewController else { return }
+                identifier: PolicyViewController.identifier) as? PolicyViewController else { return }
             
             policyVC.policyType = .privacy
             

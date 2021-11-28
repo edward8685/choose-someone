@@ -144,11 +144,11 @@ extension TrackRecordsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        performSegue(withIdentifier: "toUserRecord", sender: records[indexPath.row])
+        performSegue(withIdentifier: SegueIdentifier.userRecord.rawValue, sender: records[indexPath.row])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toUserRecord" {
+        if segue.identifier == SegueIdentifier.userRecord.rawValue {
             if let recordVC = segue.destination as? UserRecordViewController {
                 
                 if let record = sender as? Record {

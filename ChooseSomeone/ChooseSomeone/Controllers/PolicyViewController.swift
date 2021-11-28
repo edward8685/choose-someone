@@ -1,5 +1,5 @@
 //
-//  WebViewController.swift
+//  PolicyViewController.swift
 //  ChooseSomeone
 //
 //  Created by Ed Chang on 2021/11/17.
@@ -30,7 +30,7 @@ enum PolicyType: String, policy {
     }
 }
 
-class WebViewController: BaseViewController {
+class PolicyViewController: BaseViewController {
     
     // MARK: - Class Properties -
     
@@ -92,7 +92,7 @@ class WebViewController: BaseViewController {
 
 // MARK: - WKNavigation Delegate -
 
-extension WebViewController: WKNavigationDelegate {
+extension PolicyViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         print(error.localizedDescription)

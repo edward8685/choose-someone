@@ -10,7 +10,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="irm-ag-iVg">
             <objects>
-                <tabBarController storyboardIdentifier="TabbarController" id="Gcw-Sl-xTf" customClass="TabBarController" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" id="Gcw-Sl-xTf" customClass="TabBarController" customModule="ChooseSomeone" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="abP-oV-E9o">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

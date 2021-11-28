@@ -37,7 +37,7 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
     @IBAction func goToPrivacyPage(_ sender: UIButton) {
         
         guard let policyVC = UIStoryboard.policy.instantiateViewController(
-            identifier: WebViewController.identifier) as? WebViewController else { return }
+            identifier: PolicyViewController.identifier) as? PolicyViewController else { return }
         
         policyVC.policyType = .privacy
         
@@ -47,7 +47,7 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
     @IBAction func goToEulaPage(_ sender: Any) {
         
         guard let policyVC = UIStoryboard.policy.instantiateViewController(
-            identifier: WebViewController.identifier) as? WebViewController else { return }
+            identifier: PolicyViewController.identifier) as? PolicyViewController else { return }
         
         policyVC.policyType = .eula
         
@@ -136,7 +136,7 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
                 
                 print("Fetch user info successfully")
                 
-                guard let tabbarVC = UIStoryboard.policy.instantiateViewController(
+                guard let tabbarVC = UIStoryboard.main.instantiateViewController(
                     identifier: TabBarController.identifier) as? TabBarController else { return }
                 
                 tabbarVC.modalPresentationStyle = .fullScreen

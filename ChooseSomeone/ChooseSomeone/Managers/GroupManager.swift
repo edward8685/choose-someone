@@ -10,16 +10,22 @@ import FirebaseFirestoreSwift
 import FirebaseFirestore
 
 class GroupManager {
-    
+
     let userId = UserManager.shared.userInfo.uid
     
     static let shared = GroupManager()
     
     lazy var dataBase = Firestore.firestore()
     
+    private let groupsCollection = Collection.groups.rawValue
+    
+    private let requestsCollection = Collection.requests.rawValue
+    
+    private let messagesCollection = Collection.messages.rawValue
+    
     func addSnapshotListener(groupId: String, completion: @escaping (Result<[Message], Error>) -> Void) {
         
-        dataBase.collection("Messages")
+        dataBase.collection(messagesCollection)
             .whereField("group_id", isEqualTo: groupId)
             .addSnapshotListener { (snapshot, error) in
                 
@@ -37,13 +43,11 @@ class GroupManager {
                             if let message = try document.data(as: Message.self, decoder: Firestore.Decoder()) {
                                 
                                 messages.append(message)
-                                
                             }
                             
                         } catch {
                             
                             completion(.failure(error))
-                            
                         }
                     }
                     messages.sort { $0.createdTime.seconds < $1.createdTime.seconds }
@@ -55,7 +59,7 @@ class GroupManager {
     
     func fetchMessages(groupId: String, completion: @escaping (Result<[Message], Error>) -> Void) {
         
-        let collection = dataBase.collection("Messages")
+        let collection = dataBase.collection(messagesCollection)
         
         collection.getDocuments() {(querySnapshot, error) in
             
@@ -90,7 +94,7 @@ class GroupManager {
     
     func fetchGroups(completion: @escaping (Result<[Group], Error>) -> Void) {
         
-        let collection = dataBase.collection("Groups")
+        let collection = dataBase.collection(groupsCollection)
         
         collection.order(by: "date", descending: false).getDocuments() {(querySnapshot, error) in
             
@@ -113,7 +117,9 @@ class GroupManager {
                             if group.date.checkIsExpired() {
                                 
                                 group.isExpired = true
+                                
                             } else {
+                                
                                 group.isExpired = false
                             }
                             
@@ -131,9 +137,9 @@ class GroupManager {
         }
     }
     
-    func fetchRequest(completion: @escaping (Result<[Request], Error>) -> Void) {
+    func addRequestListener(completion: @escaping (Result<[Request], Error>) -> Void) {
         
-        dataBase.collection("Requests")
+        dataBase.collection(requestsCollection)
             .whereField("host_id", isEqualTo: userId)
             .addSnapshotListener { (querySnapshot, error) in
                 
@@ -171,7 +177,7 @@ class GroupManager {
     
     func buildTeam(group: inout Group, completion: (Result<String, Error>) -> Void) {
         
-        let document = dataBase.collection("Groups").document()
+        let document = dataBase.collection(groupsCollection).document()
         
         group.groupId = document.documentID
         
@@ -190,7 +196,7 @@ class GroupManager {
     
     func updateTeam(group: Group, completion: (Result<String, Error>) -> Void) {
         
-        let document = dataBase.collection("Groups").document(group.groupId)
+        let document = dataBase.collection(groupsCollection).document(group.groupId)
         
         do {
             
@@ -207,7 +213,7 @@ class GroupManager {
     
     func sendMessage(groupId: String, message: Message, completion: (Result<String, Error>) -> Void) {
         
-        let document = dataBase.collection("Messages").document()
+        let document = dataBase.collection(messagesCollection).document()
         
         do {
             
@@ -224,7 +230,7 @@ class GroupManager {
     
     func sendRequest(request: Request, completion: (Result<String, Error>) -> Void) {
         
-        let document = dataBase.collection("Requests").document()
+        let document = dataBase.collection(requestsCollection).document()
         
         do {
             
@@ -233,16 +239,14 @@ class GroupManager {
         } catch {
             
             completion(.failure(error))
-            
         }
         
         completion(.success("Success"))
-        
     }
     
     func addUserToGroup(groupId: String, userId: String, completion: @escaping (Result<String, Error>) -> Void) {
         
-        let docRef = dataBase.collection("Groups").document(groupId)
+        let docRef = dataBase.collection(groupsCollection).document(groupId)
         
         docRef.updateData([
             "user_ids": FieldValue.arrayUnion([userId])
@@ -264,7 +268,7 @@ class GroupManager {
     
     func removeRequest(groupId: String, userId: String, completion: @escaping (Result<String, Error>) -> Void) {
         
-        dataBase.collection("Requests")
+        dataBase.collection(requestsCollection)
             .whereField("group_id", isEqualTo: groupId)
             .whereField("request_id", isEqualTo: userId)
             .getDocuments { (querySnapshot, error) in
@@ -289,7 +293,7 @@ class GroupManager {
     
     func leaveGroup(groupId: String, completion: @escaping (Result<String, Error>) -> Void) {
         
-        let docRef = dataBase.collection("Groups").document(groupId)
+        let docRef = dataBase.collection(groupsCollection).document(groupId)
         
         docRef.updateData([
             "user_ids": FieldValue.arrayRemove([userId])

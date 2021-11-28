@@ -606,6 +606,15 @@ extension ChatRoomViewController {
         dataSource = DataSource(tableView: tableView,
                                 cellProvider: { ( tableView, indexPath, model) -> UITableViewCell? in
             
+            switch self.userStatus {
+            case .ishost:
+                break
+            case .isInGroup:
+                break
+            case .notInGroup:
+                break
+            }
+            
             let cell: GroupChatCell = tableView.dequeueCell(for: indexPath)
             
             if let memberInfo = self.cache[model.userId] {

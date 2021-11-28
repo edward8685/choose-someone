@@ -47,8 +47,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="uva-Bo-58p"/>
                     <connections>
-                        <segue destination="K9k-lg-EXA" kind="show" identifier="toGroupChatVC" id="KS9-o8-ZE6"/>
-                        <segue destination="okd-f5-N7m" kind="presentation" identifier="toBuildTeamVC" modalPresentationStyle="automatic" modalTransitionStyle="coverVertical" id="Jao-OI-4lO"/>
+                        <segue destination="K9k-lg-EXA" kind="show" identifier="toGroupChat" id="KS9-o8-ZE6"/>
+                        <segue destination="okd-f5-N7m" kind="presentation" identifier="toBuildTeam" modalPresentationStyle="automatic" modalTransitionStyle="coverVertical" id="Jao-OI-4lO"/>
                         <segue destination="MMi-L5-LgI" kind="presentation" identifier="toRequestList" id="VpQ-O3-Tzv"/>
                     </connections>
                 </viewController>

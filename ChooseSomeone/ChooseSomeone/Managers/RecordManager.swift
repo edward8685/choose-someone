@@ -14,13 +14,15 @@ class RecordManager {
     
     let userId = UserManager.shared.userInfo.uid
     
-    let storage = Storage.storage()
+    lazy var storage = Storage.storage()
     
     static let shared = RecordManager()
     
     lazy var storageRef = storage.reference()
     
     lazy var dataBase = Firestore.firestore()
+    
+    private let recordsCollection = Collection.records.rawValue
     
     func uploadRecord(fileName: String, fileURL: URL, completion: @escaping (Result<URL, Error>) -> Void) {
         
@@ -71,7 +73,7 @@ class RecordManager {
     
     func uploadRecordToDb(fileName: String, fileURL: URL) {
         
-        let document = dataBase.collection("Records").document()
+        let document = dataBase.collection(recordsCollection).document()
         
         var record = Record()
         
@@ -96,7 +98,7 @@ class RecordManager {
     }
     
     func fetchRecords(completion: @escaping (Result<[Record], Error>) -> Void) {
-        let collection = dataBase.collection("Records").whereField("uid", isEqualTo: userId)
+        let collection = dataBase.collection(recordsCollection).whereField("uid", isEqualTo: userId)
         collection.getDocuments() {(querySnapshot, error) in
             
             guard let querySnapshot = querySnapshot else { return }
@@ -157,7 +159,7 @@ class RecordManager {
     
     func deleteDbRecords(fileName: String) {
         
-        let collection = dataBase.collection("Records").whereField("record_name", isEqualTo: fileName)
+        let collection = dataBase.collection(recordsCollection).whereField("record_name", isEqualTo: fileName)
         
         collection.getDocuments { (querySnapshot, error) in
             

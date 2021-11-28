@@ -150,28 +150,31 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        var sender = [Trail]()
+        
         switch indexPath.row {
             
         case 0:
             
-            performSegue(withIdentifier: "toTrailList", sender: easyTrails)
+            sender = easyTrails
             
         case 1:
             
-            performSegue(withIdentifier: "toTrailList", sender: mediumTrails)
+            sender = mediumTrails
             
         case 2:
             
-            performSegue(withIdentifier: "toTrailList", sender: hardTrails)
+            sender = hardTrails
             
         default:
-            
             return
         }
+        
+        performSegue(withIdentifier: SegueIdentifier.trailList.rawValue, sender: sender)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toTrailList" {
+        if segue.identifier == SegueIdentifier.trailList.rawValue {
             if let trailListVC = segue.destination as? TrailListViewController {
                 
                 if let trails = sender as? [Trail] {

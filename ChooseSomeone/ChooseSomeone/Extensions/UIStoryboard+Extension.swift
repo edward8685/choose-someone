@@ -19,7 +19,7 @@ private struct StoryboardCategory {
 
     static let profile = "Profile"
     
-    static let policy = "PrivacyPolicy"
+    static let policy = "Policy"
     
     static let main = "Main"
 }

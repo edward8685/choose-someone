@@ -16,15 +16,6 @@ protocol ProfileItem {
     var title: String { get }
 }
 
-enum ProfileSegue: String, CaseIterable {
-    
-    case record = "toRecord"
-    
-    case account = "toAccount"
-    
-    case privacy = "privacy"
-}
-
 enum ProfileFeat: ProfileItem, CaseIterable {
     
     case record

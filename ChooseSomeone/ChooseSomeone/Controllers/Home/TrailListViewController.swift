@@ -143,12 +143,12 @@ extension TrailListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        performSegue(withIdentifier: "toTrailInfo", sender: trails[indexPath.row])
+        performSegue(withIdentifier: SegueIdentifier.trailInfo.rawValue, sender: trails[indexPath.row])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "toTrailInfo" {
+        if segue.identifier == SegueIdentifier.trailInfo.rawValue {
             
             if let trailInfoVC = segue.destination as? TrailInfoViewController {
                 
@@ -165,7 +165,7 @@ extension TrailListViewController: UICollectionViewDelegate {
 
 func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
     
-    return UICollectionViewCompositionalLayout { (sectionIndex, env) -> NSCollectionLayoutSection? in
+    return UICollectionViewCompositionalLayout { ( sectionIndex, env) -> NSCollectionLayoutSection? in
         
         let inset = 5
         

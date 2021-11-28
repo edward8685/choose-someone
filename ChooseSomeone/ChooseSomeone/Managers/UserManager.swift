@@ -17,23 +17,26 @@ class UserManager {
     
     var userInfo = UserInfo() {
         didSet {
-            NotificationCenter.default.post(name: NSNotification.userInfoDidChanged, object: nil, userInfo: [userId: userInfo] )
+            NotificationCenter.default.post(
+                name: NSNotification.userInfoDidChanged,
+                object: nil,
+                userInfo: [userId: userInfo] )
         }
     }
     
     static let shared = UserManager()
     
-    let storage = Storage.storage()
-    
-    lazy var storageRef = storage.reference()
+    lazy var storageRef = Storage.storage().reference()
     
     lazy var dataBase = Firestore.firestore()
     
+    private let usersCollection = Collection.users.rawValue
+    
     func signUpUserInfo(userInfo: UserInfo, completion: @escaping (Result<String, Error>) -> Void) {
         
-        let userId = userInfo.uid
+        let uid = userInfo.uid
         
-        let document = dataBase.collection("Users").document(userId)
+        let document = dataBase.collection(usersCollection).document(uid)
         
         do {
             
@@ -48,10 +51,10 @@ class UserManager {
     }
     
     func fetchUserInfo(uid: String, completion: @escaping (Result<UserInfo, Error>) -> Void) {
-
-        let docRef = dataBase.collection("Users").document(uid)
         
-        docRef.getDocument{(document, error) in
+        let docRef = dataBase.collection(usersCollection).document(uid)
+        
+        docRef.getDocument {(document, error) in
             
             guard let document = document else { return }
             
@@ -114,7 +117,7 @@ class UserManager {
         
         let userId = userInfo.uid
         
-        let docRef = dataBase.collection("Users").document(userId)
+        let docRef = dataBase.collection(usersCollection).document(userId)
         
         userInfo.pictureRef = fileURL.absoluteString
         
@@ -135,10 +138,10 @@ class UserManager {
         userInfo.userName = name
         
         let userId = userInfo.uid
-
+        
         let post = [UserInfo.CodingKeys.userName.rawValue: name]
         
-        let docRef = dataBase.collection("Users").document(userId)
+        let docRef = dataBase.collection(usersCollection).document(userId)
         
         docRef.updateData(post) { error in
             
@@ -159,12 +162,12 @@ class UserManager {
         userInfo.totalFriends = numOfPartners
         
         let userId = userInfo.uid
-
+        
         let post = [UserInfo.CodingKeys.totalGroups.rawValue: numOfGroups,
                     UserInfo.CodingKeys.totalFriends.rawValue: numOfPartners
         ]
         
-        let docRef = dataBase.collection("Users").document(userId)
+        let docRef = dataBase.collection(usersCollection).document(userId)
         
         docRef.updateData(post) { error in
             
@@ -184,10 +187,10 @@ class UserManager {
         userInfo.totalLength += length
         
         let userId = userInfo.uid
-
+        
         let post = [UserInfo.CodingKeys.totalLength.rawValue: userInfo.totalLength]
         
-        let docRef = dataBase.collection("Users").document(userId)
+        let docRef = dataBase.collection(usersCollection).document(userId)
         
         docRef.updateData(post) { error in
             
@@ -208,7 +211,7 @@ class UserManager {
         
         let userId = userInfo.uid
         
-        let docRef = dataBase.collection("Users").document(userId)
+        let docRef = dataBase.collection(usersCollection).document(userId)
         
         docRef.updateData([
             "block_list": FieldValue.arrayUnion([blockUserId])

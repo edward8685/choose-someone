@@ -178,7 +178,7 @@ class GroupViewController: BaseViewController {
         
         if requests.count != 0 {
             
-            performSegue(withIdentifier: "toRequestList", sender: requests)
+            performSegue(withIdentifier: SegueIdentifier.requestList.rawValue, sender: requests)
             
         } else {
             
@@ -288,7 +288,7 @@ class GroupViewController: BaseViewController {
     
     func addRequestListener() {
         
-        GroupManager.shared.fetchRequest { result in
+        GroupManager.shared.addRequestListener { result in
             
             switch result {
                 
@@ -397,7 +397,7 @@ class GroupViewController: BaseViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "toGroupChatVC" {
+        if segue.identifier == SegueIdentifier.groupChat.rawValue {
             if let chatRoomVC = segue.destination as? ChatRoomViewController {
                 
                 if let groupInfo = sender as? Group {
@@ -409,7 +409,7 @@ class GroupViewController: BaseViewController {
             }
         }
         
-        if segue.identifier == "toRequestList" {
+        if segue.identifier == SegueIdentifier.requestList.rawValue {
             
             if let requestVC = segue.destination as? JoinRequestViewController {
                 
@@ -437,7 +437,7 @@ class GroupViewController: BaseViewController {
     }
     
     @objc func buildNewTeam() {
-        performSegue(withIdentifier: "toBuildTeamVC", sender: nil)
+        performSegue(withIdentifier: SegueIdentifier.buildTeam.rawValue, sender: nil)
     }
 }
 
@@ -484,7 +484,7 @@ extension GroupViewController: UITableViewDelegate {
                 sender = inActiveGroups
             }
         }
-        performSegue(withIdentifier: "toGroupChatVC", sender: sender[indexPath.row])
+        performSegue(withIdentifier: SegueIdentifier.groupChat.rawValue, sender: sender[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView,

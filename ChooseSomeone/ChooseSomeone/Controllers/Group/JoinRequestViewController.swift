@@ -67,7 +67,7 @@ class JoinRequestViewController: BaseViewController {
     
     func addRequestListener() {
         
-        GroupManager.shared.fetchRequest { result in
+        GroupManager.shared.addRequestListener { result in
             
             switch result {
                 
