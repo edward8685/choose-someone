@@ -9,16 +9,13 @@ import UIKit
 
 class ShadowTextField: UITextField {
     
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-      
         
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         
         borderStyle = .none
         self.clipsToBounds = true
@@ -27,8 +24,6 @@ class ShadowTextField: UITextField {
         layer.shadowOffset = CGSize(width: 0, height: 2.0)
         layer.masksToBounds = false
         layer.shadowOpacity = 0.15
-        
         layer.backgroundColor = UIColor.white.cgColor
-        
     }
 }

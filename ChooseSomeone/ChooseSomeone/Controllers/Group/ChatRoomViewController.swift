@@ -17,9 +17,12 @@ class ChatRoomViewController: BaseViewController {
     }
     
     // MARK: - DataSource & DataSourceSnapshot typelias -
+    
     typealias DataSource = UITableViewDiffableDataSource<Section, Message>
     
     typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Message>
+    
+    // MARK: - Class Properties -
     
     private var dataSource: DataSource!
     
@@ -27,7 +30,21 @@ class ChatRoomViewController: BaseViewController {
     
     var groupInfo: Group?
     
-    var userStatus: GroupStatus = .notInGroup
+    private var messages = [Message]()
+    
+    var cache = [String: UserInfo]()
+    
+    private var userStatus: GroupStatus = .notInGroup
+    
+    private var isInGroup: Bool = false {
+        
+        didSet {
+            
+            textViewView.isHidden = isInGroup ? false : true
+            
+            self.navigationItem.rightBarButtonItem?.isEnabled = isInGroup ? true : false
+        }
+    }
     
     private var textViewMessage: String? {
         
@@ -44,10 +61,6 @@ class ChatRoomViewController: BaseViewController {
         }
     }
     
-    private var messages = [Message]()
-    
-    var cache = [String: UserInfo]()
-    
     private var tableView: UITableView! {
         
         didSet {
@@ -62,16 +75,6 @@ class ChatRoomViewController: BaseViewController {
     
     private let sendButton = UIButton()
     
-    private var isInGroup: Bool = false {
-        
-        didSet {
-            
-            textViewView.isHidden = isInGroup ? false : true
-            
-            self.navigationItem.rightBarButtonItem?.isEnabled = isInGroup ? true : false
-        }
-    }
-    
     private var textView = RSKPlaceholderTextView() {
         
         didSet {
@@ -80,22 +83,24 @@ class ChatRoomViewController: BaseViewController {
         }
     }
     
-    // MARK: - View Life Cycle
+    // MARK: - View Life Cycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateUserInfo), name: NSNotification.userInfoDidChanged, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateUserInfo),
+            name: NSNotification.userInfoDidChanged,
+            object: nil)
         
         checkUserStatus()
-        
-        tableView = UITableView()
-        
-        tableView.registerCellWithNib(identifier: GroupChatCell.identifier, bundle: nil)
         
         setUpTextView()
         
         setUpTableView()
+        
+        tableView.registerCellWithNib(identifier: GroupChatCell.identifier, bundle: nil)
         
         addMessageListener()
         
@@ -122,7 +127,7 @@ class ChatRoomViewController: BaseViewController {
         textView.layer.masksToBounds = true
     }
     
-    // MARK: - Action
+    // MARK: - Actions -
     
     @objc func updateUserInfo(notification: Notification) {
         
@@ -358,7 +363,11 @@ class ChatRoomViewController: BaseViewController {
                 self.textView.text = ""
                 
                 if messages.count != 0 {
-                    tableView.scrollToRow(at: IndexPath(row: messages.count - 1, section: 0), at: .bottom, animated: true)
+                    
+                    tableView.scrollToRow(
+                        at: IndexPath(row: messages.count - 1, section: 0),
+                        at: .bottom,
+                        animated: true)
                 }
                 
             case .failure(let error):
@@ -367,6 +376,22 @@ class ChatRoomViewController: BaseViewController {
             }
         }
     }
+    
+    @objc func showMembers() {
+        
+        if let teammateVC = self.storyboard?.instantiateViewController(
+            withIdentifier: TeammateViewController.identifier
+        ) as? TeammateViewController {
+            
+            teammateVC.groupInfo = groupInfo
+            
+            teammateVC.cache = cache
+            
+            navigationController?.pushViewController(teammateVC, animated: true)
+        }
+    }
+    
+    // MARK: - UI Settings -
     
     func setNavigationBar() {
         
@@ -378,14 +403,13 @@ class ChatRoomViewController: BaseViewController {
         
         UINavigationBar.appearance().isTranslucent = true
         
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white,
-                                                            NSAttributedString.Key.font: UIFont.medium(size: 22) ?? UIFont.systemFont(ofSize: 22)]
+        UINavigationBar.appearance().titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.font: UIFont.medium(size: 22) ?? UIFont.systemFont(ofSize: 22)]
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-        let leftButton = PreviousPageButton()
-        
-        leftButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        let leftButton = PreviousPageButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         
         let image = UIImage(systemName: "chevron.left")
         
@@ -395,9 +419,7 @@ class ChatRoomViewController: BaseViewController {
         
         self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: leftButton), animated: true)
         
-        let rightButton = PreviousPageButton()
-        
-        rightButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        let rightButton = PreviousPageButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         
         let infoImage = UIImage(systemName: "info")
         
@@ -408,19 +430,9 @@ class ChatRoomViewController: BaseViewController {
         self.navigationItem.setRightBarButton(UIBarButtonItem(customView: rightButton), animated: true)
     }
     
-    @objc func showMembers() {
-        
-        if let teammateVC = self.storyboard?.instantiateViewController(withIdentifier: TeammateViewController.identifier) as? TeammateViewController {
-            
-            teammateVC.groupInfo = groupInfo
-            
-            teammateVC.cache = cache
-            
-            navigationController?.pushViewController(teammateVC, animated: true)
-        }
-    }
-    
     func setUpTableView() {
+        
+        tableView = UITableView()
         
         view.addSubview(tableView)
         
@@ -516,14 +528,13 @@ class ChatRoomViewController: BaseViewController {
     }
 }
 
-// MARK: - UITableViewDelegate
+// MARK: - TableView Delegate -
 
 extension ChatRoomViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        guard let headerView = Bundle.main.loadNibNamed(GroupChatHeaderCell.identifier, owner: self, options: nil)?.first as? GroupChatHeaderCell
-        else { fatalError("Could not create HeaderView") }
+        let headerView: GroupChatHeaderCell = .loadFromNib()
         
         self.headerView = headerView
         
@@ -554,13 +565,13 @@ extension ChatRoomViewController: UITableViewDelegate {
         80
     }
     
-    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+    func tableView(_ tableView: UITableView,
+                   contextMenuConfigurationForRowAt indexPath: IndexPath,
+                   point: CGPoint) -> UIContextMenuConfiguration? {
         
-        let index = indexPath.row
+        let userId = messages[indexPath.row].userId
         
-        let userId = messages[index].userId
-        
-        let identifier = "\(index)" as NSString
+        let identifier = "\(indexPath.row)" as NSString
         
         if userId != self.userInfo.uid {
             
@@ -586,15 +597,16 @@ extension ChatRoomViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - TableView Diffable Datasource -
+
 extension ChatRoomViewController {
     
     func configureDataSource() {
         
-        dataSource = DataSource(tableView: tableView, cellProvider: { (tableView, indexPath, model) -> UITableViewCell? in
+        dataSource = DataSource(tableView: tableView,
+                                cellProvider: { ( tableView, indexPath, model) -> UITableViewCell? in
             
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: GroupChatCell.identifier, for: indexPath) as? GroupChatCell else {
-                fatalError("Cannot create new cell")
-            }
+            let cell: GroupChatCell = tableView.dequeueCell(for: indexPath)
             
             if let memberInfo = self.cache[model.userId] {
                 
@@ -616,6 +628,8 @@ extension ChatRoomViewController {
         dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
+
+// MARK: - TextView Delegate -
 
 extension ChatRoomViewController: UITextViewDelegate {
     

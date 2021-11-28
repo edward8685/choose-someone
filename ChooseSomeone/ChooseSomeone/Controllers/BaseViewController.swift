@@ -67,12 +67,12 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
         if isHideNavigationBar {
             
             navigationController?.setNavigationBarHidden(false, animated: true)
         }
-
+        
         if !isEnableIQKeyboard {
             
             IQKeyboardManager.shared.enable = true
@@ -81,7 +81,7 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
             
             IQKeyboardManager.shared.enable = false
         }
-
+        
         if !isEnableResignOnTouchOutside {
             
             IQKeyboardManager.shared.shouldResignOnTouchOutside = true
@@ -95,6 +95,11 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
     @objc func popToPreviousPage(_ sender: UIButton) {
         
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func dismissVC() {
+        
+        dismiss(animated: true, completion: nil)
     }
     
     func showBlockAlertAction(uid: String) {

@@ -30,7 +30,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         
                         UserManager.shared.userInfo = userInfo
                         
-                        guard let tabbarVC = UIStoryboard.main.instantiateViewController(identifier: "TabbarController") as? UITabBarController else { return }
+                        guard let tabbarVC = UIStoryboard.policy.instantiateViewController(
+                            identifier: TabBarController.identifier) as? TabBarController else { return }
                         
                         self.window?.rootViewController = tabbarVC
                         
@@ -41,17 +42,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         print("Fetch user info failure: \(error)")
                     }
                 }
-                
             }
             
         } else {
             
-            guard let loginVC = UIStoryboard.login.instantiateViewController(identifier:LoginViewController.identifier) as? LoginViewController else { return }
+            guard let loginVC = UIStoryboard.login.instantiateViewController(
+                identifier: LoginViewController.identifier) as? LoginViewController else { return }
             
             self.window?.rootViewController = loginVC
-            
         }
-        
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

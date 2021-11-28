@@ -30,6 +30,7 @@
 		740FC396271D17180071459A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 740FC395271D17180071459A /* Assets.xcassets */; };
 		740FC399271D17180071459A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740FC397271D17180071459A /* LaunchScreen.storyboard */; };
 		7417858B274528B500231383 /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7417858A274528B500231383 /* TabbarController.swift */; };
+		7419104E2750D4410055D0A7 /* DismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7419104D2750D4410055D0A7 /* DismissButton.swift */; };
 		7419126C273A5AAF006750EA /* TeammateVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7419126B273A5AAF006750EA /* TeammateVIewController.swift */; };
 		7419126E273A9AAE006750EA /* PreviousPageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7419126D273A9AAE006750EA /* PreviousPageButton.swift */; };
 		742349352732B032001EC7A1 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742349342732B032001EC7A1 /* UserManager.swift */; };
@@ -86,7 +87,7 @@
 		74608D47271EC727002BD125 /* GroupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74608D46271EC727002BD125 /* GroupManager.swift */; };
 		748EF102273BAC8E00B97EE0 /* GroupStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EF101273BAC8E00B97EE0 /* GroupStatus.swift */; };
 		748EF106273CAB4D00B97EE0 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748EF105273CAB4D00B97EE0 /* BaseViewController.swift */; };
-		74AF8A3D27441300003A4132 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AF8A3C27441300003A4132 /* PrivacyPolicyViewController.swift */; };
+		74AF8A3D27441300003A4132 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AF8A3C27441300003A4132 /* WebViewController.swift */; };
 		74AF8A3F274416C5003A4132 /* PrivacyPolicy.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74AF8A3E274416C5003A4132 /* PrivacyPolicy.storyboard */; };
 		74BDD709274F447900E349A0 /* NotificationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BDD708274F447900E349A0 /* NotificationExtension.swift */; };
 		74BDD70B274F5F7E00E349A0 /* BuildTeamButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BDD70A274F5F7E00E349A0 /* BuildTeamButton.swift */; };
@@ -141,6 +142,7 @@
 		740FC398271D17180071459A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		740FC39A271D17180071459A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7417858A274528B500231383 /* TabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarController.swift; sourceTree = "<group>"; };
+		7419104D2750D4410055D0A7 /* DismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissButton.swift; sourceTree = "<group>"; };
 		7419126B273A5AAF006750EA /* TeammateVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeammateVIewController.swift; sourceTree = "<group>"; };
 		7419126D273A9AAE006750EA /* PreviousPageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousPageButton.swift; sourceTree = "<group>"; };
 		742349332732662E001EC7A1 /* ChooseSomeone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChooseSomeone.entitlements; sourceTree = "<group>"; };
@@ -199,7 +201,7 @@
 		74678B4E2747F994005CA415 /* ChooseSomeoneRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChooseSomeoneRelease.entitlements; sourceTree = "<group>"; };
 		748EF101273BAC8E00B97EE0 /* GroupStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupStatus.swift; sourceTree = "<group>"; };
 		748EF105273CAB4D00B97EE0 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		74AF8A3C27441300003A4132 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		74AF8A3C27441300003A4132 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		74AF8A3E274416C5003A4132 /* PrivacyPolicy.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PrivacyPolicy.storyboard; sourceTree = "<group>"; };
 		74BDD708274F447900E349A0 /* NotificationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtension.swift; sourceTree = "<group>"; };
 		74BDD70A274F5F7E00E349A0 /* BuildTeamButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildTeamButton.swift; sourceTree = "<group>"; };
@@ -383,7 +385,7 @@
 				7441B7C227323B4B00614D9B /* LoginViewController.swift */,
 				748EF105273CAB4D00B97EE0 /* BaseViewController.swift */,
 				7417858A274528B500231383 /* TabbarController.swift */,
-				74AF8A3C27441300003A4132 /* PrivacyPolicyViewController.swift */,
+				74AF8A3C27441300003A4132 /* WebViewController.swift */,
 				74F10299274135060097AC6F /* Home */,
 				747A1DB4273FE60200D08A37 /* Group */,
 				749CF7482742B7B6008BAC76 /* Journey */,
@@ -459,6 +461,7 @@
 				74BDD70A274F5F7E00E349A0 /* BuildTeamButton.swift */,
 				74377465273962DC006AA44E /* ShadowTextfield.swift */,
 				740E98B227362D3A006163B8 /* ImagePickerButton.swift */,
+				7419104D2750D4410055D0A7 /* DismissButton.swift */,
 			);
 			path = "Custom Stuff";
 			sourceTree = "<group>";
@@ -749,7 +752,7 @@
 				74608D41271E97DC002BD125 /* Trail.swift in Sources */,
 				740E98AC2734DF79006163B8 /* ProfileCell.swift in Sources */,
 				744934A1272562C8002D8FE3 /* TrailManager.swift in Sources */,
-				74AF8A3D27441300003A4132 /* PrivacyPolicyViewController.swift in Sources */,
+				74AF8A3D27441300003A4132 /* WebViewController.swift in Sources */,
 				740FC391271D17160071459A /* GroupViewController.swift in Sources */,
 				74E573D427292CE300F490BF /* DistanceLabel.swift in Sources */,
 				742516FB272197A30011166B /* UILabelExtension.swift in Sources */,
@@ -792,6 +795,7 @@
 				74E573852728EBEE00F490BF /* GPXTrackPoint+MapKit.swift in Sources */,
 				745A6F09272D7B08006064C4 /* TrackRecordCell.swift in Sources */,
 				74E573842728EBEE00F490BF /* GPXTrackSegment+MapKit.swift in Sources */,
+				7419104E2750D4410055D0A7 /* DismissButton.swift in Sources */,
 				748EF106273CAB4D00B97EE0 /* BaseViewController.swift in Sources */,
 				74608D45271EA5E1002BD125 /* UserInfo.swift in Sources */,
 				74E5735B27268E3E00F490BF /* TrialInfoScrollView.swift in Sources */,

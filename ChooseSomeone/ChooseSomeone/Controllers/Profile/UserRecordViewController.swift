@@ -35,8 +35,6 @@ class UserRecordViewController: BaseViewController, ChartViewDelegate {
     
     lazy var trackChartData = TrackChartData()
     
-    lazy var toPreviousPageButton = PreviousPageButton()
-    
     // MARK: - View Life Cycle -
     
     override func viewDidLoad() {
@@ -60,7 +58,7 @@ class UserRecordViewController: BaseViewController, ChartViewDelegate {
         setChart(xValues: trackChartData.distance, yValues: trackChartData.elevation)
     }
     
-    // MARK: - Method -
+    // MARK: - Methods -
     
     func setChart(xValues: [Double], yValues: [Double]) {
         
@@ -110,14 +108,14 @@ class UserRecordViewController: BaseViewController, ChartViewDelegate {
             
             didLoadGPXFile(gpxRoot: gpx)
             
-            processTrackData(gpx: gpx)
+            processTrackData(gpxRoot: gpx)
         }
         
-        func processTrackData(gpx: GPXRoot) {
+        func processTrackData(gpxRoot: GPXRoot) {
             
             var temArray: [Double] = []
             
-            for track in gpx.tracks {
+            for track in gpxRoot.tracks {
                 
                 var lastLength: Double = 0.0
                 
@@ -132,7 +130,7 @@ class UserRecordViewController: BaseViewController, ChartViewDelegate {
                             trackChartData.time.append(Double(time))
                         }
                     }
-                    // coordinate add constant of the last segment endpoint
+                    // add the last segment endpoint to coordinate of the next segment
                     let segmentLength = segment.distanceFromOrigin().map { $0 + lastLength }
                     
                     lastLength = segmentLength.last ?? 0
@@ -148,12 +146,6 @@ class UserRecordViewController: BaseViewController, ChartViewDelegate {
             trackInfo.distance = trackChartData.distance.last ?? 0
             
             trackInfo.spentTime = trackChartData.time.last ?? 0
-            
-            if let maxValue = trackChartData.elevation.max(),
-               let minValue = trackChartData.elevation.min() {
-                
-                trackInfo.elevationDiff = maxValue - minValue
-            }
             
             processDiffOfElevation(elevation: trackChartData.elevation)
         }
@@ -194,9 +186,15 @@ class UserRecordViewController: BaseViewController, ChartViewDelegate {
         trackInfo.totalClimb = totalClimp
         
         trackInfo.totalDrop = totalDrop
+        
+        if let maxValue = trackChartData.elevation.max(),
+           let minValue = trackChartData.elevation.min() {
+            
+            trackInfo.elevationDiff = maxValue - minValue
+        }
     }
     
-    // MARK: - UI Layout -
+    // MARK: - UI Settings -
     
     func setUpChartLayout() {
         
@@ -222,11 +220,11 @@ class UserRecordViewController: BaseViewController, ChartViewDelegate {
         
         let radius = UIScreen.width * 13 / 107
         
-        toPreviousPageButton.frame = CGRect(x: 20, y: 40, width: radius, height: radius)
+        let button = PreviousPageButton(frame: CGRect(x: 20, y: 40, width: radius, height: radius))
         
-        toPreviousPageButton.addTarget(self, action: #selector(popToPreviousPage), for: .touchUpInside)
+        button.addTarget(self, action: #selector(popToPreviousPage), for: .touchUpInside)
         
-        view.addSubview(toPreviousPageButton)
+        view.addSubview(button)
     }
     
     // MARK: - Polyline -

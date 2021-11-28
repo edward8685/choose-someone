@@ -11,11 +11,11 @@ import CoreGPX
 class MapViewDelegate: NSObject, MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-
+        
         if overlay is MKPolyline {
             
             let pr = MKPolylineRenderer(overlay: overlay)
-
+            
             pr.alpha = 0.8
             
             pr.strokeColor = .B1

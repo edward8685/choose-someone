@@ -14,6 +14,8 @@ import Lottie
 
 class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     
+    // MARK: - Class Properties -
+    
     let userId = UserManager.shared.userInfo.uid
     
     private var isDisplayingLocationServicesDenied: Bool = false
@@ -463,6 +465,8 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         updatePolylineColor()
     }
     
+    // MARK: - Polyline -
+    
     func updatePolylineColor() {
         
         for overlay in map.overlays where overlay is MKPolyline {
@@ -472,6 +476,8 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
             map.addOverlay(overlay)
         }
     }
+    
+    // MARK: - UI Settings -
     
     func setUpButtonsStackView() {
         
@@ -552,10 +558,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 }
 
-// MARK: - MKMapViewDelegate methods
-extension JourneyViewController: MKMapViewDelegate {
-    
-}
+// MARK: - StopWatchDelegate methods
 
 extension JourneyViewController: StopWatchDelegate {
     func stopWatch(_ stropWatch: StopWatch, didUpdateElapsedTimeString elapsedTimeString: String) {
@@ -564,7 +567,7 @@ extension JourneyViewController: StopWatchDelegate {
     }
 }
 
-// MARK: CLLocationManagerDelegate
+// MARK: - CLLocationManager Delegate -
 
 extension JourneyViewController: CLLocationManagerDelegate {
     

@@ -8,9 +8,9 @@
 import UIKit
 
 class PreviousPageButton: UIButton {
-     
+    
     override init(frame: CGRect) {
-        super.init(frame: CGRect.zero)
+        super.init(frame: frame)
         
         self.backgroundColor = .white
         
@@ -24,7 +24,7 @@ class PreviousPageButton: UIButton {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-     
+        
     }
     
     override func layoutSubviews() {

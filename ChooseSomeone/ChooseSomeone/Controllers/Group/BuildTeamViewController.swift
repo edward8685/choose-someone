@@ -12,6 +12,8 @@ import FirebaseAuth
 
 class BuildTeamViewController: BaseViewController {
     
+    // MARK: - Class Properties -
+    
     @IBOutlet weak var dimmingView: UIView! {
         
         didSet {
@@ -93,6 +95,8 @@ class BuildTeamViewController: BaseViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    // MARK: - View Life Cycle -
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -109,38 +113,16 @@ class BuildTeamViewController: BaseViewController {
         setUpTextView()
     }
     
-    func setUpTextView() {
-        
-        noteTextView.placeholder = "對團員說些什麼.."
-        
-        noteTextView.clipsToBounds = true
-        
-        noteTextView.layer.cornerRadius = 10
-        
-        noteTextView.textContainer.maximumNumberOfLines = 3
-        
-        noteTextView.textContainer.lineBreakMode = .byWordWrapping
-    }
+    // MARK: - Methods -
     
     func checkTextsFilled() {
         
         let textfields = [ groupNameTextField, trailNameTextField, numOfPeopleTextfield]
         
         if noteTextView.text != nil {
+            
             textsWerefilled = textfields.allSatisfy { $0?.text?.isEmpty  == false }
         }
-    }
-    
-    func setUpButton() {
-        
-        sendPostButton.addTarget(self, action: #selector(sendPost), for: .touchUpInside)
-        
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @objc func handleTap(recognizer: UITapGestureRecognizer) {
-        
-        dismiss(animated: true, completion: nil)
     }
     
     @objc func sendPost() {
@@ -187,19 +169,53 @@ class BuildTeamViewController: BaseViewController {
             }
         }
     }
+    
+    // MARK: - UI Settings -
+    
+    func setUpTextView() {
+        
+        noteTextView.placeholder = "對團員說些什麼.."
+        
+        noteTextView.clipsToBounds = true
+        
+        noteTextView.layer.cornerRadius = 10
+        
+        noteTextView.textContainer.maximumNumberOfLines = 3
+        
+        noteTextView.textContainer.lineBreakMode = .byWordWrapping
+    }
+    
+    func setUpButton() {
+        
+        sendPostButton.addTarget(self, action: #selector(sendPost), for: .touchUpInside)
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func handleTap(recognizer: UITapGestureRecognizer) {
+        
+        dismiss(animated: true, completion: nil)
+    }
 }
+
+// MARK: - TextField & TextView Delegate -
 
 extension BuildTeamViewController: UITextFieldDelegate, UITextViewDelegate {
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
         var maxLength = 12
         
         if textField == numOfPeopleTextfield {
             maxLength = 2
         }
+        
         let currentString: NSString = (textField.text ?? "") as NSString
+        
         let newString: NSString =
-            currentString.replacingCharacters(in: range, with: string) as NSString
+        currentString.replacingCharacters(in: range, with: string) as NSString
+        
         return newString.length <= maxLength
     }
     
@@ -216,10 +232,9 @@ extension BuildTeamViewController: UITextFieldDelegate, UITextViewDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        guard let text = textField.text,
-              !text.isEmpty else {
-                  return
-              }
+        guard let text = textField.text, !text.isEmpty else {
+            return
+        }
         
         switch textField {
             
@@ -239,6 +254,7 @@ extension BuildTeamViewController: UITextFieldDelegate, UITextViewDelegate {
             
             return
         }
+        
         checkTextsFilled()
     }
 }

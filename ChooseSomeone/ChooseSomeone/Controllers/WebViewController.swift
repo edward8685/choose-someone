@@ -1,5 +1,5 @@
 //
-//  PrivacyPolicyViewController.swift
+//  WebViewController.swift
 //  ChooseSomeone
 //
 //  Created by Ed Chang on 2021/11/17.
@@ -32,13 +32,9 @@ enum PolicyType: String, policy {
 
 class WebViewController: BaseViewController {
     
-    // MARK: - properties
+    // MARK: - Class Properties -
     
-    var policyType: PolicyType? {
-        didSet {
-            print(policyType)
-        }
-    }
+    var policyType: PolicyType?
     
     private lazy var webView: WKWebView = {
         
@@ -49,7 +45,7 @@ class WebViewController: BaseViewController {
         return web
     }()
     
-    // MARK: - methods
+    // MARK: - Methods -
     
     private func loadURL(type: PolicyType) {
         
@@ -61,7 +57,14 @@ class WebViewController: BaseViewController {
         }
     }
     
-    // MARK: - View Life Cycle
+    private func setWebView() {
+        
+        view.stickSubView(webView)
+        
+        view.sendSubviewToBack(webView)
+    }
+    
+    // MARK: - View Life Cycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,7 +90,7 @@ class WebViewController: BaseViewController {
     
 }
 
-// MARK: - WKNavigationDelegate
+// MARK: - WKNavigation Delegate -
 
 extension WebViewController: WKNavigationDelegate {
     
@@ -103,14 +106,4 @@ extension WebViewController: WKNavigationDelegate {
         print("finish to load")
     }
     
-}
-
-extension WebViewController {
-    
-    private func setWebView() {
-        
-        view.stickSubView(webView)
-        
-        view.sendSubviewToBack(webView)
-    }
 }

@@ -8,14 +8,9 @@
 import UIKit
 
 class BuildTeamButton: UIButton {
-     
+    
     override init(frame: CGRect) {
         super.init(frame: CGRect.zero)
-        
-        let width = UIScreen.width
-        let height = UIScreen.height
-        
-        self.frame = CGRect(x: width * 0.8, y: height * 0.8, width: width * 0.18, height: width * 0.18)
         
         let image = UIImage.asset(.choose)
         
@@ -26,7 +21,7 @@ class BuildTeamButton: UIButton {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-     
+        
     }
     
     override func layoutSubviews() {

@@ -110,20 +110,20 @@ extension UIView {
     }
     
     func shake() {
-            let animation = CABasicAnimation(keyPath: "position")
+        let animation = CABasicAnimation(keyPath: "position")
         
-            animation.duration = 0.15
+        animation.duration = 0.15
         
-            animation.repeatCount = 2
+        animation.repeatCount = 2
         
-            animation.autoreverses = true
+        animation.autoreverses = true
         
-            animation.fromValue = NSValue(cgPoint: CGPoint(x: self.center.x - 5, y: self.center.y))
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.center.x - 5, y: self.center.y))
         
-            animation.toValue = NSValue(cgPoint: CGPoint(x: self.center.x + 5, y: self.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: self.center.x + 5, y: self.center.y))
         
-            self.layer.add(animation, forKey: "position")
-        }
+        self.layer.add(animation, forKey: "position")
+    }
     
     func roundCornersTop(cornerRadius: Double) {
         
@@ -185,5 +185,13 @@ extension UIView {
         objectView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
         
         objectView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
+    
+    class func loadFromNib<T: UIView>() -> T {
+        
+        // swiftlint:disable force_cast
+        return Bundle(for: T.self).loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
+        // swiftlint:enable force_cast
+        
     }
 }

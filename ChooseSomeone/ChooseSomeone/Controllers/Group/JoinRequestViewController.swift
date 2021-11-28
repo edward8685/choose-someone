@@ -10,9 +10,12 @@ import UIKit
 class JoinRequestViewController: BaseViewController {
     
     // MARK: - DataSource & DataSourceSnapshot typelias -
+    
     typealias DataSource = UITableViewDiffableDataSource<Section, Request>
     
     typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Request>
+    
+    // MARK: - Class Properties -
     
     enum Section {
         case section
@@ -31,7 +34,7 @@ class JoinRequestViewController: BaseViewController {
         }
     }
     
-    lazy var cache = [String: UserInfo]() {
+    private lazy var cache = [String: UserInfo]() {
         
         didSet {
             
@@ -39,16 +42,11 @@ class JoinRequestViewController: BaseViewController {
         }
     }
     
-    private var tableView: UITableView! {
-        
-        didSet {
-            
-            tableView.delegate = self
-            
-        }
-    }
+    private var tableView: UITableView!
     
-    lazy var dimmingView = UIView()
+    private lazy var dimmingView = UIView()
+    
+    // MARK: - View Life Cycle -
     
     override func viewDidLoad() {
         
@@ -58,28 +56,14 @@ class JoinRequestViewController: BaseViewController {
         
         setUpTableView()
         
-        setUpButton()
+        setUpDismissButton()
         
         configureDataSource()
         
         configureSnapshot()
     }
     
-    func setUpDimmingView() {
-        
-        view.stickSubView(dimmingView)
-        
-        dimmingView.translatesAutoresizingMaskIntoConstraints = false
-        
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
-        dimmingView.addGestureRecognizer(recognizer)
-        
-    }
-    
-    @objc func handleTap(recognizer: UITapGestureRecognizer) {
-        
-        dismiss(animated: true, completion: nil)
-    }
+    // MARK: - Methods -
     
     func addRequestListener() {
         
@@ -117,62 +101,10 @@ class JoinRequestViewController: BaseViewController {
         })
     }
     
-    func setUpTableView() {
-        
-        tableView = UITableView()
-        
-        tableView.registerCellWithNib(identifier: MemberCell.identifier, bundle: nil)
-        
-        view.addSubview(tableView)
-        
-        tableView.backgroundColor = .clear
-        
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
-            
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-    }
-    
-    func setUpButton() {
-        
-        let dismissButton = UIButton()
-        
-        dismissButton.frame = CGRect(x: UIScreen.width - 50, y: 30, width: 30, height: 30)
-        
-        dismissButton.titleEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        
-        dismissButton.backgroundColor = UIColor.hexStringToUIColor(hex: "64696F")
-        
-        let image = UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 15, weight: .regular))
-        
-        dismissButton.setImage(image, for: .normal)
-        
-        dismissButton.tintColor = .white
-        
-        dismissButton.layer.cornerRadius = dismissButton.frame.height / 2
-        
-        dismissButton.layer.masksToBounds = true
-        
-        dismissButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
-        
-        view.addSubview(dismissButton)
-    }
-    
-    @objc func dismissVC() {
+    @objc func handleTap(recognizer: UITapGestureRecognizer) {
         
         dismiss(animated: true, completion: nil)
     }
-}
-
-extension JoinRequestViewController: UITableViewDelegate {
     
     @objc func acceptRequest(_ sender: UIButton) {
         
@@ -202,6 +134,7 @@ extension JoinRequestViewController: UITableViewDelegate {
             case .success:
                 
                 print("accept succesfully")
+                
                 self.requests.remove(at: sender.tag)
                 
                 self.configureSnapshot()
@@ -228,6 +161,7 @@ extension JoinRequestViewController: UITableViewDelegate {
                 print("reject succesfully")
                 
                 self.requests.remove(at: sender.tag)
+                
                 self.configureSnapshot()
                 
             case .failure(let error):
@@ -236,21 +170,68 @@ extension JoinRequestViewController: UITableViewDelegate {
             }
         }
     }
+    
+    // MARK: - UI Settings -
+    
+    func setUpTableView() {
+        
+        tableView = UITableView()
+        
+        tableView.registerCellWithNib(identifier: MemberCell.identifier, bundle: nil)
+        
+        view.addSubview(tableView)
+        
+        tableView.backgroundColor = .clear
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
+            
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    func setUpDismissButton() {
+        
+        let button = DismissButton(frame: CGRect(x: UIScreen.width - 50, y: 30, width: 30, height: 30))
+        
+        button.titleEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        
+        button.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
+        
+        view.addSubview(button)
+    }
+    
+    func setUpDimmingView() {
+        
+        view.stickSubView(dimmingView)
+        
+        dimmingView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+        
+        dimmingView.addGestureRecognizer(recognizer)
+    }
 }
+
+// MARK: - Diffable Data Source -
 
 extension JoinRequestViewController {
     
     func configureDataSource() {
-        dataSource = DataSource(tableView: tableView) { (tableView, indexPath, model) ->UITableViewCell? in
+        dataSource = DataSource(tableView: tableView) { ( tableView, indexPath, model) -> UITableViewCell? in
             
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberCell.identifier, for: indexPath) as? MemberCell else {
-                fatalError("Cannot create new cell")
-            }
+            let cell: MemberCell = tableView.dequeueCell(for: indexPath)
             
             if let user = self.cache[self.requests[indexPath.row].requestId] {
                 
                 cell.setUpCell(model: model, userInfo: user)
-                
             }
             
             cell.acceptButton.addTarget(self, action: #selector(self.acceptRequest), for: .touchUpInside)

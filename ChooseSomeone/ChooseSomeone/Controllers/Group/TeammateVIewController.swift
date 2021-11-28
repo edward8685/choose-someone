@@ -9,6 +9,8 @@ import UIKit
 
 class TeammateViewController: BaseViewController {
     
+    // MARK: - Class Properties -
+    
     var cache: [String: UserInfo]?
     
     var groupInfo: Group?
@@ -23,7 +25,7 @@ class TeammateViewController: BaseViewController {
         }
     }
     
-    // MARK: - View Life Cycle
+    // MARK: - View Life Cycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,46 +44,38 @@ class TeammateViewController: BaseViewController {
         navigationController?.isNavigationBarHidden = false
     }
     
-    // MARK: - Action
+    // MARK: - UI Settings -
     
     func setNavigationBar() {
         
         self.title = "\(groupInfo?.groupName ?? "揪團") - 成員"
         
-        UINavigationBar.appearance().backgroundColor = .B1
+        UINavigationBarAppearance().backgroundColor = .B1
         
         UINavigationBar.appearance().barTintColor = .B1
         
         UINavigationBar.appearance().isTranslucent = true
         
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white,
-                                                            NSAttributedString.Key.font: UIFont.medium(size: 22) ?? UIFont.systemFont(ofSize: 22)]
-        
+        UINavigationBar.appearance().titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.font: UIFont.medium(size: 22) ?? UIFont.systemFont(ofSize: 22)
+        ]
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-        let button = UIButton()
-        
-        button.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        let leftButton = PreviousPageButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         
         let image = UIImage(systemName: "chevron.left")
         
-        button.setImage(image, for: .normal)
+        leftButton.setImage(image, for: .normal)
         
-        button.layer.cornerRadius = button.frame.height / 2
+        leftButton.addTarget(self, action: #selector(popToPreviousPage), for: .touchUpInside)
         
-        button.layer.masksToBounds = true
-        
-        button.tintColor = .B1
-        
-        button.backgroundColor = .white
-
-        button.addTarget(self, action: #selector(popToPreviousPage(_:)), for: .touchUpInside)
-        
-        self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: button), animated: true)
-        
+        self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: leftButton), animated: true)
     }
 }
+
+// MARK: - TableView Delegate & Data Source -
 
 extension TeammateViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -93,9 +87,7 @@ extension TeammateViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MemberCell.identifier, for: indexPath) as? MemberCell
-                
-        else {fatalError("Could not create Cell")}
+        let cell: MemberCell = tableView.dequeueCell(for: indexPath)
         
         if let group = groupInfo,
            let userInfo = cache?[group.userIds[indexPath.row]] {

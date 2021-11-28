@@ -12,9 +12,9 @@ import Lottie
 
 class HomeViewController: BaseViewController {
     
-    private var userInfo = UserManager.shared.userInfo
+    // MARK: - Class Properties -
     
-    var isHeaderViewCreated: Bool = false
+    private var userInfo = UserManager.shared.userInfo
     
     private var trails = [Trail]() {
         
@@ -35,18 +35,24 @@ class HomeViewController: BaseViewController {
         didSet {
             
             tableView.delegate = self
-            
             tableView.dataSource = self
         }
     }
     
-    var headerView: HomeHeaderCell?
+    private var headerView: HomeHeaderCell?
+    
+    // MARK: - View Life Cycle -
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
-        NotificationCenter.default.addObserver(self, selector: #selector(updateUserInfo), name: NSNotification.userInfoDidChanged, object: nil)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateUserInfo),
+            name: NSNotification.userInfoDidChanged,
+            object: nil
+        )
         
         setUpTableView()
         
@@ -61,30 +67,17 @@ class HomeViewController: BaseViewController {
     @objc func updateUserInfo(notification: Notification) {
         
         if let userInfo = notification.userInfo as? [String: UserInfo] {
-
+            
             if let userInfo = userInfo[self.userInfo.uid] {
                 self.userInfo = userInfo
             }
             guard let headerView = headerView else { return }
             
             headerView.updateUserInfo(user: self.userInfo)
-
         }
     }
     
-    func setUpTableView() {
-        
-        tableView = UITableView(frame: .zero, style: .grouped)
-        
-        tableView.registerCellWithNib(identifier: TrailThemeCell.identifier, bundle: nil)
-        
-        view.stickSubView(tableView)
-        
-        tableView.backgroundColor = .clear
-        
-        tableView.separatorStyle = .none
-        
-    }
+    // MARK: - Methods -
     
     func fetchTrailData() {
         
@@ -102,7 +95,7 @@ class HomeViewController: BaseViewController {
             }
         }
     }
-    //clasfied by Trail_difficult
+    // clasfied by Trail_difficult
     func manageTrailData() {
         
         for trail in trails {
@@ -123,24 +116,37 @@ class HomeViewController: BaseViewController {
             }
         }
     }
+    
+    // MARK: - UI Settings -
+    
+    func setUpTableView() {
+        
+        tableView = UITableView(frame: .zero, style: .grouped)
+        
+        tableView.registerCellWithNib(identifier: TrailThemeCell.identifier, bundle: nil)
+        
+        view.stickSubView(tableView)
+        
+        tableView.backgroundColor = .clear
+        
+        tableView.separatorStyle = .none
+    }
 }
+
+// MARK: - TableView Delegate -
 
 extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        guard let headerView = Bundle.main.loadNibNamed(HomeHeaderCell.identifier, owner: self, options: nil)?.first as? HomeHeaderCell
-        else {fatalError("Could not create HeaderView")}
+        let headerView: HomeHeaderCell = .loadFromNib()
         
         self.headerView = headerView
         
         headerView.updateUserInfo(user: userInfo)
         
-        isHeaderViewCreated = true
-        
         return self.headerView
     }
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -177,6 +183,8 @@ extension HomeViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - TableView Data Source -
+
 extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -185,11 +193,11 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: TrailThemeCell.identifier, for: indexPath) as? TrailThemeCell
-                
-        else {fatalError("Could not create Cell")}
+        let cell: TrailThemeCell = tableView.dequeueCell(for: indexPath)
         
-        cell.setUpCell(theme: TrailThemes.allCases[indexPath.row].rawValue, image: TrailThemes.allCases[indexPath.row].image)
+        cell.setUpCell(
+            theme: TrailThemes.allCases[indexPath.row].rawValue,
+            image: TrailThemes.allCases[indexPath.row].image)
         
         if indexPath.row % 2 == 1 {
             cell.themeLabel.textColor = .black
