@@ -14,22 +14,17 @@ class MapViewDelegate: NSObject, MKMapViewDelegate {
         
         if overlay is MKPolyline {
             
-            let pr = MKPolylineRenderer(overlay: overlay)
+            let polyLineRenderer = MKPolylineRenderer(overlay: overlay)
             
-            pr.alpha = 0.8
+            polyLineRenderer.alpha = 0.8
             
-            pr.strokeColor = .B1
+            polyLineRenderer.strokeColor = .B1
             
-            pr.lineWidth = 2
+            polyLineRenderer.lineWidth = 2
             
-            return pr
+            return polyLineRenderer
         }
         
         return MKOverlayRenderer()
-    }
-    
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        
-        guard let map = mapView as? GPXMapView else { return }
     }
 }

@@ -15,14 +15,7 @@ class UserManager {
     
     let userId = Auth.auth().currentUser?.uid
     
-    var userInfo = UserInfo() {
-        didSet {
-            NotificationCenter.default.post(
-                name: NSNotification.userInfoDidChanged,
-                object: nil,
-                userInfo: [userId: userInfo] )
-        }
-    }
+    var userInfo = UserInfo()
     
     static let shared = UserManager()
     

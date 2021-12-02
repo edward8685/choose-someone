@@ -14,8 +14,6 @@ class HomeViewController: BaseViewController {
     
     // MARK: - Class Properties -
     
-    private var userInfo = UserManager.shared.userInfo
-    
     private var trails = [Trail]() {
         
         didSet {
@@ -65,16 +63,10 @@ class HomeViewController: BaseViewController {
     }
     
     @objc func updateUserInfo(notification: Notification) {
-        
-        if let userInfo = notification.userInfo as? [String: UserInfo] {
-            
-            if let userInfo = userInfo[self.userInfo.uid] {
-                self.userInfo = userInfo
-            }
+
             guard let headerView = headerView else { return }
             
-            headerView.updateUserInfo(user: self.userInfo)
-        }
+            headerView.updateUserInfo(user: UserManager.shared.userInfo)
     }
     
     // MARK: - Methods -
@@ -110,9 +102,12 @@ class HomeViewController: BaseViewController {
                 
                 mediumTrails.append(trail)
                 
-            default:
+            case 4...5:
                 
                 hardTrails.append(trail)
+                
+            default:
+                return
             }
         }
     }
@@ -143,7 +138,7 @@ extension HomeViewController: UITableViewDelegate {
         
         self.headerView = headerView
         
-        headerView.updateUserInfo(user: userInfo)
+        headerView.updateUserInfo(user: UserManager.shared.userInfo)
         
         return self.headerView
     }

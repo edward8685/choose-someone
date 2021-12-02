@@ -39,7 +39,7 @@ class TrackRecordsViewController: BaseViewController {
         
         setUpTableView()
         
-        setNavigationBar()
+        setNavigationBar(title: "我的紀錄")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,33 +70,6 @@ class TrackRecordsViewController: BaseViewController {
     }
     
     // MARK: - UI Settings -
-    
-    func setNavigationBar() {
-        
-        self.title = "我的紀錄"
-        
-        UINavigationBar.appearance().backgroundColor = .B1
-        
-        UINavigationBar.appearance().barTintColor = .B1
-        
-        UINavigationBar.appearance().isTranslucent = true
-        
-        UINavigationBar.appearance().titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.white,
-            NSAttributedString.Key.font: UIFont.medium(size: 22) ?? .systemFont(ofSize: 22)]
-        
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        
-        let button = PreviousPageButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        
-        let image = UIImage(systemName: "chevron.left")
-        
-        button.setImage(image, for: .normal)
-        
-        button.addTarget(self, action: #selector(popToPreviousPage), for: .touchUpInside)
-        
-        self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: button), animated: true)
-    }
     
     func setUpTableView() {
         

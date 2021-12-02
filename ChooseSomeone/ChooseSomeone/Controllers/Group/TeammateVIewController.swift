@@ -34,44 +34,14 @@ class TeammateViewController: BaseViewController {
         
         tableView.registerCellWithNib(identifier: MemberCell.identifier, bundle: nil)
         
-        setNavigationBar()
-        
         view.stickSubView(tableView)
+        
+        setNavigationBar(title: "\(groupInfo?.groupName ?? "揪團") - 成員")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         navigationController?.isNavigationBarHidden = false
-    }
-    
-    // MARK: - UI Settings -
-    
-    func setNavigationBar() {
-        
-        self.title = "\(groupInfo?.groupName ?? "揪團") - 成員"
-        
-        UINavigationBarAppearance().backgroundColor = .B1
-        
-        UINavigationBar.appearance().barTintColor = .B1
-        
-        UINavigationBar.appearance().isTranslucent = true
-        
-        UINavigationBar.appearance().titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.white,
-            NSAttributedString.Key.font: UIFont.medium(size: 22) ?? UIFont.systemFont(ofSize: 22)
-        ]
-        
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        
-        let leftButton = PreviousPageButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        
-        let image = UIImage(systemName: "chevron.left")
-        
-        leftButton.setImage(image, for: .normal)
-        
-        leftButton.addTarget(self, action: #selector(popToPreviousPage), for: .touchUpInside)
-        
-        self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: leftButton), animated: true)
     }
 }
 

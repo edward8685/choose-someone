@@ -16,7 +16,7 @@ class GroupViewController: BaseViewController {
     
     // MARK: - Class Properties -
     
-    private var userInfo = UserManager.shared.userInfo
+    private var userInfo: UserInfo { UserManager.shared.userInfo }
     
     private var headerView: GroupHeaderCell?
     
@@ -48,7 +48,7 @@ class GroupViewController: BaseViewController {
     private var searchText: String = "" {
         
         didSet {
-            searching = true
+            isSearching = true
         }
     }
     
@@ -62,9 +62,9 @@ class GroupViewController: BaseViewController {
         }
     }
     
-    private var onlyUserGroup = false
+    private var onlyUserGroup = false // enum
     
-    private var searching = false
+    private var isSearching = false // enum
     
     // MARK: - View Life Cycle -
     
@@ -72,18 +72,6 @@ class GroupViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(updateUserInfo),
-            name: NSNotification.userInfoDidChanged,
-            object: nil)
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(changeSearchText),
-            name: NSNotification.checkGroupDidTaped,
-            object: nil)
         
         self.view.applyGradient(colors: [.B2, .B6], locations: [0.0, 1.0], direction: .leftSkewed)
         
@@ -217,16 +205,6 @@ class GroupViewController: BaseViewController {
         }
         
         return fitledGroups
-    }
-    
-    @objc func updateUserInfo(notification: Notification) {
-        
-        if let userInfo = notification.userInfo as? [String: UserInfo] {
-            
-            if let userInfo = userInfo[self.userInfo.uid] {
-                self.userInfo = userInfo
-            }
-        }
     }
     
     func fetchUserData(uid: String) {
@@ -469,7 +447,7 @@ extension GroupViewController: UITableViewDelegate {
         
         var sender = [Group]()
         
-        if searching {
+        if isSearching {
             
             sender = searchGroups
             
@@ -495,7 +473,7 @@ extension GroupViewController: UITableViewDelegate {
         
         var userId = ""
         
-        if searching {
+        if isSearching {
             
             userId = searchGroups[index].hostId
             
@@ -540,7 +518,7 @@ extension GroupViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if searching {
+        if isSearching {
             
             return searchGroups.count
             
@@ -563,7 +541,7 @@ extension GroupViewController: UITableViewDataSource {
         
         var group = Group()
         
-        if searching {
+        if isSearching {
             
             group = searchGroups[indexPath.row]
             
@@ -601,14 +579,14 @@ extension GroupViewController: UISearchBarDelegate {
             searchGroups = filtGroupBySearchName(groups: inActiveGroups)
         }
         
-        searching = true
+        isSearching = true
         
         tableView.reloadData()
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         
-        searching = false
+        isSearching = false
         
         searchBar.endEditing(true)
         

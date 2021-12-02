@@ -38,7 +38,9 @@ class GPXExtentCoordinates: NSObject {
             let center: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: centerLat, longitude: centerLon)
             let latitudeDelta = bottomRightCoordinate.latitude - topLeftCoordinate.latitude
             let longitudeDelta = topLeftCoordinate.longitude - bottomRightCoordinate.longitude
-            let span: MKCoordinateSpan = MKCoordinateSpan.init(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
+            let span: MKCoordinateSpan = MKCoordinateSpan.init(
+                latitudeDelta: latitudeDelta,
+                longitudeDelta: longitudeDelta)
             
             return MKCoordinateRegion.init(center: center, span: span)
         }
@@ -49,7 +51,6 @@ class GPXExtentCoordinates: NSObject {
             topLeftCoordinate.longitude = newValue.center.longitude + newValue.span.longitudeDelta/2
             bottomRightCoordinate.latitude = newValue.center.latitude + newValue.span.latitudeDelta/2
             bottomRightCoordinate.longitude = newValue.center.longitude - newValue.span.longitudeDelta/2
-            
         }
     }
 }

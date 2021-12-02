@@ -9,7 +9,6 @@ import UIKit
 import FirebaseStorage
 import FirebaseStorageSwift
 
-
 class TrialInfoView: UIView {
     
     @IBOutlet weak var trailName: UILabel!

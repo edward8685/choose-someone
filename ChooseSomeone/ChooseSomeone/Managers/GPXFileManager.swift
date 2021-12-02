@@ -51,7 +51,7 @@ class GPXFileManager {
             
             if let directoryURLs = try? fileManager.contentsOfDirectory(
                 at: documentsURL,
-                includingPropertiesForKeys:[.attributeModificationDateKey, .fileSizeKey],
+                includingPropertiesForKeys: [.attributeModificationDateKey, .fileSizeKey],
                 options: .skipsSubdirectoryDescendants) {
                 
                 for url in directoryURLs {

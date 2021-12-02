@@ -23,7 +23,9 @@ class LoginViewController: BaseViewController, ASAuthorizationControllerPresenta
     private lazy var loginButton = ASAuthorizationAppleIDButton(type: .signIn, style: .white)
     
     @IBOutlet weak var gradientView: UIView! {
+        
         didSet {
+            
             gradientView.applyGradient(
                 colors: [.B2, .C4],
                 locations: [0.0, 1.0], direction: .leftSkewed)

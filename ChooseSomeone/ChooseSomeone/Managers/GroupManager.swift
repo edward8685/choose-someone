@@ -11,7 +11,7 @@ import FirebaseFirestore
 
 class GroupManager {
 
-    let userId = UserManager.shared.userInfo.uid
+    var userId: String { UserManager.shared.userInfo.uid }
     
     static let shared = GroupManager()
     
@@ -61,7 +61,7 @@ class GroupManager {
         
         let collection = dataBase.collection(messagesCollection)
         
-        collection.getDocuments() {(querySnapshot, error) in
+        collection.getDocuments { (querySnapshot, error) in
             
             guard let querySnapshot = querySnapshot else { return }
             
@@ -96,7 +96,7 @@ class GroupManager {
         
         let collection = dataBase.collection(groupsCollection)
         
-        collection.order(by: "date", descending: false).getDocuments() {(querySnapshot, error) in
+        collection.order(by: "date", descending: false).getDocuments { (querySnapshot, error) in
             
             guard let querySnapshot = querySnapshot else { return }
             
@@ -114,7 +114,7 @@ class GroupManager {
                         
                         if var group = try document.data(as: Group.self, decoder: Firestore.Decoder()) {
                             
-                            if group.date.checkIsExpired() {
+                            if group.date.checkIsExpired() { //
                                 
                                 group.isExpired = true
                                 
@@ -168,7 +168,7 @@ class GroupManager {
                         }
                     }
                     
-                    requests.sort{ $0.createdTime.seconds > $1.createdTime.seconds }
+                    requests.sort { $0.createdTime.seconds > $1.createdTime.seconds }
                     
                     completion(.success(requests))
                 }

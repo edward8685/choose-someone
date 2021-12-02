@@ -7,7 +7,6 @@
 
 import UIKit
 import FirebaseFirestore
-import RSKPlaceholderTextView
 import FirebaseAuth
 
 class ChatRoomViewController: BaseViewController {
@@ -26,7 +25,7 @@ class ChatRoomViewController: BaseViewController {
     
     private var dataSource: DataSource!
     
-    private var userInfo = UserManager.shared.userInfo
+    private var userInfo: UserInfo { UserManager.shared.userInfo }
     
     var groupInfo: Group?
     
@@ -34,32 +33,9 @@ class ChatRoomViewController: BaseViewController {
     
     var cache = [String: UserInfo]()
     
-    private var userStatus: GroupStatus = .notInGroup
+    private var userStatus: GroupStatus = .notInGroup // isInGroup
     
-    private var isInGroup: Bool = false {
-        
-        didSet {
-            
-            textViewView.isHidden = isInGroup ? false : true
-            
-            self.navigationItem.rightBarButtonItem?.isEnabled = isInGroup ? true : false
-        }
-    }
-    
-    private var textViewMessage: String? {
-        
-        didSet {
-            
-            if textViewMessage != nil {
-                
-                sendButton.isEnabled = true
-                
-            } else {
-                
-                sendButton.isEnabled = false
-            }
-        }
-    }
+    private let chatTextView = ChatTextView()
     
     private var tableView: UITableView! {
         
@@ -69,34 +45,16 @@ class ChatRoomViewController: BaseViewController {
         }
     }
     
-    private let textViewView = UIView()
-    
     private var headerView: GroupChatHeaderCell?
-    
-    private let sendButton = UIButton()
-    
-    private var textView = RSKPlaceholderTextView() {
-        
-        didSet {
-            
-            textView.delegate = self
-        }
-    }
     
     // MARK: - View Life Cycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(updateUserInfo),
-            name: NSNotification.userInfoDidChanged,
-            object: nil)
-        
         checkUserStatus()
         
-        setUpTextView()
+        setUpChatTextView()
         
         setUpTableView()
         
@@ -112,7 +70,7 @@ class ChatRoomViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        //
         checkUserStatus()
         
         navigationController?.isNavigationBarHidden = false
@@ -120,30 +78,19 @@ class ChatRoomViewController: BaseViewController {
         self.tabBarController?.tabBar.isHidden = true
     }
     
-    override func viewWillLayoutSubviews() {
-        
-        textView.layer.cornerRadius = textView.frame.height / 2
-        
-        textView.layer.masksToBounds = true
-    }
-    
     // MARK: - Actions -
     
-    @objc func updateUserInfo(notification: Notification) {
-        
-        if let userInfo = notification.userInfo as? [String: UserInfo] {
-            
-            if let userInfo = userInfo[self.userInfo.uid] {
-                self.userInfo = userInfo
-            }
-        }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
     }
     
     func setUpStatusBarView() {
         
-        let statusBarFrame = UIApplication.shared.statusBarFrame
+        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
         
-        let statusBarView = UIView(frame: statusBarFrame)
+        let statusBarFrame = window?.windowScene?.statusBarManager?.statusBarFrame
+        
+        let statusBarView = UIView(frame: statusBarFrame!)
         
         self.view.addSubview(statusBarView)
         
@@ -154,16 +101,19 @@ class ChatRoomViewController: BaseViewController {
         
         guard let groupInfo = groupInfo else { return }
         
+        let isInGroup = groupInfo.userIds.contains(userInfo.uid)
+        
         if groupInfo.hostId == userInfo.uid {
             
             userStatus = .ishost
-            
-            isInGroup = true
-            
+      
         } else {
             
-            userStatus = groupInfo.userIds.contains(userInfo.uid) ? .isInGroup : .notInGroup
-            isInGroup = groupInfo.userIds.contains(userInfo.uid) ? true : false
+            userStatus = isInGroup ? .isInGroup : .notInGroup
+            
+            chatTextView.isHidden = isInGroup ? false : true
+            
+            self.navigationItem.rightBarButtonItem?.isEnabled = isInGroup ? true : false
         }
     }
     
@@ -191,7 +141,7 @@ class ChatRoomViewController: BaseViewController {
                     }
                 }
                 
-                if groupInfo.userIds.contains(self.userInfo.uid) == true {
+                if groupInfo.userIds.contains(self.userInfo.uid) {
                     
                     self.messages = filtedmessages
                     
@@ -223,7 +173,7 @@ class ChatRoomViewController: BaseViewController {
         })
     }
     
-    @objc func didTappedButton(_ sender: UIButton) {
+    @objc func didTappedButton(_ sender: UIButton) { // headerView
         
         switch userStatus {
             
@@ -288,7 +238,7 @@ class ChatRoomViewController: BaseViewController {
         
         let controller = UIAlertController(title: "確認退出", message: nil, preferredStyle: .alert)
         
-        let leaveAction = UIAlertAction(title: "退出", style: .destructive) { _ in
+        let leaveAction = UIAlertAction(title: "退出", style: .destructive) { _ in //
             
             guard let groupInfo = self.groupInfo else { return }
             
@@ -319,7 +269,6 @@ class ChatRoomViewController: BaseViewController {
         controller.addAction(leaveAction)
         
         self.present(controller, animated: true, completion: nil)
-        
     }
     
     func editGroupInfo(groupInfo: Group) {
@@ -341,9 +290,9 @@ class ChatRoomViewController: BaseViewController {
     
     @objc func sendMessage(_ sender: UIButton) {
         
-        textViewDidEndEditing(textView)
+        textViewDidEndEditing(chatTextView.textView)
         
-        guard let text = textView.text,
+        guard let text = chatTextView.textView.text,
               text.count != 0,
               let groupInfo = groupInfo else { return }
         
@@ -360,7 +309,7 @@ class ChatRoomViewController: BaseViewController {
                 
                 print("send message successfully")
                 
-                self.textView.text = ""
+                self.chatTextView.textView.text = ""
                 
                 if messages.count != 0 {
                     
@@ -395,29 +344,7 @@ class ChatRoomViewController: BaseViewController {
     
     func setNavigationBar() {
         
-        self.title = "\(groupInfo?.groupName ?? "揪團隊伍")"
-        
-        UINavigationBar.appearance().backgroundColor = .B1
-        
-        UINavigationBar.appearance().barTintColor = .B1
-        
-        UINavigationBar.appearance().isTranslucent = true
-        
-        UINavigationBar.appearance().titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor.white,
-            NSAttributedString.Key.font: UIFont.medium(size: 22) ?? UIFont.systemFont(ofSize: 22)]
-        
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        
-        let leftButton = PreviousPageButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-        
-        let image = UIImage(systemName: "chevron.left")
-        
-        leftButton.setImage(image, for: .normal)
-        
-        leftButton.addTarget(self, action: #selector(popToPreviousPage), for: .touchUpInside)
-        
-        self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: leftButton), animated: true)
+        setNavigationBar(title: "\(groupInfo?.groupName ?? "揪團隊伍")")
         
         let rightButton = PreviousPageButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         
@@ -457,74 +384,30 @@ class ChatRoomViewController: BaseViewController {
             
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            tableView.bottomAnchor.constraint(equalTo: textViewView.topAnchor)
+            tableView.bottomAnchor.constraint(equalTo: chatTextView.topAnchor)
         ])
     }
     
-    func setUpTextView() {
+    func setUpChatTextView() {
         
-        view.addSubview(textViewView)
+        view.addSubview(chatTextView)
         
-        textView.placeholder = "輸入訊息..."
-        
-        textViewView.translatesAutoresizingMaskIntoConstraints = false
+        chatTextView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
-            textViewView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            chatTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            textViewView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            chatTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             
-            textViewView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            chatTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            textViewView.heightAnchor.constraint(equalToConstant: 50)
+            chatTextView.heightAnchor.constraint(equalToConstant: 50)
         ])
         
-        textViewView.backgroundColor = .B1
+        chatTextView.textView.delegate = self
         
-        textViewView.addSubview(textView)
-        
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            
-            textView.heightAnchor.constraint(equalToConstant: 30),
-            
-            textView.bottomAnchor.constraint(equalTo: textViewView.bottomAnchor, constant: -10),
-            
-            textView.leadingAnchor.constraint(equalTo: textViewView.leadingAnchor, constant: 10),
-            
-            textView.widthAnchor.constraint(equalToConstant: UIScreen.width - 10 * 2 - 10 - 30)
-        ])
-        
-        textView.textAlignment = .left
-        
-        textView.textContainerInset = UIEdgeInsets(top: 8, left: 5, bottom: 5, right: 5)
-        
-        textView.backgroundColor = .white
-        
-        textViewView.addSubview(sendButton)
-        
-        sendButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            
-            sendButton.heightAnchor.constraint(equalToConstant: 30),
-            
-            sendButton.widthAnchor.constraint(equalToConstant: 30),
-            
-            sendButton.centerYAnchor.constraint(equalTo: textViewView.centerYAnchor),
-            
-            sendButton.trailingAnchor.constraint(equalTo: textViewView.trailingAnchor, constant: -10)
-        ])
-        
-        let image = UIImage(systemName: "paperplane")
-        
-        sendButton.setBackgroundImage(image, for: .normal)
-        
-        sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
-        
-        sendButton.tintColor = .white
+        chatTextView.sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
     }
 }
 
@@ -606,15 +489,6 @@ extension ChatRoomViewController {
         dataSource = DataSource(tableView: tableView,
                                 cellProvider: { ( tableView, indexPath, model) -> UITableViewCell? in
             
-            switch self.userStatus {
-            case .ishost:
-                break
-            case .isInGroup:
-                break
-            case .notInGroup:
-                break
-            }
-            
             let cell: GroupChatCell = tableView.dequeueCell(for: indexPath)
             
             if let memberInfo = self.cache[model.userId] {
@@ -648,6 +522,7 @@ extension ChatRoomViewController: UITextViewDelegate {
               !text.isEmpty else {
                   return
               }
-        textViewMessage = text
+        
+        chatTextView.sendButton.isEnabled = text != ""
     }
 }

@@ -19,8 +19,9 @@ class TrailManager {
     private let trailsCollection = Collection.trails.rawValue
     
     func fetchTrails(completion: @escaping (Result<[Trail], Error>) -> Void) {
+        
         let collection = dataBase.collection(trailsCollection)
-        collection.getDocuments() {(querySnapshot,error) in
+        collection.getDocuments { (querySnapshot, error) in
             
             guard let querySnapshot = querySnapshot else { return }
             

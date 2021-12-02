@@ -16,7 +16,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: - Class Properties -
     
-    let userId = UserManager.shared.userInfo.uid
+    let userId = { UserManager.shared.userInfo }
     
     private var isDisplayingLocationServicesDenied: Bool = false
     
@@ -363,8 +363,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         
         let sheet = UIAlertController()
         
-        let cancelOption = UIAlertAction(title: "取消", style: .cancel) { _ in
-        }
+        let cancelOption = UIAlertAction(title: "取消", style: .cancel)
         
         let deleteOption = UIAlertAction(title: "重置", style: .destructive) { _ in
             self.gpxTrackingStatus = .notStarted
@@ -401,6 +400,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func checkLocationServicesStatus() {
+        
         if !CLLocationManager.locationServicesEnabled() {
             
             displayLocationServicesDisabledAlert()
@@ -409,7 +409,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         if !([.authorizedAlways, .authorizedWhenInUse]
-                .contains(CLLocationManager.authorizationStatus())) {
+                .contains(locationManager.authorizationStatus)) {
             
             displayLocationServicesDeniedAlert()
             
@@ -423,7 +423,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         
         let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
             if let url = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.openURL(url)
+                UIApplication.shared.open(url, options: [:])
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
@@ -445,7 +445,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         let settingsAction = UIAlertAction(title: "Settings",
                                            style: .default) { _ in
             if let url = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.openURL(url)
+                UIApplication.shared.open(url, options: [:])
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel",

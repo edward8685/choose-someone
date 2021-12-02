@@ -37,6 +37,7 @@
 		7423493A273415AB001EC7A1 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74234939273415AB001EC7A1 /* Login.storyboard */; };
 		742516F927218A520011166B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742516F827218A520011166B /* UIColor+Extension.swift */; };
 		742516FB272197A30011166B /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742516FA272197A30011166B /* UILabelExtension.swift */; };
+		742FFD0A2753F4B7008363F4 /* ChatTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742FFD092753F4B7008363F4 /* ChatTextView.swift */; };
 		74377466273962DD006AA44E /* ShadowTextfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74377465273962DC006AA44E /* ShadowTextfield.swift */; };
 		7441B7A5273052C000614D9B /* TrackInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7441B7A4273052C000614D9B /* TrackInfo.swift */; };
 		7441B7A727313E1C00614D9B /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7441B7A627313E1C00614D9B /* UIFontExtension.swift */; };
@@ -151,6 +152,7 @@
 		74234939273415AB001EC7A1 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		742516F827218A520011166B /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		742516FA272197A30011166B /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
+		742FFD092753F4B7008363F4 /* ChatTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTextView.swift; sourceTree = "<group>"; };
 		74377465273962DC006AA44E /* ShadowTextfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowTextfield.swift; sourceTree = "<group>"; };
 		7441B7A4273052C000614D9B /* TrackInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackInfo.swift; sourceTree = "<group>"; };
 		7441B7A627313E1C00614D9B /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			children = (
 				740FC392271D17160071459A /* Group.storyboard */,
 				74608D2D271D54C7002BD125 /* GroupChatHeaderCell.swift */,
+				742FFD092753F4B7008363F4 /* ChatTextView.swift */,
 				74608D2E271D54C7002BD125 /* GroupChatHeaderCell.xib */,
 				74608D27271D4A80002BD125 /* GroupChatCell.swift */,
 				74608D28271D4A80002BD125 /* GroupChatCell.xib */,
@@ -821,6 +824,7 @@
 				74E5735B27268E3E00F490BF /* TrialInfoScrollView.swift in Sources */,
 				7457A1D2271EEEDC00A947AE /* Request.swift in Sources */,
 				74608D47271EC727002BD125 /* GroupManager.swift in Sources */,
+				742FFD0A2753F4B7008363F4 /* ChatTextView.swift in Sources */,
 				740FC38D271D17160071459A /* AppDelegate.swift in Sources */,
 				74F965072724830900B77DC5 /* TrailCell.swift in Sources */,
 				74E573872728F45700F490BF /* GPXWaypoint+MKAnnotation.swift in Sources */,

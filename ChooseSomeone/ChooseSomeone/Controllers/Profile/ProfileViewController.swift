@@ -45,7 +45,7 @@ class ProfileViewController: UIViewController {
     
     private var textInTextfield: String = ""
     
-    private let userInfo = UserManager.shared.userInfo
+    private var userInfo: UserInfo { UserManager.shared.userInfo }
     
     private let items = ProfileFeat.allCases
     
@@ -238,7 +238,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         actionSheet.addAction(UIAlertAction(
             title: ActionSheet.camera.rawValue,
             style: .default,
-            handler: { ( UIAlertAction ) in
+            handler: { _ in
                 
                 imagePickerController.sourceType = .camera
                 
@@ -248,7 +248,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         actionSheet.addAction(UIAlertAction(
             title: ActionSheet.library.rawValue,
             style: .default,
-            handler: { ( UIAlertAction ) in
+            handler: { _ in
                 
                 imagePickerController.sourceType = .photoLibrary
                 
@@ -258,7 +258,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         actionSheet.addAction(UIAlertAction(
             title: ActionSheet.cancel.rawValue,
             style: .cancel,
-            handler: { ( UIAlertAction ) in
+            handler: { _ in
                 
                 self.dismiss(animated: true, completion: nil)
             }))
@@ -266,7 +266,8 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         present(actionSheet, animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         guard let image = info[.editedImage] as? UIImage else { return }
         

@@ -20,11 +20,6 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
         return false
     }
     
-    var isEnableResignOnTouchOutside: Bool {
-        
-        return true
-    }
-    
     var isEnableIQKeyboard: Bool {
         
         return true
@@ -53,15 +48,6 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
             IQKeyboardManager.shared.enable = true
         }
         
-        if !isEnableResignOnTouchOutside {
-            
-            IQKeyboardManager.shared.shouldResignOnTouchOutside = false
-            
-        } else {
-            
-            IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-        }
-        
         self.setNeedsStatusBarAppearanceUpdate()
     }
     
@@ -75,20 +61,11 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
         
         if !isEnableIQKeyboard {
             
-            IQKeyboardManager.shared.enable = true
-            
-        } else {
-            
             IQKeyboardManager.shared.enable = false
-        }
-        
-        if !isEnableResignOnTouchOutside {
-            
-            IQKeyboardManager.shared.shouldResignOnTouchOutside = true
             
         } else {
             
-            IQKeyboardManager.shared.shouldResignOnTouchOutside = false
+            IQKeyboardManager.shared.enable = true
         }
     }
     
@@ -131,5 +108,22 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
         controller.addAction(okAction)
         
         self.present(controller, animated: true, completion: nil)
+    }
+    
+    func setNavigationBar(title: String) {
+        
+        self.title = "\(title)"
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+        let leftButton = PreviousPageButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        
+        let image = UIImage(systemName: "chevron.left")
+        
+        leftButton.setImage(image, for: .normal)
+        
+        leftButton.addTarget(self, action: #selector(popToPreviousPage), for: .touchUpInside)
+        
+        self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: leftButton), animated: true)
     }
 }

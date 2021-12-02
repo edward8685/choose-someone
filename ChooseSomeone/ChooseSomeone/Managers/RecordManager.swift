@@ -12,7 +12,7 @@ import FirebaseFirestore
 
 class RecordManager {
     
-    let userId = UserManager.shared.userInfo.uid
+    var userId: String { UserManager.shared.userInfo.uid }
     
     lazy var storage = Storage.storage()
     
@@ -99,7 +99,7 @@ class RecordManager {
     
     func fetchRecords(completion: @escaping (Result<[Record], Error>) -> Void) {
         let collection = dataBase.collection(recordsCollection).whereField("uid", isEqualTo: userId)
-        collection.getDocuments() {(querySnapshot, error) in
+        collection.getDocuments { (querySnapshot, error) in
             
             guard let querySnapshot = querySnapshot else { return }
             
@@ -127,7 +127,7 @@ class RecordManager {
                     }
                 }
                 
-                records.sort{ $0.createdTime.seconds < $1.createdTime.seconds }
+                records.sort { $0.createdTime.seconds < $1.createdTime.seconds }
                 
                 completion(.success(records))
             }
