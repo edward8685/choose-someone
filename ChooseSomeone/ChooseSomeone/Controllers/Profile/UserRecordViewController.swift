@@ -220,7 +220,7 @@ class UserRecordViewController: BaseViewController, ChartViewDelegate {
         
         let radius = UIScreen.width * 13 / 107
         
-        let button = PreviousPageButton(frame: CGRect(x: 20, y: 40, width: radius, height: radius))
+        let button = PreviousPageButton(frame: CGRect(x: 40, y: 50, width: radius, height: radius))
         
         button.addTarget(self, action: #selector(popToPreviousPage), for: .touchUpInside)
         

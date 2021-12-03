@@ -315,7 +315,6 @@
 			children = (
 				74678B4E2747F994005CA415 /* ChooseSomeoneRelease.entitlements */,
 				742349332732662E001EC7A1 /* ChooseSomeone.entitlements */,
-				740FC38C271D17160071459A /* AppDelegate.swift */,
 				740FC38E271D17160071459A /* SceneDelegate.swift */,
 				74608D3F271E9201002BD125 /* Managers */,
 				74608D1A271D1CAF002BD125 /* Extensions */,
@@ -438,6 +437,7 @@
 				742516F827218A520011166B /* UIColor+Extension.swift */,
 				742516FA272197A30011166B /* UILabelExtension.swift */,
 				74FDD9272722C47D0014D2B2 /* UITableView+ColloectionVIewExtension.swift */,
+				740FC38C271D17160071459A /* AppDelegate.swift */,
 				74FDD9292722C5670014D2B2 /* UITextFieldExtexsion.swift */,
 				7449349E27255A0B002D8FE3 /* UIStoryboard+Extension.swift */,
 				74E573D527292EBD00F490BF /* Double+Measures.swift */,

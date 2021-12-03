@@ -106,7 +106,7 @@ class ChatRoomViewController: BaseViewController {
         if groupInfo.hostId == userInfo.uid {
             
             userStatus = .ishost
-      
+            
         } else {
             
             userStatus = isInGroup ? .isInGroup : .notInGroup

@@ -21,7 +21,7 @@ class TrailListViewController: BaseViewController {
         
         case section
     }
-
+    
     private var collectionView: UICollectionView! {
         
         didSet {
@@ -35,7 +35,7 @@ class TrailListViewController: BaseViewController {
     private var dataSource: DataSource!
     
     private var snapshot = DataSourceSnapshot()
-
+    
     var trails = [Trail]() {
         
         didSet {
@@ -80,7 +80,7 @@ class TrailListViewController: BaseViewController {
         
         let radius = UIScreen.width * 13 / 107
         
-        let button = PreviousPageButton(frame: CGRect(x: 40, y: 40, width: radius, height: radius))
+        let button = PreviousPageButton(frame: CGRect(x: 40, y: 50, width: radius, height: radius))
         
         button.addTarget(self, action: #selector(popToPreviousPage), for: .touchUpInside)
         
@@ -165,43 +165,58 @@ extension TrailListViewController: UICollectionViewDelegate {
 
 func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
     
-    return UICollectionViewCompositionalLayout { ( sectionIndex, env) -> NSCollectionLayoutSection? in
+    return UICollectionViewCompositionalLayout { ( _, env) -> NSCollectionLayoutSection? in
         
-        let inset = 5
+        let inset: CGFloat = 8
         
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0))
+        let height: CGFloat = 270
+        
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.5),
+            heightDimension: .fractionalHeight(1.0))
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        //        item.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
-        //        
-        let height: CGFloat = 300
+        item.contentInsets = NSDirectionalEdgeInsets(
+            top: inset,
+            leading: inset,
+            bottom: inset,
+            trailing: inset)
         
-        let groupLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(450))
+        let groupLayoutSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .absolute(450))
         
-        let group = NSCollectionLayoutGroup.custom(layoutSize: groupLayoutSize) { (env) -> [NSCollectionLayoutGroupCustomItem] in
-            
-            let size = env.container.contentSize
-            
-            let spacing: CGFloat = 10.0
-            
-            let itemWidth = (size.width-spacing * 3) / 2
-            
-            return [
+        let group = NSCollectionLayoutGroup.custom(
+            layoutSize: groupLayoutSize) { (env) -> [NSCollectionLayoutGroupCustomItem] in
                 
-                NSCollectionLayoutGroupCustomItem(frame: CGRect(x: (itemWidth+spacing * 2), y: 0, width: itemWidth, height: height * 0.9)),
+                let size = env.container.contentSize
                 
-                NSCollectionLayoutGroupCustomItem(frame: CGRect(x: spacing, y: height / 2, width: itemWidth, height: height * 0.9))
-            ]
-        }
+                let itemWidth = (size.width - inset * 4) / 2
+                
+                return [
+                    
+                    NSCollectionLayoutGroupCustomItem(
+                        frame: CGRect(x: (itemWidth+inset * 2), y: 0, width: itemWidth, height: height)),
+                    
+                    NSCollectionLayoutGroupCustomItem(
+                        frame: CGRect(x: 0, y: height / 2, width: itemWidth, height: height))
+                ]
+            }
         
         let section = NSCollectionLayoutSection(group: group)
         
         section.interGroupSpacing = -150
         
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: inset,
+            leading: inset,
+            bottom: inset,
+            trailing: inset
+        )
+        
         return section
     }
-    
 }
 
 // MARK: - CollectionView Diffable Data Source -
@@ -213,17 +228,17 @@ extension TrailListViewController {
         dataSource = DataSource(
             collectionView: collectionView,
             cellProvider: { (collectionView, indexPath, model) -> UICollectionViewCell? in
-            
-            let cell: TrailCell = collectionView.dequeueCell(for: indexPath)
-            
-            cell.setUpCell(model: model)
-            
-            cell.checkGroupButton.tag = indexPath.row
-            
-            cell.checkGroupButton.addTarget(self, action: #selector(self.toGroupPage), for: .touchUpInside)
-            
-            return cell
-        })
+                
+                let cell: TrailCell = collectionView.dequeueCell(for: indexPath)
+                
+                cell.setUpCell(model: model)
+                
+                cell.checkGroupButton.tag = indexPath.row
+                
+                cell.checkGroupButton.addTarget(self, action: #selector(self.toGroupPage), for: .touchUpInside)
+                
+                return cell
+            })
     }
     
     @objc func toGroupPage(_ sender: UIButton) {
