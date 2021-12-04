@@ -62,9 +62,9 @@ class GroupViewController: BaseViewController {
         }
     }
     
-    private var onlyUserGroup = false // enum
+    private var onlyUserGroup = false
     
-    private var isSearching = false // enum
+    private var isSearching = false
     
     // MARK: - View Life Cycle -
     
@@ -232,22 +232,22 @@ class GroupViewController: BaseViewController {
                 
             case .success(let groups):
                 
-                var filtedGroups = [Group]()
+                var filteredGroups = [Group]()
                 
                 for group in groups where self.userInfo.blockList?.contains(group.hostId) == false {
                     
-                    filtedGroups.append(group)
+                    filteredGroups.append(group)
                 }
                 
-                self.myGroups = filtedGroups.filter {
+                self.myGroups = filteredGroups.filter {
                     $0.userIds.contains(self.userInfo.uid)
                 }
                 
-                self.inActiveGroups = filtedGroups.filter { $0.isExpired == false }
+                self.inActiveGroups = filteredGroups.filter { $0.isExpired == false }
                 
                 self.rearrangeMyGroup(groups: self.myGroups)
                 
-                filtedGroups.forEach { group in
+                filteredGroups.forEach { group in
                     
                     guard self.cache[group.hostId] != nil else {
                         

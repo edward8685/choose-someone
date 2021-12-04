@@ -151,16 +151,12 @@ class BuildTeamViewController: BaseViewController {
                     
                 case .success:
                     
-                    let controller = UIAlertController(title: "開啟揪團囉", message: nil, preferredStyle: .alert)
-                    
                     let okAction = UIAlertAction(title: "OK", style: .default) { _ in
                         
                         self.dismiss(animated: true, completion: nil)
                     }
                     
-                    controller.addAction(okAction)
-                    
-                    self.present(controller, animated: true, completion: nil)
+                    showAlertAction(title: "開啟揪團囉", message: nil, actions: [okAction])
                     
                 case .failure(let error):
                     

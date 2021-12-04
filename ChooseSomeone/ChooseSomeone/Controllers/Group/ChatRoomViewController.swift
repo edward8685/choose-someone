@@ -70,7 +70,8 @@ class ChatRoomViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //
+        super.viewWillAppear(animated)
+        
         checkUserStatus()
         
         navigationController?.isNavigationBarHidden = false
@@ -79,11 +80,7 @@ class ChatRoomViewController: BaseViewController {
     }
     
     // MARK: - Actions -
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.lightContent
-    }
-    
+
     func setUpStatusBarView() {
         
         let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
@@ -236,9 +233,9 @@ class ChatRoomViewController: BaseViewController {
     
     func leaveGroup() {
         
-        let controller = UIAlertController(title: "確認退出", message: nil, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
         
-        let leaveAction = UIAlertAction(title: "退出", style: .destructive) { _ in //
+        let leaveAction = UIAlertAction(title: "退出", style: .destructive) { _ in
             
             guard let groupInfo = self.groupInfo else { return }
             
@@ -258,17 +255,8 @@ class ChatRoomViewController: BaseViewController {
                 }
             }
         }
-        
-        let cancelAction = UIAlertAction(title: "取消", style: .default) { _ in
-            
-            self.dismiss(animated: true, completion: nil)
-        }
-        
-        controller.addAction(cancelAction)
-        
-        controller.addAction(leaveAction)
-        
-        self.present(controller, animated: true, completion: nil)
+
+        showAlertAction(title: "確認退出", message: nil, actions: [cancelAction, leaveAction])
     }
     
     func editGroupInfo(groupInfo: Group) {

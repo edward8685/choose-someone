@@ -12,7 +12,7 @@ import CoreLocation
 import Firebase
 import Lottie
 
-class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
+class JourneyViewController: BaseViewController {
     
     // MARK: - Class Properties -
     
@@ -229,27 +229,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
         
         RecordManager.shared.detectDeviceAndUpload()
         
-        map.delegate = mapViewDelegate
-        
-        map.showsUserLocation = true
-        
-        locationManager.delegate = self
-        
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(stopFollowingUser(_:)))
-        
-        panGesture.delegate = self
-        
-        map.addGestureRecognizer(panGesture)
-        
-        locationManager.startUpdatingLocation()
-        
-        let center = locationManager.location?.coordinate ??
-        CLLocationCoordinate2D(latitude: 25.042393, longitude: 121.56496)
-        let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
-        let region = MKCoordinateRegion(center: center, span: span)
-        
-        map.setRegion(region, animated: true)
-        self.view.addSubview(map)
+        setUpMap()
         
         setUpButtonsStackView()
         
@@ -289,6 +269,31 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     // MARK: - Action
+    
+    func setUpMap() {
+        
+        map.delegate = mapViewDelegate
+        
+        map.showsUserLocation = true
+        
+        locationManager.delegate = self
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(stopFollowingUser(_:)))
+        
+        panGesture.delegate = self
+        
+        map.addGestureRecognizer(panGesture)
+        
+        locationManager.startUpdatingLocation()
+        
+        let center = locationManager.location?.coordinate ??
+        CLLocationCoordinate2D(latitude: 25.042393, longitude: 121.56496)
+        let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+        let region = MKCoordinateRegion(center: center, span: span)
+
+        map.setRegion(region, animated: true)
+        self.view.addSubview(map)
+    }
     
     @objc func trackerButtonTapped() {
         
@@ -361,11 +366,11 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @objc func resetButtonTapped() {
         
-        let sheet = UIAlertController()
-        
+        if gpxTrackingStatus == .notStarted { return }
+
         let cancelOption = UIAlertAction(title: "取消", style: .cancel)
         
-        let deleteOption = UIAlertAction(title: "重置", style: .destructive) { _ in
+        let resetOption = UIAlertAction(title: "重置", style: .destructive) { _ in
             self.gpxTrackingStatus = .notStarted
             
             UIView.animate(withDuration: 0.3) {
@@ -374,11 +379,7 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
             }
         }
         
-        sheet.addAction(cancelOption)
-        
-        sheet.addAction(deleteOption)
-        
-        self.present(sheet, animated: true)
+        showAlertAction(title: nil, message: nil, preferredStyle: .actionSheet, actions: [cancelOption, resetOption])
     }
     
     @objc func followButtonTroggler() {
@@ -419,43 +420,32 @@ class JourneyViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func displayLocationServicesDisabledAlert() {
         
-        let alertController = UIAlertController(title: "Disabled", message: "Enable", preferredStyle: .alert)
-        
-        let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
+        let settingsAction = UIAlertAction(title: "設定", style: .default) { _ in
             if let url = URL(string: UIApplication.openSettingsURLString) {
+                
                 UIApplication.shared.open(url, options: [:])
             }
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         
-        alertController.addAction(settingsAction)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
         
-        alertController.addAction(cancelAction)
-        
-        present(alertController, animated: true)
+        showAlertAction(title: "無法讀取位置", message: "請開啟定位服務", actions: [settingsAction, cancelAction])
     }
     
     func displayLocationServicesDeniedAlert() {
         
         if isDisplayingLocationServicesDenied { return }
         
-        let alertController = UIAlertController(title: "Access to location denied",
-                                                message: "Allow location",
-                                                preferredStyle: .alert)
-        let settingsAction = UIAlertAction(title: "Settings",
+        let settingsAction = UIAlertAction(title: "設定",
                                            style: .default) { _ in
             if let url = URL(string: UIApplication.openSettingsURLString) {
                 UIApplication.shared.open(url, options: [:])
             }
         }
-        let cancelAction = UIAlertAction(title: "Cancel",
-                                         style: .cancel) { _ in }
+        let cancelAction = UIAlertAction(title: "取消",
+                                         style: .cancel)
         
-        alertController.addAction(settingsAction)
-        
-        alertController.addAction(cancelAction)
-        
-        present(alertController, animated: true)
+        showAlertAction(title: "無法讀取位置", message: "請開啟定位服務", actions: [settingsAction, cancelAction])
         
         isDisplayingLocationServicesDenied = false
     }

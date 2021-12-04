@@ -33,7 +33,7 @@ class TrialInfoView: UIView {
         
         trailLength.text = "\(trail.trailLength) 公里"
         
-        trailLevel.text = "\(trail.trailLevel) 星"
+        trailLevel.text = "\(trail.trailLevel) 級"
         
         trafficInfo.text = trail.trailTraffic.replacingOccurrences(of: "\\r\\n", with: "\n")
         
