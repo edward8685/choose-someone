@@ -18,10 +18,6 @@ class GPXMapView: MKMapView {
     var currentSegmentOverlay: MKPolyline
     
     var extent: GPXExtentCoordinates = GPXExtentCoordinates()
-    
-    var headingImageView: UIImageView?
-
-    var heading: CLHeading?
 
     var headingOffset: CGFloat?
     
@@ -35,44 +31,17 @@ class GPXMapView: MKMapView {
         
         super.init(coder: aDecoder)
 
-        rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(rotationGestureHandling(_:)))
-        
-        addGestureRecognizer(rotationGesture)
         isUserInteractionEnabled = true
+        
         isMultipleTouchEnabled = true
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
         if let compassView = subviews.filter({ $0.isKind(of: NSClassFromString("MKCompassView")!) }).first {
 
             compassView.frame.origin = CGPoint(x: UIScreen.width / 2 - 18, y: 30)
-        }
-    }
-    
-    @objc func rotationGestureHandling(_ gesture: UIRotationGestureRecognizer) {
-        
-        headingOffset = gesture.rotation
-
-        if gesture.state == .ended {
-            headingOffset = nil
-        }
-    }
-    
-    func updateHeading() {
-        guard let heading = heading else { return }
-        
-        headingImageView?.isHidden = false
-        let rotation = CGFloat((heading.trueHeading - camera.heading)/180 * Double.pi)
-        
-        var newRotation = rotation
-        
-        if let headingOffset = headingOffset {
-            newRotation = rotation + headingOffset
-        }
- 
-        UIView.animate(withDuration: 0.15) {
-            self.headingImageView?.transform = CGAffineTransform(rotationAngle: newRotation)
         }
     }
 

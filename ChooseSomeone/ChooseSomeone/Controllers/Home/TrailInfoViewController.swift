@@ -7,63 +7,52 @@
 
 import UIKit
 
-class TrailInfoViewController: UIViewController {
+class TrailInfoViewController: BaseViewController {
+    
+    // MARK: - Class Properties -
     
     @IBOutlet weak var trailInfoView: TrialInfoView!
     
     var trail: Trail?
     
+    // MARK: - View Life Cycle -
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpButton()
-    
+        setUpDismissButton()
+        
         navigationController?.isNavigationBarHidden = true
         
         if let trail = trail {
-        trailInfoView.setUpLayout(trail: trail)
+            trailInfoView.setUpLayout(trail: trail)
         }
     }
     
-    func setUpButton() {
-        
-        let dismissButton = UIButton()
-        
-        dismissButton.frame = CGRect(x: UIScreen.width - 50, y: 50, width: 30, height: 30)
-        
-        dismissButton.titleEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        
-        dismissButton.backgroundColor = UIColor.hexStringToUIColor(hex: "64696F")
-        
-        let image = UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .light))
-        
-        dismissButton.setImage(image, for: .normal)
-        
-        dismissButton.tintColor = .white
-        
-        dismissButton.layer.cornerRadius = 15
-        
-        dismissButton.layer.masksToBounds = true
-        
-        dismissButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
-        
-        view.addSubview(dismissButton)
-    }
-    
-    func setUpdimmingView() {
-        
-        let recognizer = UITapGestureRecognizer(target: self,action: #selector(handleTap(recognizer:)))
-            
-        trailInfoView.dimmingView.addGestureRecognizer(recognizer)
-        }
+    // MARK: - Methods -
     
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
         
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func dismissVC() {
+    // MARK: - UI Settings -
+    
+    func setUpDismissButton() {
         
-        dismiss(animated: true, completion: nil)
+        let button = DismissButton(frame: CGRect(x: UIScreen.width - 50, y: 30, width: 30, height: 30))
+        
+        button.titleEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        
+        button.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
+        
+        view.addSubview(button)
+    }
+    
+    func setUpdimmingView() {
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
+        
+        trailInfoView.dimmingView.addGestureRecognizer(recognizer)
     }
 }

@@ -18,10 +18,8 @@ extension GPXRoot {
         for track in self.tracks {
             
             tLength += track.length
-            
         }
         
         return tLength
-        
     }
 }

@@ -12,6 +12,7 @@ extension UIView {
     @IBInspectable var borderColor: UIColor? {
         
         get {
+            
             guard let borderColor = layer.borderColor else {
                 return nil
             }
@@ -19,6 +20,7 @@ extension UIView {
         }
         
         set {
+            
             layer.borderColor = newValue?.cgColor
         }
     }
@@ -26,10 +28,12 @@ extension UIView {
     @IBInspectable var borderWidth: CGFloat {
         
         get {
+            
             return layer.borderWidth
         }
         
         set {
+            
             layer.borderWidth = newValue
         }
     }
@@ -37,10 +41,12 @@ extension UIView {
     @IBInspectable var cornerRadius: CGFloat {
         
         get {
+            
             return layer.cornerRadius
         }
         
         set {
+            
             layer.cornerRadius = newValue
         }
     }
@@ -48,11 +54,13 @@ extension UIView {
     @IBInspectable var shadowColor: UIColor? {
         
         get {
+            
             guard let color = layer.shadowColor else { return nil }
             return UIColor(cgColor: color)
         }
         
         set {
+            
             guard let uiColor = newValue else { return }
             layer.shadowColor = uiColor.cgColor
         }
@@ -62,10 +70,12 @@ extension UIView {
     @IBInspectable var shadowOpacity: Float {
         
         get {
+            
             return layer.shadowOpacity
         }
         
         set {
+            
             layer.shadowOpacity = newValue
         }
     }
@@ -73,20 +83,26 @@ extension UIView {
     @IBInspectable var shadowOffset: CGSize {
         
         get {
+            
             return layer.shadowOffset
         }
         
         set {
+            
             layer.shadowOffset = newValue
         }
     }
     
     enum Direction: Int {
+        
         case topToBottom = 0
         case leftSkewed
     }
     
-    func applyGradient(colors: [UIColor?], locations: [NSNumber]? = [0.0, 1.0], direction: Direction = .topToBottom) {
+    func applyGradient( // caution: removeAll is not available for UIStoryBoard VC
+        colors: [UIColor?],
+        locations: [NSNumber]? = [0.0, 1.0],
+        direction: Direction = .topToBottom) {
         
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.bounds
@@ -104,26 +120,25 @@ extension UIView {
             
         }
         
-        /// caution: removeAll is not available for UIStoryBoard VC
         self.layer.sublayers?.removeAll()
         self.layer.addSublayer(gradientLayer)
     }
     
     func shake() {
-            let animation = CABasicAnimation(keyPath: "position")
+        let animation = CABasicAnimation(keyPath: "position")
         
-            animation.duration = 0.15
+        animation.duration = 0.15
         
-            animation.repeatCount = 2
+        animation.repeatCount = 2
         
-            animation.autoreverses = true
+        animation.autoreverses = true
         
-            animation.fromValue = NSValue(cgPoint: CGPoint(x: self.center.x - 5, y: self.center.y))
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.center.x - 5, y: self.center.y))
         
-            animation.toValue = NSValue(cgPoint: CGPoint(x: self.center.x + 5, y: self.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: self.center.x + 5, y: self.center.y))
         
-            self.layer.add(animation, forKey: "position")
-        }
+        self.layer.add(animation, forKey: "position")
+    }
     
     func roundCornersTop(cornerRadius: Double) {
         
@@ -185,5 +200,12 @@ extension UIView {
         objectView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
         
         objectView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
+    
+    class func loadFromNib<T: UIView>() -> T {
+        
+        // swiftlint:disable force_cast
+        return Bundle(for: T.self).loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
+        // swiftlint:enable force_cast
     }
 }

@@ -11,7 +11,7 @@ private struct StoryboardCategory {
 
     static let home = "Home"
 
-    static let group = "ChooseGroup"
+    static let group = "Group"
     
     static let login = "Login"
     
@@ -19,7 +19,7 @@ private struct StoryboardCategory {
 
     static let profile = "Profile"
     
-    static let policy = "PrivacyPolicy"
+    static let policy = "Policy"
     
     static let main = "Main"
 }

@@ -38,9 +38,9 @@ class GroupInfoCell: UITableViewCell {
         
         trailName.text = group.trailName
         
-        travelDate.text = TimeFormater.dateStyle.timeFormat(time: group.date)
+        travelDate.text = TimeFormater.dateStyle.timestampToString(time: group.date)
         
-        travelTime.text = TimeFormater.timeStyle.timeFormat(time: group.date)
+        travelTime.text = TimeFormater.timeStyle.timestampToString(time: group.date)
         
         hostName.text = hostname
         

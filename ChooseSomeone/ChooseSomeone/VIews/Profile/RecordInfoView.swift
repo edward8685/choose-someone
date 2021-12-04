@@ -21,7 +21,7 @@ class RecordInfoView: UIView {
     
     @IBOutlet weak var totalDropLabel: UILabel!
     
-    func updateTrackInfo(data: TrackInfo){
+    func updateTrackInfo(data: TrackInfo) {
         
         totalDistanceLabel.text = data.distance.toKilometers()
         

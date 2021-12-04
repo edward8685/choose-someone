@@ -9,51 +9,59 @@ import Foundation
 import FirebaseFirestoreSwift
 import FirebaseFirestore
 
-class GroupRoomManager {
+class GroupManager {
+
+    var userId: String { UserManager.shared.userInfo.uid }
     
-    let userId = UserManager.shared.userInfo.uid
-    
-    static let shared = GroupRoomManager()
+    static let shared = GroupManager()
     
     lazy var dataBase = Firestore.firestore()
     
+    private let groupsCollection = Collection.groups.rawValue
+    
+    private let requestsCollection = Collection.requests.rawValue
+    
+    private let messagesCollection = Collection.messages.rawValue
+    
     func addSnapshotListener(groupId: String, completion: @escaping (Result<[Message], Error>) -> Void) {
         
-        dataBase.collection("Messages").whereField("group_id", isEqualTo: groupId).addSnapshotListener { (snapshot, error) in
-            
-            if let error = error {
+        dataBase.collection(messagesCollection)
+            .whereField("group_id", isEqualTo: groupId)
+            .addSnapshotListener { (snapshot, error) in
                 
-                completion(.failure(error))
-                
-            } else {
-                
-                var messages = [Message]()
-                
-                for document in snapshot!.documents {
+                if let error = error {
                     
-                    do {
-                        if let message = try document.data(as: Message.self, decoder: Firestore.Decoder()) {
+                    completion(.failure(error))
+                    
+                } else {
+                    
+                    var messages = [Message]()
+                    
+                    for document in snapshot!.documents {
+                        
+                        do {
+                            if let message = try document.data(as: Message.self, decoder: Firestore.Decoder()) {
+                                
+                                messages.append(message)
+                            }
                             
-                            messages.append(message)
+                        } catch {
                             
+                            completion(.failure(error))
                         }
-                        
-                    } catch {
-                        
-                        completion(.failure(error))
-                        
                     }
+                    messages.sort { $0.createdTime.seconds < $1.createdTime.seconds }
+                    
+                    completion(.success(messages))
                 }
-                messages.sort { $0.createdTime.seconds < $1.createdTime.seconds }
-                
-                completion(.success(messages))
             }
-        }
     }
     
     func fetchMessages(groupId: String, completion: @escaping (Result<[Message], Error>) -> Void) {
-        let collection = dataBase.collection("Messages")
-        collection.getDocuments() {(querySnapshot, error) in
+        
+        let collection = dataBase.collection(messagesCollection)
+        
+        collection.getDocuments { (querySnapshot, error) in
             
             guard let querySnapshot = querySnapshot else { return }
             
@@ -85,8 +93,10 @@ class GroupRoomManager {
     }
     
     func fetchGroups(completion: @escaping (Result<[Group], Error>) -> Void) {
-        let collection = dataBase.collection("Groups")
-        collection.order(by: "date", descending: false).getDocuments() {(querySnapshot, error) in
+        
+        let collection = dataBase.collection(groupsCollection)
+        
+        collection.order(by: "date", descending: false).getDocuments { (querySnapshot, error) in
             
             guard let querySnapshot = querySnapshot else { return }
             
@@ -104,13 +114,15 @@ class GroupRoomManager {
                         
                         if var group = try document.data(as: Group.self, decoder: Firestore.Decoder()) {
                             
-                            if group.date.checkIsExpired() {
+                            if group.date.checkIsExpired() { //
                                 
                                 group.isExpired = true
+                                
                             } else {
+                                
                                 group.isExpired = false
                             }
-                                
+                            
                             groups.append(group)
                         }
                         
@@ -119,54 +131,53 @@ class GroupRoomManager {
                         completion(.failure(error))
                     }
                 }
-
+                
                 completion(.success(groups))
             }
         }
     }
     
-    func fetchRequest(completion: @escaping (Result<[Request], Error>) -> Void) {
+    func addRequestListener(completion: @escaping (Result<[Request], Error>) -> Void) {
         
-        dataBase.collection("Requests").whereField("host_id", isEqualTo: userId).addSnapshotListener { (querySnapshot, error) in
-            
-            guard let querySnapshot = querySnapshot else { return }
-            
-            if let error = error {
+        dataBase.collection(requestsCollection)
+            .whereField("host_id", isEqualTo: userId)
+            .addSnapshotListener { (querySnapshot, error) in
                 
-                completion(.failure(error))
+                guard let querySnapshot = querySnapshot else { return }
                 
-            } else {
-                
-                var requests = [Request]()
-                
-                for document in querySnapshot.documents {
+                if let error = error {
                     
-                    do {
+                    completion(.failure(error))
+                    
+                } else {
+                    
+                    var requests = [Request]()
+                    
+                    for document in querySnapshot.documents {
                         
-                        if let request = try document.data(as: Request.self, decoder: Firestore.Decoder()) {
+                        do {
                             
-                            requests.append(request)
+                            if let request = try document.data(as: Request.self, decoder: Firestore.Decoder()) {
+                                
+                                requests.append(request)
+                            }
                             
+                        } catch {
+                            
+                            completion(.failure(error))
                         }
-                        
-                    } catch {
-                        
-                        completion(.failure(error))
-                        
                     }
+                    
+                    requests.sort { $0.createdTime.seconds > $1.createdTime.seconds }
+                    
+                    completion(.success(requests))
                 }
-                
-                requests.sort{ $0.createdTime.seconds > $1.createdTime.seconds }
-                
-                completion(.success(requests))
-                
             }
-        }
     }
     
     func buildTeam(group: inout Group, completion: (Result<String, Error>) -> Void) {
         
-        let document = dataBase.collection("Groups").document()
+        let document = dataBase.collection(groupsCollection).document()
         
         group.groupId = document.documentID
         
@@ -185,7 +196,7 @@ class GroupRoomManager {
     
     func updateTeam(group: Group, completion: (Result<String, Error>) -> Void) {
         
-        let document = dataBase.collection("Groups").document(group.groupId)
+        let document = dataBase.collection(groupsCollection).document(group.groupId)
         
         do {
             
@@ -202,7 +213,7 @@ class GroupRoomManager {
     
     func sendMessage(groupId: String, message: Message, completion: (Result<String, Error>) -> Void) {
         
-        let document = dataBase.collection("Messages").document()
+        let document = dataBase.collection(messagesCollection).document()
         
         do {
             
@@ -219,7 +230,7 @@ class GroupRoomManager {
     
     func sendRequest(request: Request, completion: (Result<String, Error>) -> Void) {
         
-        let document = dataBase.collection("Requests").document()
+        let document = dataBase.collection(requestsCollection).document()
         
         do {
             
@@ -228,38 +239,36 @@ class GroupRoomManager {
         } catch {
             
             completion(.failure(error))
-            
         }
         
         completion(.success("Success"))
-        
     }
     
     func addUserToGroup(groupId: String, userId: String, completion: @escaping (Result<String, Error>) -> Void) {
         
-        let docRef = dataBase.collection("Groups").document(groupId)
-   
-                docRef.updateData([
-                            "user_ids": FieldValue.arrayUnion([userId])
-                        ]) { error in
-                            if let error = error {
-                                
-                                print("Error updating document: \(error)")
-                                
-                                completion(.failure(error))
-                                
-                            } else {
-                                
-                                print("User leave group successfully")
-                                
-                                completion(.success("Success"))
-                    }
-                }
+        let docRef = dataBase.collection(groupsCollection).document(groupId)
+        
+        docRef.updateData([
+            "user_ids": FieldValue.arrayUnion([userId])
+        ]) { error in
+            if let error = error {
+                
+                print("Error updating document: \(error)")
+                
+                completion(.failure(error))
+                
+            } else {
+                
+                print("User leave group successfully")
+                
+                completion(.success("Success"))
             }
+        }
+    }
     
     func removeRequest(groupId: String, userId: String, completion: @escaping (Result<String, Error>) -> Void) {
         
-        dataBase.collection("Requests")
+        dataBase.collection(requestsCollection)
             .whereField("group_id", isEqualTo: groupId)
             .whereField("request_id", isEqualTo: userId)
             .getDocuments { (querySnapshot, error) in
@@ -284,7 +293,7 @@ class GroupRoomManager {
     
     func leaveGroup(groupId: String, completion: @escaping (Result<String, Error>) -> Void) {
         
-        let docRef = dataBase.collection("Groups").document(groupId)
+        let docRef = dataBase.collection(groupsCollection).document(groupId)
         
         docRef.updateData([
             "user_ids": FieldValue.arrayRemove([userId])
@@ -297,6 +306,6 @@ class GroupRoomManager {
                 
                 print("User leave group successfully")
             }
-            }
         }
+    }
 }

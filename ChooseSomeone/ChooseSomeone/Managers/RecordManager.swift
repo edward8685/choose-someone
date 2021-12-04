@@ -12,15 +12,17 @@ import FirebaseFirestore
 
 class RecordManager {
     
-    let userId = UserManager.shared.userInfo.uid
+    var userId: String { UserManager.shared.userInfo.uid }
     
-    let storage = Storage.storage()
+    lazy var storage = Storage.storage()
     
     static let shared = RecordManager()
     
     lazy var storageRef = storage.reference()
     
     lazy var dataBase = Firestore.firestore()
+    
+    private let recordsCollection = Collection.records.rawValue
     
     func uploadRecord(fileName: String, fileURL: URL, completion: @escaping (Result<URL, Error>) -> Void) {
         
@@ -48,7 +50,7 @@ class RecordManager {
                             
                             self.uploadRecordToDb(fileName: fileName, fileURL: url)
                             
-                            GPXFileManager.parseGPXFile(fileURL: url)
+                            GPXFileManager.uploadTrackLengthToDb(fileURL: url)
                             
                         case .failure(let error):
                             
@@ -71,7 +73,7 @@ class RecordManager {
     
     func uploadRecordToDb(fileName: String, fileURL: URL) {
         
-        let document = dataBase.collection("Records").document()
+        let document = dataBase.collection(recordsCollection).document()
         
         var record = Record()
         
@@ -96,8 +98,8 @@ class RecordManager {
     }
     
     func fetchRecords(completion: @escaping (Result<[Record], Error>) -> Void) {
-        let collection = dataBase.collection("Records").whereField("uid", isEqualTo: userId)
-        collection.getDocuments() {(querySnapshot, error) in
+        let collection = dataBase.collection(recordsCollection).whereField("uid", isEqualTo: userId)
+        collection.getDocuments { (querySnapshot, error) in
             
             guard let querySnapshot = querySnapshot else { return }
             
@@ -125,7 +127,7 @@ class RecordManager {
                     }
                 }
                 
-                records.sort{ $0.createdTime.seconds < $1.createdTime.seconds }
+                records.sort { $0.createdTime.seconds < $1.createdTime.seconds }
                 
                 completion(.success(records))
             }
@@ -157,7 +159,7 @@ class RecordManager {
     
     func deleteDbRecords(fileName: String) {
         
-        let collection = dataBase.collection("Records").whereField("record_name", isEqualTo: fileName)
+        let collection = dataBase.collection(recordsCollection).whereField("record_name", isEqualTo: fileName)
         
         collection.getDocuments { (querySnapshot, error) in
             
@@ -185,7 +187,7 @@ class RecordManager {
             
             for file in files {
                 
-                let fileName = (file.absoluteString as NSString).lastPathComponent
+                let fileName = (file.absoluteString as NSString).lastPathComponent.removeFileSuffix()
                 
                 uploadRecord(fileName: fileName, fileURL: file) { result in
                     

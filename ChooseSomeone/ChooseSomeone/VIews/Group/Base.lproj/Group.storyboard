@@ -35,10 +35,10 @@
             </objects>
             <point key="canvasLocation" x="-861" y="84"/>
         </scene>
-        <!--Choose Group View Controller-->
+        <!--Group View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ChooseGroupViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ChooseGroupViewController" customModule="ChooseSomeone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GroupViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="GroupViewController" customModule="ChooseSomeone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -47,8 +47,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="uva-Bo-58p"/>
                     <connections>
-                        <segue destination="K9k-lg-EXA" kind="show" identifier="toGroupChatVC" id="KS9-o8-ZE6"/>
-                        <segue destination="okd-f5-N7m" kind="presentation" identifier="toBuildTeamVC" modalPresentationStyle="automatic" modalTransitionStyle="coverVertical" id="Jao-OI-4lO"/>
+                        <segue destination="K9k-lg-EXA" kind="show" identifier="toGroupChat" id="KS9-o8-ZE6"/>
+                        <segue destination="okd-f5-N7m" kind="presentation" identifier="toBuildTeam" modalPresentationStyle="automatic" modalTransitionStyle="coverVertical" id="Jao-OI-4lO"/>
                         <segue destination="MMi-L5-LgI" kind="presentation" identifier="toRequestList" id="VpQ-O3-Tzv"/>
                     </connections>
                 </viewController>

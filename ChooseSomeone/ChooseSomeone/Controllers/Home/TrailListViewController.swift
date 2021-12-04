@@ -10,11 +10,19 @@ import UIKit
 class TrailListViewController: BaseViewController {
     
     // MARK: - DataSource & DataSourceSnapshot typelias -
+    
     typealias DataSource = UICollectionViewDiffableDataSource<Section, Trail>
     
     typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Trail>
     
-    @IBOutlet weak var collectionView: UICollectionView! {
+    // MARK: - Class Properties -
+    
+    enum Section {
+        
+        case section
+    }
+    
+    private var collectionView: UICollectionView! {
         
         didSet {
             
@@ -28,11 +36,6 @@ class TrailListViewController: BaseViewController {
     
     private var snapshot = DataSourceSnapshot()
     
-    enum Section {
-        
-        case section
-    }
-    
     var trails = [Trail]() {
         
         didSet {
@@ -41,11 +44,17 @@ class TrailListViewController: BaseViewController {
         }
     }
     
+    // MARK: - View Life Cycle
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         setupCollectionView()
+        
+        configureDataSource()
+        
+        configureSnapshot()
         
         setUpButton()
         
@@ -54,42 +63,28 @@ class TrailListViewController: BaseViewController {
         navigationController?.isNavigationBarHidden = true
     }
     
+    // MARK: - UI Settings -
+    
     private func setupCollectionView() {
+        
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
         
         collectionView.registerCellWithNib(reuseIdentifier: TrailCell.reuseIdentifier, bundle: nil)
         
+        view.stickSubView(collectionView)
+        
         collectionView.backgroundColor = .clear
-        
-        collectionView.collectionViewLayout = configureCollectionViewLayout()
-        
-        configureDataSource()
-        
-        configureSnapshot()
     }
     
     func setUpButton() {
         
-        let returnButton = UIButton()
-        
         let radius = UIScreen.width * 13 / 107
         
-        returnButton.frame = CGRect(x: 40, y: 40, width: radius, height: radius)
+        let button = PreviousPageButton(frame: CGRect(x: 40, y: 50, width: radius, height: radius))
         
-        returnButton.backgroundColor = .white
+        button.addTarget(self, action: #selector(popToPreviousPage), for: .touchUpInside)
         
-        let image = UIImage(systemName: "chevron.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .medium))
-        
-        returnButton.setImage(image, for: .normal)
-        
-        returnButton.tintColor = .B1
-        
-        returnButton.layer.cornerRadius = radius / 2
-        
-        returnButton.layer.masksToBounds = true
-        
-        returnButton.addTarget(self, action: #selector(returnToPreviousPage), for: .touchUpInside)
-        
-        self.view.addSubview(returnButton)
+        view.addSubview(button)
     }
     
     func setUpLabel() {
@@ -111,15 +106,9 @@ class TrailListViewController: BaseViewController {
                 themeLabel = TrailThemes.hard.rawValue
                 
             default:
-                
                 return
             }
         }
-    }
-    
-    @objc func returnToPreviousPage() {
-        
-        navigationController?.popViewController(animated: true)
     }
     
     func setUpThemeTag() {
@@ -148,16 +137,18 @@ class TrailListViewController: BaseViewController {
     }
 }
 
+// MARK: - CollectionView Delegate -
+
 extension TrailListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        performSegue(withIdentifier: "toTrailInfo", sender: trails[indexPath.row])
+        performSegue(withIdentifier: SegueIdentifier.trailInfo.rawValue, sender: trails[indexPath.row])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "toTrailInfo" {
+        if segue.identifier == SegueIdentifier.trailInfo.rawValue {
             
             if let trailInfoVC = segue.destination as? TrailInfoViewController {
                 
@@ -170,74 +161,93 @@ extension TrailListViewController: UICollectionViewDelegate {
     }
 }
 
-// MARK: - Collection View -
+// MARK: - CollectionView CompositionalLayout -
 
 func configureCollectionViewLayout() -> UICollectionViewCompositionalLayout {
     
-    return UICollectionViewCompositionalLayout { (sectionIndex, env) -> NSCollectionLayoutSection? in
+    return UICollectionViewCompositionalLayout { ( _, env) -> NSCollectionLayoutSection? in
         
-        let inset  = 5
+        let inset: CGFloat = 8
         
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0))
+        let height: CGFloat = 270
+        
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.5),
+            heightDimension: .fractionalHeight(1.0))
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-//        item.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
-//        
-        let height: CGFloat = 300
+        item.contentInsets = NSDirectionalEdgeInsets(
+            top: inset,
+            leading: inset,
+            bottom: inset,
+            trailing: inset)
         
-        let groupLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(450))
+        let groupLayoutSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .absolute(450))
         
-        
-        
-        let group = NSCollectionLayoutGroup.custom(layoutSize: groupLayoutSize) { (env) -> [NSCollectionLayoutGroupCustomItem] in
-            
-            let size = env.container.contentSize
-            
-            let spacing: CGFloat = 10.0
-            
-            let itemWidth = (size.width-spacing * 3) / 2
-            
-            return [
+        let group = NSCollectionLayoutGroup.custom(
+            layoutSize: groupLayoutSize) { (env) -> [NSCollectionLayoutGroupCustomItem] in
                 
-                NSCollectionLayoutGroupCustomItem(frame: CGRect(x: (itemWidth+spacing * 2), y: 0, width: itemWidth, height: height * 0.9)),
+                let size = env.container.contentSize
                 
-                NSCollectionLayoutGroupCustomItem(frame: CGRect(x: spacing, y: height / 2, width: itemWidth, height: height * 0.9))
-            ]
-        }
+                let itemWidth = (size.width - inset * 4) / 2
+                
+                return [
+                    
+                    NSCollectionLayoutGroupCustomItem(
+                        frame: CGRect(x: (itemWidth+inset * 2), y: 0, width: itemWidth, height: height)),
+                    
+                    NSCollectionLayoutGroupCustomItem(
+                        frame: CGRect(x: 0, y: height / 2, width: itemWidth, height: height))
+                ]
+            }
         
         let section = NSCollectionLayoutSection(group: group)
         
         section.interGroupSpacing = -150
         
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: inset,
+            leading: inset,
+            bottom: inset,
+            trailing: inset
+        )
+        
         return section
     }
-    
 }
-// MARK: - Diffable Data Source -
+
+// MARK: - CollectionView Diffable Data Source -
 
 extension TrailListViewController {
     
     func configureDataSource() {
-        dataSource = DataSource(collectionView: collectionView) { (collectionView, indexPath, model) -> UICollectionViewCell? in
-            
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrailCell.reuseIdentifier, for: indexPath) as? TrailCell else {
-                fatalError("Cannot create new cell")
-            }
-            cell.setUpCell(model: model)
-            
-            cell.checkGroupButton.tag = indexPath.row
-            
-            cell.checkGroupButton.addTarget(self, action: #selector(self.toGroupPage), for: .touchUpInside)
-            
-            return cell
-        }
+        
+        dataSource = DataSource(
+            collectionView: collectionView,
+            cellProvider: { (collectionView, indexPath, model) -> UICollectionViewCell? in
+                
+                let cell: TrailCell = collectionView.dequeueCell(for: indexPath)
+                
+                cell.setUpCell(model: model)
+                
+                cell.checkGroupButton.tag = indexPath.row
+                
+                cell.checkGroupButton.addTarget(self, action: #selector(self.toGroupPage), for: .touchUpInside)
+                
+                return cell
+            })
     }
     
     @objc func toGroupPage(_ sender: UIButton) {
         self.tabBarController?.selectedIndex = 1
         
-        NotificationCenter.default.post(name: NSNotification.checkGroupDidTaped, object: nil, userInfo: ["trailName": self.trails[sender.tag].trailName] )
+        NotificationCenter.default.post(
+            name: NSNotification.checkGroupDidTaped,
+            object: nil,
+            userInfo: ["trailName": self.trails[sender.tag].trailName] )
     }
     
     func configureSnapshot() {

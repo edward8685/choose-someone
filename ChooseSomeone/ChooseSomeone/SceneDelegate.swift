@@ -12,9 +12,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
-        guard let _ = (scene as? UIWindowScene) else { return }
+    func scene(_ scene: UIScene,
+               willConnectTo session: UISceneSession,
+               options connectionOptions: UIScene.ConnectionOptions) {
         
         if Auth.auth().currentUser != nil {
             
@@ -30,7 +30,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         
                         UserManager.shared.userInfo = userInfo
                         
-                        guard let tabbarVC = UIStoryboard.main.instantiateViewController(identifier: "TabbarController") as? UITabBarController else { return }
+                        guard let tabbarVC = UIStoryboard.main.instantiateViewController(
+                            identifier: TabBarController.identifier) as? TabBarController else { return }
                         
                         self.window?.rootViewController = tabbarVC
                         
@@ -41,29 +42,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         print("Fetch user info failure: \(error)")
                     }
                 }
-                
             }
             
         } else {
             
-            guard let loginVC = UIStoryboard.login.instantiateViewController(identifier:LoginViewController.identifier) as? LoginViewController else { return }
+            guard let loginVC = UIStoryboard.login.instantiateViewController(
+                identifier: LoginViewController.identifier) as? LoginViewController else { return }
             
             self.window?.rootViewController = loginVC
-            
         }
         
+        setupAppearance()
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
-
+        
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
-
+        
     }
     
     func sceneWillResignActive(_ scene: UIScene) {
-
+        
     }
     
     func sceneWillEnterForeground(_ scene: UIScene) {
@@ -71,6 +72,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
-
+        
+    }
+    
+    // MARK: - Appearance -
+    func setupAppearance() {
+        
+        UINavigationBar.appearance().backgroundColor = .B1
+        
+        UINavigationBar.appearance().barTintColor = .B1
+        
+        UINavigationBar.appearance().isTranslucent = true
+        
+        UINavigationBar.appearance().titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.font: UIFont.medium(size: 22) ?? UIFont.systemFont(ofSize: 22)]
     }
 }

@@ -27,7 +27,7 @@ class GroupChatCell: UITableViewCell {
         
         let time = message.createdTime
         
-        createdTime.text = TimeFormater.preciseTime.timeFormat(time: time)
+        createdTime.text = TimeFormater.preciseTime.timestampToString(time: time)
         
         let userId = message.userId
         

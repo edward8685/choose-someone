@@ -18,15 +18,17 @@ class TrackRecordCell: UITableViewCell {
         
         recordName.text = model.recordName
         
-        uploadTime.text = TimeFormater.preciseTime.timeFormat(time: model.createdTime)
-    
+        uploadTime.text = TimeFormater.preciseTime.timestampToString(time: model.createdTime)
     }
     
     override func awakeFromNib() {
+        
         super.awakeFromNib()
+        
         selectionStyle = .none
+        
         self.backgroundColor = .clear
+        
         self.contentView.backgroundColor = .clear
-
     }
 }

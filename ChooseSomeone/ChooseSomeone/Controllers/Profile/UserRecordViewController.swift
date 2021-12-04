@@ -12,13 +12,16 @@ import CoreLocation
 import Firebase
 import Charts
 
-class UserRecordViewController: UIViewController, ChartViewDelegate {
+class UserRecordViewController: BaseViewController, ChartViewDelegate {
+    
+    // MARK: - Class Properties -
     
     @IBOutlet weak var map: GPXMapView!
     
     @IBOutlet weak var recordInfoView: RecordInfoView!
     
     @IBOutlet weak var chartView: LineChartView! {
+        
         didSet {
             chartView.delegate = self
         }
@@ -30,15 +33,9 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
     
     lazy var trackInfo = TrackInfo()
     
-    lazy var elevation: [Double] = []
+    lazy var trackChartData = TrackChartData()
     
-    lazy var trackTime: [Double] = []
-    
-    lazy var distanceFromOrigin: [Double] = []
-    
-    private let timeLabel = UILabel()
-    
-    private let totalTrackedDistanceLabel = DistanceLabel()
+    // MARK: - View Life Cycle -
     
     override func viewDidLoad() {
         
@@ -56,23 +53,24 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         
         parseGPXFile()
         
-        setChart(distance: distanceFromOrigin, values: elevation)
-        
         recordInfoView.updateTrackInfo(data: trackInfo)
         
+        setChart(xValues: trackChartData.distance, yValues: trackChartData.elevation)
     }
     
-    func setChart(distance: [Double], values: [Double]) {
+    // MARK: - Methods -
+    
+    func setChart(xValues: [Double], yValues: [Double]) {
         
         var dataEntries: [ChartDataEntry] = []
         
         chartView.noDataText = "Can not get track record!"
         
-        for index in 0..<elevation.count {
+        for index in 0..<trackChartData.elevation.count {
             
-            let xvalue = distance[index] / 1000
+            let xvalue = xValues[index] / 1000 // m -> km
             
-            let yvalue = values[index]
+            let yvalue = yValues[index]
             
             let dataEntry = ChartDataEntry(x: xvalue, y: yvalue)
             
@@ -82,31 +80,124 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
         let dataSet = LineChartDataSet(entries: dataEntries, label: "")
         
         dataSet.colors = [.U1 ?? .systemGray]
-        
         dataSet.drawFilledEnabled = true
-        
         dataSet.drawCirclesEnabled = false
-        
         dataSet.drawValuesEnabled = false
-        
         dataSet.lineWidth = 2
-        
         dataSet.fillAlpha = 0.8
-        
         dataSet.fillColor = .U2 ?? .lightGray
         
         chartView.data = LineChartData(dataSets: [dataSet])
         
-        chartView.xAxis.setLabelCount(values.count, force: true)
+        chartView.xAxis.setLabelCount(yValues.count, force: true)
         
         chartView.legend.enabled = false
         
         setUpChartLayout()
-
     }
     
+    // MARK: - Parse GPX File and Process Track Data -
+    
+    func parseGPXFile() {
+        
+        let inputURL = URL(string: record.recordRef)
+        
+        if let inputURL = inputURL {
+            
+            guard let gpx = GPXParser(withURL: inputURL)?.parsedData() else { return }
+            
+            didLoadGPXFile(gpxRoot: gpx)
+            
+            processTrackData(gpxRoot: gpx)
+        }
+        
+        func processTrackData(gpxRoot: GPXRoot) {
+            
+            var temArray: [Double] = []
+            
+            for track in gpxRoot.tracks {
+                
+                var lastLength: Double = 0.0
+                
+                for segment in track.segments {
+                    
+                    for trackPoints in segment.points {
+                        
+                        if let ele = trackPoints.elevation,
+                           
+                            let time = trackPoints.time?.timeIntervalSinceReferenceDate {
+                            trackChartData.elevation.append(ele)
+                            trackChartData.time.append(Double(time))
+                        }
+                    }
+                    // add the last segment endpoint to coordinate of the next segment
+                    let segmentLength = segment.distanceFromOrigin().map { $0 + lastLength }
+                    
+                    lastLength = segmentLength.last ?? 0
+                    
+                    temArray += segmentLength
+                }
+            }
+            
+            trackChartData.distance = temArray
+            
+            trackChartData.time = trackChartData.time.map { $0 - self.trackChartData.time[0]}
+            
+            trackInfo.distance = trackChartData.distance.last ?? 0
+            
+            trackInfo.spentTime = trackChartData.time.last ?? 0
+            
+            processDiffOfElevation(elevation: trackChartData.elevation)
+        }
+    }
+    
+    func didLoadGPXFile(gpxRoot: GPXRoot) {
+        
+        map.importFromGPXRoot(gpxRoot)
+        
+        map.regionToGPXExtent()
+    }
+    
+    func processDiffOfElevation(elevation: [Double]) {
+        
+        var totalClimp: Double = 0.0
+        
+        var totalDrop: Double = 0.0
+        
+        if elevation.count != 0 {
+            
+            for index in 0..<elevation.count - 1 {
+                
+                let diff = elevation[index + 1] - elevation[index]
+                
+                if diff < 0 {
+                    
+                    totalDrop += diff
+                    
+                } else {
+                    
+                    totalClimp += diff
+                }
+            }
+        }
+        
+        totalDrop = abs(totalDrop)
+        
+        trackInfo.totalClimb = totalClimp
+        
+        trackInfo.totalDrop = totalDrop
+        
+        if let maxValue = trackChartData.elevation.max(),
+           let minValue = trackChartData.elevation.min() {
+            
+            trackInfo.elevationDiff = maxValue - minValue
+        }
+    }
+    
+    // MARK: - UI Settings -
+    
     func setUpChartLayout() {
- 
+        
         let xAxis = chartView.xAxis
         xAxis.labelPosition = .bottom
         xAxis.setLabelCount(10, force: false)
@@ -127,111 +218,16 @@ class UserRecordViewController: UIViewController, ChartViewDelegate {
     
     func setUpButton() {
         
-        let returnButton = UIButton()
-        
         let radius = UIScreen.width * 13 / 107
         
-        returnButton.frame = CGRect(x: 20, y: 40, width: radius, height: radius)
+        let button = PreviousPageButton(frame: CGRect(x: 40, y: 50, width: radius, height: radius))
         
-        returnButton.backgroundColor = .white
+        button.addTarget(self, action: #selector(popToPreviousPage), for: .touchUpInside)
         
-        let image = UIImage(systemName: "chevron.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .medium))
-        
-        returnButton.setImage(image, for: .normal)
-        
-        returnButton.tintColor = .B1
-        
-        returnButton.layer.cornerRadius = radius / 2
-        
-        returnButton.layer.masksToBounds = true
-        
-        returnButton.addTarget(self, action: #selector(returnToPreviousPage), for: .touchUpInside)
-        
-        view.addSubview(returnButton)
+        view.addSubview(button)
     }
     
-    @objc func returnToPreviousPage() {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    func parseGPXFile() {
-        let inputURL = URL(string: record.recordRef)
-        
-        if let inputURL = inputURL {
-            
-            guard let gpx = GPXParser(withURL: inputURL)?.parsedData() else { return }
-            
-            didLoadGPXFile(gpxRoot: gpx)
-            
-            for track in gpx.tracks {
-                
-                for segment in track.segments {
-                   
-                    for trackPoints in segment.points {
-                        
-                        if let ele = trackPoints.elevation,
-                           
-                            let time = trackPoints.time?.timeIntervalSinceReferenceDate {
-                            elevation.append(ele)
-                            trackTime.append(Double(time))
-                        }
-                    }
-                    
-                    distanceFromOrigin = segment.distanceFromOrigin()
-                }
-            }
-            trackTime = trackTime.map { $0 - self.trackTime[0]}
-            
-            trackInfo.distance = distanceFromOrigin.last ?? 0
-            
-            trackInfo.spentTime = trackTime.last ?? 0
-            
-            if let maxValue = elevation.max(),
-               let minValue = elevation.min() {
-                
-                trackInfo.elevationDiff = maxValue - minValue
-            }
-            
-            calculateElevation(elevation: elevation)
-        }
-    }
-    
-    func didLoadGPXFile(gpxRoot: GPXRoot) {
-        
-        map.importFromGPXRoot(gpxRoot)
-        
-        map.regionToGPXExtent()
-    }
-    
-    func calculateElevation(elevation: [Double]) {
-        
-        var totalClimp: Double = 0.0
-        
-        var totalDrop: Double = 0.0
-        
-        if elevation.count != 0 {
-        
-        for index in 0..<elevation.count - 1 {
-            
-            let diff = elevation[index + 1] - elevation[index]
-            
-            if diff < 0 {
-                
-                totalDrop += diff
-                
-            } else {
-                
-                totalClimp += diff
-            }
-        }
-        }
-        
-        totalDrop = abs(totalDrop)
-        
-        trackInfo.totalClimb = totalClimp
-        
-        trackInfo.totalDrop = totalDrop
-    }
+    // MARK: - Polyline -
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         
