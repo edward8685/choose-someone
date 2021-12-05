@@ -112,24 +112,6 @@
                                             <constraint firstAttribute="height" constant="40" id="bYX-l0-IUJ"/>
                                         </constraints>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bsg-Ov-7Tk">
-                                        <rect key="frame" x="20" y="685" width="374" height="30"/>
-                                        <color key="backgroundColor" name="U3"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="LH2-Gd-mwf"/>
-                                        </constraints>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Sign out"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="CSCornerRadius">
-                                                <real key="value" value="15"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="signOut:" destination="lTR-ii-BJO" eventType="touchUpInside" id="su3-hg-agq"/>
-                                        </connections>
-                                    </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="T72-9z-EQU">
                                         <rect key="frame" x="0.0" y="210" width="414" height="465"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -157,15 +139,13 @@
                                     <constraint firstItem="T72-9z-EQU" firstAttribute="leading" secondItem="uQl-7s-JAY" secondAttribute="leading" id="4Rb-FE-Wnh"/>
                                     <constraint firstItem="OUt-ZC-IdO" firstAttribute="leading" secondItem="UBr-7H-nTf" secondAttribute="trailing" constant="40" id="50t-lv-IqK"/>
                                     <constraint firstItem="T72-9z-EQU" firstAttribute="top" secondItem="UBr-7H-nTf" secondAttribute="bottom" constant="80" id="JMl-sA-mX7"/>
-                                    <constraint firstItem="bsg-Ov-7Tk" firstAttribute="top" secondItem="T72-9z-EQU" secondAttribute="bottom" constant="10" id="L7Y-3m-ItK"/>
                                     <constraint firstItem="UBr-7H-nTf" firstAttribute="leading" secondItem="uQl-7s-JAY" secondAttribute="leading" constant="30" id="Sgb-7D-Hau"/>
                                     <constraint firstItem="OUt-ZC-IdO" firstAttribute="centerY" secondItem="UBr-7H-nTf" secondAttribute="centerY" id="UMm-4j-rJS"/>
-                                    <constraint firstAttribute="trailing" secondItem="bsg-Ov-7Tk" secondAttribute="trailing" constant="20" id="boH-fx-1wi"/>
                                     <constraint firstItem="k6A-7I-BAE" firstAttribute="leading" secondItem="lxS-Pz-cHV" secondAttribute="trailing" constant="20" id="cwt-oZ-IUe"/>
-                                    <constraint firstItem="bsg-Ov-7Tk" firstAttribute="leading" secondItem="uQl-7s-JAY" secondAttribute="leading" constant="20" id="eyA-Zs-6v6"/>
                                     <constraint firstItem="U9l-aZ-CAq" firstAttribute="leading" secondItem="uQl-7s-JAY" secondAttribute="leading" constant="30" id="h3w-o8-RAr"/>
                                     <constraint firstItem="k6A-7I-BAE" firstAttribute="centerY" secondItem="lxS-Pz-cHV" secondAttribute="centerY" id="iOT-zq-jjv"/>
                                     <constraint firstAttribute="trailing" secondItem="T72-9z-EQU" secondAttribute="trailing" id="mch-lj-q43"/>
+                                    <constraint firstAttribute="bottom" secondItem="T72-9z-EQU" secondAttribute="bottom" constant="50" id="u8w-Qc-deC"/>
                                     <constraint firstItem="bay-KP-0EC" firstAttribute="leading" secondItem="UBr-7H-nTf" secondAttribute="trailing" constant="-20" id="wGu-9n-JTg"/>
                                     <constraint firstAttribute="trailing" secondItem="U9l-aZ-CAq" secondAttribute="trailing" constant="30" id="x7h-2C-1OG"/>
                                     <constraint firstItem="UBr-7H-nTf" firstAttribute="top" secondItem="uQl-7s-JAY" secondAttribute="top" constant="40" id="yBI-UO-s9k"/>
@@ -192,7 +172,6 @@
                             <constraint firstItem="lcm-Ed-Ebz" firstAttribute="bottom" secondItem="uQl-7s-JAY" secondAttribute="bottom" id="FMz-Ex-ooA"/>
                             <constraint firstItem="lcm-Ed-Ebz" firstAttribute="trailing" secondItem="uQl-7s-JAY" secondAttribute="trailing" id="SYS-32-Y0Y"/>
                             <constraint firstAttribute="bottom" secondItem="YqY-DR-Ijy" secondAttribute="bottom" id="Umv-mA-1ek"/>
-                            <constraint firstItem="lcm-Ed-Ebz" firstAttribute="bottom" secondItem="bsg-Ov-7Tk" secondAttribute="bottom" constant="10" id="aPw-vH-KX2"/>
                             <constraint firstItem="YqY-DR-Ijy" firstAttribute="leading" secondItem="lcm-Ed-Ebz" secondAttribute="leading" id="d1n-aQ-Ucm"/>
                             <constraint firstItem="YqY-DR-Ijy" firstAttribute="top" secondItem="y4X-Jx-OyW" secondAttribute="top" id="dE3-X0-9rh"/>
                             <constraint firstItem="uQl-7s-JAY" firstAttribute="leading" secondItem="lcm-Ed-Ebz" secondAttribute="leading" id="frO-Eg-wct"/>
@@ -464,11 +443,6 @@
             <point key="canvasLocation" x="-635" y="91"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="bay-KP-0EC">
-            <size key="intrinsicContentSize" width="48" height="31"/>
-        </designable>
-    </designables>
     <resources>
         <image name="camera.circle" catalog="system" width="128" height="121"/>
         <image name="person" catalog="system" width="128" height="117"/>
@@ -478,11 +452,8 @@
         <namedColor name="B1">
             <color red="0.098039209842681885" green="0.76470589637756348" blue="0.85490196943283081" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="U3">
-            <color red="1" green="0.50199997425079346" blue="0.50199997425079346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="U4">
-            <color red="0.086274509803921567" green="0.4823529411764706" blue="0.53725490196078429" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.086000002920627594" green="0.48199999332427979" blue="0.53700000047683716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

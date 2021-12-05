@@ -18,7 +18,6 @@ extension GPXTrack {
         for segment in segments {
             
             trackLength += segment.length()
-            
         }
         
         return trackLength

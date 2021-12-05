@@ -12,7 +12,9 @@ class GPXFileInfo: NSObject {
     var fileURL: URL = URL(fileURLWithPath: "")
     // swiftlint:disable force_try
     var modifiedDate: Date {
-        return try! fileURL.resourceValues(forKeys: [.contentModificationDateKey]).contentModificationDate ?? Date.distantPast
+        
+        return try! fileURL.resourceValues(
+            forKeys: [.contentModificationDateKey]).contentModificationDate ?? Date.distantPast
     }
     
     var fileName: String {

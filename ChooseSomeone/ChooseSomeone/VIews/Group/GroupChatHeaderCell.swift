@@ -92,9 +92,9 @@ class GroupChatHeaderCell: UITableViewCell {
                     return
                 }
 
-                travelDate.text = TimeFormater.dateStyle.timeFormat(time: groupInfo.date)
+                travelDate.text = TimeFormater.dateStyle.timestampToString(time: groupInfo.date)
                 
-                travelTime.text = TimeFormater.timeStyle.timeFormat(time: groupInfo.date)
+                travelTime.text = TimeFormater.timeStyle.timestampToString(time: groupInfo.date)
                 
                 note.text =  groupInfo.note
                 
@@ -114,9 +114,9 @@ class GroupChatHeaderCell: UITableViewCell {
         
         guard let groupInfo = groupInfo else { return }
         
-        travelDate.text = TimeFormater.dateStyle.timeFormat(time: groupInfo.date)
+        travelDate.text = TimeFormater.dateStyle.timestampToString(time: groupInfo.date)
         
-        travelTime.text = TimeFormater.timeStyle.timeFormat(time: groupInfo.date)
+        travelTime.text = TimeFormater.timeStyle.timestampToString(time: groupInfo.date)
         
         trailName.text = group.trailName
         

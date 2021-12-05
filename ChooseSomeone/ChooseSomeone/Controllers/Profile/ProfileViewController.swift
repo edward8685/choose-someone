@@ -7,15 +7,25 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
-enum ActionSheet: String{
+class ProfileViewController: BaseViewController {
     
-    case camera = "相機"
-    case library = "圖庫"
-    case cancel = "取消"
-}
-
-class ProfileViewController: UIViewController {
+    // MARK: - Class Properties -
+    
+    enum CameraActionSheet: String {
+        
+        case camera = "相機"
+        case library = "圖庫"
+        case cancel = "取消"
+    }
+    
+    enum AccountActionSheet: String, CaseIterable {
+        
+        case delete = "刪除帳號"
+        case signout = "登出帳號"
+        case cancel = "取消"
+    }
     
     @IBOutlet weak var gradientView: UIView! {
         didSet {
@@ -24,12 +34,6 @@ class ProfileViewController: UIViewController {
                 locations: [0.0, 1.0], direction: .leftSkewed)
         }
     }
-    
-    var textInTextfield: String = ""
-    
-    let userInfo = UserManager.shared.userInfo
-    
-    let items = ProfileFeat.allCases
     
     @IBOutlet weak var tableView: UITableView! {
         
@@ -48,17 +52,21 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var profileView: ProfileView!
     
+    private var textInTextfield: String = ""
     
-    // MARK: - View Life Cycle
+    private var userInfo: UserInfo { UserManager.shared.userInfo }
+    
+    private let items = ProfileFeat.allCases
+    
+    // MARK: - View Life Cycle -
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
+        
         tableView.registerCellWithNib(identifier: ProfileCell.identifier, bundle: nil)
         
         setUpProfileView()
-    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,20 +74,7 @@ class ProfileViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
     
-    // MARK: - Action
-    
-    func setUpProfileView() {
-        
-        profileView.setUpProfileView(userInfo: userInfo)
-        
-        profileView.editImageButton.delegate = self
-        
-        profileView.editNameTextField.isHidden = false
-        
-        profileView.editNameTextField.delegate = self
-        
-        profileView.editNameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
-    }
+    // MARK: - Methods -
     
     @IBAction func editName(_ sender: UIButton) {
         
@@ -94,14 +89,13 @@ class ProfileViewController: UIViewController {
                 profileView.editNameTextField.text = name
                 
                 updateUserInfo(name: name)
-                
             }
             
             profileView.isEditting.toggle()
         }
     }
     
-    @IBAction func signOut(_ sender: UIButton) {
+    func signOut() {
         
         let firebaseAuth = Auth.auth()
         
@@ -117,7 +111,8 @@ class ProfileViewController: UIViewController {
         
         if Auth.auth().currentUser == nil {
             
-            guard let loginVC = UIStoryboard.login.instantiateViewController(identifier: "LoginViewController") as? LoginViewController else { return }
+            guard let loginVC = UIStoryboard.login.instantiateViewController(
+                identifier: LoginViewController.identifier) as? LoginViewController else { return }
             
             loginVC.modalPresentationStyle = .fullScreen
             
@@ -143,10 +138,28 @@ class ProfileViewController: UIViewController {
     }
     
     func updateUserInfo(name: String) {
-
+        
         UserManager.shared.updateUserName(name: name)
     }
+    
+    // MARK: - UI Settings -
+    
+    func setUpProfileView() {
+        
+        profileView.setUpProfileView(userInfo: userInfo)
+        
+        profileView.editImageButton.delegate = self
+        
+        profileView.editNameTextField.delegate = self
+        
+        profileView.editNameTextField.addTarget(
+            self,
+            action: #selector(self.textFieldDidChange(_:)),
+            for: .editingChanged)
+    }
 }
+
+// MARK: - TableView Delegate -
 
 extension ProfileViewController: UITableViewDelegate {
     
@@ -155,7 +168,7 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.height / CGFloat((items.count + 1))
+        return tableView.frame.height / CGFloat((items.count + 2))
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -168,12 +181,27 @@ extension ProfileViewController: UITableViewDelegate {
             
             performSegue(withIdentifier: segueId, sender: nil)
         
+        case 1:
+            
+            let deleteAction = UIAlertAction(title: AccountActionSheet.allCases[0].rawValue, style: .destructive) { _ in
+                self.showAlertAction(title: "刪除帳號", message: "請來信至edward820630@gmail.com")
+            }
+            
+            let signoutAction = UIAlertAction(title: AccountActionSheet.allCases[1].rawValue, style: .default) {_ in
+                self.signOut()
+            }
+            
+            let cancelAction = UIAlertAction(title: AccountActionSheet.allCases[2].rawValue, style: .cancel)
+            
+            showAlertAction(title: nil, message: nil, preferredStyle: .actionSheet, actions: [deleteAction,signoutAction, cancelAction])
+            
         case 2:
             
-            guard let policyVC = UIStoryboard.policy.instantiateViewController(identifier: PrivacyPolicyViewController.identifier) as? PrivacyPolicyViewController else { return }
+            guard let policyVC = UIStoryboard.policy.instantiateViewController(
+                identifier: PolicyViewController.identifier) as? PolicyViewController else { return }
             
             policyVC.policyType = .privacy
-
+            
             present(policyVC, animated: true, completion: nil)
             
         default:
@@ -181,6 +209,8 @@ extension ProfileViewController: UITableViewDelegate {
         }
     }
 }
+
+// MARK: - TableView DataSource -
 
 extension ProfileViewController: UITableViewDataSource {
     
@@ -191,15 +221,15 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileCell.identifier, for: indexPath) as? ProfileCell
-                
-        else {fatalError("Could not create Cell")}
+        let cell: ProfileCell = tableView.dequeueCell(for: indexPath)
         
         cell.setUpCell(indexPath: indexPath)
         
         return cell
     }
 }
+
+// MARK: - TextField DataSource -
 
 extension ProfileViewController: UITextFieldDelegate {
     
@@ -208,6 +238,8 @@ extension ProfileViewController: UITextFieldDelegate {
         textInTextfield = textField.text ?? ""
     }
 }
+
+// MARK: - ImagePicker Delegate -
 
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -221,31 +253,44 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         
         imagePickerController.allowsEditing = true
         
-        let actionSheet = UIAlertController(title: "選擇照片來源", message: nil, preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(
+            title: "選擇照片來源",
+            message: nil,
+            preferredStyle: .actionSheet)
         
-        actionSheet.addAction(UIAlertAction(title: ActionSheet.camera.rawValue, style: .default, handler:{ (UIAlertAction) in
-            
-            imagePickerController.sourceType = .camera
-            
-            self.present(imagePickerController, animated: true, completion: nil)
-        }))
+        actionSheet.addAction(UIAlertAction(
+            title: CameraActionSheet.camera.rawValue,
+            style: .default,
+            handler: { _ in
+                
+                imagePickerController.sourceType = .camera
+                
+                self.present(imagePickerController, animated: true, completion: nil)
+            }))
         
-        actionSheet.addAction(UIAlertAction(title: ActionSheet.library.rawValue, style: .default, handler:{ (UIAlertAction) in
-            
-            imagePickerController.sourceType = .photoLibrary
-            
-            self.present(imagePickerController, animated: true, completion: nil)
-        }))
+        actionSheet.addAction(UIAlertAction(
+            title: CameraActionSheet.library.rawValue,
+            style: .default,
+            handler: { _ in
+                
+                imagePickerController.sourceType = .photoLibrary
+                
+                self.present(imagePickerController, animated: true, completion: nil)
+            }))
         
-        actionSheet.addAction(UIAlertAction(title: ActionSheet.cancel.rawValue, style: .cancel, handler:{ (UIAlertAction) in
-            
-            self.dismiss(animated: true, completion: nil)
-        }))
+        actionSheet.addAction(UIAlertAction(
+            title: CameraActionSheet.cancel.rawValue,
+            style: .cancel,
+            handler: { _ in
+                
+                self.dismiss(animated: true, completion: nil)
+            }))
         
         present(actionSheet, animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         
         guard let image = info[.editedImage] as? UIImage else { return }
         

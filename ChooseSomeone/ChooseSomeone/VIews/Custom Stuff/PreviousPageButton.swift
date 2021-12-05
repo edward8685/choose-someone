@@ -7,36 +7,31 @@
 
 import UIKit
 
-protocol ChevronButtonDelegate: AnyObject {
+class PreviousPageButton: UIButton {
     
-    func backPreviousPage()
-    
-}
-
-class ChevronButton: UIButton {
-    
-    
-    required init?(coder aDecoder: NSCoder) {
-        
-        super.init(coder: aDecoder)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         self.backgroundColor = .white
         
-        let image = UIImage(systemName: "chevron.left", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .medium))
+        let image = UIImage(systemName: "chevron.left",
+                            withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .medium))
         
         self.setImage(image, for: .normal)
         
         self.tintColor = .B1
     }
     
-    override func layoutSubviews() {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         
+    }
+    
+    override func layoutSubviews() {
         super.layoutSubviews()
         
         layer.cornerRadius = self.frame.height / 2
         
         self.layer.masksToBounds = true
-        
     }
-    
 }

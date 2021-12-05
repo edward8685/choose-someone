@@ -14,12 +14,11 @@ protocol ImagePickerDelegate: AnyObject {
 }
 
 class ImagePickerButton: UIButton {
-  
+    
     weak var delegate: ImagePickerDelegate?
     
-
     required init?(coder aDecoder: NSCoder) {
-       super.init(coder: aDecoder)
+        super.init(coder: aDecoder)
         
         addTarget(self, action: #selector(pickImage), for: .touchUpInside)
     }
@@ -27,6 +26,5 @@ class ImagePickerButton: UIButton {
     @objc func pickImage(sender: UIButton) {
         
         delegate?.presentImagePicker()
- 
     }
 }

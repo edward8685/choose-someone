@@ -12,6 +12,8 @@ import FirebaseAuth
 
 class BuildTeamViewController: BaseViewController {
     
+    // MARK: - Class Properties -
+    
     @IBOutlet weak var dimmingView: UIView! {
         
         didSet {
@@ -93,6 +95,8 @@ class BuildTeamViewController: BaseViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    // MARK: - View Life Cycle -
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -109,38 +113,16 @@ class BuildTeamViewController: BaseViewController {
         setUpTextView()
     }
     
-    func setUpTextView() {
-        
-        noteTextView.placeholder = "對團員說些什麼.."
-        
-        noteTextView.clipsToBounds = true
-        
-        noteTextView.layer.cornerRadius = 10
-        
-        noteTextView.textContainer.maximumNumberOfLines = 3
-        
-        noteTextView.textContainer.lineBreakMode = .byWordWrapping
-    }
+    // MARK: - Methods -
     
     func checkTextsFilled() {
         
         let textfields = [ groupNameTextField, trailNameTextField, numOfPeopleTextfield]
         
         if noteTextView.text != nil {
+            
             textsWerefilled = textfields.allSatisfy { $0?.text?.isEmpty  == false }
         }
-    }
-    
-    func setUpButton() {
-        
-        sendPostButton.addTarget(self, action: #selector(sendPost), for: .touchUpInside)
-        
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @objc func handleTap(recognizer: UITapGestureRecognizer) {
-        
-        dismiss(animated: true, completion: nil)
     }
     
     @objc func sendPost() {
@@ -159,34 +141,22 @@ class BuildTeamViewController: BaseViewController {
             
             buildTeamView.shake()
             
-            let controller = UIAlertController(title: "揪團時間錯誤", message: "請更改日期", preferredStyle: .alert)
-            
-            let okAction = UIAlertAction(title: "ok", style: .cancel)
-            
-            controller.addAction(okAction)
-            
-            self.present(controller, animated: true, completion: nil)
+            showAlertAction(title: "揪團時間錯誤", message: "請更改日期")
             
         } else {
             
-            GroupRoomManager.shared.buildTeam(group: &group) { result in
+            GroupManager.shared.buildTeam(group: &group) { result in
                 
                 switch result {
                     
                 case .success:
-                    
-                    print("build team success")
-                    
-                    let controller = UIAlertController(title: "開啟揪團囉", message: nil, preferredStyle: .alert)
                     
                     let okAction = UIAlertAction(title: "OK", style: .default) { _ in
                         
                         self.dismiss(animated: true, completion: nil)
                     }
                     
-                    controller.addAction(okAction)
-                    
-                    self.present(controller, animated: true, completion: nil)
+                    showAlertAction(title: "開啟揪團囉", message: nil, actions: [okAction])
                     
                 case .failure(let error):
                     
@@ -195,19 +165,53 @@ class BuildTeamViewController: BaseViewController {
             }
         }
     }
+    
+    // MARK: - UI Settings -
+    
+    func setUpTextView() {
+        
+        noteTextView.placeholder = "對團員說些什麼.."
+        
+        noteTextView.clipsToBounds = true
+        
+        noteTextView.layer.cornerRadius = 10
+        
+        noteTextView.textContainer.maximumNumberOfLines = 3
+        
+        noteTextView.textContainer.lineBreakMode = .byWordWrapping
+    }
+    
+    func setUpButton() {
+        
+        sendPostButton.addTarget(self, action: #selector(sendPost), for: .touchUpInside)
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func handleTap(recognizer: UITapGestureRecognizer) {
+        
+        dismiss(animated: true, completion: nil)
+    }
 }
+
+// MARK: - TextField & TextView Delegate -
 
 extension BuildTeamViewController: UITextFieldDelegate, UITextViewDelegate {
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
         var maxLength = 12
         
         if textField == numOfPeopleTextfield {
             maxLength = 2
         }
+        
         let currentString: NSString = (textField.text ?? "") as NSString
+        
         let newString: NSString =
-            currentString.replacingCharacters(in: range, with: string) as NSString
+        currentString.replacingCharacters(in: range, with: string) as NSString
+        
         return newString.length <= maxLength
     }
     
@@ -224,10 +228,9 @@ extension BuildTeamViewController: UITextFieldDelegate, UITextViewDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        guard let text = textField.text,
-              !text.isEmpty else {
-                  return
-              }
+        guard let text = textField.text, !text.isEmpty else {
+            return
+        }
         
         switch textField {
             
@@ -247,6 +250,7 @@ extension BuildTeamViewController: UITextFieldDelegate, UITextViewDelegate {
             
             return
         }
+        
         checkTextsFilled()
     }
 }

@@ -7,28 +7,9 @@
 
 import UIKit
 
-enum Section {
-    case section
-}
-
-//class customDataSource: UITableViewDiffableDataSource<Section, Record> {
-//
-//    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
-//
-//}
-
-class TrackRecordsViewController: UIViewController {
+class TrackRecordsViewController: BaseViewController {
     
-    // MARK: - DataSource & DataSourceSnapshot typelias -
-//        typealias DataSource = UITableViewDiffableDataSource<Section, Record>
-//
-//        typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Record>
-//
-//        private var dataSource: customDataSource!
-//
-//        private var snapshot = DataSourceSnapshot()
+    // MARK: - Class Properties -
     
     @IBOutlet weak var gradientView: UIView! {
         didSet {
@@ -49,15 +30,16 @@ class TrackRecordsViewController: UIViewController {
         }
     }
     
+    // MARK: - View Life Cycle -
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.view.applyGradient(colors: [.white, .U2], locations: [0.0, 1.0], direction: .leftSkewed)
         
         fetchRecords()
         
         setUpTableView()
         
-        setNavigationBar()
+        setNavigationBar(title: "我的紀錄")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,47 +49,27 @@ class TrackRecordsViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    func setNavigationBar() {
-        
-        self.title = "我的紀錄"
-        
-        UINavigationBar.appearance().backgroundColor = .B1
-        
-        UINavigationBar.appearance().barTintColor = .B1
-        
-        UINavigationBar.appearance().isTranslucent = true
-        
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white,
-                                                            NSAttributedString.Key.font: UIFont.medium(size: 22) ?? UIFont.systemFont(ofSize: 22)]
-        
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        
-        let leftButton = UIButton()
-        
-        leftButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        
-        let chevroImage = UIImage(systemName: "chevron.left")
-        
-        leftButton.setImage(chevroImage, for: .normal)
-        
-        leftButton.layer.cornerRadius = leftButton.frame.height / 2
-        
-        leftButton.layer.masksToBounds = true
-        
-        leftButton.tintColor = .B1
-        
-        leftButton.backgroundColor = .white
-        
-        leftButton.addTarget(self, action: #selector(backToPreviousVC), for: .touchUpInside)
-        
-        self.navigationItem.setLeftBarButton(UIBarButtonItem(customView: leftButton), animated: true)
-        
+    // MARK: - Methods -
+    
+    func fetchRecords() {
+        RecordManager.shared.fetchRecords { [weak self] result in
+            
+            switch result {
+                
+            case .success(let records):
+                
+                self?.records = records
+                
+                self?.tableView.reloadData()
+                
+            case .failure(let error):
+                
+                print("fetchData.failure: \(error)")
+            }
+        }
     }
     
-    @objc func backToPreviousVC() {
-        
-        navigationController?.popViewController(animated: true)
-    }
+    // MARK: - UI Settings -
     
     func setUpTableView() {
         
@@ -120,30 +82,10 @@ class TrackRecordsViewController: UIViewController {
         tableView.backgroundColor = .clear
         
         tableView.separatorStyle = .none
-        
-    }
-    
-    func fetchRecords() {
-        RecordManager.shared.fetchRecords { [weak self] result in
-            
-            switch result {
-                
-            case .success(let records):
-                
-                self?.records = records
-                
-//                self?.configureDataSource()
-//                self?.configureSnapshot()
-                
-                self?.tableView.reloadData()
-                
-            case .failure(let error):
-                
-                print("fetchData.failure: \(error)")
-            }
-        }
     }
 }
+
+// MARK: - TableView Delegate -
 
 extension TrackRecordsViewController: UITableViewDelegate {
     
@@ -151,7 +93,9 @@ extension TrackRecordsViewController: UITableViewDelegate {
         true
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
             
@@ -175,11 +119,11 @@ extension TrackRecordsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        performSegue(withIdentifier: "toUserRecord", sender: records[indexPath.row])
+        performSegue(withIdentifier: SegueIdentifier.userRecord.rawValue, sender: records[indexPath.row])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toUserRecord" {
+        if segue.identifier == SegueIdentifier.userRecord.rawValue {
             if let recordVC = segue.destination as? UserRecordViewController {
                 
                 if let record = sender as? Record {
@@ -190,6 +134,8 @@ extension TrackRecordsViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - TableView DataSource -
+
 extension TrackRecordsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -198,60 +144,10 @@ extension TrackRecordsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: TrackRecordCell.identifier, for: indexPath) as? TrackRecordCell else {
-            fatalError("Cannot create new cell")
-        }
+        let cell: TrackRecordCell = tableView.dequeueCell(for: indexPath)
         
         cell.setUpCell(model: self.records[indexPath.row])
         
         return cell
     }
-    
-    
-    
-//
-//
-//   func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-//        return .delete
-//   }
-//
-//   func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (contextualAction, view, completionHandler) in
-//
-//            self.records.remove(at: indexPath.row)
-//
-//            completionHandler(true)
-//        }
-//
-//        return UISwipeActionsConfiguration(actions: [deleteAction])
-//    }
 }
-
-//extension TrackRecordsViewController {
-//
-//    func configureDataSource() {
-//
-//        dataSource = DataSource(tableView: tableView, cellProvider: { (tableView, indexPath, model) -> UITableViewCell? in
-//
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: TrackRecordCell.identifier, for: indexPath) as? TrackRecordCell else {
-//                fatalError("Cannot create new cell")
-//            }
-//
-//            cell.setUpCell(model: self.records[indexPath.row])
-//
-//            cell.backgroundColor = .green
-//
-//            return cell
-//        })
-//        tableView.dataSource = dataSource
-//    }
-//
-//    func configureSnapshot() {
-//
-//        snapshot.appendSections([.section])
-//
-//        snapshot.appendItems(records, toSection: .section)
-//
-//        dataSource.apply(snapshot, animatingDifferences: false)
-//    }
-//}

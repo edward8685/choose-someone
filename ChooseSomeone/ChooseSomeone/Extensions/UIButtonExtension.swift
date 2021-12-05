@@ -136,16 +136,28 @@ public class GradientButton: UIButton {
 
     @IBInspectable public var startPoint: CGPoint {
         
-        get { gradientLayer.startPoint }
+        get {
+            
+            gradientLayer.startPoint
+        }
         
-        set { gradientLayer.startPoint = newValue }
+        set {
+            
+            gradientLayer.startPoint = newValue
+        }
     }
 
     @IBInspectable public var endPoint: CGPoint {
         
-        get { gradientLayer.endPoint }
+        get {
+            
+            gradientLayer.endPoint
+        }
         
-        set { gradientLayer.endPoint = newValue }
+        set {
+            
+            gradientLayer.endPoint = newValue
+        }
     }
 
     public override init(frame: CGRect = .zero) {
@@ -172,7 +184,10 @@ private extension GradientButton {
 
 extension UIButton {
     
-    func applyButtonGradient(colors: [UIColor?], locations: [NSNumber]? = [0.0, 1.0], direction: Direction = .topToBottom) {
+    func applyButtonGradient(
+        colors: [UIColor?],
+        locations: [NSNumber]? = [0.0, 1.0],
+        direction: Direction = .topToBottom) {
         
         let gradientLayer = CAGradientLayer()
         

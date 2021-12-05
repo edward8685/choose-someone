@@ -25,3 +25,10 @@ struct TrackInfo: Codable {
         self.totalDrop = 0.0
     }
 }
+
+struct TrackChartData {
+    
+    var elevation: [Double] = []
+    var time: [Double] = []
+    var distance: [Double] = []
+}

@@ -36,7 +36,6 @@ class GPXFileManager {
         } catch {
             
             print("can not save to URL")
-            
         }
     }
     
@@ -52,7 +51,7 @@ class GPXFileManager {
             
             if let directoryURLs = try? fileManager.contentsOfDirectory(
                 at: documentsURL,
-                includingPropertiesForKeys:[.attributeModificationDateKey, .fileSizeKey],
+                includingPropertiesForKeys: [.attributeModificationDateKey, .fileSizeKey],
                 options: .skipsSubdirectoryDescendants) {
                 
                 for url in directoryURLs {
@@ -76,7 +75,7 @@ class GPXFileManager {
                 
             case .success:
                 
-                parseGPXFile(fileURL: fileURL)
+                uploadTrackLengthToDb(fileURL: fileURL)
                 
                 print("save to Firebase successfully")
                 
@@ -85,33 +84,20 @@ class GPXFileManager {
             case .failure(let error):
                 
                 print("save to Firebase failure: \(error)")
-                
             }
         }
     }
     
-    class func parseGPXFile(fileURL: URL) {
-        
-        var distanceFromOrigin: [Double] = []
+    class func uploadTrackLengthToDb(fileURL: URL) {
         
         let inputURL = fileURL
         
             guard let gpx = GPXParser(withURL: inputURL)?.parsedData() else { return }
-            
-            for track in gpx.tracks {
-                
-                for segment in track.segments {
-                    
-                    distanceFromOrigin = segment.distanceFromOrigin()
-                }
-            }
         
-        let length = distanceFromOrigin.last ?? 0
+        let length = gpx.tracksLength
         
-        UserManager.shared.updateUserTrailRecord(length: length)
-
+        UserManager.shared.updateUserTrackLength(length: length)
     }
-    
     
     class func removeFileFromURL(_ fileURL: URL) {
         

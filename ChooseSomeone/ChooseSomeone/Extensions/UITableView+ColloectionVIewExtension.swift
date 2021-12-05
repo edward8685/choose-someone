@@ -15,6 +15,12 @@ extension UITableView {
         
         register(nib, forCellReuseIdentifier: identifier)
     }
+    
+    func dequeueCell<T: UITableViewCell>(for indexPath: IndexPath) -> T {
+        // swiftlint:disable force_cast
+        return dequeueReusableCell(withIdentifier: "\(T.self)", for: indexPath) as! T
+        // swiftlint:enable force_cast
+    }
 }
 
 extension UITableViewCell {
@@ -33,6 +39,13 @@ extension UICollectionView {
         
         register(nib, forCellWithReuseIdentifier: reuseIdentifier)
     }
+    
+    func dequeueCell<T: UICollectionViewCell>(for indexPath: IndexPath) -> T {
+        // swiftlint:disable force_cast
+    return self.dequeueReusableCell(withReuseIdentifier: "\(T.self)", for: indexPath) as! T
+        // swiftlint:enable force_cast
+    }
+
 }
 
 extension UICollectionViewCell {
