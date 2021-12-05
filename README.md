@@ -7,7 +7,9 @@ Choose Someone is a platform that helps you find trails and travel partners for 
   <img height="150" src="https://github.com/edward8685/choose-someone/blob/main/Screenshots/Choose_someone_icon.png">
 </p>
 
-[<img src="[resources/img/appstore-badge.png](https://github.com/edward8685/choose-someone/blob/main/Screenshots/Appstore_Badge.png)" height="50">](https://reurl.cc/529NLy)
+<p align="center">
+  <img height="50" src="https://github.com/edward8685/choose-someone/blob/main/Screenshots/Appstore_Badge.png">
+</p>
 
 
 ## Main Features
@@ -18,17 +20,17 @@ Choose Someone is a platform that helps you find trails and travel partners for 
 
 
 
- <img src="https://github.com/edward8685/choose-someone/blob/main/Screenshots/Home.png" height="200">
+ <img src="https://github.com/edward8685/choose-someone/blob/main/Screenshots/Home.png" height="400">
 
 * Feature group building and applications for Membership.
 * Feature Real-time chatroom and blocklist funciton.
 
- <img src="https://github.com/edward8685/choose-someone/blob/main/Screenshots/Group.png" height="200">
+ <img src="https://github.com/edward8685/choose-someone/blob/main/Screenshots/Group.png" height="400">
 
 * Display tracking route in a apple map.
 * Displays tracked time and user's current location and altitude
 
- <img src="https://github.com/edward8685/choose-someone/blob/main/Screenshots/Track.png" height="200">
+ <img src="https://github.com/edward8685/choose-someone/blob/main/Screenshots/Track.png" height="400">
 
 ## Requirements
 
@@ -57,3 +59,5 @@ Choose Someone is a platform that helps you find trails and travel partners for 
 ## License
 
 Distributed under the MIT License.
+
+
