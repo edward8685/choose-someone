@@ -93,11 +93,11 @@
                             <constraint firstAttribute="bottom" secondItem="jhg-yg-YUR" secondAttribute="bottom" id="2rl-3G-yO5"/>
                             <constraint firstItem="taY-hn-koQ" firstAttribute="height" secondItem="ey7-TV-ZuU" secondAttribute="height" multiplier="0.142857" id="623-Mq-fE7"/>
                             <constraint firstItem="AQ0-JK-Kvm" firstAttribute="bottom" secondItem="dQe-4f-MwP" secondAttribute="bottom" constant="23.5" id="65I-vG-3qy"/>
+                            <constraint firstAttribute="trailing" secondItem="jhg-yg-YUR" secondAttribute="trailing" id="DtF-Gu-HDT"/>
                             <constraint firstItem="dQe-4f-MwP" firstAttribute="centerX" secondItem="AQ0-JK-Kvm" secondAttribute="centerX" id="Mat-J4-dJR"/>
+                            <constraint firstItem="jhg-yg-YUR" firstAttribute="leading" secondItem="ey7-TV-ZuU" secondAttribute="leading" id="Rvd-aY-P8h"/>
                             <constraint firstItem="taY-hn-koQ" firstAttribute="width" secondItem="ey7-TV-ZuU" secondAttribute="width" multiplier="0.57971" id="THc-CL-Roc"/>
-                            <constraint firstItem="jhg-yg-YUR" firstAttribute="leading" secondItem="AQ0-JK-Kvm" secondAttribute="leading" id="bZK-j1-stw"/>
                             <constraint firstItem="jhg-yg-YUR" firstAttribute="top" secondItem="ey7-TV-ZuU" secondAttribute="top" id="iF0-F7-dVQ"/>
-                            <constraint firstItem="AQ0-JK-Kvm" firstAttribute="trailing" secondItem="jhg-yg-YUR" secondAttribute="trailing" id="iJp-nh-AIm"/>
                             <constraint firstItem="taY-hn-koQ" firstAttribute="centerX" secondItem="AQ0-JK-Kvm" secondAttribute="centerX" id="lBG-SM-jnf"/>
                             <constraint firstItem="taY-hn-koQ" firstAttribute="top" secondItem="ey7-TV-ZuU" secondAttribute="topMargin" constant="300" id="vTz-oC-Scc"/>
                         </constraints>

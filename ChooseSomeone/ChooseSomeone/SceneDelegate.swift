@@ -45,10 +45,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
             
         } else {
-            
+
             guard let loginVC = UIStoryboard.login.instantiateViewController(
                 identifier: LoginViewController.identifier) as? LoginViewController else { return }
-            
+
             self.window?.rootViewController = loginVC
         }
         
