@@ -9,12 +9,21 @@ import UIKit
 import Firebase
 import FirebaseAuth
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: BaseViewController {
     
-    enum ActionSheet: String {
+    // MARK: - Class Properties -
+    
+    enum CameraActionSheet: String {
         
         case camera = "相機"
         case library = "圖庫"
+        case cancel = "取消"
+    }
+    
+    enum AccountActionSheet: String, CaseIterable {
+        
+        case delete = "刪除帳號"
+        case signout = "登出帳號"
         case cancel = "取消"
     }
     
@@ -86,7 +95,7 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    @IBAction func signOut(_ sender: UIButton) {
+    func signOut() {
         
         let firebaseAuth = Auth.auth()
         
@@ -159,7 +168,7 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.height / CGFloat((items.count + 1))
+        return tableView.frame.height / CGFloat((items.count + 2))
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -171,6 +180,20 @@ extension ProfileViewController: UITableViewDelegate {
             let segueId = ProfileSegue.allCases[indexPath.row].rawValue
             
             performSegue(withIdentifier: segueId, sender: nil)
+        
+        case 1:
+            
+            let deleteAction = UIAlertAction(title: AccountActionSheet.allCases[0].rawValue, style: .destructive) { _ in
+                self.showAlertAction(title: "刪除帳號", message: "請來信至edward820630@gmail.com")
+            }
+            
+            let signoutAction = UIAlertAction(title: AccountActionSheet.allCases[1].rawValue, style: .default) {_ in
+                self.signOut()
+            }
+            
+            let cancelAction = UIAlertAction(title: AccountActionSheet.allCases[2].rawValue, style: .cancel)
+            
+            showAlertAction(title: nil, message: nil, preferredStyle: .actionSheet, actions: [deleteAction,signoutAction, cancelAction])
             
         case 2:
             
@@ -236,7 +259,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             preferredStyle: .actionSheet)
         
         actionSheet.addAction(UIAlertAction(
-            title: ActionSheet.camera.rawValue,
+            title: CameraActionSheet.camera.rawValue,
             style: .default,
             handler: { _ in
                 
@@ -246,7 +269,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             }))
         
         actionSheet.addAction(UIAlertAction(
-            title: ActionSheet.library.rawValue,
+            title: CameraActionSheet.library.rawValue,
             style: .default,
             handler: { _ in
                 
@@ -256,7 +279,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
             }))
         
         actionSheet.addAction(UIAlertAction(
-            title: ActionSheet.cancel.rawValue,
+            title: CameraActionSheet.cancel.rawValue,
             style: .cancel,
             handler: { _ in
                 
