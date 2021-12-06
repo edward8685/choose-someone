@@ -73,6 +73,8 @@ class GroupViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(changeSearchText), name: NSNotification.checkGroupDidTaped, object: nil)
+        
         self.view.applyGradient(colors: [.B2, .B6], locations: [0.0, 1.0], direction: .leftSkewed)
         
         fetchGroupData()
