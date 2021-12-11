@@ -10,7 +10,7 @@ Choose Someone is a platform that helps you find trails and travel partners for 
 <p align="center">
   <a href="https://apps.apple.com/tw/app/choosesomeone/id1591802356">
   <img height="50" src="https://github.com/edward8685/choose-someone/blob/main/Screenshots/Appstore_Badge.png">
-</p>
+</a></p>
 
 
 ## Main Features
