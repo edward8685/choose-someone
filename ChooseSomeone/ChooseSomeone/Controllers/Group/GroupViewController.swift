@@ -38,12 +38,7 @@ class GroupViewController: BaseViewController {
         }
     }
     
-    private lazy var cache = [String: UserInfo]() {
-        
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    private lazy var cache = [String: UserInfo]()
     
     private var searchText: String = "" {
         
@@ -228,6 +223,8 @@ class GroupViewController: BaseViewController {
     
     func fetchGroupData() {
         
+        let group: DispatchGroup = DispatchGroup()
+        group.enter()
         GroupManager.shared.fetchGroups { result in
             
             switch result {
@@ -257,6 +254,13 @@ class GroupViewController: BaseViewController {
                         
                         return
                     }
+                }
+                
+                group.leave()
+                
+                group.notify(queue: DispatchQueue.main) {
+                    
+                    self.tableView.reloadData()
                 }
                 
             case .failure(let error):
