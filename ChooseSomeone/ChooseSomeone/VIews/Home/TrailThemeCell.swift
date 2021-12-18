@@ -26,10 +26,10 @@ class TrailThemeCell: UITableViewCell {
         
         super.awakeFromNib()
         
-        contentView.backgroundColor = .clear
+        self.contentView.backgroundColor = .clear
         
         self.backgroundColor = .clear
         
-        selectionStyle = .none
+        self.selectionStyle = .none
     }
 }

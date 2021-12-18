@@ -27,8 +27,6 @@ class HomeHeaderCell: UITableViewCell {
     
     var groupsDiff: Int = 0
     
-    //    let animationDuration = 3.0
-    
     @IBOutlet weak var totalKilos: UILabel!
     
     @IBOutlet weak var totalFriends: UILabel!
@@ -76,12 +74,8 @@ class HomeHeaderCell: UITableViewCell {
         totalFriends.text = "\(friendsStartValue)"
         
         totalGroups.text = "\(groupsStartValue)"
-        
-        //        lengthStartValue += lengthDiff / animationDuration
-        //        friendsStartValue += friendsDiff / Int(animationDuration)
-        //        groupsStartValue += groupsDiff / Int(animationDuration)
-        
-        lengthStartValue += 0.2
+
+        lengthStartValue += 0.3
         friendsStartValue += 1
         groupsStartValue += 1
         
