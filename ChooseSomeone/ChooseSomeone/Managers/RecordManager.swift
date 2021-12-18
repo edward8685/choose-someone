@@ -18,6 +18,8 @@ class RecordManager {
     
     static let shared = RecordManager()
     
+    private init() { }
+    
     lazy var storageRef = storage.reference()
     
     lazy var dataBase = Firestore.firestore()
