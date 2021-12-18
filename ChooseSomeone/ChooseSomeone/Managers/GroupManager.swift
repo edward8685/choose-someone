@@ -15,6 +15,8 @@ class GroupManager {
     
     static let shared = GroupManager()
     
+    private init() { }
+    
     lazy var dataBase = Firestore.firestore()
     
     private let groupsCollection = Collection.groups.rawValue

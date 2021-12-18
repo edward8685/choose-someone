@@ -14,6 +14,8 @@ class TrailManager {
     
     static let shared = TrailManager()
     
+    private init() { }
+    
     lazy var dataBase = Firestore.firestore()
     
     private let trailsCollection = Collection.trails.rawValue

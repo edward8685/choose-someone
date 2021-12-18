@@ -19,6 +19,8 @@ class UserManager {
     
     static let shared = UserManager()
     
+    private init() { }
+    
     lazy var storageRef = Storage.storage().reference()
     
     lazy var dataBase = Firestore.firestore()

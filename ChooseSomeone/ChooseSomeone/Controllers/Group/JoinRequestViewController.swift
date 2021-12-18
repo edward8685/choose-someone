@@ -34,13 +34,7 @@ class JoinRequestViewController: BaseViewController {
         }
     }
     
-    private lazy var cache = [String: UserInfo]() {
-        
-        didSet {
-            
-            tableView.reloadData()
-        }
-    }
+    private lazy var cache = [String: UserInfo]()
     
     private var tableView: UITableView!
     
@@ -86,6 +80,10 @@ class JoinRequestViewController: BaseViewController {
     
     func fetchUserData(uid: String) {
         
+        let group = DispatchGroup()
+        
+        group.enter()
+                
         UserManager.shared.fetchUserInfo(uid: uid, completion: { result in
             
             switch result {
@@ -94,11 +92,19 @@ class JoinRequestViewController: BaseViewController {
                 
                 self.cache[user.uid] = user
                 
+                group.leave()
+                
             case .failure(let error):
                 
                 print("fetchData.failure: \(error)")
             }
         })
+        
+        group.notify(queue: DispatchQueue.main) {
+            
+            self.tableView.reloadData()
+        }
+        
     }
     
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
