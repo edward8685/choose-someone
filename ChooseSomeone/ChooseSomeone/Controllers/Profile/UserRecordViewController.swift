@@ -38,7 +38,6 @@ class UserRecordViewController: BaseViewController, ChartViewDelegate {
     // MARK: - View Life Cycle -
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         map.delegate = mapViewDelegate

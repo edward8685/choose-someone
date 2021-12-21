@@ -61,7 +61,6 @@ class ProfileViewController: BaseViewController {
     // MARK: - View Life Cycle -
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         tableView.registerCellWithNib(identifier: ProfileCell.identifier, bundle: nil)
@@ -70,6 +69,7 @@ class ProfileViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         navigationController?.isNavigationBarHidden = true
     }

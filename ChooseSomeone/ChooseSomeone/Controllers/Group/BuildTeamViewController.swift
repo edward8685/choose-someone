@@ -98,13 +98,13 @@ class BuildTeamViewController: BaseViewController {
     // MARK: - View Life Cycle -
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         setUpButton()
     }
     
     override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         
         headerView.applyGradient(colors: [.U2, .U1], locations: [0.0, 1.0], direction: .topToBottom)
         
