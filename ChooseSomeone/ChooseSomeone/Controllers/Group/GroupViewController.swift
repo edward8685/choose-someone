@@ -38,7 +38,12 @@ class GroupViewController: BaseViewController {
         }
     }
     
-    private lazy var cache = [String: UserInfo]()
+    private lazy var cache = [String: UserInfo]() {
+        
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     private var searchText: String = "" {
         
@@ -88,6 +93,7 @@ class GroupViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         navigationController?.isNavigationBarHidden = true
         
@@ -95,6 +101,7 @@ class GroupViewController: BaseViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         
         headerView?.groupSearchBar.endEditing(true)
     }
@@ -223,8 +230,6 @@ class GroupViewController: BaseViewController {
     
     func fetchGroupData() {
         
-        let group: DispatchGroup = DispatchGroup()
-        group.enter()
         GroupManager.shared.fetchGroups { result in
             
             switch result {
@@ -254,13 +259,6 @@ class GroupViewController: BaseViewController {
                         
                         return
                     }
-                }
-                
-                group.leave()
-                
-                group.notify(queue: DispatchQueue.main) {
-                    
-                    self.tableView.reloadData()
                 }
                 
             case .failure(let error):

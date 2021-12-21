@@ -66,6 +66,8 @@ class ChatRoomViewController: BaseViewController {
         
         setUpStatusBarView()
         
+        fetchMemberDate()
+        
         configureDataSource()
     }
     
@@ -151,6 +153,10 @@ class ChatRoomViewController: BaseViewController {
                 print("fetchData.failure: \(error)")
             }
         }
+    }
+    
+    func fetchMemberDate() {
+        groupInfo?.userIds.forEach{ fetchUserData(uid: $0) }
     }
     
     func fetchUserData(uid: String) {

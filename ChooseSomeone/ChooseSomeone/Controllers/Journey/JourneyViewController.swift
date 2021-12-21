@@ -222,7 +222,6 @@ class JourneyViewController: BaseViewController {
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         stopWatch.delegate = self
@@ -239,6 +238,7 @@ class JourneyViewController: BaseViewController {
     }
     
     override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         
         let trakerRadius = trackerButton.frame.height / 2
         
