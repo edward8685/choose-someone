@@ -42,7 +42,6 @@ class HomeViewController: BaseViewController {
     // MARK: - View Life Cycle -
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(
@@ -58,18 +57,19 @@ class HomeViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         navigationController?.isNavigationBarHidden = true
     }
     
-    @objc func updateUserInfo(notification: Notification) {
-
-            guard let headerView = headerView else { return }
-            
-            headerView.updateUserInfo(user: UserManager.shared.userInfo)
-    }
-    
     // MARK: - Methods -
+    
+    @objc func updateUserInfo(notification: Notification) {
+        
+        guard let headerView = headerView else { return }
+        
+        headerView.updateUserInfo(user: UserManager.shared.userInfo)
+    }
     
     func fetchTrailData() {
         
