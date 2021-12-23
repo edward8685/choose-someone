@@ -36,7 +36,7 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewWillAppear(animated)
         
         if isHideNavigationBar {
-            navigationController?.setNavigationBarHidden(true, animated: true)
+            navigationController?.setNavigationBarHidden(true, animated: false)
         }
         
         if !isEnableIQKeyboard {
@@ -56,7 +56,7 @@ class BaseViewController: UIViewController, UIGestureRecognizerDelegate {
         
         if isHideNavigationBar {
             
-            navigationController?.setNavigationBarHidden(false, animated: true)
+            navigationController?.setNavigationBarHidden(false, animated: false)
         }
         
         if !isEnableIQKeyboard {

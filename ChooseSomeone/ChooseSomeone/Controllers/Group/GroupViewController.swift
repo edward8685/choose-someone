@@ -67,9 +67,7 @@ class GroupViewController: BaseViewController {
     private var isSearching = false
     
     // MARK: - View Life Cycle -
-    
-    override var isHideNavigationBar: Bool { return true }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -92,10 +90,10 @@ class GroupViewController: BaseViewController {
         tableView.mj_header = header
     }
     
+    override var isHideNavigationBar: Bool { return true }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        navigationController?.isNavigationBarHidden = true
         
         self.tabBarController?.tabBar.isHidden = false
     }
