@@ -76,8 +76,6 @@ class ChatRoomViewController: BaseViewController {
         
         checkUserStatus()
         
-        navigationController?.isNavigationBarHidden = false
-        
         self.tabBarController?.tabBar.isHidden = true
     }
     
