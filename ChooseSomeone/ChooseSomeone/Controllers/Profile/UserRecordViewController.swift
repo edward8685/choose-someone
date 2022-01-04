@@ -162,18 +162,18 @@ class UserRecordViewController: BaseViewController, ChartViewDelegate {
         var totalClimp: Double = 0.0
         
         var totalDrop: Double = 0.0
-        
+
         if elevation.count != 0 {
             
             for index in 0..<elevation.count - 1 {
                 
                 let diff = elevation[index + 1] - elevation[index]
                 
-                if diff < 0 {
+                if diff < 0 && abs(diff) < 1.35 {
                     
                     totalDrop += diff
-                    
-                } else {
+
+                } else if diff > 0 && abs(diff) < 1.35 {
                     
                     totalClimp += diff
                 }
