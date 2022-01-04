@@ -281,10 +281,8 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         actionSheet.addAction(UIAlertAction(
             title: CameraActionSheet.cancel.rawValue,
             style: .cancel,
-            handler: { _ in
-                
-                self.dismiss(animated: true, completion: nil)
-            }))
+            handler: nil
+        ))
         
         present(actionSheet, animated: true, completion: nil)
     }
